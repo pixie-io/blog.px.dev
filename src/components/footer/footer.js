@@ -27,16 +27,16 @@ const Footer = ({ whiteFooter }) => (
             <div className='col-3'>
               <em>Company</em>
               <ul className={styles.footerCategory}>
-                <li><Link to='/community'>Community</Link></li>
-                <li><Link to='/careers'>Careers</Link></li>
+                <li><a href='https://pixielabs.ai/community'>Community</a></li>
+                <li><a href='https://pixielabs.ai/careers'>Careers</a></li>
               </ul>
             </div>
             <div className='col-6'>
               <em>Help</em>
               <ul className={styles.footerCategory}>
                 <li><a href='https://slackin.withpixie.ai'>Join Slack Community</a></li>
-                <li><Link to='/contact/#sales'>Contact Sales</Link></li>
-                <li><Link to='/contact/#support'>Email us</Link></li>
+                <li><a href='https://pixielabs.ai/contact/#sales'>Contact Sales</a></li>
+                <li><a href='https://pixielabs.ai/contact/#support'>Email us</a></li>
               </ul>
             </div>
           </div>

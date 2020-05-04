@@ -110,16 +110,16 @@ const Header = ({ whiteHeader, hideMenu }) => {
           <div>
             <em>Company</em>
             <ul>
-              <li><Link to='/community'>Community</Link></li>
-              <li><Link to='/careers'>Careers</Link></li>
+              <li><a href='https://pixielabs.ai/community'>Community</a></li>
+              <li><a href='https://pixielabs.ai/careers'>Careers</a></li>
             </ul>
           </div>
           <div>
             <em>Help & support</em>
             <ul>
               <li><a href='https://pixie-community.slack.com/'>Join Slack Community</a></li>
-              <li><Link to='/contact/#sales'>Contact Sales</Link></li>
-              <li><Link to='/contact/#support'>Email us</Link></li>
+              <li><a href='https://pixielabs.ai/contact/#sales'>Contact Sales</a></li>
+              <li><a href='https://pixielabs.ai/contact/#support'>Email us</a></li>
             </ul>
           </div>
         </div>
@@ -132,7 +132,7 @@ const Header = ({ whiteHeader, hideMenu }) => {
               <a href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'><i className='icon-youtube' /></a>
             </li>
           </ul>
-          <Link to='/terms'>Terms & Privacy</Link>
+          <a href='https://pixielabs.ai/terms'>Terms & Privacy</a>
         </div>
       </div>
       <i onClick={() => setOpen(true)} className='icon-menu-off hide-desktop' />
