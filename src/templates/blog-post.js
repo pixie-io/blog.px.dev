@@ -54,7 +54,7 @@ const BlogPostTemplate = ({ data }) => {
         </div>
         <div className='row'>
           <div className='col-12'>
-            <Link to='/blog' className={styles.viewAll}>View all Blog posts</Link>
+            <Link to='/' className={styles.viewAll}>View all Blog posts</Link>
           </div>
         </div>
       </section>
