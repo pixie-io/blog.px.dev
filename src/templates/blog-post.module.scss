@@ -1,0 +1,277 @@
+@import "../scss/partials/variables";
+
+.header {
+  padding-top: 180px;
+}
+
+.blogPostContent {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 30px;
+  padding-top: 100px;
+  color: $color-dark;
+  @media (min-width: 1000px) {
+    padding-left: 130px;
+    padding-right: 130px;
+  }
+  h2 {
+    margin: 0;
+  }
+
+
+  a {
+    color: $color-blue;
+  }
+
+  p + p {
+    margin-top: 48px;
+  }
+
+  @media (max-width: $breakpoint) {
+    & > * {
+      @include padding-mobile;
+      margin: 0;
+    }
+  }
+
+  blockquote {
+    background: #D6FBFB;
+    padding: 48px 140px;
+    margin: 48px -130px;
+    position: relative;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 200%;
+    @media (max-width: 1600px) {
+      margin-left: 30px;
+      margin-right: 30px;
+      padding: 60px;
+      font-size: 22px;
+      line-height: 32px;
+    }
+
+    &:before {
+      position: absolute;
+      background-image: url("../images/quote.svg");
+      width: 87px;
+      height: 61px;
+      content: '';
+      left: -42px;
+      top: calc(50% - 30px);
+      content: '';
+    }
+  }
+}
+
+.single-post {
+  padding-top: 110px;
+
+  img {
+    border-radius: 0
+  }
+
+  h3 {
+    font-size: 12px;
+    line-height: 38px;
+    text-transform: uppercase;
+    color: $color-red;
+    margin: 0 0 20px;
+    @include icon-square-2;
+
+    &:before {
+      box-shadow: 0 0 10px $color-red;
+      font-size: 26px;
+      width: 25px;
+      height: 25px;
+      line-height: 26px;
+      display: block;
+      margin: 0 20px 0 0;
+      padding: 0;
+    }
+
+    display: flex;
+    align-items: center;
+  }
+
+  h1 {
+    font-weight: normal;
+    color: $color-dark;
+    margin: 0 0 25px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 38px;
+    color: $color-grey1;
+    margin: 0 0 25px;
+    @include showOnDesktop;
+  }
+
+  span {
+    font-size: 14px;
+    line-height: 38px;
+    color: $color-grey2;
+  }
+}
+
+.featured-image {
+  position: relative;
+
+  .single-post-left-bottom,
+  .single-post-left-top,
+  .single-post-right-top {
+    position: absolute;
+    z-index: 1;
+  }
+
+
+  .single-post-left-bottom {
+    width: 184px;
+    height: 104px;
+    background-image: url("../images/single-post-left-bottom.svg");
+    left: -92px;
+    bottom: 0;
+  }
+
+  .single-post-left-top {
+    width: 90px;
+    height: 85px;
+    background-image: url("../images/single-post-left-top.svg");
+    top: 0;
+    left: -90px;
+
+  }
+
+  .single-post-right-top {
+    width: 184px;
+    height: 180px;
+    background-image: url("../images/single-post-right-top.svg");
+    right: 0;
+    top: -90px;
+  }
+
+}
+
+.details-post {
+
+  @media (max-width: $breakpoint) {
+    padding-top: 100px;
+  }
+
+  h3 {
+    font-size: 12px;
+    line-height: 38px;
+    text-transform: uppercase;
+    color: $color-red;
+    margin: 0 0 20px;
+    @include icon-square-2;
+
+    &:before {
+      box-shadow: 0 0 10px $color-red;
+      font-size: 26px;
+      width: 25px;
+      height: 25px;
+      line-height: 26px;
+      display: block;
+      margin: 0 20px 0 0;
+      padding: 0;
+    }
+
+    display: flex;
+    align-items: center;
+  }
+
+  h1 {
+    font-weight: normal;
+    color: $color-dark;
+    margin: 0 0 25px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 38px;
+    color: $color-grey1;
+    margin: 0 0 25px;
+  }
+
+  span {
+    font-size: 14px;
+    line-height: 38px;
+    color: $color-grey2;
+  }
+
+  & > * {
+    @include padding-mobile;
+    @media (min-width: $breakpoint) {
+      padding-left: 40px;
+      padding-right: 0;
+    }
+  }
+}
+
+.ornament-top-right,
+.ornament-center-right,
+.ornament-top-left,
+.ornament-center-left {
+  background-repeat: no-repeat;
+  width: 149px;
+  height: 290px;
+  position: absolute;
+  @media (max-width: 1650px) {
+    width: calc(149px / 2);
+  }
+
+  @media (max-width: 1450px) {
+    display: none;
+  }
+  background-image: url('../images/ornament.png');
+}
+
+
+.ornament-top-right {
+  top: 200px;
+  right: 40px;
+}
+
+.ornament-center-right {
+  right: 40px;
+  top: 1800px;
+}
+
+.ornament-top-left {
+  left: 40px;
+  top: 830px;
+
+}
+
+.ornament-center-left {
+  left: 40px;
+  top: 2700px;
+  display: none;
+}
+
+.viewAll {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: underline;
+  color: $color-green;
+  margin: 0 auto;
+  display: table;
+  letter-spacing: normal;
+}
+
+.latest-stories {
+  padding-top: 100px;
+  padding-bottom: 50px;
+
+  article {
+    a {
+      div:nth-child(2) {
+        background: rgba(237, 238, 240, 0.3);
+      }
+    }
+  }
+}

@@ -1,0 +1,227 @@
+@import "../../scss/partials/variables";
+
+.featured-blog {
+  background: $color-dark;
+  padding-top: 242px;
+  padding-bottom: 100px;
+  position: relative;
+
+  .navigation-featured {
+    position: relative;
+    margin-top: 50px;
+
+    .navigateDots {
+
+      position: absolute;
+      left: 45px;
+      top: 0;
+
+      button {
+        width: 8px;
+        height: 8px;
+        background: $color-grey1;
+        padding: 0;
+        margin-right: 22px;
+        border-radius: 0;
+
+        &.active {
+          background: $color-blue;
+        }
+      }
+    }
+
+    .navigateArrow {
+      transform: translateY(-50%);
+      cursor: pointer;
+      position: relative;
+      float: right;
+      right: 0;
+      height: 48px;
+      width: 48px;
+      background: $color-blue;
+      margin-left: 20px;
+
+      img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+.latest-stories {
+  background: $color-dark;
+
+  .blog-category {
+    padding-bottom: 60px;
+    h2 {
+      font-weight: normal;
+      margin: 0 0 27px;
+      color: $color-white;
+      text-align: left;
+      @media (max-width: $breakpoint) {
+        @include padding-mobile;
+      }
+      @include centerOnMobile;
+    }
+
+    span {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 38px;
+      color: $color-grey1;
+      display: block;
+      margin-bottom: 23px;
+      text-align: left;
+      @media (max-width: $breakpoint) {
+        @include padding-mobile;
+        display: block;
+        text-align: center;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+
+      @media (max-width: $breakpoint) {
+        @include padding-mobile;
+        display: block;
+        text-align: center;
+      }
+
+      li {
+        margin-right: 65px;
+        color: $color-grey1;
+        display: inline;
+
+        button {
+          padding: 0;
+          background: none;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 38px;
+          color: $color-grey1;
+          text-transform: unset;
+          letter-spacing: unset;
+
+          &.active {
+            color: $color-blue;
+          }
+        }
+
+        &:first-child {
+          margin-right: 115px;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        @media (max-width: $breakpoint) {
+          display: block;
+          margin: 0;
+          width: 100%;
+          line-height: 40px;
+        }
+      }
+    }
+  }
+
+  .blog-view-all {
+    text-align: center;
+    margin-bottom: 228px;
+    margin-top: 20px;
+
+    button {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      color: $color-green;
+      background: none;
+      padding: 0;
+      text-transform: none;
+      letter-spacing: normal;
+      text-decoration: underline;
+    }
+  }
+}
+
+.message-blog {
+  text-align: center;
+  position: relative;
+
+  h4 {
+    text-align: center;
+    font-weight: 300;
+    font-size: 64px;
+    line-height: 78px;
+    color: $color-white;
+    max-width: 640px;
+    margin: 0 auto 35px;
+    @media (max-width: $breakpoint) {
+      @include padding-mobile;
+    }
+
+  }
+
+  h5 {
+    text-align: center;
+    font-size: 22px;
+    line-height: 187.4%;
+    color: $color-grey1;
+    margin: 0 auto 47px;
+    max-width: 500px;
+    font-weight: normal;
+
+    a {
+      color: $color-blue;
+      display: inline;
+    }
+  }
+
+  a {
+    display: inline-block;
+  }
+
+  .quoteOrnament1 {
+    position: absolute;
+    top: 0;
+    left: 200px;
+    background-image: url("../../images/homepage/home-ornament.png");
+    width: 272px;
+    height: 119px;
+    content: '';
+    @include showOnDesktop;
+  }
+
+  .quoteOrnament2 {
+    position: absolute;
+    right: 200px;
+    bottom: 0;
+    background-image: url("../../images/homepage/home-ornament.png");
+    width: 272px;
+    transform: rotate(180deg);
+    height: 119px;
+    content: '';
+    @include showOnDesktop;
+  }
+}
+
+.ornament-top-right {
+  @include ornament;
+  right: 35px;
+  top: 60px;
+}
+
+.ornament-top-left {
+  @include ornament;
+  left: 35px;
+  top: 830px;
+}

@@ -21,6 +21,13 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/content/blog`,
+        name: 'posts',
+      },
+    },
+    {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
@@ -76,6 +83,12 @@ module.exports = {
           'Montserrat:300,400,700',
         ],
         display: 'block',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        includePaths: ['node_modules', './src/scss'],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

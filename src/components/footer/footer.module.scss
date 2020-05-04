@@ -1,0 +1,165 @@
+@import "../../scss/partials/variables";
+
+footer {
+  background-color: $color-dark;
+  padding-top: 228px;
+  padding-bottom: 33px;
+  position: relative;
+
+  @media (max-width: $breakpoint) {
+    padding-bottom: 50px;
+    padding-top: 100px;
+  }
+
+  &.whitefooter {
+    background: $color-white;
+  }
+
+  .repeater {
+    @include ornament;
+    top: 228px;
+    left: 35px;
+  }
+
+  .copyright {
+    a {
+      font-size: 26px;
+      margin-bottom: 40px;
+      display: block;
+      color: $color-grey2;
+      width: 100px;
+
+      i {
+        &:before {
+          margin: 0;
+        }
+      }
+
+      @include hideOnDesk;
+    }
+
+    @include centerOnTablet;
+
+    span {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $color-grey2;
+      display: block;
+      margin-bottom: 8px;
+      @media (max-width: $breakpoint) {
+        margin: 20px 0 0;
+      }
+    }
+
+    span + a {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: $color-grey2;
+    }
+  }
+
+  em {
+    color: $color-grey1;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    font-style: normal;
+    display: block;
+    @include hideOnDesk;
+  }
+
+  .footer-category {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    list-style: none;
+    @include hideOnDesk;
+
+    li {
+      font-size: 16px;
+      line-height: 38px;
+      display: block;
+
+      a {
+        color: $color-grey2;
+        transition: all .5s ease;
+
+        &:hover {
+          color: $color-grey1;
+        }
+      }
+    }
+  }
+
+  .footer-social {
+    ul {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      display: block;
+      list-style: none;
+      width: 150px;
+      @media (max-width: $breakpoint) {
+        margin: 45px auto 0;
+        display: block;
+        width: 190px;
+        float: none;
+      }
+
+      li {
+        margin-right: 15px;
+        display: inline-block;
+        width: 22px;
+        text-align: center;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        a {
+          color: $color-grey1;
+          cursor: pointer;
+
+          &:hover {
+            color: $color-blue;
+          }
+        }
+
+        &:hover {
+          a {
+            color: $color-blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer-mobile {
+  @media (max-width: $breakpoint) {
+    display: flex !important;
+    flex-direction: column;
+    text-align: center;
+    max-width: 225px;
+    margin: 0 auto;
+    .footer-social {
+      order: 1;
+      width: 100%;
+
+      ul {
+        display: contents;
+      }
+    }
+    .copyright {
+      order: 2;
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+}
+
