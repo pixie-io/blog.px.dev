@@ -13,7 +13,7 @@ const Footer = ({ whiteFooter }) => (
             <i className='icon-logo2' />
           </a>
           <span>&copy; 2020, Pixie Labs Inc.</span>
-          <Link to='/policies'>Terms & Privacy</Link>
+          <a href='https://pixielabs.ai/policies'>Terms & Privacy</a>
         </div>
         <div className='col-9 hide-tablet'>
           <div className='row'>
