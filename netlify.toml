@@ -1,0 +1,14 @@
+[build]
+  publish ="public/"
+  command = "yarn install && yarn lint && gatsby build && cp netlify_passwd_header public/_headers"
+
+[build.environment]
+  # Staging environment.
+  TRACKING_ID = "UA-141615052-1"
+
+[context.production]
+  # No password on prod.
+  command = "yarn install && yarn lint && gatsby build"
+
+[context.production.environment]
+  TRACKING_ID = "UA-141511669-1"
