@@ -1,19 +1,19 @@
 ---
 path: '/post-2'
-title: '6 Steps to Become a Millionaire in 3 Years' 
-date: 2020-04-04T06:00:00.000+00:00
-featured_image: ./blog-post.jpg
+title: 'Blog post 2' 
+date: 2019-04-04T06:00:00.000+00:00
+featured_image: blog-post.jpg
 category: 'Category 2'
-author: 'Benjamin Hardy2'
+author: 'Author name'
 featured: true
 ---
 
-#Hello 2
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a libero pretium, pharetra odio id, volutpat nunc. Maecenas vulputate, magna et viverra vulputate, augue dui ullamcorper diam, eget pulvinar ex massa at magna. In pulvinar dolor ut nunc ultrices auctor. Duis volutpat odio et nulla consequat, non tincidunt felis feugiat. Aliquam viverra convallis convallis. Vivamus porttitor, massa venenatis dictum tempor, ipsum orci finibus tellus, in efficitur urna tellus vitae ex. Nulla feugiat massa id risus volutpat tincidunt. Vestibulum sed nulla mauris. Suspendisse molestie cursus pulvinar. Pellentesque luctus mi non feugiat luctus.
 
-All users on MySpace will know that there are millions of people out there. Every day besides so many people joining this community, there are many others who will be looking out for friends. This will mean that they are naturally looking out for good people who are interesting enough. For this, the profile has to be very interesting.
+Aenean augue dui, hendrerit ac dictum ut, aliquam at dui. In at nunc sodales, convallis ex at, bibendum leo. Integer elementum turpis mi, sit amet malesuada enim dignissim ac. Morbi nisi risus, cursus eget nulla vel, iaculis accumsan elit. Vestibulum vitae felis tortor. Nunc sit amet ante hendrerit, lacinia mauris pretium, convallis elit. Ut orci libero, posuere sit amet felis non, venenatis tempor massa. Curabitur eu elit consequat, scelerisque nunc sit amet, fringilla risus. Aenean vitae rhoncus nisi, eu placerat nisi. Aenean scelerisque erat non fringilla porta. Vivamus semper ultricies risus, vitae euismod felis tempor in. Morbi maximus vulputate faucibus. Maecenas vel hendrerit ligula. Sed ut scelerisque elit.
 
-To make the profile unique, you can use good MySpace layouts. This will make a world of a difference to the profile. Imagine that someone visits your profile, and they find it without any good information or pictures. They would not spend another minute looking at it, and you will quickly lose your reputation.
+Fusce tempus lacus enim, nec facilisis odio venenatis iaculis. Nulla gravida diam ut turpis aliquam, in convallis odio bibendum. Phasellus a est nisi. Aliquam a sem et nibh molestie sodales eu condimentum tellus. Donec eget efficitur diam, ut scelerisque leo. Nulla tellus felis, fringilla nec aliquet eu, facilisis et lacus. Sed eget condimentum justo. Fusce sed suscipit sem, nec mattis ligula. Suspendisse potenti. Duis mattis quam sed dapibus finibus.
 
-You will also lose the chance to make a whole new bunch of friends. You cannot expect them to take a second look at your profile. Thus before you lose the chance to make new friends, you should customize the profile as best as you can. You can choose from a great variety, as there are plenty of sites, which are dedicated to MySpace layouts.
+Etiam euismod auctor aliquam. Nullam orci lorem, condimentum eu malesuada tempus, laoreet viverra velit. In ultrices, sem nec malesuada iaculis, enim augue placerat velit, egestas eleifend risus metus vel nunc. Nullam venenatis vel ligula ut accumsan. Praesent condimentum, orci ut euismod pharetra, ligula ex convallis odio, ac iaculis metus nunc id est. Cras a felis ut lectus volutpat scelerisque quis vel urna. In dictum augue sed dolor hendrerit, sed porta ante venenatis. Sed aliquam, libero vitae mollis dignissim, velit nunc luctus nisl, a maximus leo tellus ac leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 
-
+Donec r
