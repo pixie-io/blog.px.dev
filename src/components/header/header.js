@@ -1,14 +1,23 @@
-import { Link } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import BodyClassName from 'react-body-classname';
 import styles from './header.module.scss';
 import { docsRedirect, loginRedirect, signupRedirect } from '../shared/tracking-utils';
+import { MenuCountersContext } from '../shared/header-counters.provider';
 
 const Header = ({ whiteHeader, hideMenu }) => {
+  const headerCountersData = useStaticQuery(graphql`
+      {
+          headerCountersData {
+              slack
+              github
+          }
+      }
+  `);
+  const { headerCountersData: { github: ssrGithub, slack: ssrSlack } } = headerCountersData;
+
   const [open, setOpen] = useState(false);
-  const [totalUsers, setTotalUsers] = useState(null);
-  const [totalGit, setTotalGit] = useState(null);
   const [showShadow, setShowShadow] = useState(false);
 
   const closeMenu = () => {
@@ -22,26 +31,10 @@ const Header = ({ whiteHeader, hideMenu }) => {
       setShowShadow(false);
     }
   };
-  const getSlackCounter = async () => {
-    const stream = await fetch('https://slackin.withpixie.ai/data');
-    const response = await stream.json();
-    if (response) {
-      setTotalUsers(response.total);
-    }
-  };
-  const getGitCounter = async () => {
-    const stream = await fetch('https://api.github.com/repos/pixie-labs/pixie');
-    const response = await stream.json();
-    if (response) {
-      setTotalGit(response.watchers);
-    }
-  };
 
   useEffect(() => {
     processShadowVisibility();
     window.addEventListener('scroll', processShadowVisibility, false);
-    getSlackCounter();
-    getGitCounter();
     return () => {
       window.removeEventListener('scroll', processShadowVisibility, false);
     };
@@ -50,30 +43,33 @@ const Header = ({ whiteHeader, hideMenu }) => {
   return (
     <header className={`${whiteHeader ? styles.whiteHeader : ''} ${showShadow ? styles.showShadow : ''} ${hideMenu ? styles.hideMenu : ''}`}>
       <BodyClassName className={`${open ? 'menu-open' : ''}`} />
-
-      <div>
-        <Link to='/'>
-          <i className='icon-logo2' />
-        </Link>
-        <div className={styles.counters}>
-          <div className={styles.counter}>
-            <a href='https://slackin.withpixie.ai/'>
-              <i className='icon-slack' />
-              <div>
-                {totalUsers}
+      <MenuCountersContext.Consumer>
+        {(context) => (
+          <div>
+            <Link to='/'>
+              <i className='icon-logo2' />
+            </Link>
+            <div className={styles.counters}>
+              <div className={styles.counter}>
+                <a href='https://slackin.withpixie.ai/'>
+                  <i className='icon-slack' />
+                  <div>
+                    {context.totalUsers || ssrSlack}
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-          <div className={styles.counter}>
-            <a href='https://github.com/pixie-labs/pixie'>
-              <i className='icon-github-1' />
-              <div>
-                {totalGit}
+              <div className={styles.counter}>
+                <a href='https://github.com/pixie-labs/pixie'>
+                  <i className='icon-github-1' />
+                  <div>
+                    {context.totalGit || ssrGithub}
+                  </div>
+                </a>
               </div>
-            </a>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+      </MenuCountersContext.Consumer>
       <div className={`hide-mobile hide-tablet ${styles.menu}`}>
         <ul>
           <li>
@@ -130,13 +126,13 @@ const Header = ({ whiteHeader, hideMenu }) => {
         <div className={styles.links}>
           <ul className={styles.socialIcons}>
             <li><a href='https://pixie-community.slack.com/'><i className='icon-slack' /></a></li>
-            <li><a href='https://twitter.com/pixielabs_ai'><i className='icon-twitter' /></a></li>
+            <li><a href='https://twitter.com/pixie_run'><i className='icon-twitter' /></a></li>
             <li><a href='https://github.com/pixie-labs/'><i className='icon-github-1' /></a></li>
             <li>
               <a href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'><i className='icon-youtube' /></a>
             </li>
           </ul>
-          <Link to='/policies'>Terms & Privacy</Link>
+          <Link to='/terms'>Terms & Privacy</Link>
         </div>
       </div>
       <i onClick={() => setOpen(true)} className='icon-menu-off hide-desktop' />

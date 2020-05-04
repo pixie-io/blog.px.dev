@@ -1,5 +1,6 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
+const fetch = require('node-fetch');
 
 exports.onCreateNode = ({
   node, actions, getNode, getNodesByType,
@@ -114,4 +115,26 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
   `;
   createTypes(typeDefs);
+};
+exports.sourceNodes = async ({
+  actions: { createNode },
+  createContentDigest,
+}) => {
+  const slackReq = await fetch('https://slackin.withpixie.ai/data');
+  const slack = await slackReq.json();
+
+  const gitReq = await fetch('https://api.github.com/repos/pixie-labs/pixie');
+  const github = await gitReq.json();
+
+  createNode({
+    slack: slack.total,
+    github: github.watchers,
+    id: 'header-counters-data',
+    parent: null,
+    children: [],
+    internal: {
+      type: 'HeaderCountersData',
+      contentDigest: createContentDigest({}),
+    },
+  });
 };
