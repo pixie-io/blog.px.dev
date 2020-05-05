@@ -1,9 +1,9 @@
 ---
-path: '/post-2'
-title: 'Blog post 2' 
+path: '/test-post-3'
+title: 'Test Post 3' 
 date: 2020-05-05T06:00:00.000+00:00
 featured_image: blog-post.jpg
-category: 'Category 2'
+category: 'Guest Blogs'
 author: 'Author name'
 featured: true
 ---

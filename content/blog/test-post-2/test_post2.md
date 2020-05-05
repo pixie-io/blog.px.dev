@@ -1,10 +1,10 @@
 ---
-path: '/post-1'
-title: 'Blog post 1' 
+path: '/test-post-2'
+title: 'Test Post 2' 
 date: 2020-05-05T06:00:00.000+00:00
 featured_image: blog-post.jpg
-category: 'Category 1'
-author: 'Author name: Pixie'
+category: 'Guest Blogs'
+author: 'Author name'
 featured: true
 ---
 
@@ -16,4 +16,4 @@ Fusce tempus lacus enim, nec facilisis odio venenatis iaculis. Nulla gravida dia
 
 Etiam euismod auctor aliquam. Nullam orci lorem, condimentum eu malesuada tempus, laoreet viverra velit. In ultrices, sem nec malesuada iaculis, enim augue placerat velit, egestas eleifend risus metus vel nunc. Nullam venenatis vel ligula ut accumsan. Praesent condimentum, orci ut euismod pharetra, ligula ex convallis odio, ac iaculis metus nunc id est. Cras a felis ut lectus volutpat scelerisque quis vel urna. In dictum augue sed dolor hendrerit, sed porta ante venenatis. Sed aliquam, libero vitae mollis dignissim, velit nunc luctus nisl, a maximus leo tellus ac leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 
-Donec risus turpis, congue vitae lacus vel, ullamcorper sollicitudin ex. Maecenas sed nunc lacinia, molestie tellus nec, porta elit. Phasellus interdum id tellus eget sodales. Curabitur feugiat nunc eu felis malesuada sollicitudin. Ut tempus mattis semper. Maecenas vel massa id ligula pulvinar sodales. Phasellus quis nisi a purus fermentum lobortis ut non nulla. Fusce aliquet mollis dolor, sit amet lobortis tortor venenatis ac. Nullam sed ultricies sapien, nec volutpat turpis. Nulla eu nibh mauris. In id ornare elit. Suspendisse porttitor nisi quis dui hendrerit pharetra vitae non ex. Nunc bibendum quam fermentum nisl semper ultricies. Donec a lobortis tortor. Donec eu nibh non odio condimentum volutpat. Sed sagittis lorem laoreet, posuere risus id, aliquam nulla.
+Donec r
