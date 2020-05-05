@@ -1,0 +1,218 @@
+//Import CSS
+@import "./partials/variables";
+@import "../font/fontello.css";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+
+  &.menu-open {
+    @media (max-width: 768px) {
+      overflow: hidden;
+    }
+  }
+
+  &.black {
+    background-color: $color-dark;;
+  }
+
+  &.show-menu {
+    header {
+      top: 0;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+i {
+  &:before {
+    margin: 0;
+  }
+}
+
+.hide-desktop {
+  @media (min-width: 1000px) {
+    display: none !important;
+  }
+}
+
+.hide-not-desktop {
+  @media (max-width: 1000px) {
+    display: none !important;
+  }
+}
+
+.hide-mobile {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+.hide-tablet {
+  @media (min-width: 768px) and (max-width: 1000px) {
+    display: none !important;
+  }
+}
+
+.clearfix {
+  &:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+//BUTTONS
+.button, button {
+  padding: 22px 46px;
+  background: $color-blue;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  letter-spacing: 0.4em;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  text-transform: uppercase;
+  color: $color-dark;
+  cursor: pointer;
+  -webkit-filter: brightness(100%);
+  transition: filter .3s ease;
+  border-radius: 3px;
+  @media (max-width: 1000px) {
+    letter-spacing: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &.active {
+    background: $color-blue !important;
+  }
+
+  &.small {
+    padding: 12px 22px;
+  }
+
+  &:hover {
+    -webkit-filter: brightness(80%);
+  }
+}
+
+//GRID SYSTEM
+
+.container {
+  margin: 0 auto;
+}
+
+@media (min-width: 1000px) {
+  .container {
+    max-width: 1290px;
+    width: 80%;
+    padding: 0 35px;
+  }
+  .row {
+    width: 100%;
+  }
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    width: percentage($i / 12);
+    box-sizing: border-box;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+
+    &::after {
+      content: "\200B";
+      height: 1px;
+      float: left;
+    }
+
+    @media (min-width: 1200px) {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    @media (max-width: 1000px) {
+      display: block;
+      float: none;
+      width: 100%;
+      &:empty {
+        display: none;
+      }
+    }
+  }
+}
+
+.row {
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+    clear: both;
+  }
+}
+
+.hero-col {
+  overflow: hidden;
+  padding: 0;
+
+  .hero-image {
+
+
+    .gatsby-image-wrapper {
+      @media (max-width: 1000px) {
+        height: 30vh;
+        margin-left: 0;
+      }
+    }
+
+    &.left-heavy {
+      .gatsby-image-wrapper {
+        @media (max-width: 1000px) {
+          height: 30vh;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+/* Typgraphy */
+
+.subtitle1 {
+  font-size: 20px;
+  line-height: 32px;
+}
+
+h1 {
+  font-size: 42px;
+  line-height: 53px;
+}
+
+h2 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 45px;
+}
+
+h4 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 33px;
+}
