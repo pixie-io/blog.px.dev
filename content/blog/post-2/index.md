@@ -1,7 +1,7 @@
 ---
 path: '/post-2'
 title: 'Blog post 2' 
-date: 2019-04-04T06:00:00.000+00:00
+date: 2020-05-05T06:00:00.000+00:00
 featured_image: blog-post.jpg
 category: 'Category 2'
 author: 'Author name'

@@ -28,7 +28,7 @@ const FeatureBlogPostItem = ({ post }) => {
             />
           </div>
           <div className={`col-5 ${styles.featuredExcerpt}`}>
-            <h3>DIGITAL MARKETING</h3>
+            <h3>Pixie Engineering</h3>
             <h1>{title}</h1>
             <p>{subtitle || excerpt}</p>
             <span>{date}</span>

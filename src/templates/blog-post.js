@@ -28,7 +28,7 @@ const BlogPostTemplate = ({ data }) => {
               <Img fluid={post.frontmatter.featured_image.childImageSharp.fluid} />
             </div>
             <div className={`col-5 ${styles.detailsPost}`}>
-              <h3>DIGITAL MARKETING</h3>
+              <h3>Pixie Engineering</h3>
               <h1>{post.frontmatter.title}</h1>
               <p>{post.frontmatter.subtitle || post.excerpt}</p>
               <span>{post.frontmatter.date}</span>
