@@ -173,7 +173,7 @@ export default Blog;
 
 export const pageQuery = graphql`
     query {
-        posts: allMarkdownRemark(filter: {frontmatter: {featured: {eq: true}}}, sort: { fields: [frontmatter___date], order: DESC }) {
+        posts: allMdx(filter: {frontmatter: {featured: {eq: true}}}, sort: { fields: [frontmatter___date], order: DESC }) {
             nodes {
                 fields {
                     slug
@@ -198,7 +198,7 @@ export const pageQuery = graphql`
                 }
             }
         }
-        featured: allMarkdownRemark(filter: {frontmatter: {featured: {eq: true}}}, limit: 3, sort: { fields: [frontmatter___date], order: DESC }) {
+        featured: allMdx(filter: {frontmatter: {featured: {eq: true}}}, limit: 3, sort: { fields: [frontmatter___date], order: DESC }) {
             nodes {
                 fields {
                     slug
@@ -224,7 +224,7 @@ export const pageQuery = graphql`
                 }
             }
         }
-        categories: allMarkdownRemark(filter: {frontmatter: {category: {ne: null}}}) {
+        categories: allMdx(filter: {frontmatter: {category: {ne: null}}}) {
             nodes {
                 frontmatter {
                     category

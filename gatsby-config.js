@@ -1,4 +1,5 @@
 const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'dev';
+const containers = require('remark-containers');
 
 require('dotenv').config({
   path: `.env.${activeEnv}`,
@@ -28,24 +29,35 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 1200,
-            },
-          },
-          'gatsby-remark-copy-linked-files',
-        ],
-      },
-    },
-    {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/content/pages`,
         name: 'pages',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: ['.mdx', '.md'],
+        remarkPlugins: [containers],
+        // a workaround to solve mdx-remark plugin compat issue
+        // https://github.com/gatsbyjs/gatsby/issues/15486
+        plugins: [
+          'gatsby-remark-images',
+        ],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 1030,
+            },
+          },
+          {
+            resolve: 'gatsby-remark-copy-linked-files',
+          },
+
+
+        ],
       },
     },
     'gatsby-transformer-sharp',
@@ -86,12 +98,7 @@ module.exports = {
         display: 'block',
       },
     },
-    {
-      resolve: 'gatsby-plugin-sass',
-      options: {
-        includePaths: ['node_modules', './src/scss'],
-      },
-    },
+
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

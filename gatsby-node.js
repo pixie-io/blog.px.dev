@@ -23,7 +23,7 @@ exports.onCreateNode = ({
     }
   }
 
-  if (node.internal.type === 'MarkdownRemark') {
+  if (node.internal.type === 'Mdx') {
     const fileNode = (node.parent && node.parent !== 'undefined')
       ? getNode(node.parent)
       : node;
@@ -56,7 +56,7 @@ exports.onCreateNode = ({
 exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     query {
-  blog: allMarkdownRemark(
+  blog: allMdx(
             filter: { fileAbsolutePath: { regex: "/blog/" } }
             sort: { fields: [frontmatter___date], order: DESC }
             limit: 1000
@@ -98,10 +98,10 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   const typeDefs = `
-    type MarkdownRemark implements Node {
-      frontmatter: Frontmatter
+    type Mdx implements Node {
+      frontmatter: MdxFrontmatter
     }
-    type Frontmatter @infer {
+    type MdxFrontmatter @infer {
       title: String
       subtitle: String
       date: Date @dateformat(formatString: "DD-MM-YYYY")
