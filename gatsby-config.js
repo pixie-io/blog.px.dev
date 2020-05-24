@@ -93,7 +93,8 @@ module.exports = {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: [
-          'Montserrat:300,400,700',
+          'roboto:300,400,400i,700',
+          'manrope:300,400,400i,700',
         ],
         display: 'block',
       },

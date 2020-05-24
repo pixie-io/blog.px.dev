@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap');
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   padding: 0;
   margin: 0;
   overflow-x: hidden;
@@ -199,18 +199,23 @@ i {
 }
 
 h1 {
+  font-family: 'Manrope', sans-serif;
   font-size: 42px;
   line-height: 53px;
 }
 
 h2 {
+  font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 36px;
   line-height: 45px;
 }
-
+h3 {
+  font-family: 'Manrope', sans-serif;
+}
 h4 {
+  font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;

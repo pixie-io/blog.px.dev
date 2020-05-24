@@ -11,12 +11,21 @@ import rightNav from '../images/right-nav.svg';
 
 const Blog = ({ data }) => {
   const pageSize = 9;
-  const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
-  const { featured: { nodes: featured } } = data;
+  const paginate = (posts, pageNumber) =>
+    posts.slice(0, (pageNumber + 1) * pageSize);
+  const {
+    featured: { nodes: featured },
+  } = data;
   const maxFeatured = Math.max(featured.length, 3);
-  const { posts: { nodes: allPosts } } = data;
-  const { categories: { nodes: allCategories } } = data;
-  const categories = [...new Set((allCategories || []).map((c) => c.frontmatter.category))];
+  const {
+    posts: { nodes: allPosts },
+  } = data;
+  const {
+    categories: { nodes: allCategories },
+  } = data;
+  const categories = [
+    ...new Set((allCategories || []).map((c) => c.frontmatter.category)),
+  ];
 
   const [category, setCategory] = useState(null);
   const [page, setPage] = useState(0);
@@ -25,7 +34,9 @@ const Blog = ({ data }) => {
   const [featureIndex, setFeatureIndex] = useState(0);
 
   const filterPosts = (p, c) => {
-    const filteredPosts = c ? allPosts.filter((pos) => pos.frontmatter.category === c) : allPosts;
+    const filteredPosts = c
+      ? allPosts.filter((pos) => pos.frontmatter.category === c)
+      : allPosts;
     const paginatedPosts = paginate(filteredPosts, p);
     setPosts(paginatedPosts);
     setPage(p);
@@ -46,55 +57,59 @@ const Blog = ({ data }) => {
   };
 
   return (
-
     <Layout>
-      <SEO title='Blog' />
+      <SEO title="Blog" />
       <section className={styles.featuredBlog}>
         <div className={styles.ornamentTopRight} />
         <div className={styles.ornamentTopLeft} />
         <FeatureBlogPostItem post={featured[featureIndex]} />
-        <div className='container'>
-          <div className='col-7' />
-          <div className='col-5'>
+        <div className="container">
+          <div className="col-7" />
+          <div className="col-5">
             <div className={styles.navigationFeatured}>
               <div className={styles.navigateDots}>
-                {[...Array(maxFeatured)
-                  .keys()].map((index) => (
-                    <button
-                      type='button'
-                      key={index}
-                      onClick={() => setFeatureIndex(index)}
-                      className={index === featureIndex ? 'active' : ''}
-                    />
+                {[...Array(maxFeatured).keys()].map((index) => (
+                  <button
+                    type="button"
+                    key={index}
+                    onClick={() => setFeatureIndex(index)}
+                    className={index === featureIndex ? 'active' : ''}
+                  />
                 ))}
               </div>
               <div onClick={() => goRight()} className={styles.navigateArrow}>
-                <img src={rightNav} alt='' />
+                <img src={rightNav} alt="" />
               </div>
               <div onClick={() => goLeft()} className={styles.navigateArrow}>
-                <img src={leftNav} alt='' />
+                <img src={leftNav} alt="" />
               </div>
             </div>
           </div>
         </div>
       </section>
       <section className={styles.latestStories}>
-        <div className='container'>
+        <div className="container">
           <div className={`row ${styles.blogCategory}`}>
-            <div className='col-12'>
+            <div className="col-12">
               <h2>Latest Stories</h2>
             </div>
-            <div className='col-12'>
+            <div className="col-12">
               <span>Categories</span>
               <ul>
                 <li>
-                  <button className={!category ? styles.active : ''} type='button' onClick={() => filterByCategory(null)}>All</button>
+                  <button
+                    className={!category ? styles.active : ''}
+                    type="button"
+                    onClick={() => filterByCategory(null)}
+                  >
+                    All
+                  </button>
                 </li>
 
                 {categories.map((cat) => (
                   <li>
                     <button
-                      type='button'
+                      type="button"
                       className={category === cat ? styles.active : ''}
                       key={cat}
                       onClick={() => filterByCategory(cat)}
@@ -106,49 +121,56 @@ const Blog = ({ data }) => {
               </ul>
             </div>
           </div>
-          <div className='row'>
-            {posts.map((post) => <BlogPostItem post={post} key={post.id} />)}
+          <div className="row">
+            {posts.map((post) => (
+              <BlogPostItem post={post} key={post.id} />
+            ))}
           </div>
-          <div className='clearfix' />
-          <div className='row'>
+          <div className="clearfix" />
+          <div className="row">
             <div className={`col-12 ${styles.blogViewAll}`}>
-              {hasMore
-                ? <button type='button' onClick={() => loadMore()}>View all Blog posts </button> : ''}
+              {hasMore ? (
+                <button type="button" onClick={() => loadMore()}>
+                  View all Blog posts{' '}
+                </button>
+              ) : (
+                ''
+              )}
             </div>
           </div>
-          <div className='clearfix' />
-
-
+          <div className="clearfix" />
         </div>
         <div className={styles.messageBlog}>
           <div
             className={styles.quoteOrnament1}
-            data-sal='slide-up'
-            data-sal-duration='600'
-            data-sal-delay='300'
-            data-sal-easing='ease'
+            data-sal="slide-up"
+            data-sal-duration="600"
+            data-sal-delay="300"
+            data-sal-easing="ease"
           />
           <div
-            data-sal='slide-down'
-            data-sal-duration='900'
-            data-sal-delay='300'
-            data-sal-easing='ease'
+            data-sal="slide-down"
+            data-sal-duration="900"
+            data-sal-delay="300"
+            data-sal-easing="ease"
             className={styles.quoteOrnament2}
           />
 
           <h4>We&apos;re busy building. Drop us a line to learn more!</h4>
           <h5>
-            Got questions or suggestions? Message us here, email us, or visit our&nbsp;
+            Got questions or suggestions? Message us here, email us, or visit
+            our&nbsp;
             <a
-              href='https://work.withpixie.ai/docs'
-              target='_blank'
-              rel='noopener noreferrer'
+              href="https://work.withpixie.ai/docs"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               help center.
             </a>
           </h5>
-          <a href='https://pixielabs.ai/contact' className='button'>Contact Us</a>
-
+          <a href="https://pixielabs.ai/contact" className="button">
+            Contact Us
+          </a>
         </div>
       </section>
     </Layout>
@@ -172,64 +194,71 @@ Blog.propTypes = {
 export default Blog;
 
 export const pageQuery = graphql`
-    query {
-        posts: allMdx(filter: {frontmatter: {featured: {eq: true}}}, sort: { fields: [frontmatter___date], order: DESC }) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    author
-                    category
-                    date(formatString: "DD MMMM YYYY")
-                    featured_image {
-                        childImageSharp {
-                            id
-                            fluid(maxWidth: 380) {
-                                base64
-                                aspectRatio
-                                src
-                                srcSet
-                                sizes
-                            }
-                        }
-                    }
-                }
-            }
+  query {
+    posts: allMdx(
+      filter: { frontmatter: { featured: { eq: true } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      nodes {
+        fields {
+          slug
         }
-        featured: allMdx(filter: {frontmatter: {featured: {eq: true}}}, limit: 3, sort: { fields: [frontmatter___date], order: DESC }) {
-            nodes {
-                fields {
-                    slug
-                }
-                excerpt(pruneLength: 160)
-                frontmatter {
-                    title
-                    subtitle
-                    author
-                    date(formatString: "MMMM DD, YYYY")
-                    featured_image {
-                        childImageSharp {
-                            id
-                            fluid(maxWidth: 380) {
-                                base64
-                                aspectRatio
-                                src
-                                srcSet
-                                sizes
-                            }
-                        }
-                    }
-                }
+        frontmatter {
+          title
+          author
+          category
+          date(formatString: "DD MMMM YYYY")
+          featured_image {
+            childImageSharp {
+              id
+              fluid(maxWidth: 380) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
             }
+          }
         }
-        categories: allMdx(filter: {frontmatter: {category: {ne: null}}}) {
-            nodes {
-                frontmatter {
-                    category
-                }
-            }
-        }
+      }
     }
+    featured: allMdx(
+      filter: { frontmatter: { featured: { eq: true } } }
+      limit: 3
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      nodes {
+        fields {
+          slug
+        }
+        excerpt(pruneLength: 160)
+        frontmatter {
+          title
+          subtitle
+          author
+          date(formatString: "MMMM DD, YYYY")
+          featured_image {
+            childImageSharp {
+              id
+              fluid(maxWidth: 380) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+      }
+    }
+    categories: allMdx(filter: { frontmatter: { category: { ne: null } } }) {
+      nodes {
+        frontmatter {
+          category
+        }
+      }
+    }
+  }
 `;
