@@ -213,26 +213,39 @@ h2 {
 }
 h3 {
   font-family: 'Manrope', sans-serif;
+  font-size: 30px;
+  line-height: 38px;
 }
 h4 {
   font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
-  line-height: 33px;
+  line-height: 36px;
 }
 
 .image-s {
   max-width: 30%;
   margin:0 auto;
+  img{
+    max-width: 100%;
+  }
 }
 
 .image-m {
   max-width: 50%;
   margin:0 auto;
+  img{
+    max-width: 100%;
+  }
 }
 
 .image-l {
   max-width: 75%;
   margin:0 auto;
+  img{
+    max-width: 100%;
+  }
 }
+
+
