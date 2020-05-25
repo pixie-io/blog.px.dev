@@ -36,14 +36,14 @@
 
   blockquote {
     background: #D6FBFB;
-    padding: 48px 140px;
-    margin: 48px -130px;
+    padding: 20px 140px;
+    margin: 40px -130px;
     position: relative;
     font-style: italic;
     font-weight: normal;
     font-size: 30px;
     line-height: 200%;
-    @media (max-width: 1600px) {
+    @media (max-width: 1000px) {
       margin-left: 30px;
       margin-right: 30px;
       padding: 60px;
