@@ -227,25 +227,22 @@ h4 {
 .image-s {
   max-width: 30%;
   margin:0 auto;
-  img{
-    max-width: 100%;
-  }
+
 }
 
 .image-m {
   max-width: 50%;
   margin:0 auto;
-  img{
-    max-width: 100%;
-  }
 }
 
 .image-l {
   max-width: 75%;
   margin:0 auto;
-  img{
-    max-width: 100%;
-  }
 }
 
-
+.blog-image{
+  max-width: 100%;
+}
+figcaption{
+  text-align: center;
+}

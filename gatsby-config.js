@@ -35,33 +35,33 @@ module.exports = {
         name: 'pages',
       },
     },
-    {
+       {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        extensions: ['.mdx', '.md'],
-        remarkPlugins: [containers],
-        // a workaround to solve mdx-remark plugin compat issue
-        // https://github.com/gatsbyjs/gatsby/issues/15486
-        plugins: [
-          'gatsby-remark-images',
-        ],
         gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-relative-images',
+          },
           {
             resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 1030,
+              maxWidth: 1035,
+              showCaptions: false,
+              markdownCaptions: false,
             },
           },
           {
             resolve: 'gatsby-remark-copy-linked-files',
           },
-
-
         ],
+        remarkPlugins: [containers],
+        extensions: ['.mdx', '.md'],
       },
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-styled-components',
+
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
