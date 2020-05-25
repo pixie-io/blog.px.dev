@@ -46,7 +46,7 @@ module.exports = {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 1035,
-              showCaptions: false,
+              showCaptions: true,
               markdownCaptions: false,
             },
           },
@@ -54,7 +54,7 @@ module.exports = {
             resolve: 'gatsby-remark-copy-linked-files',
           },
         ],
-        remarkPlugins: [containers],
+        remarkPlugins: [containers,require('remark-unwrap-images')],
         extensions: ['.mdx', '.md'],
       },
     },
