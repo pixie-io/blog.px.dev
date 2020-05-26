@@ -12,7 +12,9 @@ import { graphql, useStaticQuery } from 'gatsby';
 import favDark from '../images/favicon-dark.png';
 import favGreen from '../images/favicon-green.png';
 
-function SEO({ description, lang, meta, title }) {
+function SEO({
+  description, lang, meta, title,
+}) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -31,9 +33,9 @@ function SEO({ description, lang, meta, title }) {
     rel: 'icon',
     type: 'image/png',
     href:
-      typeof window !== 'undefined' &&
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+      typeof window !== 'undefined'
+      && window.matchMedia
+      && window.matchMedia('(prefers-color-scheme: dark)').matches
         ? favGreen
         : favDark,
   };

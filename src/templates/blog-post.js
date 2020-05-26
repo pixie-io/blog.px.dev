@@ -17,13 +17,11 @@ const BlogPostTemplate = ({ data }) => {
 
   return (
     <Layout whiteFooter whiteHeader>
-
       <SEO title='Home' />
       <div className='container'>
         <section className={styles.header}>
           <div className={`row ${styles.singlePost}`}>
             <div className={`col-7 ${styles.featuredImage}`}>
-
               <div className={styles.singlePostLeftTop} />
 
               <Img
@@ -63,7 +61,6 @@ const BlogPostTemplate = ({ data }) => {
           </div>
         </div>
       </section>
-
     </Layout>
   );
 };

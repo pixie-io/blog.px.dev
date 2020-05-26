@@ -11,8 +11,7 @@ import rightNav from '../images/right-nav.svg';
 
 const Blog = ({ data }) => {
   const pageSize = 9;
-  const paginate = (posts, pageNumber) =>
-    posts.slice(0, (pageNumber + 1) * pageSize);
+  const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
   const {
     featured: { nodes: featured },
   } = data;
@@ -58,19 +57,19 @@ const Blog = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Blog" />
+      <SEO title='Blog' />
       <section className={styles.featuredBlog}>
         <div className={styles.ornamentTopRight} />
         <div className={styles.ornamentTopLeft} />
         <FeatureBlogPostItem post={featured[featureIndex]} />
-        <div className="container">
-          <div className="col-7" />
-          <div className="col-5">
+        <div className='container'>
+          <div className='col-7' />
+          <div className='col-5'>
             <div className={styles.navigationFeatured}>
               <div className={styles.navigateDots}>
                 {[...Array(maxFeatured).keys()].map((index) => (
                   <button
-                    type="button"
+                    type='button'
                     key={index}
                     onClick={() => setFeatureIndex(index)}
                     className={index === featureIndex ? 'active' : ''}
@@ -78,28 +77,28 @@ const Blog = ({ data }) => {
                 ))}
               </div>
               <div onClick={() => goRight()} className={styles.navigateArrow}>
-                <img src={rightNav} alt="" />
+                <img src={rightNav} alt='' />
               </div>
               <div onClick={() => goLeft()} className={styles.navigateArrow}>
-                <img src={leftNav} alt="" />
+                <img src={leftNav} alt='' />
               </div>
             </div>
           </div>
         </div>
       </section>
       <section className={styles.latestStories}>
-        <div className="container">
+        <div className='container'>
           <div className={`row ${styles.blogCategory}`}>
-            <div className="col-12">
+            <div className='col-12'>
               <h2>Latest Stories</h2>
             </div>
-            <div className="col-12">
+            <div className='col-12'>
               <span>Categories</span>
               <ul>
                 <li>
                   <button
                     className={!category ? styles.active : ''}
-                    type="button"
+                    type='button'
                     onClick={() => filterByCategory(null)}
                   >
                     All
@@ -109,7 +108,7 @@ const Blog = ({ data }) => {
                 {categories.map((cat) => (
                   <li>
                     <button
-                      type="button"
+                      type='button'
                       className={category === cat ? styles.active : ''}
                       key={cat}
                       onClick={() => filterByCategory(cat)}
@@ -121,38 +120,39 @@ const Blog = ({ data }) => {
               </ul>
             </div>
           </div>
-          <div className="row">
+          <div className='row'>
             {posts.map((post) => (
               <BlogPostItem post={post} key={post.id} />
             ))}
           </div>
-          <div className="clearfix" />
-          <div className="row">
+          <div className='clearfix' />
+          <div className='row'>
             <div className={`col-12 ${styles.blogViewAll}`}>
               {hasMore ? (
-                <button type="button" onClick={() => loadMore()}>
-                  View all Blog posts{' '}
+                <button type='button' onClick={() => loadMore()}>
+                  View all Blog posts
+                  {' '}
                 </button>
               ) : (
                 ''
               )}
             </div>
           </div>
-          <div className="clearfix" />
+          <div className='clearfix' />
         </div>
         <div className={styles.messageBlog}>
           <div
             className={styles.quoteOrnament1}
-            data-sal="slide-up"
-            data-sal-duration="600"
-            data-sal-delay="300"
-            data-sal-easing="ease"
+            data-sal='slide-up'
+            data-sal-duration='600'
+            data-sal-delay='300'
+            data-sal-easing='ease'
           />
           <div
-            data-sal="slide-down"
-            data-sal-duration="900"
-            data-sal-delay="300"
-            data-sal-easing="ease"
+            data-sal='slide-down'
+            data-sal-duration='900'
+            data-sal-delay='300'
+            data-sal-easing='ease'
             className={styles.quoteOrnament2}
           />
 
@@ -161,14 +161,14 @@ const Blog = ({ data }) => {
             Got questions or suggestions? Message us here, email us, or visit
             our&nbsp;
             <a
-              href="https://work.withpixie.ai/docs"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='https://work.withpixie.ai/docs'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               help center.
             </a>
           </h5>
-          <a href="https://pixielabs.ai/contact" className="button">
+          <a href='https://pixielabs.ai/contact' className='button'>
             Contact Us
           </a>
         </div>

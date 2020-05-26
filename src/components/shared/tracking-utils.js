@@ -1,8 +1,8 @@
 // Utilities that help track users between website and product.
 
 export const trackingID = () => JSON.parse(localStorage.getItem('ajs_user_id'))
-      || JSON.parse(localStorage.getItem('ajs_anonymous_id'))
-      || '';
+  || JSON.parse(localStorage.getItem('ajs_anonymous_id'))
+  || '';
 
 export const loginRedirect = (e) => {
   e.preventDefault();

@@ -25,9 +25,7 @@ const BlogPostItem = ({ post }) => {
             <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
           </div>
           <div className={styles.content}>
-            <h4>
-              {title}
-            </h4>
+            <h4>{title}</h4>
             <p className='subtitle1'>{author}</p>
             <span>{date}</span>
           </div>

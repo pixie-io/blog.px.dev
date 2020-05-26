@@ -1,5 +1,6 @@
 const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'dev';
 const containers = require('remark-containers');
+const unwrapImages = require('remark-unwrap-images');
 
 require('dotenv').config({
   path: `.env.${activeEnv}`,
@@ -35,7 +36,7 @@ module.exports = {
         name: 'pages',
       },
     },
-       {
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         gatsbyRemarkPlugins: [
@@ -54,7 +55,7 @@ module.exports = {
             resolve: 'gatsby-remark-copy-linked-files',
           },
         ],
-        remarkPlugins: [containers,require('remark-unwrap-images')],
+        remarkPlugins: [containers, unwrapImages],
         extensions: ['.mdx', '.md'],
       },
     },

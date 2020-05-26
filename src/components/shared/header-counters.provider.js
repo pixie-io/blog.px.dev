@@ -7,7 +7,6 @@ export const MenuCountersProvider = ({ children }) => {
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalGit, setTotalGit] = useState(0);
 
-
   const getSlackCounter = async () => {
     const stream = await fetch('https://slackin.withpixie.ai/data');
     const response = await stream.json();
@@ -31,10 +30,11 @@ export const MenuCountersProvider = ({ children }) => {
   }, []);
 
   return (
-    <MenuCountersContext.Provider value={{
-      totalUsers,
-      totalGit,
-    }}
+    <MenuCountersContext.Provider
+      value={{
+        totalUsers,
+        totalGit,
+      }}
     >
       <div>{children}</div>
     </MenuCountersContext.Provider>
