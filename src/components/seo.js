@@ -17,22 +17,27 @@ function SEO({
 }) {
   const { site } = useStaticQuery(
     graphql`
-        query {
-            site {
-                siteMetadata {
-                    title
-                    description
-                    author
-                }
-            }
+      query {
+        site {
+          siteMetadata {
+            title
+            description
+            author
+          }
         }
+      }
     `,
   );
 
   const favicon = {
     rel: 'icon',
     type: 'image/png',
-    href: typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? favGreen : favDark,
+    href:
+      typeof window !== 'undefined'
+      && window.matchMedia
+      && window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? favGreen
+        : favDark,
   };
 
   const metaDescription = description || site.siteMetadata.description;

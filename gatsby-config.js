@@ -1,5 +1,6 @@
 const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'dev';
 const containers = require('remark-containers');
+const unwrapImages = require('remark-unwrap-images');
 
 require('dotenv').config({
   path: `.env.${activeEnv}`,
@@ -38,30 +39,30 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        extensions: ['.mdx', '.md'],
-        remarkPlugins: [containers],
-        // a workaround to solve mdx-remark plugin compat issue
-        // https://github.com/gatsbyjs/gatsby/issues/15486
-        plugins: [
-          'gatsby-remark-images',
-        ],
         gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-relative-images',
+          },
           {
             resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 1030,
+              maxWidth: 1035,
+              showCaptions: true,
+              markdownCaptions: false,
             },
           },
           {
             resolve: 'gatsby-remark-copy-linked-files',
           },
-
-
         ],
+        remarkPlugins: [containers, unwrapImages],
+        extensions: ['.mdx', '.md'],
       },
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-styled-components',
+
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -93,7 +94,8 @@ module.exports = {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: [
-          'Montserrat:300,400,700',
+          'roboto:300,400,400i,700',
+          'manrope:300,400,400i,700',
         ],
         display: 'block',
       },

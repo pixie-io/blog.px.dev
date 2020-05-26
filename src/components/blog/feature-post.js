@@ -7,11 +7,11 @@ import styles from './feature-blog.module.scss';
 
 const FeatureBlogPostItem = ({ post }) => {
   const {
-    frontmatter:
-      {
-        title, featured_image: featuredImage, date, subtitle,
-      },
-    fields: { slug }, excerpt,
+    frontmatter: {
+      title, featured_image: featuredImage, date, subtitle,
+    },
+    fields: { slug },
+    excerpt,
   } = post;
   return (
     <div className={`container ${styles.featured}`}>
