@@ -5,7 +5,7 @@ date: 2020-06-11T12:30:00.000+00:00
 featured_image: pixie.png
 category: 'Guest Blogs'
 author: 'John Arundel'
-featured: false
+featured: true
 ---
 
 This is a guest tutorial by John Arundel, of [Bitfield Consulting](https://bitfieldconsulting.com). Hang on tight as he takes you from zero to Pixie in a few thrill-packed minutes!
@@ -32,7 +32,9 @@ Pixie has three main components:
 
 There's also the Pixie _control cloud_, which handles authentication, admin, and so on, but you don't need to worry about this for now, because it's hosted by Pixie Labs, and your Pixie installation knows how to talk to it automatically.
 
+::: div image-l
 ![Pixie architecture diagram](./pixie-architecture.png)
+:::
 
 ## Prerequisites
 
@@ -56,7 +58,8 @@ If you want to know what the installer does before you run it, you can [inspect 
 
 Let's see what that looks like:
 
-```
+``` bash
+
   ___  _       _
  | _ \(_)__ __(_) ___
  |  _/| |\ \ /| |/ -_)
@@ -68,7 +71,7 @@ unsampled auto-telemetry to debug performance issues in real-time,
 More information at: https://www.pixielabs.ai.
 
 This command will install the Pixie CLI (px) in a location selected
-by you, and performs authentication with Pixie's cloud hosted control
+by you, and performs authentication with Pixies cloud hosted control
 plane. After installation of the CLI you can easily manage Pixie
 installations on your K8s clusters and execute scripts to collect
 telemetry from your clusters using Pixie.
@@ -79,21 +82,29 @@ More Info:
 
 ==> Installing PX CLI:
 Install Path [/usr/local/bin]:
-```
+``` 
+
 
 The default install path (`/usr/local/bin`) should be fine, unless you want to install `px` somewhere else (if so, enter the path here). Otherwise, just press Enter to continue.
 
-```
+```bash
 
 ==> Authenticating with Pixie Cloud:
 [0000]  INFO Pixie CLI
-Opening authentication URL: https://work.withpixie.ai:443/login?local_mode=true&redirect_uri=http%3A%2F%2Flocalhost%3A8085%2Fauth_complete
+Opening authentication URL: \
+https://work.withpixie.ai:443/login?local_mode= \
+true&redirect_uri=http%3A%2F%2Flocalhost%3A8085%2Fauth_complete
 [0000]  INFO Starting browser
+
 ```
+
+
 
 This will open your browser to [work.withpixie.ai](https://work.withpixie.ai/), where you'll be prompted to log in (if you have an existing Pixie account) or sign up for a new account:
 
-![](login.png)
+::: div image-m
+![Login](login.png)
+:::
 
 Once you're signed in, you're ready to get your Pixie on!
 
@@ -103,7 +114,7 @@ First, let's make sure we're pointing at the right cluster. Although Pixie can m
 
 Try this command to find out what your Kubernetes config says your current cluster is:
 
-```
+```bash
 kubectl config current-context
 
 My-Awesome-Cluster
@@ -111,7 +122,7 @@ My-Awesome-Cluster
 
 If the answer isn't what you were expecting, select the right cluster by running:
 
-```
+```bash
 kubectl config use-context My-Awesome-Cluster
 
 Switched to context "My-Awesome-Cluster".
@@ -119,7 +130,7 @@ Switched to context "My-Awesome-Cluster".
 
 You're all set! Make Pixie go now:
 
-```
+```bash
 px deploy
 
 Running Cluster Checks:
@@ -140,7 +151,7 @@ Is the cluster correct? (y/n) [y] :
 
 Assuming it is, press Enter to continue:
 
-```
+```bash
 Found 3 nodes
  ✔    Creating namespace
  ✔    Deleting stale Pixie objects, if any
@@ -170,7 +181,7 @@ That's it! You're Pixified and ready to roll.
 
 If your cluster already has some services running in it, then Pixie will be able to give you some interesting data and views on them, so continue to the next section. If not, there's a demo application you can deploy using the CLI, to give Pixie something interesting to chew on:
 
-```
+```bash
 px demo deploy px-sock-shop
 
 Deploying demo app px-sock-shop to the following cluster: JIMSv2-Test-Cluster
@@ -198,19 +209,23 @@ https://work.withpixie.ai
 
 The first thing you'll see is the 'Service to Service SLAs' dashboard. The two graphs at the top show _latency_ (request duration) against time:
 
+::: div image-l
 ![Latency graphs](latency.png)
+:::
 
 This kind of display will be familiar to SREs, and you may already have something similar if you're using Prometheus and Grafana, for example.
 
 Next is the _throughput_ (requests handled per second), and the error rate, as a percentage of requests:
 
+::: div image-l
 ![Throughput and error rate graphs](throughput-errors.png)
+:::
 
 ## Running queries on the command line
 
 While it's helpful to see this information in graph form, we can get a much more detailed view of the same data using the CLI tool:
 
-```
+``` bash
 px run px/service_stats
 
 Table ID: Request Latency Histogram
@@ -286,4 +301,3 @@ Table ID: script_list
 ```
 
 ...and many more! Have fun with Pixie, and stay tuned for the next tutorial in this series, where we'll go a little deeper and see what else Pixie can do.
-

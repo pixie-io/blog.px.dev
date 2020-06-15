@@ -1,9 +1,9 @@
 ---
 path: '/test-post-1'
-title: 'Test Post 2' 
+title: 'Test Pixie Team Blog' 
 date: 2020-05-05T06:00:00.000+00:00
 featured_image: blog-post.jpg
-category: 'Test Blogs'
+category: 'Pixie Team Blogs'
 author: 'Author name: Pixie'
 featured: true
 ---
