@@ -3,7 +3,7 @@ path: '/adam-hawkins-on-pixie'
 title: 'Adam Hawkins On Pixie'
 category: 'Guest Blogs'
 author: 'Adam Hawkins'
-featured: true
+featured: false
 ---
 
 I, [Adam Hawkins](https://hawkins.io), recently tried Pixie. I was
