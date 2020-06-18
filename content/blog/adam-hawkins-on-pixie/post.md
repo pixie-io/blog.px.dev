@@ -4,6 +4,7 @@ title: 'Adam Hawkins On Pixie'
 category: 'Guest Blogs'
 author: 'Adam Hawkins'
 featured: false
+featured_image: ahawkins_blog_feature.png
 ---
 
 I, [Adam Hawkins](https://hawkins.io), recently tried Pixie. I was
