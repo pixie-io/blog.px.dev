@@ -61,5 +61,7 @@ magnitude less.
 Sounds interesting right? Check out my demo video for quick
 walkthrough.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_MlD-hVjVok" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Pixie is in free community beta right now. You can install it on your
 cluster and try it for yourself.
