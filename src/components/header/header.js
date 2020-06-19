@@ -78,7 +78,7 @@ const Header = ({ whiteHeader, transparentMenu }) => {
             </a>
           </li>
           <li className={styles.colored}>
-            <a href='https://docs.pixielabs.ai/installing-pixie/quick-start/' target='_blank' rel='noreferrer'>
+            <a href='https://docs.pixielabs.ai/installing-pixie/quick-start/' target='_blank' rel='noreferrer noopener'>
               Get started
             </a>
           </li>
