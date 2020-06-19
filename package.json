@@ -7,6 +7,9 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.0.10",
     "@mdx-js/react": "^1.6.1",
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.9.6",
     "dotenv": "^8.2.0",
     "eslint-plugin-prettier": "^3.1.2",
     "gatsby": "2.22.9",
@@ -30,6 +33,7 @@
     "gatsby-transformer-sharp": "^2.1.21",
     "gatsby-plugin-styled-components": "^3.1.6",
     "babel-plugin-styled-components": "^1.10.6",
+    "gatsby-theme-material-ui": "^1.0.8",
     "remark-unwrap-images": "^2.0.0",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.13.1",
