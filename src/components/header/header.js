@@ -134,10 +134,10 @@ const Header = ({ whiteHeader, transparentMenu }) => {
             <em>Company</em>
             <ul>
               <li>
-                <Link to='/community'>Community</Link>
+                <Link to='https://pixielabs.ai/community'>Community</Link>
               </li>
               <li>
-                <Link to='/careers'>Careers</Link>
+                <Link to='https://pixielabs.ai/careers'>Careers</Link>
               </li>
             </ul>
           </div>
@@ -150,10 +150,10 @@ const Header = ({ whiteHeader, transparentMenu }) => {
                 </a>
               </li>
               <li>
-                <Link to='/contact/#sales'>Contact Sales</Link>
+                <Link to='https://pixielabs.ai/contact/#sales'>Contact Sales</Link>
               </li>
               <li>
-                <Link to='/contact/#support'>Email us</Link>
+                <Link to='https://pixielabs.ai/contact/#support'>Email us</Link>
               </li>
             </ul>
           </div>
@@ -197,7 +197,7 @@ const Header = ({ whiteHeader, transparentMenu }) => {
             </li>
           </ul>
 
-          <Link to='/terms'>Terms & Privacy</Link>
+          <Link to='https://pixielabs.ai/terms'>Terms & Privacy</Link>
         </div>
       </div>
       <i onClick={() => setOpen(true)} className='icon-menu-off hide-desktop' />
