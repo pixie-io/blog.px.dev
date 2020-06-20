@@ -59,8 +59,6 @@ const Blog = ({ data }) => {
     <Layout>
       <SEO title='Blog' />
       <section className={styles.featuredBlog}>
-        <div className={styles.ornamentTopRight} />
-        <div className={styles.ornamentTopLeft} />
         <FeatureBlogPostItem post={featured[featureIndex]} />
         <div className='container'>
           <div className='col-7' />

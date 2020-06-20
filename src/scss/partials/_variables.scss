@@ -130,20 +130,7 @@ $breakpoint: 1000px;
 @mixin icon-reports() {&:before {font-family: 'fontello'; content: '\e819'; }}
 @mixin icon-circle-1() {&:before {font-family: 'fontello'; content: '\f111'; }}
 
-@mixin ornament(){
-  background-image: url('../../images/ornament.png');
-  background-repeat: no-repeat;
-  width: 149px;
-  height: 290px;
-  position: absolute;
-  @media (max-width: 1650px) {
-    width: calc(149px / 2);
-  }
 
-  @media (max-width: 1450px) {
-    display: none;
-  }
-}
 
 @mixin ornamentSquareBlue(){
   background-image: url('../../images/ornament-square-blue.png');

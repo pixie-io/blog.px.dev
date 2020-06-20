@@ -214,14 +214,4 @@
   }
 }
 
-.ornament-top-right {
-  @include ornament;
-  right: 35px;
-  top: 60px;
-}
 
-.ornament-top-left {
-  @include ornament;
-  left: 35px;
-  top: 830px;
-}
