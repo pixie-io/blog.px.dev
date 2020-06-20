@@ -65,13 +65,14 @@ const Blog = ({ data }) => {
           <div className='col-5'>
             <div className={styles.navigationFeatured}>
               <div className={styles.navigateDots}>
-                {[...Array(maxFeatured).keys()].map((index) => (
-                  <button
-                    type='button'
-                    key={index}
-                    onClick={() => setFeatureIndex(index)}
-                    className={index === featureIndex ? 'active' : ''}
-                  />
+                {[...Array(maxFeatured)
+                  .keys()].map((index) => (
+                    <button
+                      type='button'
+                      key={index}
+                      onClick={() => setFeatureIndex(index)}
+                      className={index === featureIndex ? 'active' : ''}
+                    />
                 ))}
               </div>
               <div onClick={() => goRight()} className={styles.navigateArrow}>
@@ -104,11 +105,10 @@ const Blog = ({ data }) => {
                 </li>
 
                 {categories.map((cat) => (
-                  <li>
+                  <li key={cat}>
                     <button
                       type='button'
                       className={category === cat ? styles.active : ''}
-                      key={cat}
                       onClick={() => filterByCategory(cat)}
                     >
                       {cat}
@@ -201,7 +201,9 @@ export const pageQuery = graphql`
         fields {
           slug
         }
+        id
         frontmatter {
+        
           title
           author
           category
