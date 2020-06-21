@@ -19,7 +19,7 @@ const FeatureBlogPostItem = ({ post }) => {
       <Link to={`/blog/${slug}`}>
         <div className='row'>
 
-          <div className={`col-7 ${styles.featuredImage}`}>
+          <div className={`col-5 ${styles.featuredImage}`}>
             <div className={styles.featuredLeftBottom} />
             <div className={styles.featuredLeftTop} />
             <div className={styles.featuredRightTop} />
@@ -33,7 +33,7 @@ const FeatureBlogPostItem = ({ post }) => {
               : <PostPlaceholder />}
           </div>
           <div
-            className={`col-5  ${styles.featuredExcerpt}`}
+            className={`col-7  ${styles.featuredExcerpt}`}
           >
             <h3>Pixie Engineering</h3>
             <h1>{title}</h1>
