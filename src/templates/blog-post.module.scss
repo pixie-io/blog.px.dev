@@ -2,7 +2,8 @@
 
 .blogPost {
 
-background-color: $color-white;
+  background-color: $color-white;
+
   .header {
     padding-top: 180px;
   }
@@ -20,6 +21,7 @@ background-color: $color-white;
 
     h2 {
       margin: 0;
+      padding-top: 40px;
     }
 
 
@@ -66,7 +68,7 @@ background-color: $color-white;
       }
     }
 
-    figcaption{
+    figcaption {
       margin-top: 16px;
     }
   }
