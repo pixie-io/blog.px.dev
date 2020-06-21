@@ -40,30 +40,29 @@ background-color: $color-white;
 
     blockquote {
       background: #D6FBFB;
-      padding: 20px 140px;
-      margin: 40px -130px;
+      padding: 10px 40px;
+      margin: 30px 0;
       position: relative;
       font-style: italic;
       font-weight: normal;
-      font-size: 30px;
-      line-height: 200%;
+      font-size: 18px;
+      line-height: 150%;
       @media (max-width: 1000px) {
         margin-left: 30px;
         margin-right: 30px;
-        padding: 60px;
-        font-size: 22px;
-        line-height: 32px;
       }
 
       &:before {
         position: absolute;
         background-image: url("../images/quote.svg");
-        width: 87px;
-        height: 61px;
+        width: 47px;
+        height: 40px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
         content: '';
-        left: -42px;
+        left: -22px;
         top: calc(50% - 30px);
-        content: '';
       }
     }
   }
