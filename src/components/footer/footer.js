@@ -50,19 +50,19 @@ const Footer = ({ whiteFooter }) => (
           </a>
         </li>
         <li>
-          <Link to='https://pixielabs.ai/terms'>TERMS & PRIVACY</Link>
+          <a href='https://pixielabs.ai/terms'>TERMS & PRIVACY</a>
         </li>
         <li>
-          <Link to='https://pixielabs.ai/community'>COMMUNITY</Link>
+          <a href='https://pixielabs.ai/community'>COMMUNITY</a>
         </li>
         <li>
-          <Link to='https://pixielabs.ai/careers'>CAREERS</Link>
+          <a href='https://pixielabs.ai/careers'>CAREERS</a>
         </li>
         <li>
           <Link to='/'>BLOG</Link>
         </li>
         <li>
-          <Link to='https://pixielabs.ai/contact'>CONTACT</Link>
+          <a href='https://pixielabs.ai/contact'>CONTACT</a>
         </li>
       </ul>
     </div>

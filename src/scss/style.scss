@@ -202,22 +202,25 @@ h1 {
   font-family: 'Manrope', sans-serif;
   font-size: 38px;
   line-height: 46px;
+  @media (max-width: $breakpoint) {
+    padding-top: 0;
+    font-size: 36px;
+    line-height: 46px;
+  }
+
 }
 
 h2 {
-  font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 36px;
   line-height: 45px;
 }
 h3 {
-  font-family: 'Manrope', sans-serif;
   font-size: 30px;
   line-height: 38px;
 }
 h4 {
-  font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;

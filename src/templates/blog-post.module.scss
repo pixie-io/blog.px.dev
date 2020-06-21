@@ -74,7 +74,7 @@
   }
 
   .single-post {
-    padding-top: 110px;
+    padding-top: 0;
 
     img {
       border-radius: 0
@@ -107,6 +107,7 @@
       font-weight: normal;
       color: $color-dark;
       margin: 0 0 25px;
+
     }
 
     p {
@@ -168,34 +169,8 @@
       padding-top: 100px;
     }
 
-    h3 {
-      font-size: 12px;
-      line-height: 38px;
-      text-transform: uppercase;
-      color: $color-red;
-      margin: 0 0 20px;
-      @include icon-square-2;
 
-      &:before {
-        box-shadow: 0 0 10px $color-red;
-        font-size: 26px;
-        width: 25px;
-        height: 25px;
-        line-height: 26px;
-        display: block;
-        margin: 0 20px 0 0;
-        padding: 0;
-      }
 
-      display: flex;
-      align-items: center;
-    }
-
-    h1 {
-      font-weight: normal;
-      color: $color-dark;
-      margin: 0 0 25px;
-    }
 
     p {
       font-size: 16px;
