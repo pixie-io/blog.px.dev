@@ -65,6 +65,10 @@ background-color: $color-white;
         top: calc(50% - 30px);
       }
     }
+
+    figcaption{
+      margin-top: 16px;
+    }
   }
 
   .single-post {
