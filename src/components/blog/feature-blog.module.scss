@@ -67,6 +67,9 @@
 .featured-right-top {
   position: absolute;
   z-index: 1;
+  @media (max-width: $breakpoint) {
+    display: none;
+  }
 }
 
 

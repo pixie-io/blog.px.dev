@@ -142,6 +142,9 @@
       background-image: url("../images/single-post-left-bottom.svg");
       left: -92px;
       bottom: 0;
+      @media (max-width: $breakpoint) {
+        display: none;
+      }
     }
 
     .single-post-left-top {
@@ -150,6 +153,9 @@
       background-image: url("../images/single-post-left-top.svg");
       top: 0;
       left: -90px;
+      @media (max-width: $breakpoint) {
+        display: none;
+      }
 
     }
 
@@ -159,6 +165,9 @@
       background-image: url("../images/single-post-right-top.svg");
       right: 0;
       top: -90px;
+      @media (max-width: $breakpoint) {
+        display: none;
+      }
     }
 
   }

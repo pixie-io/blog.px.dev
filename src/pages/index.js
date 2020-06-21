@@ -154,7 +154,7 @@ const Blog = ({ data }) => {
             className={styles.quoteOrnament2}
           />
 
-          <h4>We&apos;re busy building. Drop us a line to learn more!</h4>
+          <h2>We&apos;re busy building. Drop us a line to learn more!</h2>
           <h5>
             Got questions or suggestions? Message us here, email us, or visit
             our&nbsp;
