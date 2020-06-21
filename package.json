@@ -54,7 +54,8 @@
     "rehype-react": "^5.0.1",
     "remark-containers": "^1.1.2",
     "remark-unwrap-images": "^2.0.0",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "system-components": "^3.0.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.19.0",
@@ -68,7 +69,6 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "prettier": "^1.17.1",
-    "system-components": "^3.0.3",
     "typescript": "^3.7.5"
   },
   "keywords": [

@@ -1,6 +1,6 @@
 import React from 'react';
 import Code from './mdxComponents/code';
-import CodeRenderer from './mdxComponents/codeRenderer';
+import CodeRenderer from './mdxComponents/codeRenderer.tsx';
 import Pre from './mdxComponents/pre';
 
 const getChildren = (props) => props.children;
