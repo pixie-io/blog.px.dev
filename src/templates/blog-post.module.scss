@@ -6,17 +6,30 @@
 
   .header {
     padding-top: 180px;
+    @media (max-width: 1000px) {
+      padding-top: 0;
+    }
   }
 
   .blogPostContent {
     font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 36px;
     padding-top: 100px;
     color: $color-dark;
     @media (min-width: 1000px) {
       padding-left: 130px;
       padding-right: 130px;
+    }
+    @media (max-width: 1000px) {
+      font-size: 16px;
+      padding-top: 50px;
+      line-height: 32px;
+    }
+
+    img {
+      padding-top: 16px;
+      padding-bottom: 16px;
     }
 
     h2 {
@@ -76,6 +89,13 @@
   .single-post {
     padding-top: 0;
 
+    @media (max-width: $breakpoint) {
+      display: flex;
+      flex-direction:column;
+      .featured-image{
+        order: 2;
+      }
+    }
     img {
       border-radius: 0
     }
@@ -127,7 +147,9 @@
 
   .featured-image {
     position: relative;
-
+    @media (max-width: $breakpoint) {
+      margin-top: 40px;
+    }
     .single-post-left-bottom,
     .single-post-left-top,
     .single-post-right-top {
@@ -177,8 +199,6 @@
     @media (max-width: $breakpoint) {
       padding-top: 100px;
     }
-
-
 
 
     p {

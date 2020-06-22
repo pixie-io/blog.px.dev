@@ -20,9 +20,6 @@ const FeatureBlogPostItem = ({ post }) => {
         <div className='row'>
 
           <div className={`col-5 ${styles.featuredImage}`}>
-            <div className={styles.featuredLeftBottom} />
-            <div className={styles.featuredLeftTop} />
-            <div className={styles.featuredRightTop} />
             {featuredImage ? (
               <Img
                 className={styles.featureImage}

@@ -28,8 +28,8 @@ const BlogPostItem = ({ post }) => {
               : <PostPlaceholder />}
           </div>
           <div className={styles.content}>
-            <h4>{title}</h4>
-            <p className='subtitle1'>{author}</p>
+            <h5>{title}</h5>
+            <p>{author}</p>
             <span>{date}</span>
           </div>
         </Link>

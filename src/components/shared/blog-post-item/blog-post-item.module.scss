@@ -41,7 +41,7 @@ article {
       border-radius: 0 0 10px 10px;
       background: $color-white;
 
-      h4 {
+      h5 {
         margin: 0;
         padding: 0;
         color: $color-dark;
@@ -50,9 +50,9 @@ article {
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        height: 68px;
+        height: 64px;
         @media (max-width:$breakpoint) {
-          max-height: 68px;
+          max-height: 64px;
           height: auto;
         }
       }

@@ -5,6 +5,9 @@
   padding-top: 242px;
   padding-bottom: 100px;
   position: relative;
+  @media (max-width: $breakpoint) {
+    padding-top: 100px;
+  }
 
   .navigation-featured {
     position: relative;

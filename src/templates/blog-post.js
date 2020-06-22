@@ -23,7 +23,6 @@ const BlogPostTemplate = ({ data }) => {
         <div className='container'>
           <section className={styles.header}>
             <div className={`row ${styles.singlePost}`}>
-
               <div className={`col-7 ${styles.featuredImage}`}>
                 <div className={styles.singlePostLeftTop} />
                 {post.frontmatter.featured_image

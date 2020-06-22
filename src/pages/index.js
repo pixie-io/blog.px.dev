@@ -139,21 +139,6 @@ const Blog = ({ data }) => {
           <div className='clearfix' />
         </div>
         <div className={styles.messageBlog}>
-          <div
-            className={styles.quoteOrnament1}
-            data-sal='slide-up'
-            data-sal-duration='600'
-            data-sal-delay='300'
-            data-sal-easing='ease'
-          />
-          <div
-            data-sal='slide-down'
-            data-sal-duration='900'
-            data-sal-delay='300'
-            data-sal-easing='ease'
-            className={styles.quoteOrnament2}
-          />
-
           <h2>We&apos;re busy building. Drop us a line to learn more!</h2>
           <h5>
             Got questions or suggestions? Message us here, email us, or visit
