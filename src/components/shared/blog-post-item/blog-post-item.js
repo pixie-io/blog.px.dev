@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 
 import PropTypes from 'prop-types';
 import styles from './blog-post-item.module.scss';
+import PostPlaceholder from '../../post-placeholder';
 
 const BlogPostItem = ({ post }) => {
   const {
@@ -22,11 +23,13 @@ const BlogPostItem = ({ post }) => {
       <div className={styles.articleContent}>
         <Link to={`/blog/${slug}`}>
           <div className={styles.featuredImage}>
-            <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
+            {featuredImage
+              ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
+              : <PostPlaceholder />}
           </div>
           <div className={styles.content}>
-            <h4>{title}</h4>
-            <p className='subtitle1'>{author}</p>
+            <h5>{title}</h5>
+            <p>{author}</p>
             <span>{date}</span>
           </div>
         </Link>

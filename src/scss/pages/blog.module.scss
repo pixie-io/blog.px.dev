@@ -5,6 +5,9 @@
   padding-top: 242px;
   padding-bottom: 100px;
   position: relative;
+  @media (max-width: $breakpoint) {
+    padding-top: 100px;
+  }
 
   .navigation-featured {
     position: relative;
@@ -157,11 +160,9 @@
   text-align: center;
   position: relative;
 
-  h4 {
+  h2 {
     text-align: center;
     font-weight: 300;
-    font-size: 64px;
-    line-height: 78px;
     color: $color-white;
     max-width: 640px;
     margin: 0 auto 35px;
@@ -214,14 +215,4 @@
   }
 }
 
-.ornament-top-right {
-  @include ornament;
-  right: 35px;
-  top: 60px;
-}
 
-.ornament-top-left {
-  @include ornament;
-  left: 35px;
-  top: 830px;
-}

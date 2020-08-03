@@ -4,10 +4,11 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap');
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: Manrope, sans-serif;
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+  background-color: $color-dark;
 
   &.menu-open {
     @media (max-width: 768px) {
@@ -200,49 +201,88 @@ i {
 
 h1 {
   font-family: 'Manrope', sans-serif;
-  font-size: 42px;
-  line-height: 53px;
+  font-size: 38px;
+  line-height: 46px;
+  @media (max-width: $breakpoint) {
+    padding-top: 0;
+    font-size: 25px;
+    line-height: 36px;
+  }
+
 }
 
 h2 {
-  font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 36px;
   line-height: 45px;
+  @media (max-width: $breakpoint) {
+    font-size: 25px;
+    line-height: 36px;
+  }
 }
+
 h3 {
-  font-family: 'Manrope', sans-serif;
   font-size: 30px;
   line-height: 38px;
+  @media (max-width: $breakpoint) {
+    font-size: 22px;
+    line-height: 30px;
+  }
 }
+
 h4 {
-  font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
   line-height: 36px;
+  @media (max-width: $breakpoint) {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+h5 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 30px;
+  color: $color-dark;
+  @media (max-width: $breakpoint) {
+    font-size: 18px;
+    line-height: 26px;
+  }
 }
 
 .image-s {
   max-width: 30%;
-  margin:0 auto;
+  margin: 0 auto;
 
 }
 
 .image-m {
   max-width: 50%;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .image-l {
   max-width: 75%;
-  margin:0 auto;
+  margin: 0 auto;
+  @media (max-width: $breakpoint) {
+    padding: 0;
+    max-width: 100%;
+  }
 }
 
-.blog-image{
+figure {
+  margin: 16px 0;
+}
+
+.blog-image {
   max-width: 100%;
 }
-figcaption{
+
+figcaption {
   text-align: center;
+  opacity: .6;
 }

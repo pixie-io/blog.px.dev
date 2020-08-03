@@ -1,28 +1,21 @@
-import { graphql, Link, useStaticQuery } from 'gatsby';
+import { Link } from 'gatsby';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import BodyClassName from 'react-body-classname';
 import styles from './header.module.scss';
-import {
-  docsRedirect,
-  loginRedirect,
-  signupRedirect,
-} from '../shared/tracking-utils';
-import { MenuCountersContext } from '../shared/header-counters.provider';
 
-const Header = ({ whiteHeader, hideMenu }) => {
-  const headerCountersData = useStaticQuery(graphql`
-    {
-      headerCountersData {
-        slack
-        github
-      }
-    }
-  `);
-  const {
-    headerCountersData: { github: ssrGithub, slack: ssrSlack },
-  } = headerCountersData;
+import docs from '../../images/footer/docs-icon.svg';
+import github from '../../images/footer/github-icon.svg';
+import slack from '../../images/footer/slack-icon.svg';
+import youtube from '../../images/footer/youtube-icon.svg';
+import twitter from '../../images/footer/twitter-icon.svg';
+import linkedin from '../../images/footer/linkedin-icon.svg';
+import pixieLogo from '../../images/pixie-logo-header.svg';
+import betanaut from '../../images/betanaut.png';
 
+import { docsRedirect, loginRedirect, signupRedirect } from '../shared/tracking-utils';
+
+const Header = ({ whiteHeader, transparentMenu }) => {
   const [open, setOpen] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
 
@@ -48,34 +41,30 @@ const Header = ({ whiteHeader, hideMenu }) => {
 
   return (
     <header
-      className={`${whiteHeader ? styles.whiteHeader : ''} ${
-        showShadow ? styles.showShadow : ''
-      } ${hideMenu ? styles.hideMenu : ''}`}
+      className={`
+      ${transparentMenu ? styles.transparentMenu : ''}  
+      ${whiteHeader ? styles.whiteHeader : ''}  
+      ${showShadow ? styles.showShadow : ''} 
+      `}
     >
       <BodyClassName className={`${open ? 'menu-open' : ''}`} />
-      <MenuCountersContext.Consumer>
-        {(context) => (
-          <div>
-            <Link to='/'>
-              <i className='icon-logo2' />
-            </Link>
-            <div className={styles.counters}>
-              <div className={styles.counter}>
-                <a href='https://slackin.withpixie.ai/'>
-                  <i className='icon-slack' />
-                  <div>{context.totalUsers || ssrSlack}</div>
-                </a>
-              </div>
-              <div className={styles.counter}>
-                <a href='https://github.com/pixie-labs/pixie'>
-                  <i className='icon-github-1' />
-                  <div>{context.totalGit || ssrGithub}</div>
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
-      </MenuCountersContext.Consumer>
+      <div className={styles.logos}>
+        <Link to='/' className={styles.logo}>
+          <img src={pixieLogo} alt='pixie logo' />
+          <img src={betanaut} alt='pixienaut beta' className={styles.betanaut} />
+        </Link>
+        <div className={styles.socialIcons}>
+          <a href='https://slackin.withpixie.ai'>
+            <img src={slack} />
+          </a>
+          <a href='https://github.com/pixie-labs/pixie'>
+            <img src={github} />
+          </a>
+          <a href='https://twitter.com/pixie_run'>
+            <img src={twitter} />
+          </a>
+        </div>
+      </div>
       <div className={`hide-mobile hide-tablet ${styles.menu}`}>
         <ul>
           <li>
@@ -83,14 +72,14 @@ const Header = ({ whiteHeader, hideMenu }) => {
               Docs
             </a>
           </li>
-          <li className={styles.outlined}>
+          <li>
             <a href='#' onClick={(e) => loginRedirect(e)}>
-              Log In
+              Sign In
             </a>
           </li>
           <li className={styles.colored}>
-            <a href='#' onClick={(e) => signupRedirect(e)}>
-              Join Beta
+            <a href='https://docs.pixielabs.ai/installing-pixie/quick-start/' target='_blank' rel='noreferrer noopener'>
+              Get started
             </a>
           </li>
         </ul>
@@ -103,7 +92,8 @@ const Header = ({ whiteHeader, hideMenu }) => {
       >
         <div className={styles.headerResponsive}>
           <Link to='/' className={styles.icon}>
-            <i className='icon-logo2' />
+            <img src={pixieLogo} alt='pixie logo' />
+            <img src={betanaut} alt='pixienaut beta' className={styles.betanaut} />
           </Link>
           <i
             className={`icon-menu-on  ${styles.close}`}
@@ -171,23 +161,36 @@ const Header = ({ whiteHeader, hideMenu }) => {
         <div className={styles.links}>
           <ul className={styles.socialIcons}>
             <li>
-              <a href='https://pixie-community.slack.com/'>
-                <i className='icon-slack' />
+              <a
+                href='https://work.withpixie.ai/docs'
+                onClick={(e) => docsRedirect(e)}
+              >
+                <img src={docs} className={styles.socialIcon} />
               </a>
             </li>
             <li>
-              <a href='https://twitter.com/pixie_run'>
-                <i className='icon-twitter' />
+              <a href='https://github.com/pixie-labs/pixie'>
+                <img src={github} className={styles.socialIcon} />
               </a>
             </li>
             <li>
-              <a href='https://github.com/pixie-labs/'>
-                <i className='icon-github-1' />
+              <a href='https://slackin.withpixie.ai'>
+                <img src={slack} className={styles.socialIcon} />
               </a>
             </li>
             <li>
               <a href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'>
-                <i className='icon-youtube' />
+                <img src={youtube} className={styles.socialIcon} />
+              </a>
+            </li>
+            <li>
+              <a href='https://twitter.com/pixie_run'>
+                <img src={twitter} className={styles.socialIcon} />
+              </a>
+            </li>
+            <li>
+              <a href='https://www.linkedin.com/company/pixieai/'>
+                <img src={linkedin} className={styles.socialIcon} />
               </a>
             </li>
           </ul>
@@ -201,10 +204,10 @@ const Header = ({ whiteHeader, hideMenu }) => {
 
 Header.propTypes = {
   whiteHeader: PropTypes.bool,
-  hideMenu: PropTypes.bool,
+  transparentMenu: PropTypes.bool,
 };
 Header.defaultProps = {
   whiteHeader: false,
-  hideMenu: false,
+  transparentMenu: false,
 };
 export default Header;

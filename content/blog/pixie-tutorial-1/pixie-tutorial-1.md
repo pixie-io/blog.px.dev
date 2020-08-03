@@ -2,7 +2,6 @@
 path: '/pixie-tutorial-1'
 title: 'Getting Your Pixie On: First Steps Installing and Deploying Pixie'
 date: 2020-06-11T12:30:00.000+00:00
-featured_image: pixie.png
 category: 'Guest Blogs'
 author: 'John Arundel'
 featured: true

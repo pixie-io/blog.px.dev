@@ -59,21 +59,20 @@ const Blog = ({ data }) => {
     <Layout>
       <SEO title='Blog' />
       <section className={styles.featuredBlog}>
-        <div className={styles.ornamentTopRight} />
-        <div className={styles.ornamentTopLeft} />
         <FeatureBlogPostItem post={featured[featureIndex]} />
         <div className='container'>
           <div className='col-7' />
           <div className='col-5'>
             <div className={styles.navigationFeatured}>
               <div className={styles.navigateDots}>
-                {[...Array(maxFeatured).keys()].map((index) => (
-                  <button
-                    type='button'
-                    key={index}
-                    onClick={() => setFeatureIndex(index)}
-                    className={index === featureIndex ? 'active' : ''}
-                  />
+                {[...Array(maxFeatured)
+                  .keys()].map((index) => (
+                    <button
+                      type='button'
+                      key={index}
+                      onClick={() => setFeatureIndex(index)}
+                      className={index === featureIndex ? 'active' : ''}
+                    />
                 ))}
               </div>
               <div onClick={() => goRight()} className={styles.navigateArrow}>
@@ -106,11 +105,10 @@ const Blog = ({ data }) => {
                 </li>
 
                 {categories.map((cat) => (
-                  <li>
+                  <li key={cat}>
                     <button
                       type='button'
                       className={category === cat ? styles.active : ''}
-                      key={cat}
                       onClick={() => filterByCategory(cat)}
                     >
                       {cat}
@@ -141,22 +139,7 @@ const Blog = ({ data }) => {
           <div className='clearfix' />
         </div>
         <div className={styles.messageBlog}>
-          <div
-            className={styles.quoteOrnament1}
-            data-sal='slide-up'
-            data-sal-duration='600'
-            data-sal-delay='300'
-            data-sal-easing='ease'
-          />
-          <div
-            data-sal='slide-down'
-            data-sal-duration='900'
-            data-sal-delay='300'
-            data-sal-easing='ease'
-            className={styles.quoteOrnament2}
-          />
-
-          <h4>We&apos;re busy building. Drop us a line to learn more!</h4>
+          <h2>We&apos;re busy building. Drop us a line to learn more!</h2>
           <h5>
             Got questions or suggestions? Message us here, email us, or visit
             our&nbsp;
@@ -203,7 +186,9 @@ export const pageQuery = graphql`
         fields {
           slug
         }
+        id
         frontmatter {
+        
           title
           author
           category

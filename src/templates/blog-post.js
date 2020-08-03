@@ -10,6 +10,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
 import mdxComponents from '../components/mdxComponents';
+import PostPlaceholder from '../components/post-placeholder';
 
 const BlogPostTemplate = ({ data }) => {
   const post = data.mdx;
@@ -17,50 +18,56 @@ const BlogPostTemplate = ({ data }) => {
 
   return (
     <Layout whiteFooter whiteHeader>
-      <SEO title='Home' />
-      <div className='container'>
-        <section className={styles.header}>
-          <div className={`row ${styles.singlePost}`}>
-            <div className={`col-7 ${styles.featuredImage}`}>
-              <div className={styles.singlePostLeftTop} />
-
-              <Img
-                fluid={post.frontmatter.featured_image.childImageSharp.fluid}
-              />
+      <div className={styles.blogPost}>
+        <SEO title='Home' />
+        <div className='container'>
+          <section className={styles.header}>
+            <div className={`row ${styles.singlePost}`}>
+              <div className={`col-7 ${styles.featuredImage}`}>
+                <div className={styles.singlePostLeftTop} />
+                {post.frontmatter.featured_image
+                  ? (
+                    <Img
+                      fluid={post.frontmatter.featured_image.childImageSharp.fluid}
+                    />
+                  ) : <PostPlaceholder />}
+              </div>
+              <div
+                className={`col-5  ${styles.detailsPost}`}
+              >
+                <h3>Pixie Engineering</h3>
+                <h1>{post.frontmatter.title}</h1>
+                <p>{post.frontmatter.subtitle || post.excerpt}</p>
+                <span>{post.frontmatter.date}</span>
+              </div>
             </div>
-            <div className={`col-5 ${styles.detailsPost}`}>
-              <h3>Pixie Engineering</h3>
-              <h1>{post.frontmatter.title}</h1>
-              <p>{post.frontmatter.subtitle || post.excerpt}</p>
-              <span>{post.frontmatter.date}</span>
+          </section>
+          <div className='row'>
+            <div className={`col-12 ${styles.blogPostContent}`}>
+              <MDXProvider components={mdxComponents}>
+                <MDXRenderer>{post.body}</MDXRenderer>
+              </MDXProvider>
+            </div>
+          </div>
+        </div>
+
+        <section className={styles.latestStories}>
+          <div className='container'>
+            <div className='row'>
+              {related.map((p) => (
+                <BlogPostItem post={p} key={p.fields.slug} />
+              ))}
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-12'>
+              <Link to='/' className={styles.viewAll}>
+                View all Blog posts
+              </Link>
             </div>
           </div>
         </section>
-        <div className='row'>
-          <div className={`col-12 ${styles.blogPostContent}`}>
-            <MDXProvider components={mdxComponents}>
-              <MDXRenderer>{post.body}</MDXRenderer>
-            </MDXProvider>
-          </div>
-        </div>
       </div>
-
-      <section className={styles.latestStories}>
-        <div className='container'>
-          <div className='row'>
-            {related.map((p) => (
-              <BlogPostItem post={p} key={p.fields.slug} />
-            ))}
-          </div>
-        </div>
-        <div className='row'>
-          <div className='col-12'>
-            <Link to='/' className={styles.viewAll}>
-              View all Blog posts
-            </Link>
-          </div>
-        </div>
-      </section>
     </Layout>
   );
 };
