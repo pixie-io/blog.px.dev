@@ -9,6 +9,7 @@ import SEO from '../components/seo';
 import styles from '../scss/pages/blog.module.scss';
 import blogIcon from '../images/blog-icon.svg';
 import PostPlaceholder from '../components/post-placeholder';
+import Newsletter from '../components/shared/newsletter/newsletter';
 
 const Blog = ({ data }) => {
   const {
@@ -115,6 +116,8 @@ const Blog = ({ data }) => {
             </Link>
           ))}
         </div>
+        <div className='clearfix' style={{ paddingBottom: '60px' }} />
+        <Newsletter />
         <div className='clearfix' />
       </section>
     </Layout>
