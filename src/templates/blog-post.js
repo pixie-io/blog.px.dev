@@ -35,7 +35,7 @@ const BlogPostTemplate = ({ data }) => {
                 <div className={styles.postShare}>
                   <ShareIcons />
                   <div>
-                    <div>
+                    <div className={styles.postAuthor}>
                       {post.frontmatter.author}
                     </div>
                     <div className={styles.postDate}>
@@ -72,7 +72,7 @@ const BlogPostTemplate = ({ data }) => {
                 <div className={styles.postShare}>
                   <ShareIcons />
                   <div>
-                    <div>
+                    <div className={styles.postAuthor}>
                       {post.frontmatter.author}
                     </div>
                     <div className={styles.postDate}>
