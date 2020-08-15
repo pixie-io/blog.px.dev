@@ -79,11 +79,11 @@ const BlogPostTemplate = ({ data }) => {
                   </div>
                 </div>
                 <h1>{post.frontmatter.title}</h1>
-                <p>{post.frontmatter.subtitle || post.excerpt}</p>
-                <span>{post.frontmatter.date}</span>
-                <MDXProvider components={mdxComponents}>
-                  <MDXRenderer>{post.body}</MDXRenderer>
-                </MDXProvider>
+                <div className={styles.postBody}>
+                  <MDXProvider components={mdxComponents}>
+                    <MDXRenderer>{post.body}</MDXRenderer>
+                  </MDXProvider>
+                </div>
               </div>
             </div>
           </div>
@@ -109,6 +109,7 @@ BlogPostTemplate.propTypes = {
     mdx: PropTypes.shape({
       frontmatter: PropTypes.object,
       body: PropTypes.string,
+      timeToRead: PropTypes.number,
       excerpt: PropTypes.string,
     }),
     featured: PropTypes.object,
@@ -119,8 +120,7 @@ export const pageQuery = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       excerpt(pruneLength: 160)
       body
-              timeToRead
-
+      timeToRead
       frontmatter {
         title
         subtitle

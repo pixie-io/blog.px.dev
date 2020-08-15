@@ -19,6 +19,23 @@
       color: #12D6D6;
     }
 
+    .postBody {
+      >p:first-of-type:first-letter {
+        color: #353738;
+        float: left;
+        font-weight: bold;
+        font-size: 64px;
+        line-height: 75px;
+        margin: -12px 6px 0px 0px;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 30px;
+      }
+    }
+
+
     .postShare {
       display: flex;
       justify-content: space-between;
