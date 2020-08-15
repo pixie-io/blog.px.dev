@@ -1,218 +1,70 @@
 @import "../../scss/partials/variables";
 
-.featured-blog {
-  background: $color-dark;
-  padding-top: 242px;
+.blogIndex {
+  padding-top: 140px;
   padding-bottom: 100px;
   position: relative;
+  color: $white;
   @media (max-width: $breakpoint) {
     padding-top: 100px;
   }
 
-  .navigation-featured {
-    position: relative;
-    margin-top: 50px;
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .navigateDots {
-
-      position: absolute;
-      left: 45px;
-      top: 0;
-
-      button {
-        width: 8px;
-        height: 8px;
-        background: $color-grey1;
-        padding: 0;
-        margin-right: 22px;
-        border-radius: 0;
-
-        &.active {
-          background: $color-blue;
-        }
-      }
+    img {
+      padding-right: 20px;
     }
+  }
 
-    .navigateArrow {
-      transform: translateY(-50%);
+  .categoriesFilter {
+    padding-bottom: 140px;
+    text-align: center;
+
+    .categoryItem {
+      color: #9696A5;
+      font-size: 18px;
+      line-height: 30px;
+      margin: 10px 20px;
       cursor: pointer;
-      position: relative;
-      float: right;
-      right: 0;
-      height: 48px;
-      width: 48px;
-      background: $color-blue;
-      margin-left: 20px;
+      display: inline-block;
 
-      img {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+      &.active {
+        color: #12D6D6;
       }
     }
   }
-}
 
-.latest-stories {
-  background: $color-dark;
+  .blogPostItem {
+    margin-bottom: 85px;
+    color: inherit;
+    display: block;
 
-  .blog-category {
-    padding-bottom: 60px;
-    h2 {
-      font-weight: normal;
-      margin: 0 0 27px;
-      color: $color-white;
-      text-align: left;
-      @media (max-width: $breakpoint) {
-        @include padding-mobile;
-      }
-      @include centerOnMobile;
-    }
-
-    span {
-      font-style: normal;
-      font-weight: normal;
+    .overText {
       font-size: 16px;
-      line-height: 24px;
-      color: $color-grey1;
-      display: block;
-      margin-bottom: 23px;
-      text-align: left;
-      @media (max-width: $breakpoint) {
-        @include padding-mobile;
-        display: block;
-        text-align: center;
-      }
+      line-height: 28px;
+      color: #9696A5;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-
-      @media (max-width: $breakpoint) {
-        @include padding-mobile;
-        display: block;
-        text-align: center;
-      }
-
-      li {
-        margin-right: 65px;
-        color: $color-grey1;
-        display: inline;
-
-        button {
-          padding: 0;
-          background: none;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 16px;
-          line-height: 38px;
-          color: $color-grey1;
-          text-transform: unset;
-          letter-spacing: unset;
-
-          &.active {
-            color: $color-blue;
-          }
-        }
-
-        &:first-child {
-          margin-right: 115px;
-        }
-
-        &:last-child {
-          margin-right: 0;
-        }
-
-        @media (max-width: $breakpoint) {
-          display: block;
-          margin: 0;
-          width: 100%;
-          line-height: 40px;
-        }
-      }
+    h3 {
+      padding-top: 14px;
+      padding-bottom: 14px;
+      margin: 0;
     }
-  }
 
-  .blog-view-all {
-    text-align: center;
-    margin-bottom: 228px;
-    margin-top: 20px;
-
-    button {
-      font-style: normal;
-      font-weight: 600;
+    .author {
       font-size: 16px;
-      line-height: 24px;
-      color: $color-green;
-      background: none;
-      padding: 0;
-      text-transform: none;
-      letter-spacing: normal;
-      text-decoration: underline;
+      line-height: 28px;
+      padding-bottom: 20px;
+    }
+
+    .summary {
+      font-size: 16px;
+      line-height: 28px;
+      color: #9696A5;
     }
   }
+
 }
-
-.message-blog {
-  text-align: center;
-  position: relative;
-
-  h2 {
-    text-align: center;
-    font-weight: 300;
-    color: $color-white;
-    max-width: 640px;
-    margin: 0 auto 35px;
-    @media (max-width: $breakpoint) {
-      @include padding-mobile;
-    }
-
-  }
-
-  h5 {
-    text-align: center;
-    font-size: 22px;
-    line-height: 187.4%;
-    color: $color-grey1;
-    margin: 0 auto 47px;
-    max-width: 500px;
-    font-weight: normal;
-
-    a {
-      color: $color-blue;
-      display: inline;
-    }
-  }
-
-  a {
-    display: inline-block;
-  }
-
-  .quoteOrnament1 {
-    position: absolute;
-    top: 0;
-    left: 200px;
-    background-image: url("../../images/homepage/home-ornament.png");
-    width: 272px;
-    height: 119px;
-    content: '';
-    @include showOnDesktop;
-  }
-
-  .quoteOrnament2 {
-    position: absolute;
-    right: 200px;
-    bottom: 0;
-    background-image: url("../../images/homepage/home-ornament.png");
-    width: 272px;
-    transform: rotate(180deg);
-    height: 119px;
-    content: '';
-    @include showOnDesktop;
-  }
-}
-
-

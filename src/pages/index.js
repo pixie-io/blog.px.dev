@@ -1,56 +1,39 @@
 import React, { useState } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
+
+
 import PropTypes from 'prop-types';
+import Img from 'gatsby-image/index';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import BlogPostItem from '../components/shared/blog-post-item';
-import FeatureBlogPostItem from '../components/blog/feature-post';
 import styles from '../scss/pages/blog.module.scss';
-import leftNav from '../images/left-nav.svg';
-import rightNav from '../images/right-nav.svg';
+import blogIcon from '../images/blog-icon.svg';
+import PostPlaceholder from '../components/post-placeholder';
 
 const Blog = ({ data }) => {
-  const pageSize = 9;
-  const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
-  const {
-    featured: { nodes: featured },
-  } = data;
-  const maxFeatured = Math.max(featured.length, 3);
   const {
     posts: { nodes: allPosts },
   } = data;
-  const {
-    categories: { nodes: allCategories },
+  let {
+    categories: { group: categories },
   } = data;
-  const categories = [
-    ...new Set((allCategories || []).map((c) => c.frontmatter.category)),
-  ];
+  const allPostsNumber = allPosts.length;
+  categories = (categories || []).map((c) => ({
+    name: c.fieldValue,
+    count: c.totalCount,
+  }));
 
   const [category, setCategory] = useState(null);
-  const [page, setPage] = useState(0);
-  const [posts, setPosts] = useState(paginate(allPosts, 0));
-  const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
-  const [featureIndex, setFeatureIndex] = useState(0);
+  const [posts, setPosts] = useState(allPosts);
 
   const filterPosts = (p, c) => {
     const filteredPosts = c
       ? allPosts.filter((pos) => pos.frontmatter.category === c)
       : allPosts;
-    const paginatedPosts = paginate(filteredPosts, p);
-    setPosts(paginatedPosts);
-    setPage(p);
+    setPosts(filteredPosts);
     setCategory(c);
-    setHasMore(filteredPosts.length > paginatedPosts.length);
   };
-  const goLeft = () => {
-    setFeatureIndex(Math.max(0, featureIndex - 1));
-  };
-  const goRight = () => {
-    setFeatureIndex(Math.min(maxFeatured - 1, featureIndex + 1));
-  };
-  const loadMore = () => {
-    filterPosts(page + 1, category);
-  };
+
   const filterByCategory = (c) => {
     filterPosts(0, c);
   };
@@ -58,103 +41,81 @@ const Blog = ({ data }) => {
   return (
     <Layout>
       <SEO title='Blog' />
-      <section className={styles.featuredBlog}>
-        <FeatureBlogPostItem post={featured[featureIndex]} />
+      <section className={styles.blogIndex}>
         <div className='container'>
-          <div className='col-7' />
-          <div className='col-5'>
-            <div className={styles.navigationFeatured}>
-              <div className={styles.navigateDots}>
-                {[...Array(maxFeatured)
-                  .keys()].map((index) => (
-                    <button
-                      type='button'
-                      key={index}
-                      onClick={() => setFeatureIndex(index)}
-                      className={index === featureIndex ? 'active' : ''}
-                    />
-                ))}
-              </div>
-              <div onClick={() => goRight()} className={styles.navigateArrow}>
-                <img src={rightNav} alt='' />
-              </div>
-              <div onClick={() => goLeft()} className={styles.navigateArrow}>
-                <img src={leftNav} alt='' />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className={styles.latestStories}>
-        <div className='container'>
-          <div className={`row ${styles.blogCategory}`}>
-            <div className='col-12'>
-              <h2>Latest Stories</h2>
-            </div>
-            <div className='col-12'>
-              <span>Categories</span>
-              <ul>
-                <li>
-                  <button
-                    className={!category ? styles.active : ''}
-                    type='button'
-                    onClick={() => filterByCategory(null)}
-                  >
-                    All
-                  </button>
-                </li>
-
+          <div className='col-12'>
+            <div className='row'>
+              <h1>
+                <img src={blogIcon} />
+                Blog
+              </h1>
+              <h3>The latest news and announcements on Pixie, products, partners, and more.</h3>
+              <div className={styles.categoriesFilter}>
+                <span
+                  className={`${!category ? styles.active : ''} ${styles.categoryItem}`}
+                  onClick={() => filterByCategory(null)}
+                >
+                  All (
+                  {allPostsNumber}
+                  )
+                </span>
                 {categories.map((cat) => (
-                  <li key={cat}>
-                    <button
-                      type='button'
-                      className={category === cat ? styles.active : ''}
-                      onClick={() => filterByCategory(cat)}
-                    >
-                      {cat}
-                    </button>
-                  </li>
+                  <span
+                    key={cat.name}
+                    className={`${category === cat.name ? styles.active : ''} ${styles.categoryItem}`}
+                    onClick={() => filterByCategory(cat.name)}
+                  >
+                    {cat.name}
+                    (
+                    {cat.count}
+                    )
+                  </span>
                 ))}
-              </ul>
+              </div>
             </div>
+
           </div>
-          <div className='row'>
-            {posts.map((post) => (
-              <BlogPostItem post={post} key={post.id} />
-            ))}
-          </div>
-          <div className='clearfix' />
-          <div className='row'>
-            <div className={`col-12 ${styles.blogViewAll}`}>
-              {hasMore ? (
-                <button type='button' onClick={() => loadMore()}>
-                  View all Blog posts
-                  {' '}
-                </button>
-              ) : (
-                ''
-              )}
-            </div>
-          </div>
-          <div className='clearfix' />
+          {posts.map((post) => (
+            <Link to={`/blog/${post.fields.slug}`} className={styles.blogPostItem} key={post.id}>
+              <div className='row'>
+                <div className='col-3'>
+                  {post.frontmatter.featured_image
+                    ? (
+                      <Img
+                        fluid={post.frontmatter.featured_image.childImageSharp.fluid}
+                        alt={post.frontmatter.title}
+                      />
+                    )
+                    : <PostPlaceholder />}
+                </div>
+                <div className='col-9'>
+                  <div className={styles.overText}>
+                    {post.frontmatter.date}
+                    {' • '}
+                    {post.timeToRead}
+                    {' '}
+                    minute
+                    {post.timeToRead > 1 ? 's' : ''}
+                    {' '}
+                    read
+                  </div>
+                  <h3>{post.frontmatter.title}</h3>
+                  <div className={styles.author}>
+                    {post.frontmatter.author}
+                    {' '}
+                    in
+                    {' '}
+                    {post.frontmatter.category}
+                  </div>
+                  <div className={styles.summary}>
+                    {post.excerpt}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-        <div className={styles.messageBlog}>
-          <h2>We&apos;re busy building. Drop us a line to learn more!</h2>
-          <h5>
-            Got questions or suggestions? Message us here, email us, or visit
-            our&nbsp;
-            <a
-              href='https://work.withpixie.ai/docs'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              help center.
-            </a>
-          </h5>
-          <a href='https://pixielabs.ai/contact' className='button'>
-            Contact Us
-          </a>
-        </div>
+        <div className='clearfix' />
       </section>
     </Layout>
   );
@@ -169,7 +130,7 @@ Blog.propTypes = {
       nodes: PropTypes.array.isRequired,
     }),
     categories: PropTypes.shape({
-      nodes: PropTypes.array.isRequired,
+      group: PropTypes.array.isRequired,
     }),
   }).isRequired,
 };
@@ -187,8 +148,9 @@ export const pageQuery = graphql`
           slug
         }
         id
+        timeToRead
+        excerpt
         frontmatter {
-        
           title
           author
           category
@@ -196,7 +158,7 @@ export const pageQuery = graphql`
           featured_image {
             childImageSharp {
               id
-              fluid(maxWidth: 380) {
+              fluid(maxWidth: 290) {
                 base64
                 aspectRatio
                 src
@@ -238,12 +200,11 @@ export const pageQuery = graphql`
         }
       }
     }
-    categories: allMdx(filter: { frontmatter: { category: { ne: null } } }) {
-      nodes {
-        frontmatter {
-          category
-        }
-      }
+   categories: allMdx(filter: {frontmatter: {category: {ne: null}}}) {
+    group(field: frontmatter___category) {
+      totalCount
+      fieldValue
     }
+  }
   }
 `;
