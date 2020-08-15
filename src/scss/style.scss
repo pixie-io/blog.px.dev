@@ -111,6 +111,9 @@ i {
 
 .container {
   margin: 0 auto;
+  @media (max-width: 1000px) {
+    margin: 0 24px;
+  }
 }
 
 @media (min-width: 1000px) {
@@ -140,8 +143,8 @@ i {
     }
 
     @media (min-width: 1200px) {
-      padding-left: 40px;
-      padding-right: 40px;
+      //padding-left: 40px;
+      //padding-right: 40px;
     }
     @media (max-width: 1000px) {
       display: block;

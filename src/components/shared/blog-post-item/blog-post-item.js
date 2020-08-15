@@ -8,12 +8,13 @@ import PostPlaceholder from '../../post-placeholder';
 
 const BlogPostItem = ({ post }) => {
   const {
+    timeToRead,
     frontmatter: {
       title,
       featured_image: featuredImage,
       author,
       date,
-      //  category,
+      category,
     },
     fields: { slug },
   } = post;
@@ -29,8 +30,23 @@ const BlogPostItem = ({ post }) => {
           </div>
           <div className={styles.content}>
             <h5>{title}</h5>
-            <p>{author}</p>
-            <span>{date}</span>
+            <p>
+              {author}
+              {' '}
+              in
+              {' '}
+              {category}
+            </p>
+            <span>
+              {' '}
+              {date}
+              {' • '}
+              {timeToRead}
+              {' '}
+              minute
+              {timeToRead > 1 ? 's' : ''}
+              {' '}
+            </span>
           </div>
         </Link>
       </div>
@@ -41,6 +57,7 @@ BlogPostItem.propTypes = {
   post: PropTypes.shape({
     frontmatter: PropTypes.object,
     fields: PropTypes.object,
+    timeToRead: PropTypes.number,
   }).isRequired,
 };
 
