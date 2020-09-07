@@ -19,7 +19,7 @@ In this guest blog post, infrastructure crime-fighter John Arundel, of [Bitfield
 
 It ain't easy being a cop. An infrastructure cop, that is. Every day on the beat, we deal with SLA parole violations, DDoS attacks, CPU stealing. Even the occasional cache poisoning.
 
-::: div image-l
+::: div image-m
 ![Image 1: Infrastructure cops](./the-wire.webp)
 :::
 
@@ -31,7 +31,7 @@ Suppose you could see every HTTP request going through your cluster, or every My
 
 There's a new recruit on the force who can help you do exactly that. [Pixie](https://docs.withpixie.ai/getting-started/what-is-pixie/) is a software tool for monitoring and tracing in Kubernetes clusters, letting you see what's going on _without_ making any code changes, or sending any customer data outside the cluster. It can reduce the time to triage issues from days to just hours.
 
-::: div image-l
+::: div image-m
 ![CLI demo](./cli-demo.svg)
 :::
 
@@ -48,7 +48,7 @@ Well, there's a powerful tracing framework already built into the Linux kernel, 
 
 Pixie uses eBPF probes to intercept and record all the activity we're interested in. For example, whenever a service receives an HTTP request and sends a response, Pixie captures it. Whenever a SQL query goes to a database, and some data rows are returned, it goes into Pixie's notebook.
 
-::: div image-l
+::: div image-m
 ![SQL data](./mysql-data.png)
 :::
 
@@ -56,19 +56,19 @@ Pixie uses eBPF probes to intercept and record all the activity we're interested
 The clever part is that Pixie integrates with Kubernetes, so it can work out which pods and services are connected to which requests and actions, and it records the timestamp of everything, so it can track the throughput and latency of everything that happens.
 
 
-::: div image-l
+::: div image-m
 ![Service stats live view](./service-stats.png)
 :::
 
 Although traditional distributed tracing is still valuable, it can only answer the questions that you ask, and you have to know the questions beforehand. By contrast, Pixie can _show_ you what's going on right now, by looking deep inside the cluster and watching activity at the kernel level. It's like X-Ray Specs for your cluster.
 
-::: div image-l
+::: div image-m
 ![Service graphs](./service-graphs.png)
 :::
 
 Even better, it's programmable. Pixie comes with a handy set of scripts for gathering and querying data, but you can modify these, write your own, or use community-maintained scripts. These scripts are written in a special extra-complicated programming language that you'll have to learn. (Just kidding. It's Python.)
 
-::: div image-l
+::: div image-m
 ![Pixie scripts](./pixie-script.png)
 :::
 
@@ -79,7 +79,7 @@ Even better, it's programmable. Pixie comes with a handy set of scripts for gath
 
 "This all sounds great," I can hear you saying, "but I'm a little too busy to spend a bunch of time installing, setting up, and figuring out this Pixie thing, and we don't have any spare budget for SaaS products anyway. Nice idea, but I've got an inbox full of nice ideas, and the business is screaming because _things are on fire_."
 
-::: div image-l
+::: div image-m
 ![Works on my machine...](./works-on-my.png)
 :::
 
@@ -87,7 +87,7 @@ Relax. Pixie respects your time. In fact, _time_ is the point. Pixie is quick an
 
 You don't have to install anything on your cluster nodes. You don't have to change your Kubernetes YAML files. You don't need to deploy a service mesh (thank heavens for that). In just a few minutes, Pixie can give you stats on the resource usage in your cluster, all the services you're running, and all the traffic you're handling. If you spot a problem, you can zoom in on specific HTTP or gRPC requests, or SQL queries, to see what's going wrong.
 
-::: div image-l
+::: div image-m
 ![HTTP data](./http-data.png)
 :::
 
@@ -104,11 +104,6 @@ It turns out it's not that bad. There's a small overhead, sure. But for most rea
 Brace yourself: not a thing. Yes, you heard that right. The community edition of Pixie is free to download, free to use, and it'll stay free forever. And everything you've just read about is included in that community edition. No time-limited 'free trial', no missing features; batteries _are_ included.
 
 But surely those hard-working Pixie Labs engineers deserve some recompense for building such a great product? Of course, and if Pixie makes your life a tiny bit more magical, you can opt to pay a small monthly charge for the Team edition, which adds some nice features like multiplayer, online support, and archive data storage. If you _really_ love Pixie, you'll want the Enterprise edition, which is an unlimited, access-all-areas ticket to the Pixie Magic Kingdom.
-
-::: div image-l
-![Plans and pricing](./plans.png)
-:::
-
 
 The core product, though, is totally free. (It's almost like they _want_ everyone to use it!) If that's enough to make you Pixie-curious, and you're wondering how to get started, stay tuned. In the next post, I'll show you how to download and deploy Pixie, and together, we'll fight crime.
 
