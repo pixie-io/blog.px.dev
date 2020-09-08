@@ -8,7 +8,7 @@ author: 'Zain Asgar'
 featured: true
 ---
 
-This post describes how to use [gobpf](https://github.com/iovisor/gobpf) and uprobes to build a function arugment tracer for Go applications.
+This post describes how to use [gobpf](https://github.com/iovisor/gobpf) and uprobes to build a function argument tracer for Go applications.
 
 # Introduction
 
@@ -20,7 +20,7 @@ We will explore using enhanced BPF ([ebpf](https://ebpf.io)), which is available
 
 # What is eBPF?
 
-Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think about it as a lighweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. As shown in the overview below, eBPF allows the Kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. Since this verification is strict, and only support a verifiable subset of C, the kernel can then compile the bytecode to verified machine code for efficient runtime execution. This high performance allow eBPF to be used in performance critical workloads like: packet filtering, networking monitoring, etc. Using eBPF we can also insert probes; these are a functions that are executed whenever events occur and can examine the state of the system. Many different types of probes are available, but the one we will focus on for this post is uprobes. 
+Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think about it as a lighweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. As shown in the overview below, eBPF allows the Kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. Since this verification is strict, and only support a verifiable subset of C, the kernel can then compile the bytecode to verified machine code for efficient runtime execution. This high performance allow eBPF to be used in performance critical workloads like: packet filtering, networking monitoring, etc. Using eBPF we can also insert probes; functions that are executed whenever a specific event such as a function call occurs. The probes then allow you to run a BPF compiled function that can examine the state of the system application or kernel. Many different types of probes are available, but the one we will focus on for this post is uprobes. 
 
  ::: div image-l
 ![BPF overview (from ebpf.io)](./bpf-overview.png)
@@ -29,13 +29,13 @@ Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You 
 
 # Uprobes
 
-One of the features that BPF allows you to access is uprobes; functions that allows you to intercept and provide userspace programs. The flow for a uprobe is essentially the same as any other BPF program, and summarized in the diagram below. The compiled and verified BPF programs is executed as part of a uprobe and the results can be written into a buffer. Let's see how uprobes actually function.
+One of the features that BPF allows you to access is uprobes. These are functions that allow you to intercept a userspace program by inserting a soft-interrupt debug trap instruction (_int3_ on an x86). If you are interested in details, checkout [this](https://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints) blog post by Eli. The flow for an uprobe is essentially the same as any other BPF program, and summarized in the diagram below. The compiled and verified BPF programs is executed as part of a uprobe and the results can be written into a buffer. Let's see how uprobes actually function.
 
 ::: div image-l
 ![BPF for tracing (from Brendan Gregg)](./bpf-tracing.jpg)
 :::
 
-
+To dig into the details of deploying uprobes and capturing function arguments, we will be using [this](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/app.go) simple demo application. The relevant parts of this Go program are shown below. It's a simple HTTP server that exposes a single _GET_ endpoint on _/e_, that computes the value of Euler's number (__e__). Since this uses an iterative approximation, it takes in a single query param, _iters_, specifying the number of iterations to run the approximation; the more iterations the more accurate the approximation, at the cost of compute cycles. It's not important to understand the math behind the function, just that we are interested in tracing the arguments of any invocation of _computeE_.
 
 ```go
 // computeE computes the approximation of e by running a fixed number of iterations.
@@ -59,11 +59,14 @@ func main() {
     // Start server...
 }
 ```
+To understand how uprobes work, let's take a look at how symbols are tracked inside of binaries. Go binaries on Linux use DWARF to store debug info, and this information is available, even in optimized binaries, unless debug data has been stripped. We can use the command _objdump_ to examine the symbols in the binary:
 
 ```bash
 [0] % objdump --syms app|grep computeE
 00000000006609a0 g     F .text    000000000000004b              main.computeE
 ```
+
+The function _computeE_ is located at address _0x6609a0_. To look at the instructions around it, we can ask objdump to disassemble to binary (done by adding -d). The disassembled code looks like:
 
 
 ```bash
@@ -75,6 +78,14 @@ func main() {
   6609b1:       00
   6609b2:       f2 0f 10 0d 36 a6 0f    movsd  0xfa636(%rip),%xmm1
 ```
+
+From this we can see what happens when _computeE_ is called. The first instruction is `mov 0x8(%rsp),%rax`, moves the content offset `0x8` from the `rsp` register to the `rax` register. This is actually the input argument _iterations_ above; the arguments in Go are passed on the stack. With this in mind, lets take a quick pass at writing what a BPF program function will look like:
+
+
+::: div image-xl
+![App Tracing](./app-trace.svg)
+:::
+sdfsdf
 
 ```c
 #include <uapi/linux/ptrace.h>
@@ -88,11 +99,6 @@ inline int computeECalled(struct pt_regs *ctx) {
   return 0;
 }
 ```
-
-::: div image-xl
-![App Tracing](./app-trace.svg)
-:::
-sdfsdf
 
 
 ```
