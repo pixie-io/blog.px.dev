@@ -32,7 +32,7 @@ Pixie has three main components:
 There's also the Pixie _control cloud_, which handles authentication, admin, and so on, but you don't need to worry about this for now, because it's hosted by Pixie Labs, and your Pixie installation knows how to talk to it automatically.
 
 ::: div image-l
-![Pixie architecture diagram](./pixie-architecture.png)
+![Pixie architecture diagram](./product-arch.svg)
 :::
 
 ## Prerequisites
