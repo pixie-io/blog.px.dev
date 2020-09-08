@@ -70,7 +70,6 @@ To understand how uprobes work, let's look at how symbols are tracked inside bin
 
 The function _computeE_ is located at address _0x6609a0_. To look at the instructions around it, we can ask objdump to disassemble to binary (done by adding -d). The disassembled code looks like:
 
-ß
 ```bash
 [0] % objdump -d app | less
 00000000006609a0 <main.computeE>:
