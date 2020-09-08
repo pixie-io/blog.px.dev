@@ -112,7 +112,7 @@ inline int computeECalled(struct pt_regs *ctx) {
 }
 ```
 
-With that we have fully functioning end-to-end arugment tracer for the _main.computeE_ function! The results of this are shown in the video clip below.
+With that, we have a fully functioning end-to-end argument tracer for the _main.computeE_ function! The results of this are shown in the video clip below.
 
 ::: div image-xl
 ![End-to-End demo](./e2e-demo.gif)
