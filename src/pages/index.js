@@ -12,10 +12,7 @@ import rightNav from '../images/right-nav.svg';
 const Blog = ({ data }) => {
   const pageSize = 9;
   const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
-  const {
-    featured: { nodes: featured },
-  } = data;
-  const maxFeatured = Math.max(featured.length, 3);
+
   const {
     posts: { nodes: allPosts },
   } = data;
@@ -42,12 +39,7 @@ const Blog = ({ data }) => {
     setCategory(c);
     setHasMore(filteredPosts.length > paginatedPosts.length);
   };
-  const goLeft = () => {
-    setFeatureIndex(Math.max(0, featureIndex - 1));
-  };
-  const goRight = () => {
-    setFeatureIndex(Math.min(maxFeatured - 1, featureIndex + 1));
-  };
+
   const loadMore = () => {
     filterPosts(page + 1, category);
   };
@@ -58,33 +50,6 @@ const Blog = ({ data }) => {
   return (
     <Layout>
       <SEO title='Blog' />
-      <section className={styles.featuredBlog}>
-        <FeatureBlogPostItem post={featured[featureIndex]} />
-        <div className='container'>
-          <div className='col-7' />
-          <div className='col-5'>
-            <div className={styles.navigationFeatured}>
-              <div className={styles.navigateDots}>
-                {[...Array(maxFeatured)
-                  .keys()].map((index) => (
-                    <button
-                      type='button'
-                      key={index}
-                      onClick={() => setFeatureIndex(index)}
-                      className={index === featureIndex ? 'active' : ''}
-                    />
-                ))}
-              </div>
-              <div onClick={() => goRight()} className={styles.navigateArrow}>
-                <img src={rightNav} alt='' />
-              </div>
-              <div onClick={() => goLeft()} className={styles.navigateArrow}>
-                <img src={leftNav} alt='' />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <section className={styles.latestStories}>
         <div className='container'>
           <div className={`row ${styles.blogCategory}`}>
@@ -162,9 +127,6 @@ const Blog = ({ data }) => {
 
 Blog.propTypes = {
   data: PropTypes.shape({
-    featured: PropTypes.shape({
-      nodes: PropTypes.array,
-    }),
     posts: PropTypes.shape({
       nodes: PropTypes.array.isRequired,
     }),
@@ -208,36 +170,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    featured: allMdx(
-      filter: { frontmatter: { featured: { eq: true } } }
-      limit: 3
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      nodes {
-        fields {
-          slug
-        }
-        excerpt(pruneLength: 160)
-        frontmatter {
-          title
-          subtitle
-          author
-          date(formatString: "MMMM DD, YYYY")
-          featured_image {
-            childImageSharp {
-              id
-              fluid(maxWidth: 380) {
-                base64
-                aspectRatio
-                src
-                srcSet
-                sizes
-              }
-            }
-          }
-        }
-      }
-    }
+  
     categories: allMdx(filter: { frontmatter: { category: { ne: null } } }) {
       nodes {
         frontmatter {
