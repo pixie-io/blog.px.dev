@@ -11,47 +11,75 @@ import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
 import mdxComponents from '../components/mdxComponents';
 import PostPlaceholder from '../components/post-placeholder';
+import reddit from '../images/icons/reddit-icon.svg';
+import slack from '../images/icons/slack-icon.svg';
+import facebook from '../images/icons/facebook-icon.svg';
+import twitter from '../images/icons/twitter-icon.svg';
+import linkedin from '../images/icons/linkedin-icon.svg';
+import bookmark from '../images/icons/bookmark-icon.svg';
 
 const BlogPostTemplate = ({ data }) => {
   const post = data.mdx;
   const related = data.featured.nodes;
 
   return (
-    <Layout whiteFooter whiteHeader>
+    <Layout>
       <div className={styles.blogPost}>
         <SEO title='Home' />
         <div className='container'>
-          <section className={styles.header}>
-            <div className={`row ${styles.singlePost}`}>
-              <div className={`col-7 ${styles.featuredImage}`}>
-                <div className={styles.singlePostLeftTop} />
-                {post.frontmatter.featured_image
-                  ? (
-                    <Img
-                      fluid={post.frontmatter.featured_image.childImageSharp.fluid}
-                    />
-                  ) : <PostPlaceholder />}
-              </div>
-              <div
-                className={`col-5  ${styles.detailsPost}`}
-              >
-                <h3>Pixie Engineering</h3>
-                <h1>{post.frontmatter.title}</h1>
-                <p>{post.frontmatter.subtitle || post.excerpt}</p>
-                <span>{post.frontmatter.date}</span>
-              </div>
-            </div>
-          </section>
           <div className='row'>
-            <div className={`col-12 ${styles.blogPostContent}`}>
-              <MDXProvider components={mdxComponents}>
-                <MDXRenderer>{post.body}</MDXRenderer>
-              </MDXProvider>
+            <div className='col-12'>
+              <div className={styles.breadcrumb}>
+                <Link to='/'>Blog</Link>
+                {' '}
+                /
+                {' '}
+                {post.frontmatter.category}
+              </div>
+              <h1>{post.frontmatter.title}</h1>
             </div>
           </div>
+          <div className='row'>
+            <div className='col-6'>author</div>
+            <div className='col-6'>
+              <div className={styles.socialIcons}>
+                <a href='#'>
+                  <img src={slack} />
+                </a>
+                <a href='#'>
+                  <img src={reddit} />
+                </a>
+                <a href='#'>
+                  <img src={twitter} />
+                </a>
+                <a href='#'>
+                  <img src={linkedin} />
+                </a>
+                <a href='#'>
+                  <img src={facebook} />
+                </a>
+                <a href='#'>
+                  <img src={bookmark} />
+                </a>
+              </div>
+            </div>
+          </div>
+          {post.frontmatter.featured_image
+            ? (
+              <Img
+                fluid={post.frontmatter.featured_image.childImageSharp.fluid}
+              />
+            ) : <PostPlaceholder />}
+
+          <p>{post.frontmatter.subtitle || post.excerpt}</p>
+          <span>{post.frontmatter.date}</span>
+
+          <MDXProvider components={mdxComponents}>
+            <MDXRenderer>{post.body}</MDXRenderer>
+          </MDXProvider>
         </div>
 
-        <section className={styles.latestStories}>
+        <section className={styles.relatedStories}>
           <div className='container'>
             <div className='row'>
               {related.map((p) => (
@@ -90,7 +118,8 @@ export const pageQuery = graphql`
       frontmatter {
         title
         subtitle
-        date
+                  category
+          date(formatString: "DD MMMM YYYY")
         featured_image {
           childImageSharp {
             fluid(maxWidth: 1200, quality: 92) {
@@ -109,6 +138,8 @@ export const pageQuery = graphql`
         fields {
           slug
         }
+             timeToRead
+        excerpt(pruneLength: 200)
         frontmatter {
           title
           subtitle
