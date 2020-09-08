@@ -22,7 +22,7 @@ We will explore using enhanced BPF ([ebpf](https://ebpf.io)), which is available
 
 Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think about it as a lighweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. As shown in the overview below, eBPF allows the Kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. Since this verification is strict, and only support a verifiable subset of C, the kernel can then compile the bytecode to verified machine code for efficient runtime execution. This high performance allow eBPF to be used in performance critical workloads like: packet filtering, networking monitoring, etc. Using eBPF we can also insert probes; functions that are executed whenever a specific event such as a function call occurs. The probes then allow you to run a BPF compiled function that can examine the state of the system application or kernel. Many different types of probes are available, but the one we will focus on for this post is uprobes. 
 
- ::: div image-l
+::: div image-l
 ![BPF overview (from ebpf.io)](./bpf-overview.png)
 :::
 
@@ -30,6 +30,7 @@ Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You 
 # Uprobes
 
 One of the features that BPF allows you to access is uprobes. These are functions that allow you to intercept a userspace program by inserting a soft-interrupt debug trap instruction (_int3_ on an x86). If you are interested in details, checkout [this](https://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints) blog post by Eli. The flow for an uprobe is essentially the same as any other BPF program, and summarized in the diagram below. The compiled and verified BPF programs is executed as part of a uprobe and the results can be written into a buffer. Let's see how uprobes actually function.
+
 
 ::: div image-l
 ![BPF for tracing (from Brendan Gregg)](./bpf-tracing.jpg)
@@ -79,13 +80,26 @@ The function _computeE_ is located at address _0x6609a0_. To look at the instruc
   6609b2:       f2 0f 10 0d 36 a6 0f    movsd  0xfa636(%rip),%xmm1
 ```
 
-From this we can see what happens when _computeE_ is called. The first instruction is `mov 0x8(%rsp),%rax`, moves the content offset `0x8` from the `rsp` register to the `rax` register. This is actually the input argument _iterations_ above; the arguments in Go are passed on the stack. With this in mind, lets take a quick pass at writing what a BPF program function will look like:
+From this we can see what happens when _computeE_ is called. The first instruction is `mov 0x8(%rsp),%rax`, moves the content offset `0x8` from the `rsp` register to the `rax` register. This is actually the input argument _iterations_ above; the arguments in Go are passed on the stack. With this information in mind we are ready to dive in and start writing the code to trace the arguments for _computeE_.
 
+# Building the Tracer
+
+In order to capture the events we need to register a uprobe function, and also have a userspace function that can read the output. A diagram of this is show below. We are going to write a binary called _tracer_ that is responsible for registering the BPF code, and also reading the results of the BPF code. As shown, the uprobe will simply write to a perf-buffer, a linux kernel data structure use for perf events.
+
+::: div image-m
+![High-level overview showing the Tracer binary listening to perf events generated from the App](./app-tracer.svg)
+:::
+
+Now that we understand the pieces involved, lets look into the details of what happens when we add an uprobe. The diagram below shows how the binary 
+is modified by the Linux kernel when a uprobe is inserted; the first instruction in `main.computeE` will be replaced by an _int3_ instruction. This will 
+cause a soft-interrupt, allowing the Linux kernel to execute our BPF function. At this point we can write the arguments to the perf-buffer, which 
+is asynchronously read by the tracer. 
 
 ::: div image-xl
 ![App Tracing](./app-trace.svg)
 :::
-sdfsdf
+
+The BPF function for this is fairly simple; the C code is shown below. We will register this function so that it's invoked everytime _main.computeE_ is called. When it's called we simply read the function argument and write that the perf buffer. There is other boilerplate needed to setup the buffers, etc., this can be found in the complete example [here](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/tracer/tracer.go). 
 
 ```c
 #include <uapi/linux/ptrace.h>
@@ -100,6 +114,13 @@ inline int computeECalled(struct pt_regs *ctx) {
 }
 ```
 
+With that we have fully functioning end-to-end arugment tracer for the _main.computeE_ function! The results of this are shown in the video clip below.
+
+::: div image-xl
+![End-to-End demo](./e2e-demo.gif)
+:::
+
+One of the cool things is that we can actually use GDB to see the modifications made to the binary. Here we dump out the instructions at the _0x6609a0_ address, before running our tracer binary.
 
 ```
 (gdb) display /4i 0x6609a0
@@ -110,6 +131,8 @@ inline int computeECalled(struct pt_regs *ctx) {
    0x6609b2 <main.computeE+18>: movsd  0xfa636(%rip),%xmm1
 ```
 
+Here it is after we run the tracer binary. We can clearly see that first instruction is now the _int3_ instruction.
+
 ```
 (gdb) display /4i 0x6609a0
 7: x/4i 0x6609a0
@@ -119,8 +142,13 @@ inline int computeECalled(struct pt_regs *ctx) {
    0x6609aa <main.computeE+10>: movsd  0xfa616(%rip),%xmm0
 ```
 
+Although, we hard coded the tracer for this particular example, it's possible to make this process generalizable. Many aspects of Go, such as nested pointers, interfaces, channels, etc. make this process challenging, but solving these problems allows for another mode of instrumentation that is not
+available in existing systems. Also, since this process works at the binary level, it can be used with any natively compiled binaries for other languages (C++, Rust, etc.), as long account for the differences in their respective ABI's. 
 
-::: div image-xl
-![End-to-End demo](./e2e-demo.gif)
-:::
-sdfsdf
+# So is this a good idea?
+
+BPF tracing using uprobes comes with it's own set of pros and cons. It's attractive to use this when we need observability into the state of the binary, even when it's running in environments where attaching a debugger will be difficult, or a bad idea (ex. production binaries). The biggest down side is the code required get even trivial visibility into the application state. While BPF code is fairly accessible, it's fairly complex to write and maintain so without substantial high-level tooling, it's unlikely this will be used for generic debugging. 
+
+
+
+
