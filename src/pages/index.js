@@ -24,7 +24,7 @@ const Blog = ({ data }) => {
     count: allPosts.filter((pos) => pos.frontmatter.category === c).length,
   }));
 
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState(categories[0].label);
   const [page, setPage] = useState(0);
   const [posts, setPosts] = useState(paginate(allPosts, 0));
   const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
@@ -80,11 +80,9 @@ const Blog = ({ data }) => {
               </ul>
             </div>
           </div>
-          <div className='row'>
-            {posts.map((post) => (
-              <BlogPostItem post={post} key={post.id} />
-            ))}
-          </div>
+          {posts.map((post) => (
+            <BlogPostItem post={post} key={post.id} />
+          ))}
           <div className='clearfix' />
           <div className='row'>
             <div className={`col-12 ${styles.blogViewAll}`}>
@@ -129,8 +127,11 @@ export const pageQuery = graphql`
           slug
         }
         id
+        timeToRead
+        excerpt(pruneLength: 200)
+
         frontmatter {
-        
+       
           title
           author
           category
@@ -138,7 +139,7 @@ export const pageQuery = graphql`
           featured_image {
             childImageSharp {
               id
-              fluid(maxWidth: 380) {
+              fluid(maxWidth: 285) {
                 base64
                 aspectRatio
                 src

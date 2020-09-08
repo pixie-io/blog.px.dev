@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
-
 import PropTypes from 'prop-types';
 import styles from './blog-post-item.module.scss';
 import PostPlaceholder from '../../post-placeholder';
@@ -13,27 +12,42 @@ const BlogPostItem = ({ post }) => {
       featured_image: featuredImage,
       author,
       date,
-      //  category,
+      category,
     },
+    timeToRead,
+    excerpt,
     fields: { slug },
   } = post;
-
   return (
-    <article className='col-4'>
-      <div className={styles.articleContent}>
-        <Link to={`/blog/${slug}`}>
-          <div className={styles.featuredImage}>
-            {featuredImage
-              ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
-              : <PostPlaceholder />}
-          </div>
-          <div className={styles.content}>
-            <h5>{title}</h5>
-            <p>{author}</p>
-            <span>{date}</span>
-          </div>
-        </Link>
-      </div>
+    <article className='row'>
+      <Link to={`/blog/${slug}`}>
+        <div className='col-3'>
+          {featuredImage
+            ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
+            : <PostPlaceholder />}
+        </div>
+        <div className='col-9'>
+          <p className={styles.dateRow}>
+            {date}
+            {' '}
+            •
+            {' '}
+            {timeToRead}
+            {' '}
+            minutes read
+          </p>
+          <h3>{title}</h3>
+
+          <p className={styles.authorRow}>
+            {author}
+            {' '}
+            in
+            {' '}
+            {category}
+          </p>
+          <p>{excerpt}</p>
+        </div>
+      </Link>
     </article>
   );
 };
@@ -41,6 +55,8 @@ BlogPostItem.propTypes = {
   post: PropTypes.shape({
     frontmatter: PropTypes.object,
     fields: PropTypes.object,
+    timeToRead: PropTypes.number,
+    excerpt: PropTypes.string,
   }).isRequired,
 };
 

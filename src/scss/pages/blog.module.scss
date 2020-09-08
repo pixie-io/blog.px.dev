@@ -6,16 +6,16 @@
 
   .blog-category {
     padding-bottom: 60px;
-    margin-top: 120px;
+    margin-top: 150px;
 
     h1 {
-      font-size: 64px;
-      line-height: 88px;
       font-weight: normal;
       margin: 0 0 27px;
       color: $color-white;
       text-align: center;
       font-weight: normal;
+      display: flex;
+      justify-content: center;
 
       img {
         display: inline-block;
@@ -24,8 +24,6 @@
     }
 
     h3 {
-      font-size: 30px;
-      line-height: 41px;
       text-align: center;
       color: white;
       font-weight: normal;

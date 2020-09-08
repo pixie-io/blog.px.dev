@@ -3,81 +3,38 @@
 
 article {
   margin-bottom: 70px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
 
-  @media (max-width:$breakpoint) {
-    margin:0 0 70px;
+  p, span {
+    color: #9696A5;
   }
 
-  .article-content {
-    border-radius: 0 0 10px 10px;
+  h3 {
+    color: white;
+    font-weight: normal;
+    margin: 14px 0;
+  }
+
+  img {
+    border-radius: 5px;
     overflow: hidden;
-    box-shadow: 0px 4px 162px rgba(0, 0, 0, 0.09);
-    .featured-image {
-      height: 250px;
-      width: 100%;
-      display: block;
-      overflow: hidden;
-      border-radius: 10px 10px 0 0;
-
-      div {
-        background-size: cover;
-        border-radius: 10px 10px 0 0;
-        transition: all .5s ease;
-        background-repeat: no-repeat;
-        background-position: center;
-        width: 100%;
-        height: 250px;
-        background-color: rgba($color-grey2,0.5);
-
-        &:hover {
-          transform: scale(1.1);
-          border-radius: 10px 10px 0 0;
-        }
-      }
-    }
-
-    .content {
-      padding: 30px 35px 45px;
-      border-radius: 0 0 10px 10px;
-      background: $color-white;
-
-      h5 {
-        margin: 0;
-        padding: 0;
-        color: $color-dark;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        height: 64px;
-        @media (max-width:$breakpoint) {
-          max-height: 64px;
-          height: auto;
-        }
-      }
-
-      p {
-        color: $color-grey2;
-        padding-bottom: 0;
-        margin-bottom: 4px;
-      }
-
-      span {
-        font-size: 14px;
-        line-height: 17px;
-        color: $color-grey1;
-      }
-    }
-
   }
 
+  .dateRow {
+    margin: 0;
+    @media (max-width: $breakpoint) {
 
-  @media (max-width:$breakpoint) {
-    .article-content {
-      margin-left: 35px !important;
-      margin-right: 35px !important;
+      margin-top: 50px;
+
     }
+  }
+
+  .authorRow {
+    color: white;
   }
 
 }
