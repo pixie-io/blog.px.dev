@@ -9,7 +9,7 @@ import styles from './blog-post.module.scss';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
-import mdxComponents from '../components/mdxComponents';
+import mdxComponents from '../components/mdxComponents/index.tsx';
 import PostPlaceholder from '../components/post-placeholder';
 import reddit from '../images/icons/reddit-icon.svg';
 import slack from '../images/icons/slack-icon.svg';
@@ -18,6 +18,47 @@ import twitter from '../images/icons/twitter-icon.svg';
 import linkedin from '../images/icons/linkedin-icon.svg';
 import bookmark from '../images/icons/bookmark-icon.svg';
 
+// eslint-disable-next-line no-shadow
+const MetaBar = ({ post, styles }) => (
+  <div className='row'>
+    <div className='col-6'>
+      <div className={styles.postHeader}>
+        <span className={styles.author}>{post.frontmatter.author}</span>
+        <span className={styles.date}>
+          {post.frontmatter.date}
+          {' '}
+          •
+          {' '}
+          {post.timeToRead}
+          {' '}
+          minutes read
+        </span>
+      </div>
+    </div>
+    <div className='col-6'>
+      <div className={styles.socialIcons}>
+        <a href='#'>
+          <img src={slack} />
+        </a>
+        <a href='#'>
+          <img src={reddit} />
+        </a>
+        <a href='#'>
+          <img src={twitter} />
+        </a>
+        <a href='#'>
+          <img src={linkedin} />
+        </a>
+        <a href='#'>
+          <img src={facebook} />
+        </a>
+        <a href='#'>
+          <img src={bookmark} />
+        </a>
+      </div>
+    </div>
+  </div>
+);
 const BlogPostTemplate = ({ data }) => {
   const post = data.mdx;
   const related = data.featured.nodes;
@@ -39,44 +80,7 @@ const BlogPostTemplate = ({ data }) => {
               <h1>{post.frontmatter.title}</h1>
             </div>
           </div>
-          <div className='row'>
-            <div className='col-6'>
-              <div className={styles.postHeader}>
-                <span className={styles.author}>{post.frontmatter.author}</span>
-                <span className={styles.date}>
-                  {post.frontmatter.date}
-                  {' '}
-                  •
-                  {' '}
-                  {post.timeToRead}
-                  {' '}
-                  minutes read
-                </span>
-              </div>
-            </div>
-            <div className='col-6'>
-              <div className={styles.socialIcons}>
-                <a href='#'>
-                  <img src={slack} />
-                </a>
-                <a href='#'>
-                  <img src={reddit} />
-                </a>
-                <a href='#'>
-                  <img src={twitter} />
-                </a>
-                <a href='#'>
-                  <img src={linkedin} />
-                </a>
-                <a href='#'>
-                  <img src={facebook} />
-                </a>
-                <a href='#'>
-                  <img src={bookmark} />
-                </a>
-              </div>
-            </div>
-          </div>
+          <MetaBar post={post} styles={styles} />
           <div className={styles.postImage}>
             <div className='row'>
               <div className='col-12'>
@@ -98,6 +102,8 @@ const BlogPostTemplate = ({ data }) => {
               </div>
             </div>
           </div>
+          <MetaBar post={post} styles={styles} />
+
         </div>
 
         <section className={styles.relatedStories}>
