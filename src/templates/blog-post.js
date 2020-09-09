@@ -87,6 +87,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
                 <Link to='/'>Blog</Link>
                 {' '}
                 /
+                {' '}
                 {post.frontmatter.category}
               </div>
               <h1>{post.frontmatter.title}</h1>
