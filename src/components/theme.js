@@ -83,11 +83,7 @@ const common = {
       marginBottom: '16px',
       marginTop: '0px',
       fontSize: '16px',
-<<<<<<< HEAD
       lineHeight: '26px',
-=======
-      lineHeight: '24px',
->>>>>>> main
       fontStyle: 'normal',
       fontWeight: 'normal',
       textRendering: 'optimizeLegibility',

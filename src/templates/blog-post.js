@@ -71,7 +71,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
               }
             />
           ) : (
-            <PostPlaceholder />
+            <PostPlaceholder imgStyle={{ objectFit: 'cover' }} style={{ maxHeight: '300px' }} />
           )}
         </div>
 
