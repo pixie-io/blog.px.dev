@@ -26,7 +26,16 @@ body {
     }
   }
 }
+.small-scroll{
+  overflow: auto;
+}
+.small-scroll::-webkit-scrollbar {
+  display: none;
+}
 
+.small-scroll::-webkit-scrollbar-button {
+
+}
 a {
   text-decoration: none;
   color: #12D6D6;
@@ -286,8 +295,8 @@ figure {
 }
 
 .blog-image {
-  padding-top: 24px;
-  padding-bottom: 24px;
+  margin-top:  24px;
+  margin-bottom:  24px;
   max-width: 100%;
 }
 

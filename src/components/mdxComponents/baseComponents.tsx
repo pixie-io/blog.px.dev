@@ -12,7 +12,6 @@ import CodeRenderer from './codeRenderer';
 import ListItem from './listItem';
 
 const getChildren = (props) => props.children;
-const getLanguage = (props) => (props.className ? props.className.replace('language-', '') : 'bash');
 
 export default {
   // There is a bug in material plugin that overwrites the H1 with the default typography,
@@ -26,7 +25,6 @@ export default {
     <CodeRenderer
       {...props}
       code={getChildren(props)}
-      language={getLanguage(props)}
     />
   ),
   inlineCode: (props: any) => <Code {...props} />,

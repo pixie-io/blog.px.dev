@@ -38,7 +38,7 @@ const MetaBar = ({ post, shareUrl }) => (
       </div>
       <div className='col-6'>
         <div className={styles.socialIcons}>
-          <a href='#'>
+          <a href='https://slackin.withpixie.ai'>
             <img src={slack} />
           </a>
           <RedditShareButton url={shareUrl}>
