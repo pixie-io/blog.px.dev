@@ -313,7 +313,19 @@ figcaption {
     height: 253px;
 
     img {
-      object-fit: contain!important;
+      object-fit: contain !important;
     }
   }
+}
+
+blockquote {
+  p.MuiTypography-body1 {
+    font-family: Source Sans Pro;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 54px;
+  }
+
+  padding: 30px 50px;
 }
