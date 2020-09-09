@@ -14,20 +14,24 @@
     color: #12D6D6;
   }
 
-  .postHeader {
+  .metaBar {
+    margin: 50px 0;
 
-    .author {
-      color: white;
-      display: block;
-      padding: 0;
-      margin: 0 0 5px;
-    }
+    .postHeader {
 
-    .date {
-      color: #596274;
-      display: block;
-      margin: 0;
-      padding: 0;
+      .author {
+        color: white;
+        display: block;
+        padding: 0;
+        margin: 0 0 5px;
+      }
+
+      .date {
+        color: #596274;
+        display: block;
+        margin: 0;
+        padding: 0;
+      }
     }
   }
 
@@ -60,7 +64,16 @@
   }
 
   section.relatedStories {
+    margin-top: 70px;
 
+    h3 {
+      color: white;
+    }
+
+    .viewAll {
+      text-align: center;
+      display: block;
+    }
   }
 
 }

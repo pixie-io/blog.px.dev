@@ -20,41 +20,43 @@ import bookmark from '../images/icons/bookmark-icon.svg';
 
 // eslint-disable-next-line no-shadow
 const MetaBar = ({ post, styles }) => (
-  <div className='row'>
-    <div className='col-6'>
-      <div className={styles.postHeader}>
-        <span className={styles.author}>{post.frontmatter.author}</span>
-        <span className={styles.date}>
-          {post.frontmatter.date}
-          {' '}
-          •
-          {' '}
-          {post.timeToRead}
-          {' '}
-          minutes read
-        </span>
+  <div className={styles.metaBar}>
+    <div className='row'>
+      <div className='col-6'>
+        <div className={styles.postHeader}>
+          <span className={styles.author}>{post.frontmatter.author}</span>
+          <span className={styles.date}>
+            {post.frontmatter.date}
+            {' '}
+            •
+            {' '}
+            {post.timeToRead}
+            {' '}
+            minutes read
+          </span>
+        </div>
       </div>
-    </div>
-    <div className='col-6'>
-      <div className={styles.socialIcons}>
-        <a href='#'>
-          <img src={slack} />
-        </a>
-        <a href='#'>
-          <img src={reddit} />
-        </a>
-        <a href='#'>
-          <img src={twitter} />
-        </a>
-        <a href='#'>
-          <img src={linkedin} />
-        </a>
-        <a href='#'>
-          <img src={facebook} />
-        </a>
-        <a href='#'>
-          <img src={bookmark} />
-        </a>
+      <div className='col-6'>
+        <div className={styles.socialIcons}>
+          <a href='#'>
+            <img src={slack} />
+          </a>
+          <a href='#'>
+            <img src={reddit} />
+          </a>
+          <a href='#'>
+            <img src={twitter} />
+          </a>
+          <a href='#'>
+            <img src={linkedin} />
+          </a>
+          <a href='#'>
+            <img src={facebook} />
+          </a>
+          <a href='#'>
+            <img src={bookmark} />
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -107,11 +109,15 @@ const BlogPostTemplate = ({ data }) => {
         </div>
 
         <section className={styles.relatedStories}>
+
           <div className='container'>
             <div className='row'>
-              {related.map((p) => (
-                <BlogPostItem post={p} key={p.fields.slug} />
-              ))}
+              <div className='col-12'>
+                <h3>Related Stories</h3>
+                {related.map((p) => (
+                  <BlogPostItem post={p} key={p.fields.slug} />
+                ))}
+              </div>
             </div>
           </div>
           <div className='row'>
