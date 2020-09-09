@@ -124,7 +124,9 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
         <section className={styles.relatedStories}>
           <div className='container'>
             <div className='row'>
-              <h3>Related Stories</h3>
+              <div className='col-12'>
+                <h3>Related Stories</h3>
+              </div>
               {related.map((p) => (
                 <BlogPostCard post={p} key={p.fields.slug} />
               ))}
