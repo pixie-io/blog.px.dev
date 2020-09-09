@@ -77,7 +77,7 @@ const BlogPostTemplate = ({ data }) => {
               </div>
             </div>
           </div>
-          <div className={styles.postBody}>
+          <div className={styles.postImage}>
             <div className='row'>
               <div className='col-12'>
                 {post.frontmatter.featured_image
@@ -88,7 +88,8 @@ const BlogPostTemplate = ({ data }) => {
                   ) : <PostPlaceholder />}
               </div>
             </div>
-
+          </div>
+          <div className={styles.postBody}>
             <div className='row'>
               <div className='col-12'>
                 <MDXProvider components={mdxComponents}>
