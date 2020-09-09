@@ -57,7 +57,13 @@ const Header = ({ whiteHeader, transparentMenu }) => {
               Pixienaut Monthly on Sep 24th!
             </div>
             <div className='hide-desktop'> Get a preview in the next Pixienaut Monthly</div>
-            <div className={`${styles.newsBarClose} hide-desktop`} onClick={(e) => closeTopBanner(e)}> &#10005;</div>
+            <div
+              className={`${styles.newsBarClose} hide-desktop`}
+              onClick={(e) => closeTopBanner(e)}
+            >
+{' '}
+&#10005;
+            </div>
           </div>
         </a>
       )}
@@ -73,7 +79,7 @@ const Header = ({ whiteHeader, transparentMenu }) => {
         <div className={styles.logos}>
           <Link to='/' className={styles.logo}>
             <img src={pixieLogo} alt='pixie logo' />
-            <img src={betanaut} alt='pixienaut beta' className={styles.betanaut} />
+            <span>Blog</span>
           </Link>
           <div className={styles.socialIcons}>
             <a href='https://slackin.withpixie.ai'>
@@ -105,7 +111,11 @@ const Header = ({ whiteHeader, transparentMenu }) => {
               </a>
             </li>
             <li className={styles.colored}>
-              <a href='https://docs.pixielabs.ai/installing-pixie/quick-start/' target='_blank' rel='noreferrer'>
+              <a
+                href='https://docs.pixielabs.ai/installing-pixie/quick-start/'
+                target='_blank'
+                rel='noreferrer'
+              >
                 Get Started
               </a>
             </li>
