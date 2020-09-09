@@ -96,9 +96,9 @@ const Header = ({ whiteHeader, transparentMenu }) => {
         <div className={`hide-mobile hide-tablet ${styles.menu}`}>
           <ul>
             <li>
-              <Link to='/community'>
+              <a href='https://pixielabs.ai/community'>
                 Community
-              </Link>
+              </a>
             </li>
             <li>
               <a href='#' onClick={(e) => docsRedirect(e)}>

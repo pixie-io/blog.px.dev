@@ -18,8 +18,7 @@ import twitter from '../images/icons/twitter-icon.svg';
 import linkedin from '../images/icons/linkedin-icon.svg';
 import bookmark from '../images/icons/bookmark-icon.svg';
 
-// eslint-disable-next-line no-shadow
-const MetaBar = ({ post, styles }) => (
+const MetaBar = ({ post }) => (
   <div className={styles.metaBar}>
     <div className='row'>
       <div className='col-6'>
@@ -82,7 +81,7 @@ const BlogPostTemplate = ({ data }) => {
               <h1>{post.frontmatter.title}</h1>
             </div>
           </div>
-          <MetaBar post={post} styles={styles} />
+          <MetaBar post={post} />
           <div className={styles.postImage}>
             <div className='row'>
               <div className='col-12'>
