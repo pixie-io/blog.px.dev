@@ -55,7 +55,9 @@
     "remark-containers": "^1.1.2",
     "remark-unwrap-images": "^2.0.0",
     "styled-components": "^4.4.0",
-    "system-components": "^3.0.3"
+    "system-components": "^3.0.3",
+    "react-share": "^4.2.1"
+
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.19.0",
@@ -82,6 +84,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "lint": "./lint.sh",
+    "lint-fix": "eslint src ./*.js --fix",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "repository": {

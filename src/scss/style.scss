@@ -27,8 +27,21 @@ body {
   }
 }
 
+.small-scroll {
+  overflow: auto;
+}
+
+.small-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.small-scroll::-webkit-scrollbar-button {
+
+}
+
 a {
   text-decoration: none;
+  color: #12D6D6;
 }
 
 i {
@@ -203,6 +216,7 @@ h1 {
   font-family: 'Manrope', sans-serif;
   font-size: 38px;
   line-height: 46px;
+  font-weight: normal;
   @media (max-width: $breakpoint) {
     padding-top: 0;
     font-size: 25px;
@@ -212,6 +226,7 @@ h1 {
 }
 
 h2 {
+  font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 36px;
@@ -223,8 +238,10 @@ h2 {
 }
 
 h3 {
+  font-family: 'Manrope', sans-serif;
   font-size: 30px;
   line-height: 38px;
+  font-weight: normal;
   @media (max-width: $breakpoint) {
     font-size: 22px;
     line-height: 30px;
@@ -232,6 +249,7 @@ h3 {
 }
 
 h4 {
+  font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
@@ -243,6 +261,7 @@ h4 {
 }
 
 h5 {
+  font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
@@ -279,6 +298,8 @@ figure {
 }
 
 .blog-image {
+  margin-top: 24px;
+  margin-bottom: 24px;
   max-width: 100%;
 }
 
@@ -286,3 +307,14 @@ figcaption {
   text-align: center;
   opacity: .6;
 }
+
+.blog-post-card {
+  .gatsby-image-wrapper {
+    height: 253px;
+
+    img {
+      object-fit: contain !important;
+    }
+  }
+}
+

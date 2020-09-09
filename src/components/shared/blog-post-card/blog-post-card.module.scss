@@ -1,0 +1,64 @@
+@import "partials/variables";
+
+
+article.card {
+  margin-bottom: 70px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
+  position: relative;
+  display: block;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  p, span {
+    color: #9696A5;
+  }
+
+
+
+  img {
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .cardImage {
+    height: 253px;
+  }
+
+  .cardBody {
+    padding: 20px;
+    height: 172px;
+    background-color: #4A4C4F;
+    h5 {
+      color: white;
+      font-weight: normal;
+      margin: 14px 0;
+      height: 60px;
+      overflow: hidden;
+      @media (max-width: $breakpoint) {
+        height: 52px;
+      }
+    }
+    .dateRow {
+      margin: 0;
+      @media (max-width: $breakpoint) {
+        margin-top: 10px;
+      }
+    }
+
+    .authorRow {
+      margin: 0;
+      color: white;
+    }
+  }
+}
+

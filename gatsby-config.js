@@ -95,7 +95,9 @@ module.exports = {
       options: {
         fonts: [
           'Source Code Pro:400',
+          'Source Sans Pro:400',
           'manrope:300,400,400i,700',
+          'roboto:300,400,400i,700',
         ],
         display: 'swap',
       },

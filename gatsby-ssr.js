@@ -1,7 +1,15 @@
 /**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
+ * Implement Gatsby's Browser APIs in this file.
  *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
+ * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
+import React from 'react';
+import MainThemeProvider from './src/components/mainThemeProvider.tsx';
+import './src/scss/style.scss';
 
-// You can delete this file if you're not using it
+// eslint-disable-next-line import/prefer-default-export
+export const wrapRootElement = ({ element }) => (
+  <MainThemeProvider>
+    {element}
+  </MainThemeProvider>
+);

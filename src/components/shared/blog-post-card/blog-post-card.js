@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
-import styles from './blog-post-item.module.scss';
+import styles from './blog-post-card.module.scss';
 import PostPlaceholder from '../../post-placeholder';
 
-const BlogPostItem = ({ post }) => {
+const BlogPostCard = ({ post }) => {
   const {
     frontmatter: {
       title,
@@ -15,18 +15,25 @@ const BlogPostItem = ({ post }) => {
       category,
     },
     timeToRead,
-    excerpt,
     fields: { slug },
   } = post;
   return (
-    <article className='row'>
+    <article className={`${styles.card} col-4 blog-post-card`}>
       <Link to={`/blog/${slug}`}>
-        <div className='col-3'>
+        <div className={styles.cardImage}>
           {featuredImage
             ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
             : <PostPlaceholder />}
         </div>
-        <div className='col-9'>
+        <div className={styles.cardBody}>
+          <h5>{title}</h5>
+          <p className={styles.authorRow}>
+            {author}
+            {' '}
+            in
+            {' '}
+            {category}
+          </p>
           <p className={styles.dateRow}>
             {date}
             {' '}
@@ -36,22 +43,12 @@ const BlogPostItem = ({ post }) => {
             {' '}
             minutes read
           </p>
-          <h3>{title}</h3>
-
-          <p className={styles.authorRow}>
-            {author}
-            {' '}
-            in
-            {' '}
-            {category}
-          </p>
-          <p>{excerpt}</p>
         </div>
       </Link>
     </article>
   );
 };
-BlogPostItem.propTypes = {
+BlogPostCard.propTypes = {
   post: PropTypes.shape({
     frontmatter: PropTypes.object,
     fields: PropTypes.object,
@@ -60,4 +57,4 @@ BlogPostItem.propTypes = {
   }).isRequired,
 };
 
-export default BlogPostItem;
+export default BlogPostCard;
