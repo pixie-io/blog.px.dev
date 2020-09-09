@@ -134,7 +134,7 @@ export const pageQuery = graphql`
         }
         id
         timeToRead
-        excerpt(pruneLength: 200)
+        excerpt(pruneLength: 200) 
         frontmatter {
           title
           author
@@ -144,7 +144,7 @@ export const pageQuery = graphql`
           featured_image {
             childImageSharp {
               id
-              fluid(maxWidth: 285) {
+              fluid(maxHeight: 320) {
                 base64
                 aspectRatio
                 src
