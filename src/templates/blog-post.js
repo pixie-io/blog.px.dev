@@ -5,6 +5,9 @@ import { MDXProvider } from '@mdx-js/react';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
+import {
+  FacebookShareButton, LinkedinShareButton, RedditShareButton, TwitterShareButton,
+} from 'react-share';
 import styles from './blog-post.module.scss';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -16,9 +19,8 @@ import slack from '../images/icons/slack-icon.svg';
 import facebook from '../images/icons/facebook-icon.svg';
 import twitter from '../images/icons/twitter-icon.svg';
 import linkedin from '../images/icons/linkedin-icon.svg';
-import bookmark from '../images/icons/bookmark-icon.svg';
 
-const MetaBar = ({ post }) => (
+const MetaBar = ({ post, shareUrl }) => (
   <div className={styles.metaBar}>
     <div className='row'>
       <div className='col-6'>
@@ -28,7 +30,6 @@ const MetaBar = ({ post }) => (
             {post.frontmatter.date}
             {' '}
             •
-            {' '}
             {post.timeToRead}
             {' '}
             minutes read
@@ -40,27 +41,31 @@ const MetaBar = ({ post }) => (
           <a href='#'>
             <img src={slack} />
           </a>
-          <a href='#'>
+          <RedditShareButton url={shareUrl}>
             <img src={reddit} />
-          </a>
-          <a href='#'>
+          </RedditShareButton>
+          <TwitterShareButton url={shareUrl}>
             <img src={twitter} />
-          </a>
-          <a href='#'>
+          </TwitterShareButton>
+          <LinkedinShareButton
+            title={post.frontmatter.title}
+            summary={post.frontmatter.excerpt}
+            url={shareUrl}
+          >
             <img src={linkedin} />
-          </a>
-          <a href='#'>
+          </LinkedinShareButton>
+          <FacebookShareButton
+            url={shareUrl}
+          >
             <img src={facebook} />
-          </a>
-          <a href='#'>
-            <img src={bookmark} />
-          </a>
+          </FacebookShareButton>
         </div>
       </div>
     </div>
   </div>
 );
-const BlogPostTemplate = ({ data }) => {
+// eslint-disable-next-line react/prop-types
+const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   const post = data.mdx;
   const related = data.featured.nodes;
 
@@ -75,22 +80,24 @@ const BlogPostTemplate = ({ data }) => {
                 <Link to='/'>Blog</Link>
                 {' '}
                 /
-                {' '}
                 {post.frontmatter.category}
               </div>
               <h1>{post.frontmatter.title}</h1>
             </div>
           </div>
-          <MetaBar post={post} />
+          <MetaBar post={post} shareUrl={location.href} />
           <div className={styles.postImage}>
             <div className='row'>
               <div className='col-12'>
-                {post.frontmatter.featured_image
-                  ? (
-                    <Img
-                      fluid={post.frontmatter.featured_image.childImageSharp.fluid}
-                    />
-                  ) : <PostPlaceholder />}
+                {post.frontmatter.featured_image ? (
+                  <Img
+                    fluid={
+                      post.frontmatter.featured_image.childImageSharp.fluid
+                    }
+                  />
+                ) : (
+                  <PostPlaceholder />
+                )}
               </div>
             </div>
           </div>
@@ -103,12 +110,10 @@ const BlogPostTemplate = ({ data }) => {
               </div>
             </div>
           </div>
-          <MetaBar post={post} styles={styles} />
-
+          <MetaBar post={post} shareUrl={location.href} />
         </div>
 
         <section className={styles.relatedStories}>
-
           <div className='container'>
             <div className='row'>
               <div className='col-12'>
@@ -142,6 +147,7 @@ BlogPostTemplate.propTypes = {
     }),
     featured: PropTypes.object,
   }).isRequired,
+
 };
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -152,9 +158,9 @@ export const pageQuery = graphql`
       frontmatter {
         title
         subtitle
-           author
-                  category
-          date(formatString: "DD MMMM YYYY")
+        author
+        category
+        date(formatString: "DD MMMM YYYY")
         featured_image {
           childImageSharp {
             fluid(maxWidth: 1200, quality: 92) {
@@ -173,7 +179,7 @@ export const pageQuery = graphql`
         fields {
           slug
         }
-             timeToRead
+        timeToRead
         excerpt(pruneLength: 200)
         frontmatter {
           title

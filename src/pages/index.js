@@ -58,7 +58,10 @@ const Blog = ({ data }) => {
                 <img src={blogIcon} alt='blog icon' />
                 Blog
               </h1>
-              <h3>The latest news and announcements on Pixie, products, partners, and more.</h3>
+              <h3>
+                The latest news and announcements on Pixie, products, partners,
+                and more.
+              </h3>
             </div>
             <div className='col-12'>
               <ul>
@@ -131,7 +134,6 @@ export const pageQuery = graphql`
         excerpt(pruneLength: 200)
 
         frontmatter {
-       
           title
           author
           category
@@ -151,7 +153,7 @@ export const pageQuery = graphql`
         }
       }
     }
-  
+
     categories: allMdx(filter: { frontmatter: { category: { ne: null } } }) {
       nodes {
         frontmatter {
