@@ -14,11 +14,33 @@
     color: #12D6D6;
   }
 
+  .postHeader {
+
+    .author {
+      color: white;
+      display: block;
+      padding: 0;
+      margin: 0 0 5px;
+    }
+
+    .date {
+      color: #596274;
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
   .socialIcons {
     text-align: right;
+    @media (max-width: $breakpoint) {
+      margin-top: 25px;
+      text-align: center;
+    }
+
     img {
       height: 32px;
-      margin-left: 30px;
+      margin: 0 10px;
     }
 
   }
@@ -26,6 +48,11 @@
   h1 {
     color: white;
     font-weight: normal;
+  }
+
+  .postBody {
+    margin-top: 50px;
+    color: white;
   }
 
   section.relatedStories {

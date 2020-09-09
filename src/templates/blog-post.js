@@ -40,7 +40,20 @@ const BlogPostTemplate = ({ data }) => {
             </div>
           </div>
           <div className='row'>
-            <div className='col-6'>author</div>
+            <div className='col-6'>
+              <div className={styles.postHeader}>
+                <span className={styles.author}>{post.frontmatter.author}</span>
+                <span className={styles.date}>
+                  {post.frontmatter.date}
+                  {' '}
+                  •
+                  {' '}
+                  {post.timeToRead}
+                  {' '}
+                  minutes read
+                </span>
+              </div>
+            </div>
             <div className='col-6'>
               <div className={styles.socialIcons}>
                 <a href='#'>
@@ -64,19 +77,26 @@ const BlogPostTemplate = ({ data }) => {
               </div>
             </div>
           </div>
-          {post.frontmatter.featured_image
-            ? (
-              <Img
-                fluid={post.frontmatter.featured_image.childImageSharp.fluid}
-              />
-            ) : <PostPlaceholder />}
+          <div className={styles.postBody}>
+            <div className='row'>
+              <div className='col-12'>
+                {post.frontmatter.featured_image
+                  ? (
+                    <Img
+                      fluid={post.frontmatter.featured_image.childImageSharp.fluid}
+                    />
+                  ) : <PostPlaceholder />}
+              </div>
+            </div>
 
-          <p>{post.frontmatter.subtitle || post.excerpt}</p>
-          <span>{post.frontmatter.date}</span>
-
-          <MDXProvider components={mdxComponents}>
-            <MDXRenderer>{post.body}</MDXRenderer>
-          </MDXProvider>
+            <div className='row'>
+              <div className='col-12'>
+                <MDXProvider components={mdxComponents}>
+                  <MDXRenderer>{post.body}</MDXRenderer>
+                </MDXProvider>
+              </div>
+            </div>
+          </div>
         </div>
 
         <section className={styles.relatedStories}>
@@ -106,6 +126,7 @@ BlogPostTemplate.propTypes = {
       frontmatter: PropTypes.object,
       body: PropTypes.string,
       excerpt: PropTypes.string,
+      timeToRead: PropTypes.number,
     }),
     featured: PropTypes.object,
   }).isRequired,
@@ -115,9 +136,11 @@ export const pageQuery = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       excerpt(pruneLength: 160)
       body
+      timeToRead
       frontmatter {
         title
         subtitle
+           author
                   category
           date(formatString: "DD MMMM YYYY")
         featured_image {
