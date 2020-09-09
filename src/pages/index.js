@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Layout from '../components/layout';
@@ -26,7 +26,7 @@ const Blog = ({ data }) => {
 
   const [category, setCategory] = useState(categories[0].label);
   const [page, setPage] = useState(0);
-  const [posts, setPosts] = useState(paginate(allPosts, 0));
+  const [posts, setPosts] = useState(paginate(allPosts.filter((pos) => pos.frontmatter.category === category), 0));
   const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
 
   const filterPosts = (p, c) => {
@@ -46,6 +46,9 @@ const Blog = ({ data }) => {
   const filterByCategory = (c) => {
     filterPosts(0, c);
   };
+  useEffect(() => {
+    filterByCategory(category);
+  }, []);
 
   return (
     <Layout>
@@ -132,10 +135,10 @@ export const pageQuery = graphql`
         id
         timeToRead
         excerpt(pruneLength: 200)
-
         frontmatter {
           title
           author
+          email
           category
           date(formatString: "DD MMMM YYYY")
           featured_image {

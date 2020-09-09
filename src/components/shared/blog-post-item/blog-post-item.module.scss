@@ -9,14 +9,21 @@ article {
   font-size: 16px;
   line-height: 28px;
 
+  .border {
+    border: 1px solid #353535;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+
+
   p, span {
     color: #9696A5;
   }
 
   h3 {
     color: white;
-    font-weight: normal;
-    margin: 14px 0;
+    font-weight: bold;
+    margin: 24px 0;
   }
 
   img {
@@ -24,17 +31,33 @@ article {
     overflow: hidden;
   }
 
-  .dateRow {
-    margin: 0;
-    @media (max-width: $breakpoint) {
+  .body {
+    padding: 24px;
 
-      margin-top: 50px;
+    .heading {
+      display: flex;
+      align-items: center;
+
+      .authorAvatar {
+        display: inline-block;
+        padding-right: 16px;
+      }
+
+      .authorDetails {
+        display: inline-block;
+
+        .dateRow {
+          color: #9696A5;
+          margin: 0;
+        }
+
+        .authorRow {
+          color: white;
+        }
+      }
 
     }
   }
 
-  .authorRow {
-    color: white;
-  }
 
 }
