@@ -114,7 +114,7 @@ const Header = ({ whiteHeader, transparentMenu }) => {
               <a
                 href='https://docs.pixielabs.ai/installing-pixie/quick-start/'
                 target='_blank'
-                rel='noreferrer'
+                rel='noopener noreferrer'
               >
                 Get Started
               </a>
