@@ -1,15 +1,22 @@
 @import "../scss/partials/variables";
 
 .blogPost {
-  margin-top: 150px;
+  margin-top: 94px;
+
+  .postImage {
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
 
   .breadcrumb {
     a {
       text-decoration: none;
       color: inherit;
+      font-size: inherit;
     }
 
-    font-size: 18px;
+    font-size: 14px;
     line-height: 30px;
     color: #12D6D6;
   }
@@ -18,6 +25,12 @@
     margin: 50px 0;
 
     .postHeader {
+      display: flex;
+      align-items: center;
+
+      .authorAvatar {
+        margin-right: 16px;
+      }
 
       .author {
         color: white;
@@ -45,7 +58,8 @@
     img {
       height: 32px;
       margin: 0 10px;
-      &:hover{
+
+      &:hover {
         filter: brightness(0) saturate(100%) invert(69%) sepia(85%) saturate(2173%) hue-rotate(130deg) brightness(102%) contrast(86%);
 
       }
@@ -59,9 +73,6 @@
     font-weight: normal;
   }
 
-  .postImage {
-    margin: 50px 0;
-  }
 
   .postBody {
     margin-top: 50px;
@@ -69,9 +80,13 @@
   }
 
   section.relatedStories {
-    margin-top: 70px;
+    margin-top: 170px;
 
-    h3 {
+    hr {
+      opacity: 0.3;
+    }
+
+    h4 {
       color: white;
     }
 
