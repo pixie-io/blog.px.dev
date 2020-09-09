@@ -6,12 +6,14 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import {
-  FacebookShareButton, LinkedinShareButton, RedditShareButton, TwitterShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  RedditShareButton,
+  TwitterShareButton,
 } from 'react-share';
 import styles from './blog-post.module.scss';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import BlogPostItem from '../components/shared/blog-post-item';
 import mdxComponents from '../components/mdxComponents/index.tsx';
 import PostPlaceholder from '../components/post-placeholder';
 import reddit from '../images/icons/reddit-icon.svg';
@@ -19,6 +21,7 @@ import slack from '../images/icons/slack-icon.svg';
 import facebook from '../images/icons/facebook-icon.svg';
 import twitter from '../images/icons/twitter-icon.svg';
 import linkedin from '../images/icons/linkedin-icon.svg';
+import BlogPostCard from '../components/shared/blog-post-card';
 
 const MetaBar = ({ post, shareUrl }) => (
   <div className={styles.metaBar}>
@@ -38,7 +41,11 @@ const MetaBar = ({ post, shareUrl }) => (
       </div>
       <div className='col-6'>
         <div className={styles.socialIcons}>
-          <a href='https://slackin.withpixie.ai'>
+          <a
+            href='https://slackin.withpixie.ai'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             <img src={slack} />
           </a>
           <RedditShareButton url={shareUrl}>
@@ -116,12 +123,10 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
         <section className={styles.relatedStories}>
           <div className='container'>
             <div className='row'>
-              <div className='col-12'>
-                <h3>Related Stories</h3>
-                {related.map((p) => (
-                  <BlogPostItem post={p} key={p.fields.slug} />
-                ))}
-              </div>
+              <h3>Related Stories</h3>
+              {related.map((p) => (
+                <BlogPostCard post={p} key={p.fields.slug} />
+              ))}
             </div>
           </div>
           <div className='row'>
@@ -186,6 +191,7 @@ export const pageQuery = graphql`
           subtitle
           author
           date
+          category
           featured_image {
             childImageSharp {
               fluid(maxWidth: 1200, quality: 92) {

@@ -69,8 +69,6 @@ const CodeRenderer = withStyles((theme) => ({
     hasNumbers: optionsArr.some((o) => o === 'numbers' || o === 'language-numbers'),
     height: +((optionsArr.find((o) => o.startsWith('H') || o.startsWith('language-H')) || '').substring(1)),
   };
-  console.log(optionsArr);
-  console.log(options);
   const language = (props.className ? (props.className.split(':')[0] || 'bash').replace('language-', '') : 'bash');
 
   return (

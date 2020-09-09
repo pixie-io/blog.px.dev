@@ -26,9 +26,11 @@ body {
     }
   }
 }
-.small-scroll{
+
+.small-scroll {
   overflow: auto;
 }
+
 .small-scroll::-webkit-scrollbar {
   display: none;
 }
@@ -36,6 +38,7 @@ body {
 .small-scroll::-webkit-scrollbar-button {
 
 }
+
 a {
   text-decoration: none;
   color: #12D6D6;
@@ -295,12 +298,22 @@ figure {
 }
 
 .blog-image {
-  margin-top:  24px;
-  margin-bottom:  24px;
+  margin-top: 24px;
+  margin-bottom: 24px;
   max-width: 100%;
 }
 
 figcaption {
   text-align: center;
   opacity: .6;
+}
+
+.blog-post-card {
+  .gatsby-image-wrapper {
+    height: 253px;
+
+    img {
+      object-fit: contain!important;
+    }
+  }
 }
