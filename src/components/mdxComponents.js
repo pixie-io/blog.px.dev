@@ -1,5 +1,5 @@
 import React from 'react';
-import Code from './mdxComponents/code';
+import Code from './mdxComponents/code.tsx';
 import CodeRenderer from './mdxComponents/codeRenderer.tsx';
 import Pre from './mdxComponents/pre';
 
