@@ -1,25 +1,44 @@
 import withStyles from '@material-ui/core/styles/withStyles';
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
+import { Theme } from '@material-ui/core';
 
-const Quote = withStyles(() => ({
+const Quote = withStyles((theme: Theme) => ({
   quote: {
-    padding: '17px',
-    borderStyle: 'solid',
-    border: '0',
-    borderLeft: '5px',
-    borderColor: '#12D6D6',
-    backgroundColor: '#353535',
-    borderRadius: '0 5px 5px 0',
-    marginBottom: '32px',
-    marginTop: '32px',
-    fontSize: '18px',
+    padding: '30px 50px',
+    fontFamily: 'Source Sans Pro',
+    fontStyle: 'italic',
+    fontSize: '32px',
+    lineHeight: '54px',
+    [theme.breakpoints.down('md')]: {
+      fontSize: '20px',
+      lineHeight: '34px',
+      padding: '10px 30px',
+    },
+  },
+  author: {
+    color: '#B2B5BB',
+    fontWeight: 'bold',
+    fontSize: '22px',
     lineHeight: '30px',
+    paddingTop: '16px',
   },
 
 }))((props) => {
-  const { children, classes } = props;
-  return (<div className={classes.quote}>{children}</div>);
+  const { children, classes, author } = props;
+  console.log(props);
+  return (
+    <div className={classes.quote}>
+      {children}
+      {author && (
+        <div className={classes.author}>
+          -
+          {' '}
+          {author}
+        </div>
+      )}
+    </div>
+  );
 });
 
 export default Quote;

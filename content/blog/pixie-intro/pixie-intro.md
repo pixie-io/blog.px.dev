@@ -14,10 +14,11 @@ In this guest blog post, infrastructure crime-fighter John Arundel, of [Bitfield
 
 ## Episode 1: The Wire
 
-> I'm gonna show you as gently as I can how much you don't know.<br />
-—Cutty
+<quote author='Cutty'>
+ I'm gonna show you as gently as I can how much you don't know.
+</quote>
 
-It ain't easy being a cop. An infrastructure cop, that is. Every day on the beat, we deal with SLA parole violations, DDoS attacks, CPU stealing. Even the occasional cache poisoning.
+>It ain't easy being a cop. An infrastructure cop, that is. Every day on the beat, we deal with SLA parole violations, DDoS attacks, CPU stealing. Even the occasional cache poisoning.
 
 ::: div image-m
 ![Image 1: Infrastructure cops](./the-wire.webp)
