@@ -2,7 +2,7 @@
 path: '/pixie-intro'
 title: 'Put a Little Pixie in Your Cluster: Auto-Telemetry for Live-Debugging Distributed Environments'
 date: 2020-05-06T06:00:00.000+00:00
-featured_image: pixie.png
+featured_image: plans.png
 category: 'Guest Blogs'
 author: 'John Arundel'
 featured: true
@@ -14,11 +14,10 @@ In this guest blog post, infrastructure crime-fighter John Arundel, of [Bitfield
 
 ## Episode 1: The Wire
 
-<quote author='Cutty'>
- I'm gonna show you as gently as I can how much you don't know.
-</quote>
+> I'm gonna show you as gently as I can how much you don't know.<br />
+—Cutty
 
->It ain't easy being a cop. An infrastructure cop, that is. Every day on the beat, we deal with SLA parole violations, DDoS attacks, CPU stealing. Even the occasional cache poisoning.
+It ain't easy being a cop. An infrastructure cop, that is. Every day on the beat, we deal with SLA parole violations, DDoS attacks, CPU stealing. Even the occasional cache poisoning.
 
 ::: div image-m
 ![Image 1: Infrastructure cops](./the-wire.webp)
