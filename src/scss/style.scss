@@ -231,6 +231,7 @@ h2 {
   font-weight: normal;
   font-size: 36px;
   line-height: 45px;
+  margin-top: 64px;
   @media (max-width: $breakpoint) {
     font-size: 25px;
     line-height: 36px;
@@ -242,6 +243,8 @@ h3 {
   font-size: 30px;
   line-height: 38px;
   font-weight: normal;
+  margin-top: 64px;
+
   @media (max-width: $breakpoint) {
     font-size: 22px;
     line-height: 30px;
@@ -275,18 +278,18 @@ h5 {
 
 .image-s {
   max-width: 30%;
-  margin: 0 auto;
+  margin: 32px auto;
 
 }
 
 .image-m {
   max-width: 50%;
-  margin: 0 auto;
+  margin: 32px auto;
 }
 
 .image-l {
   max-width: 75%;
-  margin: 0 auto;
+  margin: 32px auto;
   @media (max-width: $breakpoint) {
     padding: 0;
     max-width: 100%;

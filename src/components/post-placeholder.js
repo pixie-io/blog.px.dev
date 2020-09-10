@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 
-const PostPlaceholder = () => (
+const PostPlaceholder = ({ imgStyle, style }) => (
   <StaticQuery
     query={graphql`
       query {
@@ -17,7 +17,7 @@ const PostPlaceholder = () => (
               relativePath
               name
               childImageSharp {
-                fluid(maxWidth: 1291, quality: 70) {
+                fluid(maxWidth: 1920, quality: 70) {
                   ...GatsbyImageSharpFluid_withWebp
                 }
               }
@@ -29,7 +29,7 @@ const PostPlaceholder = () => (
     render={(data) => {
       const { fluid } = data.images.edges[0].node.childImageSharp;
 
-      return <Img loading='lazy' fluid={fluid} fadeIn={false} />;
+      return <Img loading='lazy' fluid={fluid} fadeIn={false} imgStyle={imgStyle} style={style} />;
     }}
   />
 );

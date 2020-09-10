@@ -5,6 +5,7 @@ date: 2020-05-06T06:00:00.000+00:00
 featured_image: plans.png
 category: 'Guest Blogs'
 author: 'John Arundel'
+email: 'john@bitfieldconsulting.com'
 featured: true
 ---
 

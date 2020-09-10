@@ -105,20 +105,6 @@ const Header = ({ whiteHeader, transparentMenu }) => {
                 Docs
               </a>
             </li>
-            <li>
-              <a href='#' onClick={(e) => loginRedirect(e)}>
-                Sign In
-              </a>
-            </li>
-            <li className={styles.colored}>
-              <a
-                href='https://docs.pixielabs.ai/installing-pixie/quick-start/'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                Get Started
-              </a>
-            </li>
           </ul>
         </div>
         <div

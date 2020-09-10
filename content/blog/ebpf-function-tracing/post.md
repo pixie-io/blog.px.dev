@@ -5,6 +5,7 @@ date: 2020-09-07T06:00:00.000+00:00
 featured_image: hero.png
 category: 'Pixie Team Blogs'
 author: 'Zain Asgar'
+email: 'zasgar@pixielabs.ai'
 featured: true
 ---
 
