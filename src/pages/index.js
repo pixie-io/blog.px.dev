@@ -26,7 +26,9 @@ const Blog = ({ data }) => {
 
   const [category, setCategory] = useState(categories[0].label);
   const [page, setPage] = useState(0);
-  const [posts, setPosts] = useState(paginate(allPosts.filter((pos) => pos.frontmatter.category === category), 0));
+  const [posts, setPosts] = useState(paginate(allPosts.filter(
+    (pos) => pos.frontmatter.category === category,
+  ), 0));
   const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
 
   const filterPosts = (p, c) => {

@@ -1,6 +1,6 @@
 ---
 path: '/ebpf-function-tracing'
-title: 'Tracing Go function arguments using eBPF'
+title: 'Debugging Go in prod using eBPF function argument tracing'
 date: 2020-09-07T06:00:00.000+00:00
 featured_image: hero.png
 category: 'Pixie Team Blogs'
@@ -21,7 +21,9 @@ We will explore using enhanced BPF ([ebpf](https://ebpf.io)), which is available
 
 # What is eBPF?
 
-Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think about it as a lightweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. As shown in the overview below, eBPF allows the kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. Since this verification is strict and only supports a verifiable subset of C, the kernel can then compile the bytecode to verified machine code for efficient runtime execution. This high performance allows eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc. Using eBPF, we can also insert probes; functions that are executed whenever a specific event such as a function call occurs. The probes then allow you to run a BPF compiled function that can examine the state of the system application or kernel. Many different types of probes are available, but the one we will focus on for this post is uprobes.
+Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think about it as a lightweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. As shown in the overview below, eBPF allows the kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. This strict verifications allows the kernel to compile the bytecode into verified machine code for efficient runtime execution.
+
+This high performance allows eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc. Using eBPF, we can also insert probes; functions that are executed whenever a specific event such as a function call occurs. The probes then allow you to run a BPF compiled function that can examine the state of the system application or kernel. Many different types of probes are available, but the one we will focus on for this post is uprobes.
 
 ::: div image-l
 ![BPF overview (from ebpf.io)](./bpf-overview.png)
@@ -146,4 +148,13 @@ Although we hardcoded the tracer for this particular example, it's possible to m
 
 BPF tracing using uprobes comes with its own set of pros and cons. It's attractive to use this when we need observability into the binary state, even when running in environments where attaching a debugger will be problematic or harmful (ex. production binaries). The biggest downside is the code required to get even trivial visibility into the application state. While BPF code is relatively accessible, it's complex to write and maintain. Without substantial high-level tooling, it's unlikely this can be used for generic debugging.
 
-Go dynamic logging is something we are working on at Pixie, so if this post's contents are interesting, please give [Pixie](https://pixielabs.ai) a try. If you like working on challenges like this, consider working at [Pixie](https://pixielabs.ai/career).
+Go dynamic logging is something we are working on at Pixie, so if this post's contents are interesting, please give [Pixie](https://pixielabs.ai) a try. If you like working on challenges like this, check out our [open positions](https://pixielabs.ai/career).
+
+
+#### Links/references
+
+* [Video](https://www.youtube.com/watch?v=0mxUU_--dDM&feature=youtu.be) from GoBangalore Meetup.
+* [Video](https://www.youtube.com/watch?v=SlcBq3xDc7I) from GoPoland Meetup.
+* [Slides](https://www.slideshare.net/ZainAsgar/go-logging-using-ebpf) from GoPoland Meetup.
+* https://github.com/iovisor/gobpf
+* https://github.com/iovisor/bcc
