@@ -1,8 +1,8 @@
 ---
 path: '/ebpf-function-tracing'
-title: 'Tracing Go function arguments using eBPF' 
+title: 'Tracing Go function arguments using eBPF'
 date: 2020-09-07T06:00:00.000+00:00
-featured_image: blog-post.jpg
+featured_image: hero.png
 category: 'Pixie Team Blogs'
 author: 'Zain Asgar'
 featured: true
@@ -13,14 +13,14 @@ This post describes how to use [gobpf](https://github.com/iovisor/gobpf) and upr
 # Introduction
 
 When debugging, we are typically interested in capturing the state of a program. This allows us to examine what the application is doing, and determine where the bug in our code is located. One of the
-most simple things we can do is us a debugger to capture function arguments. For Go applications, we will typically use Delve or gdb. While these tools are amazing for debugging in a development environment, they usually do not lend themselves to be used in a production system. Some of the features that make these debuggers powerful also allow them to mutate the state of the application and
-cause a significant overhead typically undesirable in a production system. 
+most simple things we can do is use a debugger to capture function arguments. For Go applications, we will typically use Delve or gdb. While these tools are amazing for debugging in a development environment, they usually do not lend themselves to be used in a production system. Some of the features that make these debuggers powerful also allow them to mutate the state of the application and
+cause a significant overhead typically undesirable in a production system.
 
-We will explore using enhanced BPF ([ebpf](https://ebpf.io)), which is available in Linux 4.x+, and the higher level Go library gobpf to capture function arguments. Using eBPF has its own sets of pros and cons, and will explore that as part of the implementation. 
+We will explore using enhanced BPF ([ebpf](https://ebpf.io)), which is available in Linux 4.x+, and the higher level Go library gobpf to capture function arguments. Using eBPF has its own sets of pros and cons, and will explore that as part of the implementation.
 
 # What is eBPF?
 
-Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think about it as a lightweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. As shown in the overview below, eBPF allows the kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. Since this verification is strict and only support a verifiable subset of C, the kernel can then compile the bytecode to verified machine code for efficient runtime execution. This high performance allows eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc. Using eBPF, we can also insert probes; functions that are executed whenever a specific event such as a function call occurs. The probes then allow you to run a BPF compiled function that can examine the state of the system application or kernel. Many different types of probes are available, but the one we will focus on for this post is uprobes. 
+Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think about it as a lightweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. As shown in the overview below, eBPF allows the kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. Since this verification is strict and only supports a verifiable subset of C, the kernel can then compile the bytecode to verified machine code for efficient runtime execution. This high performance allows eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc. Using eBPF, we can also insert probes; functions that are executed whenever a specific event such as a function call occurs. The probes then allow you to run a BPF compiled function that can examine the state of the system application or kernel. Many different types of probes are available, but the one we will focus on for this post is uprobes.
 
 ::: div image-l
 ![BPF overview (from ebpf.io)](./bpf-overview.png)
@@ -133,13 +133,13 @@ Here it is after we run the tracer binary. We can clearly see that the first ins
 ```
 (gdb) display /4i 0x6609a0
 7: x/4i 0x6609a0
-   0x6609a0 <main.computeE>:    int3   
+   0x6609a0 <main.computeE>:    int3
    0x6609a1 <main.computeE+1>:  mov    0x8(%rsp),%eax
    0x6609a5 <main.computeE+5>:  mov    $0x2,%ecx
    0x6609aa <main.computeE+10>: movsd  0xfa616(%rip),%xmm0
 ```
 
-Although we hardcoded the tracer for this particular example, it's possible to make this process generalizable. Many aspects of Go, such as nested pointers, interfaces, channels, etc. make this process challenging, but solving these problems allows for another instrumentation mode not available in existing systems. Also, since this process works at the binary level, it can be used with natively compiled binaries for other languages (C++, Rust, etc.). We just need to account for the differences in their respective ABI's. 
+Although we hardcoded the tracer for this particular example, it's possible to make this process generalizable. Many aspects of Go, such as nested pointers, interfaces, channels, etc. make this process challenging, but solving these problems allows for another instrumentation mode not available in existing systems. Also, since this process works at the binary level, it can be used with natively compiled binaries for other languages (C++, Rust, etc.). We just need to account for the differences in their respective ABI's.
 
 # So is this a good idea?
 
