@@ -21,7 +21,7 @@ We will explore using enhanced BPF ([ebpf](https://ebpf.io)), which is available
 
 # What is eBPF?
 
-Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think about it as a lightweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. As shown in the overview below, eBPF allows the kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. This strict verifications allows the kernel to compile the bytecode to into verified machine code for efficient runtime execution.
+Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think about it as a lightweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. As shown in the overview below, eBPF allows the kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. This strict verifications allows the kernel to compile the bytecode into verified machine code for efficient runtime execution.
 
 This high performance allows eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc. Using eBPF, we can also insert probes; functions that are executed whenever a specific event such as a function call occurs. The probes then allow you to run a BPF compiled function that can examine the state of the system application or kernel. Many different types of probes are available, but the one we will focus on for this post is uprobes.
 
