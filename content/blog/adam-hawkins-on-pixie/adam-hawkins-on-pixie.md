@@ -3,6 +3,7 @@ path: '/adam-hawkins-on-pixie'
 title: 'Adam Hawkins On Pixie'
 category: 'Guest Blogs'
 author: 'Adam Hawkins'
+email: 'adam@hawkins.io'
 featured: true
 featured_image: ahawkins_blog_feature.png
 date: 2020-06-17T06:00:00.000+00:00
