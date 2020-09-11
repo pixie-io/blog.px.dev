@@ -73,23 +73,24 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
     <Layout showSwitch>
       <div className={`${styles.blogPost} ${muiClasses.body}`}>
         <SEO title='Home' />
-        <div className={styles.postImage}>
-          {post.frontmatter.featured_image ? (
-            <Img
-              style={{ maxHeight: '300px' }}
-              imgStyle={{ objectFit: 'cover' }}
-              fluid={
-                post.frontmatter.featured_image.childImageSharp.fluid
-              }
-            />
-          ) : (
-            <PostPlaceholder imgStyle={{ objectFit: 'cover' }} style={{ maxHeight: '300px' }} />
-          )}
-        </div>
+
 
         <div className='container'>
           <div className='row'>
             <div className='col-12'>
+              <div className={styles.postImage}>
+                {post.frontmatter.featured_image ? (
+                  <Img
+                    style={{ maxHeight: '500px' }}
+                    imgStyle={{ objectFit: 'cover' }}
+                    fluid={
+                      post.frontmatter.featured_image.childImageSharp.fluid
+                    }
+                  />
+                ) : (
+                  <PostPlaceholder imgStyle={{ objectFit: 'cover' }} style={{ maxHeight: '300px' }} />
+                )}
+              </div>
               <div className={styles.breadcrumb}>
                 <Link to='/'>Blog</Link>
                 {' '}

@@ -2,7 +2,7 @@
 path: '/ebpf-function-tracing'
 title: 'Debugging Go in prod using eBPF function argument tracing'
 date: 2020-09-10T06:00:00.000+00:00
-featured_image: hero.png
+featured_image: 4.png
 category: 'Pixie Team Blogs'
 author: 'Zain Asgar'
 email: 'zasgar@pixielabs.ai'
