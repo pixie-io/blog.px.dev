@@ -31,7 +31,7 @@
     "gatsby-plugin-remote-images": "^2.2.0",
     "gatsby-plugin-sass": "^2.1.27",
     "gatsby-plugin-scroll-reveal": "0.0.6",
-    "gatsby-plugin-segment-js": "^3.1.0",
+    "gatsby-plugin-segment-js": "^3.6.0",
     "gatsby-plugin-sharp": "^2.4.5",
     "gatsby-plugin-styled-components": "^3.1.6",
     "gatsby-remark-copy-linked-files": "^2.3.2",
@@ -59,9 +59,7 @@
     "remark-containers": "^1.1.2",
     "remark-unwrap-images": "^2.0.0",
     "styled-components": "^4.4.0",
-    "system-components": "^3.0.3",
-    "react-share": "^4.2.1"
-
+    "system-components": "^3.0.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.19.0",
