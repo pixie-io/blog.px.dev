@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Header from '../header';
 import Footer from '../footer';
-import { ThemeModeContext } from '../mainThemeProvider';
+import { ThemeModeContext } from '../mainThemeProvider.tsx';
 
 const Layout = ({
   children, whiteHeader, whiteFooter, hideMenu, showSwitch,
