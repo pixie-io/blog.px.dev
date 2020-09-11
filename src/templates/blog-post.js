@@ -6,6 +6,8 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import styles from './blog-post.module.scss';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -26,7 +28,7 @@ const MetaBar = ({ post, shareUrl }) => (
             <GravatarIcon email={post.frontmatter.email} />
           </div>
           <div>
-            <span className={styles.author}>{post.frontmatter.author}</span>
+            <Typography variant='body1' className={styles.author}>{post.frontmatter.author}</Typography>
             <span className={styles.date}>
               {post.frontmatter.date}
             </span>
@@ -53,13 +55,23 @@ const MetaBar = ({ post, shareUrl }) => (
     </div>
   </div>
 );
+
+const useStyles = makeStyles((theme) => ({
+  body: {
+    backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
+  },
+}));
+
+
 // eslint-disable-next-line react/prop-types
 const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   const post = data.mdx;
   const related = data.featured.nodes;
+  const muiClasses = useStyles();
+
   return (
     <Layout showSwitch>
-      <div className={styles.blogPost}>
+      <div className={`${styles.blogPost} ${muiClasses.body}`}>
         <SEO title='Home' />
         <div className={styles.postImage}>
           {post.frontmatter.featured_image ? (
@@ -85,7 +97,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
                 {' '}
                 {post.frontmatter.category}
               </div>
-              <h1>{post.frontmatter.title}</h1>
+              <Typography variant='h1'>{post.frontmatter.title}</Typography>
             </div>
           </div>
           <MetaBar post={post} shareUrl={location.href} />
@@ -106,7 +118,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
             <div className='row'>
               <div className='col-12'>
                 <hr />
-                <h4>Related Stories</h4>
+                <Typography variant='h4'>Related Stories</Typography>
               </div>
               {related.map((p) => (
                 <BlogPostCard post={p} key={p.fields.slug} />

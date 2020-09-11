@@ -18,7 +18,11 @@ export default {
   // so this cannot be set here. The default mui h1 has been updated to match
   // the design and overwritten on homepage (only 1 implementation).
   // The problem seems to occur only on the H1 (to be investigated).
-
+  h1: (props: any) => <Typography {...props} variant='h1' />,
+  h2: (props: any) => <Typography {...props} variant='h2' />,
+  h3: (props: any) => <Typography {...props} variant='h3' />,
+  h4: (props: any) => <Typography {...props} variant='h4' />,
+  h5: (props: any) => <Typography {...props} variant='h5' />,
   p: (props: any) => <Typography {...props} variant='body1' />,
   pre: Pre,
   code: (props: any) => (
