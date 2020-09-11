@@ -20,7 +20,7 @@ const Layout = ({
             theme={theme}
           />
           <main>{children}</main>
-          <Footer whiteFooter={theme === 'light' || whiteFooter} />
+          <Footer whiteFooter={(theme === 'light' && showSwitch) || whiteFooter} />
         </>
       )}
     </ThemeModeContext.Consumer>
