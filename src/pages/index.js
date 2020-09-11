@@ -24,11 +24,9 @@ const Blog = ({ data }) => {
     count: allPosts.filter((pos) => pos.frontmatter.category === c).length,
   }));
 
-  const [category, setCategory] = useState(categories[0].label);
+  const [category, setCategory] = useState(null);
   const [page, setPage] = useState(0);
-  const [posts, setPosts] = useState(paginate(allPosts.filter(
-    (pos) => pos.frontmatter.category === category,
-  ), 0));
+  const [posts, setPosts] = useState(paginate(allPosts), 0);
   const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
 
   const filterPosts = (p, c) => {
@@ -70,6 +68,19 @@ const Blog = ({ data }) => {
             </div>
             <div className='col-12'>
               <ul>
+                <li>
+                  <button
+                    type='button'
+                    className={category === null ? styles.active : ''}
+                    onClick={() => filterByCategory(null)}
+                  >
+                    All
+                    {' '}
+                    (
+                    {allPosts.length}
+                    )
+                  </button>
+                </li>
                 {categories.map((cat) => (
                   <li key={cat.label}>
                     <button
