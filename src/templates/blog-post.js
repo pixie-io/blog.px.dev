@@ -58,7 +58,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   const post = data.mdx;
   const related = data.featured.nodes;
   return (
-    <Layout>
+    <Layout showSwitch>
       <div className={styles.blogPost}>
         <SEO title='Home' />
         <div className={styles.postImage}>
