@@ -59,7 +59,6 @@ const Blog = (props) => {
             <div className='col-12'>
               <h1>
                 <img src={blogIcon} alt='blog icon' />
-                Blog
               </h1>
               <h3>
                 The latest news and announcements on Pixie, products, partners,
