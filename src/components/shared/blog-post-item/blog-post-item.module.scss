@@ -13,6 +13,9 @@ article {
     border: 1px solid #353535;
     box-sizing: border-box;
     border-radius: 5px;
+    .image{
+      margin: 20px;
+    }
   }
 
 
@@ -45,10 +48,15 @@ article {
 
       .authorDetails {
         display: inline-block;
-
+        width: 100%;
         .dateRow {
           color: #9696A5;
           margin: 0;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+
         }
 
         .authorRow {

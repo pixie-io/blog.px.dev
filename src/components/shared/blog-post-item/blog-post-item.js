@@ -25,9 +25,11 @@ const BlogPostItem = ({ post }) => {
         <div className='col-2' />
         <div className='col-8'>
           <div className={styles.border}>
-            {featuredImage
-              ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
-              : <PostPlaceholder />}
+            <div className={styles.image}>
+              {featuredImage
+                ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
+                : <PostPlaceholder />}
+            </div>
             <div className={styles.body}>
               <div className={styles.heading}>
                 <div className={styles.authorAvatar}>
@@ -36,13 +38,10 @@ const BlogPostItem = ({ post }) => {
                 <div className={styles.authorDetails}>
                   <div className={styles.authorRow}>
                     {author}
-                    {' '}
-                    in
-                    {' '}
-                    {category}
                   </div>
                   <div className={styles.dateRow}>
-                    {date}
+                    <div>{date}</div>
+                    <div>{category}</div>
                   </div>
                 </div>
               </div>
