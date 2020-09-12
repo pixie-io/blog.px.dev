@@ -9,6 +9,7 @@ import styles from '../scss/pages/blog.module.scss';
 import blogIcon from '../images/blog-icon.svg';
 
 const Blog = (props) => {
+  const PIXIE_TEAM_BLOGS = 'Pixie Team Blogs';
   const { data, pageContext: { category: urlCategory } } = props;
   const pageSize = 9;
   const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
@@ -24,8 +25,10 @@ const Blog = (props) => {
   ].map((c) => ({
     label: c,
     count: allPosts.filter((pos) => pos.frontmatter.category === c).length,
-  }));
-
+    order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
+  }))
+    .sort((a, b) => (a <= b ? -1 : 1));
+  console.log(categories);
   const [category, setCategory] = useState(urlCategory);
   const [page, setPage] = useState(0);
   const [posts, setPosts] = useState(paginate(allPosts, 0));
