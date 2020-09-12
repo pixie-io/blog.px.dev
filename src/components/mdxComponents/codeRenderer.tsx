@@ -2,6 +2,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Box, Tooltip } from '@material-ui/core';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React from 'react';
+import vsLight from 'prism-react-renderer/themes/duotoneLight';
+import vsDark from 'prism-react-renderer/themes/duotoneDark';
+import { ThemeModeContext } from '../mainThemeProvider';
 import copyBtn from '../../images/copy-btn.svg';
 
 
@@ -11,7 +14,7 @@ const LineNumber = withStyles((theme) => ({
     width: '20px',
     textAlign: 'right',
     paddingRight: '20px',
-    color: theme.palette.type === 'light' ? '#c7254e' : '#e0ebf7',
+    color: theme.palette.type === 'light' ? '#f3f3f3' : '#e0ebf7',
     fontFamily: '"Roboto Mono", Monospace,',
 
   },
@@ -20,10 +23,10 @@ const LineNumber = withStyles((theme) => ({
 
 const CodeRenderer = withStyles((theme) => ({
   code: {
-    backgroundColor: theme.palette.type === 'light' ? '#212324' : '#292929',
+    backgroundColor: theme.palette.type === 'light' ? '#f3f3f3' : '#292929',
     borderRadius: '5px',
     boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.15)',
-    marginBottom: '16px',
+    marginBottom: '32px',
     marginTop: '12px',
     position: 'relative',
     padding: '4px 0 4px 12px',
@@ -61,9 +64,9 @@ const CodeRenderer = withStyles((theme) => ({
 
 }))((props: any) => {
   const {
-    classes, code,
+    classes, code, theme,
   } = props;
-
+  console.log(theme);
   const optionsArr = props.className ? props.className.split(':') : [''];
   const options = {
     hasNumbers: optionsArr.some((o) => o === 'numbers' || o === 'language-numbers'),
@@ -73,31 +76,36 @@ const CodeRenderer = withStyles((theme) => ({
 
   return (
     <div className={classes.code}>
-      <Box className={`${classes.codeHighlight} small-scroll`} style={{ height: options.height ? options.height : 'auto' }}>
-        <Highlight
-          {...defaultProps}
-          code={code.trim()}
-          language={language}
-        >
-          {({
-            className, style, tokens, getLineProps, getTokenProps,
-          }: any) => (
-            <pre
-              className={`${className} ${classes.pre}`}
-              style={{ ...style, backgroundColor: 'transparent' }}
+      <ThemeModeContext.Consumer>
+        {({ theme }) => (
+          <Box className={`${classes.codeHighlight} small-scroll`} style={{ height: options.height ? options.height : 'auto' }}>
+            <Highlight
+              {...defaultProps}
+              code={code.trim()}
+              language={language}
+              theme={theme == 'light' ? vsLight : vsDark}
             >
-              {tokens.map((line, i) => (
-                <div {...getLineProps({ line, key: i })}>
-                  {options.hasNumbers && <LineNumber lineNumber={i + 1} />}
-                  {line.map((token, key) => (
-                    <span {...getTokenProps({ token, key })} />
+              {({
+                className, style, tokens, getLineProps, getTokenProps,
+              }: any) => (
+                <pre
+                  className={`${className} ${classes.pre}`}
+                  style={{ ...style, backgroundColor: 'transparent' }}
+                >
+                  {tokens.map((line, i) => (
+                    <div {...getLineProps({ line, key: i })}>
+                      {options.hasNumbers && <LineNumber lineNumber={i + 1} />}
+                      {line.map((token, key) => (
+                        <span {...getTokenProps({ token, key })} />
+                      ))}
+                    </div>
                   ))}
-                </div>
-              ))}
-            </pre>
-          )}
-        </Highlight>
-      </Box>
+                </pre>
+              )}
+            </Highlight>
+          </Box>
+        )}
+      </ThemeModeContext.Consumer>
       <Tooltip title='Copy to clipboard' aria-label='copy' placement='top'>
         <img src={copyBtn} alt='' className={classes.copyBtn} onClick={() => { navigator.clipboard.writeText(code); }} />
       </Tooltip>
