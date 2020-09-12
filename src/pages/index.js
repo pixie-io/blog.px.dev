@@ -9,7 +9,7 @@ import styles from '../scss/pages/blog.module.scss';
 import blogIcon from '../images/blog-icon.svg';
 
 const Blog = (props) => {
-  const { data, pageContext: { category: cat } } = props;
+  const { data, pageContext: { category: urlCategory } } = props;
   const pageSize = 9;
   const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
 
@@ -26,7 +26,7 @@ const Blog = (props) => {
     count: allPosts.filter((pos) => pos.frontmatter.category === c).length,
   }));
 
-  const [category, setCategory] = useState(cat);
+  const [category, setCategory] = useState(urlCategory);
   const [page, setPage] = useState(0);
   const [posts, setPosts] = useState(paginate(allPosts, 0));
   const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
@@ -72,7 +72,7 @@ const Blog = (props) => {
                   <Link to='/'>
                     <button
                       type='button'
-                      className={category === null ? styles.active : ''}
+                      className={!category ? styles.active : ''}
                     >
                       All
                       {' '}
@@ -85,8 +85,8 @@ const Blog = (props) => {
                 {categories.map((cat) => (
                   <li key={cat.label}>
                     <Link
-                      to={slugify(cat.label)
-                        .toLowerCase()}
+                      to={`/${slugify(cat.label)
+                        .toLowerCase()}`}
                     >
                       <button
                         type='button'
