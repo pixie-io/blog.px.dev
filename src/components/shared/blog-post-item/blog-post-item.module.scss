@@ -27,6 +27,11 @@ article {
     color: white;
     font-weight: bold;
     margin: 24px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   img {
