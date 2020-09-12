@@ -1,6 +1,8 @@
+
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 const fetch = require('node-fetch');
+const slugify = require('slugify');
 
 exports.onCreateNode = ({
   node, actions, getNode, getNodesByType,
@@ -72,6 +74,13 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
+            categories: allMdx(filter: { frontmatter: { category: { ne: null } } }) {
+      nodes {
+        frontmatter {
+          category
+        }
+      }
+    }
      }
   `);
   if (result.errors) {
@@ -80,7 +89,10 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const blogPrefix = 'blog';
   const blogPost = path.resolve('./src/templates/blog-post.js');
+  const homePage = path.resolve('./src/pages/index.js');
+
   const posts = result.data.blog.edges;
+
 
   posts.forEach((post) => {
     const related = [...posts];
@@ -93,6 +105,18 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   });
+  const categories = result.data.categories.nodes.map((c) => c.frontmatter.category);
+  categories.forEach((category) => {
+    actions.createPage({
+      path: `/${slugify(category).toLowerCase()}`,
+      component: homePage,
+      context: {
+        slug: slugify(category),
+        category,
+      },
+    });
+  });
+
   return null;
 };
 exports.createSchemaCustomization = ({ actions }) => {

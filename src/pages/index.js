@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
+import slugify from 'slugify';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
 import styles from '../scss/pages/blog.module.scss';
 import blogIcon from '../images/blog-icon.svg';
 
-const Blog = ({ data }) => {
+const Blog = (props) => {
+  const { data, pageContext: { category: cat } } = props;
   const pageSize = 9;
   const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
 
@@ -24,9 +26,9 @@ const Blog = ({ data }) => {
     count: allPosts.filter((pos) => pos.frontmatter.category === c).length,
   }));
 
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState(cat);
   const [page, setPage] = useState(0);
-  const [posts, setPosts] = useState(paginate(allPosts), 0);
+  const [posts, setPosts] = useState(paginate(allPosts, 0));
   const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
 
   const filterPosts = (p, c) => {
@@ -43,11 +45,9 @@ const Blog = ({ data }) => {
   const loadMore = () => {
     filterPosts(page + 1, category);
   };
-  const filterByCategory = (c) => {
-    filterPosts(0, c);
-  };
+
   useEffect(() => {
-    filterByCategory(category);
+    filterPosts(0, category);
   }, []);
 
   return (
@@ -69,31 +69,36 @@ const Blog = ({ data }) => {
             <div className='col-12'>
               <ul>
                 <li>
-                  <button
-                    type='button'
-                    className={category === null ? styles.active : ''}
-                    onClick={() => filterByCategory(null)}
-                  >
-                    All
-                    {' '}
-                    (
-                    {allPosts.length}
-                    )
-                  </button>
+                  <Link to='/'>
+                    <button
+                      type='button'
+                      className={category === null ? styles.active : ''}
+                    >
+                      All
+                      {' '}
+                      (
+                      {allPosts.length}
+                      )
+                    </button>
+                  </Link>
                 </li>
                 {categories.map((cat) => (
                   <li key={cat.label}>
-                    <button
-                      type='button'
-                      className={category === cat.label ? styles.active : ''}
-                      onClick={() => filterByCategory(cat.label)}
+                    <Link
+                      to={slugify(cat.label)
+                        .toLowerCase()}
                     >
-                      {cat.label}
-                      {' '}
-                      (
-                      {cat.count}
-                      )
-                    </button>
+                      <button
+                        type='button'
+                        className={category === cat.label ? styles.active : ''}
+                      >
+                        {cat.label}
+                        {' '}
+                        (
+                        {cat.count}
+                        )
+                      </button>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -123,6 +128,9 @@ const Blog = ({ data }) => {
 };
 
 Blog.propTypes = {
+  pageContext: PropTypes.shape({
+    category: PropTypes.string,
+  }),
   data: PropTypes.shape({
     posts: PropTypes.shape({
       nodes: PropTypes.array.isRequired,
@@ -132,7 +140,11 @@ Blog.propTypes = {
     }),
   }).isRequired,
 };
-
+Blog.defaultProps = {
+  pageContext: {
+    category: null,
+  },
+};
 export default Blog;
 
 export const pageQuery = graphql`
