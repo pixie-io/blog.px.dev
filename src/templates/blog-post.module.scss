@@ -6,6 +6,9 @@
     height: 500px;
     overflow: hidden;
     margin-bottom: 30px;
+    @media (max-width: 1000px) {
+      height: auto;
+    }
   }
 
   .breadcrumb {
