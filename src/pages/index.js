@@ -28,7 +28,7 @@ const Blog = (props) => {
       count: allPosts.filter((pos) => pos.frontmatter.category === c).length,
       order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
     }))
-    .sort((a, b) => (a <= b ? -1 : 1));
+    .sort((a, b) => (a.order >= b.order ? -1 : 1));
   const [category] = useState(urlCategory);
   const [page, setPage] = useState(0);
   const [posts, setPosts] = useState(paginate(allPosts, 0));
