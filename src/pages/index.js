@@ -29,7 +29,7 @@ const Blog = (props) => {
       order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
     }))
     .sort((a, b) => (a <= b ? -1 : 1));
-  const [category, setCategory] = useState(urlCategory);
+  const [category] = useState(urlCategory);
   const [page, setPage] = useState(0);
   const [posts, setPosts] = useState(paginate(allPosts, 0));
   const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
@@ -41,7 +41,6 @@ const Blog = (props) => {
     const paginatedPosts = paginate(filteredPosts, p);
     setPosts(paginatedPosts);
     setPage(p);
-    setCategory(c);
     setHasMore(filteredPosts.length > paginatedPosts.length);
   };
 
