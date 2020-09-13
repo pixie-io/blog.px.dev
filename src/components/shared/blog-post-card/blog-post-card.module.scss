@@ -44,6 +44,9 @@ article.card {
       margin: 14px 0;
       height: 60px;
       overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       @media (max-width: $breakpoint) {
         height: 52px;
       }
