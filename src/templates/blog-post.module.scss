@@ -1,12 +1,14 @@
-@import "../scss/partials/variables";
 
 .blogPost {
   margin-top: 94px;
 
   .postImage {
-    height: 300px;
+    height: 500px;
     overflow: hidden;
     margin-bottom: 30px;
+    @media (max-width: 1300px) {
+      height: auto;
+    }
   }
 
   .breadcrumb {
@@ -33,10 +35,9 @@
       }
 
       .author {
-        color: white;
         display: block;
         padding: 0;
-        margin: 0 0 5px;
+        margin: 0;
       }
 
       .date {
@@ -50,7 +51,7 @@
 
   .socialIcons {
     text-align: right;
-    @media (max-width: $breakpoint) {
+    @media (max-width: 1000px) {
       margin-top: 25px;
       text-align: left;
     }
@@ -69,14 +70,12 @@
   }
 
   h1 {
-    color: white;
     font-weight: normal;
   }
 
 
   .postBody {
     margin-top: 50px;
-    color: white;
   }
 
   section.relatedStories {
@@ -87,7 +86,6 @@
     }
 
     h4 {
-      color: white;
     }
 
     .viewAll {

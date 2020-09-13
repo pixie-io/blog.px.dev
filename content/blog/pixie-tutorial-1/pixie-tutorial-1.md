@@ -5,6 +5,7 @@ date: 2020-06-11T12:30:00.000+00:00
 category: 'Guest Blogs'
 author: 'John Arundel'
 email: 'john@bitfieldconsulting.com'
+featured_image: 2.png
 featured: true
 ---
 

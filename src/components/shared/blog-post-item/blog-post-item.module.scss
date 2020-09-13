@@ -7,12 +7,15 @@ article {
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  line-height: 28px;
+  line-height: 26px;
 
   .border {
     border: 1px solid #353535;
     box-sizing: border-box;
     border-radius: 5px;
+    .image{
+      margin: 20px;
+    }
   }
 
 
@@ -24,6 +27,11 @@ article {
     color: white;
     font-weight: bold;
     margin: 24px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   img {
@@ -45,15 +53,18 @@ article {
 
       .authorDetails {
         display: inline-block;
-
+        width: 100%;
         .dateRow {
           color: #9696A5;
           margin: 0;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+
         }
 
-        .authorRow {
-          color: white;
-        }
+
       }
 
     }

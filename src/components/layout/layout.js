@@ -3,14 +3,26 @@ import PropTypes from 'prop-types';
 
 import Header from '../header';
 import Footer from '../footer';
+import { ThemeModeContext } from '../mainThemeProvider.tsx';
 
 const Layout = ({
   children, whiteHeader, whiteFooter, hideMenu,
 }) => (
   <>
-    <Header whiteHeader={whiteHeader} hideMenu={hideMenu} />
-    <main>{children}</main>
-    <Footer whiteFooter={whiteFooter} />
+    <ThemeModeContext.Consumer>
+      {({ toggleTheme, theme }) => (
+        <>
+          <Header
+            whiteHeader={whiteHeader}
+            hideMenu={hideMenu}
+            onThemeTypeSwitch={toggleTheme}
+            theme={theme}
+          />
+          <main>{children}</main>
+          <Footer whiteFooter={whiteFooter || theme === 'light'} />
+        </>
+      )}
+    </ThemeModeContext.Consumer>
   </>
 );
 

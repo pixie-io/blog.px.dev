@@ -26,7 +26,6 @@ const Quote = withStyles((theme: Theme) => ({
 
 }))((props) => {
   const { children, classes, author } = props;
-  console.log(props);
   return (
     <div className={classes.quote}>
       {children}

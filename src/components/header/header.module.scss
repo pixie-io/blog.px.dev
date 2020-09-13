@@ -73,6 +73,10 @@ header {
       }
     }
 
+    span {
+      font-size: 12px;
+    }
+
     .socialIcons {
       @media (max-width: 768px) {
         display: none;

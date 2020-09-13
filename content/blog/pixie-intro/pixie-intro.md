@@ -2,11 +2,12 @@
 path: '/pixie-intro'
 title: 'Put a Little Pixie in Your Cluster: Auto-Telemetry for Live-Debugging Distributed Environments'
 date: 2020-05-06T06:00:00.000+00:00
-featured_image: plans.png
 category: 'Guest Blogs'
 author: 'John Arundel'
 email: 'john@bitfieldconsulting.com'
 featured: true
+featured_image: 3.png
+
 ---
 
 In this guest blog post, infrastructure crime-fighter John Arundel, of [Bitfield Consulting](https://bitfieldconsulting.com), enlists Pixie's help to solve the Case of the Sluggish Service.

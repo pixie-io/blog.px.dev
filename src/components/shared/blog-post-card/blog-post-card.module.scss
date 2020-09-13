@@ -10,6 +10,11 @@ article.card {
   line-height: 28px;
   position: relative;
   display: block;
+  border: 1px solid #4A4C4F;
+  box-sizing: border-box;
+  border-radius: 5px;
+  overflow: hidden;
+
 
   a {
     display: flex;
@@ -24,7 +29,6 @@ article.card {
   }
 
 
-
   img {
     border-radius: 5px;
     overflow: hidden;
@@ -32,22 +36,28 @@ article.card {
 
   .cardImage {
     height: 253px;
+    margin: 20px;
   }
 
   .cardBody {
     padding: 20px;
     height: 172px;
     background-color: #4A4C4F;
+
     h5 {
       color: white;
       font-weight: normal;
       margin: 14px 0;
       height: 60px;
       overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       @media (max-width: $breakpoint) {
         height: 52px;
       }
     }
+
     .dateRow {
       margin: 0;
       @media (max-width: $breakpoint) {

@@ -6858,10 +6858,10 @@ gatsby-plugin-scroll-reveal@0.0.6:
     intersection-observer "^0.7.0"
     sal.js "^0.6.2"
 
-gatsby-plugin-segment-js@^3.1.0:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-segment-js/-/gatsby-plugin-segment-js-3.2.2.tgz#f2510a3a1c89c019d23face2fb9ff081dd509cae"
-  integrity sha512-+hi98uqMTqb2wVlZBxA3tA65p6rOQ/SHU12VhPVXgmGnj5rWGSkNqYxGjUQEwltKaqjnqXAmJOZGkah+OBU7Dw==
+gatsby-plugin-segment-js@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-segment-js/-/gatsby-plugin-segment-js-3.6.0.tgz#740b2a5e6730119147e0dd1fb2c39acca83e353d"
+  integrity sha512-kdpXV5RUGR5dRcSJHsUxP2+FY8XDOAqi3disj0SHdR5mZDAg4QtpiCQZYRB6Ji1/aP87oypoJVyeu6s1+GpHSw==
 
 gatsby-plugin-sharp@^2.4.5:
   version "2.6.0"
@@ -13989,6 +13989,11 @@ slice-ansi@^3.0.0:
     ansi-styles "^4.0.0"
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
+
+slugify@^1.3.6:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.4.5.tgz#a7517acf5f4c02a4df41e735354b660a4ed1efcf"
+  integrity sha512-WpECLAgYaxHoEAJ8Q1Lo8HOs1ngn7LN7QjXgOLbmmfkcWvosyk4ZTXkTzKyhngK640USTZUlgoQJfED1kz5fnQ==
 
 slugify@^1.4.0:
   version "1.4.0"

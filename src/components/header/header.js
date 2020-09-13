@@ -6,6 +6,9 @@ import BodyClassName from 'react-body-classname';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles } from '@material-ui/core/styles';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 import styles from './header.module.scss';
 
 import docs from '../../images/footer/docs-icon.svg';
@@ -15,13 +18,21 @@ import youtube from '../../images/footer/youtube-icon.svg';
 import twitter from '../../images/footer/twitter-icon.svg';
 import pixieLogo from '../../images/pixie-logo-header.svg';
 import betanaut from '../../images/betanaut.png';
-
 import { docsRedirect, loginRedirect, signupRedirect } from '../shared/tracking-utils';
 
-const Header = ({ whiteHeader, transparentMenu }) => {
+const useStyles = makeStyles(() => ({
+  menuItem: {
+    color: '#ffffff',
+  },
+}));
+const Header = ({
+  whiteHeader, transparentMenu, onThemeTypeSwitch,
+  theme,
+}) => {
   const [open, setOpen] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
   const [showNewsBar, setShowNewsBar] = useState(true);
+  const classes = useStyles();
 
   const closeMenu = () => {
     setOpen(false);
@@ -61,8 +72,8 @@ const Header = ({ whiteHeader, transparentMenu }) => {
               className={`${styles.newsBarClose} hide-desktop`}
               onClick={(e) => closeTopBanner(e)}
             >
-{' '}
-&#10005;
+              {' '}
+              &#10005;
             </div>
           </div>
         </a>
@@ -95,6 +106,21 @@ const Header = ({ whiteHeader, transparentMenu }) => {
         </div>
         <div className={`hide-mobile hide-tablet ${styles.menu}`}>
           <ul>
+
+              <li>
+                <IconButton
+                  className={classes.menuItem}
+                  size='small'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onThemeTypeSwitch();
+                  }}
+                >
+                  {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
+                </IconButton>
+              </li>
+
+            {' '}
             <li>
               <a href='https://pixielabs.ai/community'>
                 Community
@@ -228,6 +254,8 @@ const Header = ({ whiteHeader, transparentMenu }) => {
 Header.propTypes = {
   whiteHeader: PropTypes.bool,
   transparentMenu: PropTypes.bool,
+  onThemeTypeSwitch: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
 };
 Header.defaultProps = {
   whiteHeader: false,

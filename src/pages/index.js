@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
+import slugify from 'slugify';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
 import styles from '../scss/pages/blog.module.scss';
 import blogIcon from '../images/blog-icon.svg';
 
-const Blog = ({ data }) => {
+const useStyles = makeStyles((theme) => ({
+  body: {
+    backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
+
+  },
+}));
+const Blog = (props) => {
+  const PIXIE_TEAM_BLOGS = 'Pixie Team Blogs';
+  const { data, pageContext: { category: urlCategory } } = props;
   const pageSize = 9;
   const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
+  const muiClasses = useStyles();
 
   const {
     posts: { nodes: allPosts },
@@ -19,16 +31,16 @@ const Blog = ({ data }) => {
   } = data;
   const categories = [
     ...new Set((allCategories || []).map((c) => c.frontmatter.category)),
-  ].map((c) => ({
-    label: c,
-    count: allPosts.filter((pos) => pos.frontmatter.category === c).length,
-  }));
-
-  const [category, setCategory] = useState(categories[0].label);
+  ]
+    .map((c) => ({
+      label: c,
+      count: allPosts.filter((pos) => pos.frontmatter.category === c).length,
+      order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
+    }))
+    .sort((a, b) => (a.order >= b.order ? -1 : 1));
+  const [category] = useState(urlCategory);
   const [page, setPage] = useState(0);
-  const [posts, setPosts] = useState(paginate(allPosts.filter(
-    (pos) => pos.frontmatter.category === category,
-  ), 0));
+  const [posts, setPosts] = useState(paginate(allPosts, 0));
   const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
 
   const filterPosts = (p, c) => {
@@ -38,51 +50,63 @@ const Blog = ({ data }) => {
     const paginatedPosts = paginate(filteredPosts, p);
     setPosts(paginatedPosts);
     setPage(p);
-    setCategory(c);
     setHasMore(filteredPosts.length > paginatedPosts.length);
   };
 
   const loadMore = () => {
     filterPosts(page + 1, category);
   };
-  const filterByCategory = (c) => {
-    filterPosts(0, c);
-  };
+
   useEffect(() => {
-    filterByCategory(category);
+    filterPosts(0, category);
   }, []);
 
   return (
     <Layout>
       <SEO title='Blog' />
-      <section className={styles.latestStories}>
+      <section className={`${styles.latestStories}  ${muiClasses.body}`}>
         <div className='container'>
           <div className={`row ${styles.blogCategory}`}>
             <div className='col-12'>
-              <h1>
-                <img src={blogIcon} alt='blog icon' />
-                Blog
-              </h1>
-              <h3>
+              <img src={blogIcon} alt='blog icon' className={styles.blogLogo} />
+              <Typography variant='h1'>
                 The latest news and announcements on Pixie, products, partners,
                 and more.
-              </h3>
+              </Typography>
             </div>
             <div className='col-12'>
               <ul>
-                {categories.map((cat) => (
-                  <li key={cat.label}>
+                <li>
+                  <Link to='/'>
                     <button
                       type='button'
-                      className={category === cat.label ? styles.active : ''}
-                      onClick={() => filterByCategory(cat.label)}
+                      className={!category ? styles.active : ''}
                     >
-                      {cat.label}
+                      All
                       {' '}
                       (
-                      {cat.count}
+                      {allPosts.length}
                       )
                     </button>
+                  </Link>
+                </li>
+                {categories.map((cat) => (
+                  <li key={cat.label}>
+                    <Link
+                      to={`/${slugify(cat.label)
+                        .toLowerCase()}`}
+                    >
+                      <button
+                        type='button'
+                        className={category === cat.label ? styles.active : ''}
+                      >
+                        {cat.label}
+                        {' '}
+                        (
+                        {cat.count}
+                        )
+                      </button>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -112,6 +136,9 @@ const Blog = ({ data }) => {
 };
 
 Blog.propTypes = {
+  pageContext: PropTypes.shape({
+    category: PropTypes.string,
+  }),
   data: PropTypes.shape({
     posts: PropTypes.shape({
       nodes: PropTypes.array.isRequired,
@@ -121,7 +148,11 @@ Blog.propTypes = {
     }),
   }).isRequired,
 };
-
+Blog.defaultProps = {
+  pageContext: {
+    category: null,
+  },
+};
 export default Blog;
 
 export const pageQuery = graphql`
