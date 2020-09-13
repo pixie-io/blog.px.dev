@@ -28,7 +28,12 @@ const MetaBar = ({ post, shareUrl }) => (
             <GravatarIcon email={post.frontmatter.email} />
           </div>
           <div>
-            <Typography variant='body1' className={styles.author}>{post.frontmatter.author}</Typography>
+            <Typography
+              variant='body1'
+              className={styles.author}
+            >
+              {post.frontmatter.author}
+            </Typography>
             <span className={styles.date}>
               {post.frontmatter.date}
             </span>
@@ -59,6 +64,9 @@ const MetaBar = ({ post, shareUrl }) => (
 const useStyles = makeStyles((theme) => ({
   body: {
     backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
+    '& figcaption': {
+      color: theme.palette.primary.main,
+    },
   },
 }));
 
@@ -88,7 +96,10 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
                     }
                   />
                 ) : (
-                  <PostPlaceholder imgStyle={{ objectFit: 'cover' }} style={{ maxHeight: '300px' }} />
+                  <PostPlaceholder
+                    imgStyle={{ objectFit: 'cover' }}
+                    style={{ maxHeight: '300px' }}
+                  />
                 )}
               </div>
               <div className={styles.breadcrumb}>
