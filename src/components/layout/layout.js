@@ -19,7 +19,7 @@ const Layout = ({
             theme={theme}
           />
           <main>{children}</main>
-          <Footer whiteFooter={theme === 'light'} />
+          <Footer whiteFooter={whiteFooter || theme === 'light'} />
         </>
       )}
     </ThemeModeContext.Consumer>
@@ -36,6 +36,5 @@ Layout.defaultProps = {
   whiteHeader: false,
   whiteFooter: false,
   hideMenu: false,
-  showSwitch: false,
 };
 export default Layout;
