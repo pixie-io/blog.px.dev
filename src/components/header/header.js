@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
 }));
 const Header = ({
   whiteHeader, transparentMenu, onThemeTypeSwitch,
-  theme, showSwitch,
+  theme,
 }) => {
   const [open, setOpen] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
@@ -106,7 +106,7 @@ const Header = ({
         </div>
         <div className={`hide-mobile hide-tablet ${styles.menu}`}>
           <ul>
-            {showSwitch && (
+
               <li>
                 <IconButton
                   className={classes.menuItem}
@@ -119,7 +119,7 @@ const Header = ({
                   {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
                 </IconButton>
               </li>
-            )}
+
             {' '}
             <li>
               <a href='https://pixielabs.ai/community'>
@@ -256,11 +256,9 @@ Header.propTypes = {
   transparentMenu: PropTypes.bool,
   onThemeTypeSwitch: PropTypes.func.isRequired,
   theme: PropTypes.string.isRequired,
-  showSwitch: PropTypes.bool,
 };
 Header.defaultProps = {
   whiteHeader: false,
   transparentMenu: false,
-  showSwitch: false,
 };
 export default Header;

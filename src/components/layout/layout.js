@@ -6,21 +6,20 @@ import Footer from '../footer';
 import { ThemeModeContext } from '../mainThemeProvider.tsx';
 
 const Layout = ({
-  children, whiteHeader, whiteFooter, hideMenu, showSwitch,
+  children, whiteHeader, whiteFooter, hideMenu,
 }) => (
   <>
     <ThemeModeContext.Consumer>
       {({ toggleTheme, theme }) => (
         <>
           <Header
-            showSwitch={showSwitch}
             whiteHeader={whiteHeader}
             hideMenu={hideMenu}
             onThemeTypeSwitch={toggleTheme}
             theme={theme}
           />
           <main>{children}</main>
-          <Footer whiteFooter={(theme === 'light' && showSwitch) || whiteFooter} />
+          <Footer whiteFooter={theme === 'light'} />
         </>
       )}
     </ThemeModeContext.Consumer>
@@ -32,7 +31,6 @@ Layout.propTypes = {
   whiteHeader: PropTypes.bool,
   whiteFooter: PropTypes.bool,
   hideMenu: PropTypes.bool,
-  showSwitch: PropTypes.bool,
 };
 Layout.defaultProps = {
   whiteHeader: false,

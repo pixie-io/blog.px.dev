@@ -6,26 +6,20 @@
 
   .blog-category {
     padding-bottom: 60px;
-    margin-top: 150px;
+    padding-top: 150px;
 
     h1 {
       font-weight: normal;
-      margin: 0 0 27px;
-      color: $color-white;
       text-align: center;
-      font-weight: normal;
-      display: flex;
-      justify-content: center;
+    }
 
-      img {
-        display: inline-block;
-        margin-right: 27px;
-      }
+    .blogLogo {
+      display: block;
+      margin: 0 auto;
     }
 
     h3 {
       text-align: center;
-      color: white;
       font-weight: normal;
     }
 

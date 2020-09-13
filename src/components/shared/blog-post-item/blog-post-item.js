@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 import styles from './blog-post-item.module.scss';
 import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
@@ -36,16 +37,16 @@ const BlogPostItem = ({ post }) => {
                   <GravatarIcon email={email} />
                 </div>
                 <div className={styles.authorDetails}>
-                  <div className={styles.authorRow}>
+                  <Typography variant='body1 p-0'>
                     {author}
-                  </div>
+                  </Typography>
                   <div className={styles.dateRow}>
                     <div>{date}</div>
                     <div>{category}</div>
                   </div>
                 </div>
               </div>
-              <h3>{title}</h3>
+              <Typography variant='h3'>{title}</Typography>
               <p>{excerpt}</p>
               <div className='col-2' />
             </div>

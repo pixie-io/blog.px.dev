@@ -2,17 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import slugify from 'slugify';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
 import styles from '../scss/pages/blog.module.scss';
 import blogIcon from '../images/blog-icon.svg';
 
+const useStyles = makeStyles((theme) => ({
+  body: {
+    backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
+
+  },
+}));
 const Blog = (props) => {
   const PIXIE_TEAM_BLOGS = 'Pixie Team Blogs';
   const { data, pageContext: { category: urlCategory } } = props;
   const pageSize = 9;
   const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
+  const muiClasses = useStyles();
 
   const {
     posts: { nodes: allPosts },
@@ -55,17 +64,15 @@ const Blog = (props) => {
   return (
     <Layout>
       <SEO title='Blog' />
-      <section className={styles.latestStories}>
+      <section className={`${styles.latestStories}  ${muiClasses.body}`}>
         <div className='container'>
           <div className={`row ${styles.blogCategory}`}>
             <div className='col-12'>
-              <h1>
-                <img src={blogIcon} alt='blog icon' />
-              </h1>
-              <h3>
+              <img src={blogIcon} alt='blog icon' className={styles.blogLogo} />
+              <Typography variant='h1'>
                 The latest news and announcements on Pixie, products, partners,
                 and more.
-              </h3>
+              </Typography>
             </div>
             <div className='col-12'>
               <ul>
