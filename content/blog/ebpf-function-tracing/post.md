@@ -1,6 +1,6 @@
 ---
 path: '/ebpf-function-tracing'
-title: 'Debugging Go in prod using eBPF function argument tracing'
+title: 'Part 1: Debugging Go in prod using eBPF function argument tracing'
 date: 2020-09-10T06:00:00.000+00:00
 featured_image: hero-image.png
 category: 'Pixie Team Blogs'
@@ -9,27 +9,27 @@ email: 'zasgar@pixielabs.ai'
 featured: true
 ---
 
-This post describes how to use [gobpf](https://github.com/iovisor/gobpf) and uprobes to build a function argument tracer for Go applications.
+This is the first in a series of posts describing how we can debug applications in prod using eBPF. This posts describes how to use [gobpf](https://github.com/iovisor/gobpf) and uprobes to build a function argument tracer for Go applications.
 
 # Introduction
 
 When debugging, we are typically interested in capturing the state of a program. This allows us to examine what the application is doing and determine where the bug is located in our code. A simple way to observe state is to use a debugger to capture function arguments. For Go applications, we often use Delve or gdb. 
 
-Delve and gdb work well for debugging in a development environment, but they are not often used in production. The features that make these debuggers powerful can also mutate the state of the application and create significant overhead that would be undesirable in a production system.
+Delve and gdb work well for debugging in a development environment, but they are not often used in production. The features that make these debuggers powerful can also make them undesirable to use in production systems. Debuggers can cause significant interruption to the program and even allow mutation of state which might lead to unexpected failures of production software. 
 
 To more cleanly capture function arguments, we will explore using enhanced BPF ([eBPF](https://ebpf.io)), which is available in Linux 4.x+, and the higher level Go library [gobpf](https://github.com/iovisor/gobpf). 
 
 # What is eBPF?
 
-Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think of it as a lightweight sandboxed VM that runs inside of the Linux kernel and provides access to various kernel facilities. 
+Extended BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think of it as a lightweight sandboxed VM that runs inside of the Linux kernel and can provide verified access to kernel memory. 
 
-As shown in the overview below, eBPF allows the kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. This strict verifications allows the kernel to compile the bytecode into verified machine code for efficient runtime execution. This high performance allows eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc. 
+As shown in the overview below, eBPF allows the kernel to run BPF bytecode. While the front-end language used can vary, it is typically a restricted subset of C. Typically the C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. These strict verifications guarantee that the machine code will not intentionally or accidentally compromise the Linux kernel, and that the BPF probe will execute in a bounded number of instructions every time it is triggered. These guarantees enable eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc.
 
-Using eBPF, we can also insert probes; functions that are executed whenever a specific event, such as a function call, occurs. These probes allow you to run a BPF compiled function that can examine the state of the system application or kernel. Many types of probes are available, but we will focus on uprobes in this post.
+Functionally, eBPF allows you to run restricted C code upon some event (eg. timer, network event or a function call). When triggered on a function call we call these functions probes and they can be used to either run on a function call within the kernel (kprobes), or a function call in a userspace program (uprobes). This post focuses on using uprobes to allow dynamic tracing of function arguments. 
 
 # Uprobes
 
-Uprobes allow you to intercept a userspace program by inserting a soft-interrupt debug trap instruction (`int3` on an x86). If you are interested in details, check out [this](https://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints) blog post by Eli. The flow for an uprobe is essentially the same as any other BPF program and is summarized in the diagram below. The compiled and verified BPF program is executed as part of a uprobe, and the results can be written into a buffer. 
+Uprobes allow you to intercept a userspace program by inserting a debug trap instruction (`int3` on an x86) that triggers a soft-interrupt . This is also [how debuggers work](https://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints). The flow for an uprobe is essentially the same as any other BPF program and is summarized in the diagram below. The compiled and verified BPF program is executed as part of a uprobe, and the results can be written into a buffer. 
 
 
 
@@ -39,38 +39,38 @@ Uprobes allow you to intercept a userspace program by inserting a soft-interrupt
 
 Let's see how uprobes actually function. To deploy uprobes and capture function arguments, we will be using [this](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/app.go) simple demo application. The relevant parts of this Go program are shown below. 
 
-`main()` is a simple HTTP server that exposes a single _GET_ endpoint on _/e_, which computes Euler's number (__e__) using an iterative approximation. `computeE` takes in a single query param(_iters_), which specifies the number of iterations to run the approximation. The more iterations, the more accurate the approximation, at the cost of compute cycles. It's not essential to understand the math behind the function. We are just interested in tracing the arguments of any invocation of `computeE`.
+`main()` is a simple HTTP server that exposes a single _GET_ endpoint on _/e_, which computes Euler's number (__e__) using an iterative approximation. `computeE` takes in a single query param(_iters_), which specifies the number of iterations to run for the approximation. The more iterations, the more accurate the approximation, at the cost of compute cycles. It's not essential to understand the math behind the function. We are just interested in tracing the arguments of any invocation of `computeE`.
 
 ```go
 // computeE computes the approximation of e by running a fixed number of iterations.
 func computeE(iterations int64) float64 {
-	res := 2.0
-	fact := 1.0
+  res := 2.0
+  fact := 1.0
 
-	for i := int64(2); i < iterations; i++ {
-		fact *= float64(i)
-		res += 1 / fact
-	}
-	return res
+  for i := int64(2); i < iterations; i++ {
+    fact *= float64(i)
+    res += 1 / fact
+  }
+  return res
 }
 
 func main() {
-	http.HandleFunc("/e", func(w http.ResponseWriter, r *http.Request) {
-        /// Parse iters argument from get request, use default if not available.
-        // ... removed for brevity ...
-		w.Write([]byte(fmt.Sprintf("e = %0.4f\n", computeE(iters))))
-	})
-    // Start server...
+  http.HandleFunc("/e", func(w http.ResponseWriter, r *http.Request) {
+    // Parse iters argument from get request, use default if not available.
+    // ... removed for brevity ...
+    w.Write([]byte(fmt.Sprintf("e = %0.4f\n", computeE(iters))))
+  })
+  // Start server...
 }
 ```
-To understand how uprobes work, let's look at how symbols are tracked inside binaries. Go binaries on Linux use DWARF to store debug info. This information is available, even in optimized binaries, unless debug data has been stripped. We can use the command `objdump` to examine the symbols in the binary:
+To understand how uprobes work, let's look at how symbols are tracked inside binaries. Since uprobes work by inserting a debug trap instruction, we need to get the address where the function is located. Go binaries on Linux use ELF to store debug info. This information is available, even in optimized binaries, unless debug data has been stripped. We can use the command `objdump` to examine the symbols in the binary:
 
 ```bash
 [0] % objdump --syms app|grep computeE
 00000000006609a0 g     F .text    000000000000004b              main.computeE
 ```
 
-The function `computeE` is located at address `0x6609a0`. To look at the instructions around it, we can ask `objdump` to disassemble to binary (done by adding `-d`). The disassembled code looks like:
+From the output, we know that the function `computeE` is located at address `0x6609a0`. To look at the instructions around it, we can ask `objdump` to disassemble to binary (done by adding `-d`). The disassembled code looks like:
 
 ```bash
 [0] % objdump -d app | less
@@ -91,16 +91,16 @@ With this information in mind, we are now ready to dive in and write code to tra
 To capture the events, we need to register a uprobe function and have a userspace function that can read the output. A diagram of this is shown below. We will write a binary called `tracer` that is responsible for registering the BPF code and reading the results of the BPF code. As shown, the uprobe will simply write to a perf-buffer, a linux kernel data structure used for perf events.
 
 ::: div image-m
-![High-level overview showing the Tracer binary listening to perf events generated from the App](./app-tracer.svg)
+<svg title='High-level overview showing the Tracer binary listening to perf events generated from the App' src='app-tracer.svg' />
 :::
 
 Now that we understand the pieces involved, let's look into the details of what happens when we add an uprobe. The diagram below shows how the binary is modified by the Linux kernel with an uprobe. The soft-interrupt instruction (`int3`) is inserted as the first instruction in `main.computeE`. This causes a soft-interrupt, allowing the Linux kernel to execute our BPF function. We then write the arguments to the perf-buffer, which is asynchronously read by the tracer.
 
 ::: div image-xl
-![App Tracing](./app-trace.svg)
+<svg title='Details of how a debug trap instruction is used call a BPF program' src='app-trace.svg' />
 :::
 
-The BPF function for this is relatively simple; the C code is shown below. We register this function so that it's invoked every time `main.computeE` is called. Once it's called, we simply read the function argument and write that the perf buffer. Lots of boilerplate is required to set up the buffers, etc. and this can be found in the complete example [here](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/tracer/tracer.go).
+The BPF function for this is relatively simple; the C code is shown below. We register this function so that it's invoked every time `main.computeE` is called. Once it's called, we simply read the function argument and write that the perf buffer. Lots of boilerplate is required to set up the buffers, etc. and this can be found in the complete example [here](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/trace_example/trace.go).
 
 ```c
 #include <uapi/linux/ptrace.h>
@@ -117,8 +117,8 @@ inline int computeECalled(struct pt_regs *ctx) {
 
 Now we have a fully functioning end-to-end argument tracer for the `main.computeE` function! The results of this are shown in the video clip below.
 
-::: div image-xl
-![End-to-End demo](./e2e-demo.gif)
+::: div image-l
+<svg title='End-to-End demo'  src='e2e-demo.gif' />
 :::
 
 One of the cool things is that we can actually use GDB to see the modifications made to the binary. Here we dump out the instructions at the `0x6609a0` address, before running our tracer binary.
