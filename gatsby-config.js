@@ -90,7 +90,7 @@ module.exports = {
         prodKey: '3CJpc8eFGKdlIRqUFqRta0lVYFzXyJeo',
         devKey: 'vGjQ5dHvJnp0akb0wxnPMjd2YQWqNLwt',
         trackPage: true,
-        host: 'http://segment.withpixie.ai/',
+        host: 'https://segment.withpixie.ai/',
       },
     },
     {
