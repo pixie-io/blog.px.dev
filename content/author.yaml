@@ -1,10 +1,14 @@
 - id: Zain Asgar
-  bio: lipsum
-  twitter: 'unclebobmartin'
+  bio: Co-Founder/CEO of Pixie Labs Inc and Adjunct Professor of Computer Science at Stanford University.
+  twitter: 'https://twitter.com/zainasgar'
   email: 'zasgar@pixielabs.ai'
 
 - id: John Arundel
-  bio: lipsum
-  twitter: 'w3c'
+  bio: Principal consultant at Bitfield Consulting, is a well-known writer and expert on DevOps, infrastructure, Kubernetes, Puppet, and the Go programming language. 
+  twitter: 'https://twitter.com/bitfield'
   email: 'john@bitfieldconsulting.com'
 
+- id: Adam Hawkins
+  bio: SRE at Skillshare
+  twitter: 'https://twitter.com/zainasgar'
+  email: 'adam@hawkins.io'

@@ -5,7 +5,7 @@ category: 'Guest Blogs'
 author: 'Adam Hawkins'
 email: 'adam@hawkins.io'
 featured: true
-featured_image: 1.png
+featured_image: hero-image.png
 date: 2020-06-17T06:00:00.000+00:00
 ---
 
@@ -67,7 +67,6 @@ Check out my demo video for quick
 walkthrough.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_MlD-hVjVok" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 
 Pixie is in free community beta right now. You can install it on your
 cluster and try it for yourself.

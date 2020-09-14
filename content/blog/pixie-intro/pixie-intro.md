@@ -6,7 +6,7 @@ category: 'Guest Blogs'
 author: 'John Arundel'
 email: 'john@bitfieldconsulting.com'
 featured: true
-featured_image: 3.png
+featured_image: hero-image.png
 
 ---
 
@@ -16,13 +16,13 @@ In this guest blog post, infrastructure crime-fighter John Arundel, of [Bitfield
 
 ## Episode 1: The Wire
 
-> I'm gonna show you as gently as I can how much you don't know.<br />
+> *I'm gonna show you as gently as I can how much you don't know.*<br />
 —Cutty
 
 It ain't easy being a cop. An infrastructure cop, that is. Every day on the beat, we deal with SLA parole violations, DDoS attacks, CPU stealing. Even the occasional cache poisoning.
 
 ::: div image-m
-![Image 1: Infrastructure cops](./the-wire.webp)
+![Infrastructure cops](./the-wire.webp)
 :::
 
 As any DevOps detective will tell you, the key to effective crime-solving is information. Faced with the Case of the Sluggish Service, or the Mystery of the Elevated Error Rate, we don't have a lot to go on. We could try interviewing suspects (checking log files), recruiting informants (setting up distributed tracing probes), or even reconstructing the crime (load testing).
@@ -41,7 +41,7 @@ You don't need to add instrumentation or tracing code to your services. You don'
 
 ## Episode 2: The Detail
 
-> Now you wanna know what's in the cans? Before, you wanted to know nothing. Now you ask.<br />
+> *Now you wanna know what's in the cans? Before, you wanted to know nothing. Now you ask.*<br />
 —Spiros
 
 So how does Pixie work? How can it see everything your containers are doing and sending over the wire, without you having to run a sidecar container, use a service mesh framework, or add instrumentation to your apps?
@@ -54,9 +54,7 @@ Pixie uses eBPF probes to intercept and record all the activity we're interested
 ![SQL data](./mysql-data.png)
 :::
 
-
 The clever part is that Pixie integrates with Kubernetes, so it can work out which pods and services are connected to which requests and actions, and it records the timestamp of everything, so it can track the throughput and latency of everything that happens.
-
 
 ::: div image-m
 ![Service stats live view](./service-stats.png)
@@ -76,7 +74,7 @@ Even better, it's programmable. Pixie comes with a handy set of scripts for gath
 
 ## Episode 3: The Cost
 
-> You still don't get it, do you? This ain't about your money, bro.<br />
+> *You still don't get it, do you? This ain't about your money, bro.* <br />
 —Omar
 
 "This all sounds great," I can hear you saying, "but I'm a little too busy to spend a bunch of time installing, setting up, and figuring out this Pixie thing, and we don't have any spare budget for SaaS products anyway. Nice idea, but I've got an inbox full of nice ideas, and the business is screaming because _things are on fire_."

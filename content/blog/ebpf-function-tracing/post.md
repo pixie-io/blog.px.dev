@@ -2,7 +2,7 @@
 path: '/ebpf-function-tracing'
 title: 'Debugging Go in prod using eBPF function argument tracing'
 date: 2020-09-10T06:00:00.000+00:00
-featured_image: 4.png
+featured_image: hero-image.png
 category: 'Pixie Team Blogs'
 author: 'Zain Asgar'
 email: 'zasgar@pixielabs.ai'
@@ -26,11 +26,6 @@ Enhanced BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You 
 As shown in the overview below, eBPF allows the kernel to run verified restricted C code. The C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. This strict verifications allows the kernel to compile the bytecode into verified machine code for efficient runtime execution. This high performance allows eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc. 
 
 Using eBPF, we can also insert probes; functions that are executed whenever a specific event, such as a function call, occurs. These probes allow you to run a BPF compiled function that can examine the state of the system application or kernel. Many types of probes are available, but we will focus on uprobes in this post.
-
-::: div image-l
-![BPF overview (from ebpf.io)](./bpf-overview.png)
-:::
-
 
 # Uprobes
 
