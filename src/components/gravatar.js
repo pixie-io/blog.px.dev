@@ -3,14 +3,12 @@ import { toUrl } from 'gatsby-source-gravatar';
 import GatsbyImage from 'gatsby-image';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-
 const GravatarIcon = withStyles(() => ({
   icon: {
     width: '45px',
     height: '45px',
     borderRadius: '50%',
   },
-
 }))(({ email, classes }) => {
   const url = useMemo(() => toUrl(email || ''), []);
 
@@ -26,6 +24,5 @@ const GravatarIcon = withStyles(() => ({
     />
   );
 });
-
 
 export default GravatarIcon;

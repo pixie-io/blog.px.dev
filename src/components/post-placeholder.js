@@ -29,7 +29,15 @@ const PostPlaceholder = ({ imgStyle, style }) => (
     render={(data) => {
       const { fluid } = data.images.edges[0].node.childImageSharp;
 
-      return <Img loading='lazy' fluid={fluid} fadeIn={false} imgStyle={imgStyle} style={style} />;
+      return (
+        <Img
+          loading='lazy'
+          fluid={fluid}
+          fadeIn={false}
+          imgStyle={imgStyle}
+          style={style}
+        />
+      );
     }}
   />
 );

@@ -5,7 +5,11 @@ import { MDXProvider } from '@mdx-js/react';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
-import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
+import {
+  LinkedinShareButton,
+  RedditShareButton,
+  TwitterShareButton,
+} from 'react-share';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import styles from './blog-post.module.scss';
@@ -28,15 +32,10 @@ const MetaBar = ({ post, shareUrl }) => (
             <GravatarIcon email={post.frontmatter.email} />
           </div>
           <div>
-            <Typography
-              variant='body1'
-              className={styles.author}
-            >
+            <Typography variant='body1' className={styles.author}>
               {post.frontmatter.author}
             </Typography>
-            <span className={styles.date}>
-              {post.frontmatter.date}
-            </span>
+            <span className={styles.date}>{post.frontmatter.date}</span>
           </div>
         </div>
       </div>
@@ -70,7 +69,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 // eslint-disable-next-line react/prop-types
 const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   const post = data.mdx;
@@ -81,7 +79,6 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
     <Layout showSwitch>
       <div className={`${styles.blogPost} ${muiClasses.body}`}>
         <SEO title='Home' />
-
 
         <div className='container'>
           <div className='row'>
@@ -106,7 +103,6 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
                 <Link to='/'>Blog</Link>
                 {' '}
                 /
-                {' '}
                 {post.frontmatter.category}
               </div>
               <Typography variant='h1'>{post.frontmatter.title}</Typography>
@@ -159,7 +155,6 @@ BlogPostTemplate.propTypes = {
     }),
     featured: PropTypes.object,
   }).isRequired,
-
 };
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -183,7 +178,10 @@ export const pageQuery = graphql`
       }
     }
     featured: allMdx(
-      filter: {  fields: { slug: { ne: $slug } }, frontmatter: { featured: { eq: true } } }
+      filter: {
+        fields: { slug: { ne: $slug } }
+        frontmatter: { featured: { eq: true } }
+      }
       limit: 3
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
@@ -198,7 +196,7 @@ export const pageQuery = graphql`
           subtitle
           author
           email
-         date(formatString: "DD MMMM YYYY")
+          date(formatString: "DD MMMM YYYY")
           category
           featured_image {
             childImageSharp {
