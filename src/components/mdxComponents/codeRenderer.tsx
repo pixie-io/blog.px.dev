@@ -16,7 +16,6 @@ const LineNumber = withStyles((theme) => ({
     paddingRight: '20px',
     color: theme.palette.type === 'light' ? '#ccc' : '#e0ebf7',
     fontFamily: '"Roboto Mono", Monospace,',
-
   },
 }
 ))(({ lineNumber, classes }: any) => (<span className={classes.lineBlock}>{lineNumber}</span>));
