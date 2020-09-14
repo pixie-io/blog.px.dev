@@ -49,7 +49,7 @@ const BlogPostItem = withStyles((theme) => ({
                   <GravatarIcon email={email} />
                 </div>
                 <div className={styles.authorDetails}>
-                  <Typography variant='body1 p-0'>
+                  <Typography variant='body1' className='p-0'>
                     {author}
                   </Typography>
                   <div className={styles.dateRow}>
