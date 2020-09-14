@@ -15,7 +15,7 @@ This is the first in a series of posts describing how we can debug applications 
 
 When debugging, we are typically interested in capturing the state of a program. This allows us to examine what the application is doing and determine where the bug is located in our code. A simple way to observe state is to use a debugger to capture function arguments. For Go applications, we often use Delve or gdb. 
 
-Delve and gdb work well for debugging in a development environment, but they are not often used in production. The features that make these debuggers powerful can also make them undesirable to use in production systems. Debuggers can cause significant interruption to the program and even allow mutation of state which might lead to unexepected failures of production software. 
+Delve and gdb work well for debugging in a development environment, but they are not often used in production. The features that make these debuggers powerful can also make them undesirable to use in production systems. Debuggers can cause significant interruption to the program and even allow mutation of state which might lead to unexpected failures of production software. 
 
 To more cleanly capture function arguments, we will explore using enhanced BPF ([eBPF](https://ebpf.io)), which is available in Linux 4.x+, and the higher level Go library [gobpf](https://github.com/iovisor/gobpf). 
 
