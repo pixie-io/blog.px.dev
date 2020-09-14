@@ -127,7 +127,7 @@ const Header = ({
               </a>
             </li>
             <li>
-              <a href='#' onClick={(e) => docsRedirect(e)}>
+              <a href='https://work.withpixie.ai/docs' onClick={(e) => docsRedirect(e)}>
                 Docs
               </a>
             </li>
