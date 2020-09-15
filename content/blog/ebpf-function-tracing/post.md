@@ -9,7 +9,7 @@ email: 'zasgar@pixielabs.ai'
 featured: true
 ---
 
-This is the first in a series of posts describing how we can debug applications in prod using eBPF. This posts describes how to use [gobpf](https://github.com/iovisor/gobpf) and uprobes to build a function argument tracer for Go applications.
+This is the first in a series of posts describing how we can debug applications in prod using eBPF. This post describes how to use [gobpf](https://github.com/iovisor/gobpf) and uprobes to build a function argument tracer for Go applications.
 
 # Introduction
 
@@ -23,7 +23,7 @@ To more cleanly capture function arguments, we will explore using enhanced BPF (
 
 Extended BPF (eBPF) is a kernel technology that is available in Linux 4.x+. You can think of it as a lightweight sandboxed VM that runs inside of the Linux kernel and can provide verified access to kernel memory. 
 
-As shown in the overview below, eBPF allows the kernel to run BPF bytecode. While the front-end language used can vary, it is typically a restricted subset of C. Typically the C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. These strict verifications guarantee that the machine code will not intentionally or accidentally compromise the Linux kernel, and that the BPF probe will execute in a bounded number of instructions every time it is triggered. These guarantees enable eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc.
+As shown in the overview below, eBPF allows the kernel to run BPF bytecode. While the front-end language used can vary, it is often a restricted subset of C. Typically the C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. These strict verifications guarantee that the machine code will not intentionally or accidentally compromise the Linux kernel, and that the BPF probe will execute in a bounded number of instructions every time it is triggered. These guarantees enable eBPF to be used in performance-critical workloads like packet filtering, networking monitoring, etc.
 
 Functionally, eBPF allows you to run restricted C code upon some event (eg. timer, network event or a function call). When triggered on a function call we call these functions probes and they can be used to either run on a function call within the kernel (kprobes), or a function call in a userspace program (uprobes). This post focuses on using uprobes to allow dynamic tracing of function arguments. 
 
