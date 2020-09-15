@@ -2,9 +2,10 @@ const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'dev'
 const containers = require('remark-containers');
 const unwrapImages = require('remark-unwrap-images');
 
-require('dotenv').config({
-  path: `.env.${activeEnv}`,
-});
+require('dotenv')
+  .config({
+    path: `.env.${activeEnv}`,
+  });
 
 module.exports = {
   siteMetadata: {
@@ -67,6 +68,7 @@ module.exports = {
       },
     },
     'gatsby-transformer-yaml',
+    'gatsby-transformer-yaml',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-styled-components',
@@ -117,7 +119,7 @@ module.exports = {
     // `gatsby-plugin-offline`,
   ],
   mapping: {
-    'Mdx.frontmatter.author': 'aaa',
+    'Mdx.frontmatter.author': 'authorYaml',
   },
 
 };

@@ -5,11 +5,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
-import {
-  LinkedinShareButton,
-  RedditShareButton,
-  TwitterShareButton,
-} from 'react-share';
+import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import styles from './blog-post.module.scss';
@@ -23,10 +19,10 @@ import linkedin from '../images/icons/linkedin-icon.svg';
 import BlogPostCard from '../components/shared/blog-post-card';
 import GravatarIcon from '../components/gravatar';
 
-const MetaBar = ({ post, shareUrl }) => (
+const MetaBar = ({ post, shareUrl, author }) => (
   <div className={styles.metaBar}>
     <div className='row'>
-      <div className='col-6'>
+      <div className='col-9'>
         <div className={styles.postHeader}>
           <div className={styles.authorAvatar}>
             <GravatarIcon email={post.frontmatter.email} />
@@ -34,27 +30,36 @@ const MetaBar = ({ post, shareUrl }) => (
           <div>
             <Typography variant='body1' className={styles.author}>
               {post.frontmatter.author}
+              {author && (
+              <a href={author.twitter} target='_blank' rel='noopener noreferrer' className={styles.authorTwitter}>
+                {' '}
+                <img src={twitter} />
+              </a>
+              )}
             </Typography>
-            <span className={styles.date}>{post.frontmatter.date}</span>
+            <span className={styles.date}>{author ? author.bio : post.frontmatter.date}</span>
           </div>
         </div>
       </div>
-      <div className='col-6'>
-        <div className={styles.socialIcons}>
-          <RedditShareButton url={shareUrl}>
-            <img src={reddit} />
-          </RedditShareButton>
-          <TwitterShareButton url={shareUrl}>
-            <img src={twitter} />
-          </TwitterShareButton>
-          <LinkedinShareButton
-            title={post.frontmatter.title}
-            summary={post.frontmatter.excerpt}
-            url={shareUrl}
-          >
-            <img src={linkedin} />
-          </LinkedinShareButton>
-        </div>
+      <div className='col-3'>
+        {!author
+          && (
+          <div className={styles.socialIcons}>
+            <RedditShareButton url={shareUrl}>
+              <img src={reddit} />
+            </RedditShareButton>
+            <TwitterShareButton url={shareUrl}>
+              <img src={twitter} />
+            </TwitterShareButton>
+            <LinkedinShareButton
+              title={post.frontmatter.title}
+              summary={post.frontmatter.excerpt}
+              url={shareUrl}
+            >
+              <img src={linkedin} />
+            </LinkedinShareButton>
+          </div>
+          )}
       </div>
     </div>
   </div>
@@ -74,7 +79,8 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   const post = data.mdx;
   const related = data.featured.nodes;
   const muiClasses = useStyles();
-
+  const author = data.authors.edges.map((a) => a.node)
+    .find((a) => a.id === post.frontmatter.author);
   return (
     <Layout showSwitch>
       <div className={`${styles.blogPost} ${muiClasses.body}`}>
@@ -119,7 +125,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
               </div>
             </div>
           </div>
-          <MetaBar post={post} shareUrl={location.href} />
+          <MetaBar post={post} author={author} shareUrl={location.href} />
         </div>
         <section className={styles.relatedStories}>
           <div className='container'>
@@ -154,6 +160,7 @@ BlogPostTemplate.propTypes = {
       excerpt: PropTypes.string,
     }),
     featured: PropTypes.object,
+    authors: PropTypes.object,
   }).isRequired,
 };
 export const pageQuery = graphql`
@@ -208,5 +215,15 @@ export const pageQuery = graphql`
         }
       }
     }
+    authors:allAuthorYaml {
+    edges {
+      node {
+        id
+        bio
+        email
+        twitter
+      }
+    }
+  }
   }
 `;

@@ -38,6 +38,15 @@
         display: block;
         padding: 0;
         margin: 0;
+
+        .authorTwitter {
+          img {
+            position: relative;
+            top: 5px;
+            left:10px;
+            height: 20px;
+          }
+        }
       }
 
       .date {
