@@ -1,4 +1,3 @@
-
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 const fetch = require('node-fetch');
@@ -87,7 +86,7 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors;
   }
 
-  const blogPrefix = 'blog';
+  const blogPrefix = 'blog/';
   const blogPost = path.resolve('./src/templates/blog-post.js');
   const homePage = path.resolve('./src/pages/index.js');
 
@@ -96,8 +95,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
   posts.forEach((post) => {
     const related = [...posts];
+    const urlPath = (blogPrefix + post.node.fields.slug).replace('//', '/');
     actions.createPage({
-      path: blogPrefix + post.node.fields.slug,
+      path: urlPath,
       component: blogPost,
       context: {
         slug: post.node.fields.slug,
@@ -108,7 +108,8 @@ exports.createPages = async ({ graphql, actions }) => {
   const categories = result.data.categories.nodes.map((c) => c.frontmatter.category);
   categories.forEach((category) => {
     actions.createPage({
-      path: `/${slugify(category).toLowerCase()}`,
+      path: `/${slugify(category)
+        .toLowerCase()}`,
       component: homePage,
       context: {
         slug: slugify(category),

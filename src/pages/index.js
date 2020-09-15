@@ -13,12 +13,14 @@ import blogIcon from '../images/blog-icon.svg';
 const useStyles = makeStyles((theme) => ({
   body: {
     backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
-
   },
 }));
 const Blog = (props) => {
   const PIXIE_TEAM_BLOGS = 'Pixie Team Blogs';
-  const { data, pageContext: { category: urlCategory } } = props;
+  const {
+    data,
+    pageContext: { category: urlCategory },
+  } = props;
   const pageSize = 9;
   const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
   const muiClasses = useStyles();
@@ -82,9 +84,7 @@ const Blog = (props) => {
                       type='button'
                       className={!category ? styles.active : ''}
                     >
-                      All
-                      {' '}
-                      (
+                      All (
                       {allPosts.length}
                       )
                     </button>
@@ -92,10 +92,7 @@ const Blog = (props) => {
                 </li>
                 {categories.map((cat) => (
                   <li key={cat.label}>
-                    <Link
-                      to={`/${slugify(cat.label)
-                        .toLowerCase()}`}
-                    >
+                    <Link to={`/${slugify(cat.label).toLowerCase()}`}>
                       <button
                         type='button'
                         className={category === cat.label ? styles.active : ''}
@@ -167,7 +164,7 @@ export const pageQuery = graphql`
         }
         id
         timeToRead
-        excerpt(pruneLength: 200) 
+        excerpt(pruneLength: 200)
         frontmatter {
           title
           author

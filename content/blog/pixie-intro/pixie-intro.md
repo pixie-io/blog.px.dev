@@ -34,7 +34,9 @@ Suppose you could see every HTTP request going through your cluster, or every My
 There's a new recruit on the force who can help you do exactly that. [Pixie](https://docs.withpixie.ai/getting-started/what-is-pixie/) is a software tool for monitoring and tracing in Kubernetes clusters, letting you see what's going on _without_ making any code changes, or sending any customer data outside the cluster. It can reduce the time to triage issues from days to just hours.
 
 ::: div image-m
-![CLI demo](./cli-demo.svg)
+
+<svg title="CLI demo" src="cli-demo.svg" />
+
 :::
 
 You don't need to add instrumentation or tracing code to your services. You don't need to redeploy your services. You don't even need to _restart_ your services. Just put a little Pixie in your cluster, and within a few seconds it's on the case, gathering the crime-solving information you need.

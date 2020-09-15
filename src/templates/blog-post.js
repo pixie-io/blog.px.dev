@@ -19,43 +19,47 @@ import linkedin from '../images/icons/linkedin-icon.svg';
 import BlogPostCard from '../components/shared/blog-post-card';
 import GravatarIcon from '../components/gravatar';
 
-const MetaBar = ({ post, shareUrl }) => (
+const MetaBar = ({ post, shareUrl, author }) => (
   <div className={styles.metaBar}>
     <div className='row'>
-      <div className='col-6'>
+      <div className='col-9'>
         <div className={styles.postHeader}>
           <div className={styles.authorAvatar}>
             <GravatarIcon email={post.frontmatter.email} />
           </div>
           <div>
-            <Typography
-              variant='body1'
-              className={styles.author}
-            >
+            <Typography variant='body1' className={styles.author}>
               {post.frontmatter.author}
+              {author && (
+              <a href={author.twitter} target='_blank' rel='noopener noreferrer' className={styles.authorTwitter}>
+                {' '}
+                <img src={twitter} />
+              </a>
+              )}
             </Typography>
-            <span className={styles.date}>
-              {post.frontmatter.date}
-            </span>
+            <span className={styles.date}>{author ? author.bio : post.frontmatter.date}</span>
           </div>
         </div>
       </div>
-      <div className='col-6'>
-        <div className={styles.socialIcons}>
-          <RedditShareButton url={shareUrl}>
-            <img src={reddit} />
-          </RedditShareButton>
-          <TwitterShareButton url={shareUrl}>
-            <img src={twitter} />
-          </TwitterShareButton>
-          <LinkedinShareButton
-            title={post.frontmatter.title}
-            summary={post.frontmatter.excerpt}
-            url={shareUrl}
-          >
-            <img src={linkedin} />
-          </LinkedinShareButton>
-        </div>
+      <div className='col-3'>
+        {!author
+          && (
+          <div className={styles.socialIcons}>
+            <RedditShareButton url={shareUrl}>
+              <img src={reddit} />
+            </RedditShareButton>
+            <TwitterShareButton url={shareUrl}>
+              <img src={twitter} />
+            </TwitterShareButton>
+            <LinkedinShareButton
+              title={post.frontmatter.title}
+              summary={post.frontmatter.excerpt}
+              url={shareUrl}
+            >
+              <img src={linkedin} />
+            </LinkedinShareButton>
+          </div>
+          )}
       </div>
     </div>
   </div>
@@ -70,18 +74,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 // eslint-disable-next-line react/prop-types
 const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   const post = data.mdx;
   const related = data.featured.nodes;
   const muiClasses = useStyles();
-
+  const author = data.authors.edges.map((a) => a.node)
+    .find((a) => a.id === post.frontmatter.author);
   return (
     <Layout showSwitch>
       <div className={`${styles.blogPost} ${muiClasses.body}`}>
         <SEO title='Home' />
-
 
         <div className='container'>
           <div className='row'>
@@ -106,7 +109,6 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
                 <Link to='/'>Blog</Link>
                 {' '}
                 /
-                {' '}
                 {post.frontmatter.category}
               </div>
               <Typography variant='h1'>{post.frontmatter.title}</Typography>
@@ -123,7 +125,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
               </div>
             </div>
           </div>
-          <MetaBar post={post} shareUrl={location.href} />
+          <MetaBar post={post} author={author} shareUrl={location.href} />
         </div>
         <section className={styles.relatedStories}>
           <div className='container'>
@@ -158,8 +160,8 @@ BlogPostTemplate.propTypes = {
       excerpt: PropTypes.string,
     }),
     featured: PropTypes.object,
+    authors: PropTypes.object,
   }).isRequired,
-
 };
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -183,7 +185,10 @@ export const pageQuery = graphql`
       }
     }
     featured: allMdx(
-      filter: {  fields: { slug: { ne: $slug } }, frontmatter: { featured: { eq: true } } }
+      filter: {
+        fields: { slug: { ne: $slug } }
+        frontmatter: { featured: { eq: true } }
+      }
       limit: 3
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
@@ -198,7 +203,7 @@ export const pageQuery = graphql`
           subtitle
           author
           email
-         date(formatString: "DD MMMM YYYY")
+          date(formatString: "DD MMMM YYYY")
           category
           featured_image {
             childImageSharp {
@@ -210,5 +215,15 @@ export const pageQuery = graphql`
         }
       }
     }
+    authors:allAuthorYaml {
+    edges {
+      node {
+        id
+        bio
+        email
+        twitter
+      }
+    }
+  }
   }
 `;

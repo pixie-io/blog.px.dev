@@ -14,9 +14,8 @@ const LineNumber = withStyles((theme) => ({
     width: '20px',
     textAlign: 'right',
     paddingRight: '20px',
-    color: theme.palette.type === 'light' ? '#f3f3f3' : '#e0ebf7',
+    color: theme.palette.type === 'light' ? '#ccc' : '#e0ebf7',
     fontFamily: '"Roboto Mono", Monospace,',
-
   },
 }
 ))(({ lineNumber, classes }: any) => (<span className={classes.lineBlock}>{lineNumber}</span>));
@@ -25,7 +24,7 @@ const CodeRenderer = withStyles((theme) => ({
   code: {
     backgroundColor: theme.palette.type === 'light' ? '#f3f3f3' : '#292929',
     borderRadius: '5px',
-    boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.15)',
+    boxShadow: theme.palette.type === 'light' ? '0 2px 2px rgba(0,0,0, 0.15)' : '0px 4px 16px rgba(0, 0, 0, 0.15)',
     marginBottom: '32px',
     marginTop: '12px',
     position: 'relative',
