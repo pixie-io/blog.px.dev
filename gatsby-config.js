@@ -110,7 +110,7 @@ module.exports = {
           'manrope:300,400,400i,700',
           'roboto:300,400,400i,700',
         ],
-        display: 'swap',
+        display: 'block',
       },
     },
 

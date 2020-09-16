@@ -19,6 +19,8 @@ import linkedin from '../images/icons/linkedin-icon.svg';
 import BlogPostCard from '../components/shared/blog-post-card';
 import GravatarIcon from '../components/gravatar';
 
+const categoryLink = require('../components/category-link');
+
 const MetaBar = ({ post, shareUrl, author }) => (
   <div className={styles.metaBar}>
     <div className='row'>
@@ -109,13 +111,15 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
                 <Link to='/'>Blog</Link>
                 {' '}
                 /
-                {post.frontmatter.category}
+                {' '}
+                <Link to={categoryLink.categoryLink(post.frontmatter.category)}>
+                  {post.frontmatter.category}
+                </Link>
               </div>
               <Typography variant='h1'>{post.frontmatter.title}</Typography>
             </div>
           </div>
           <MetaBar post={post} shareUrl={location.href} />
-
           <div className={styles.postBody}>
             <div className='row'>
               <div className='col-12'>

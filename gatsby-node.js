@@ -2,6 +2,8 @@ const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 const fetch = require('node-fetch');
 const slugify = require('slugify');
+const categoryLink = require('./src/components/category-link');
+
 
 exports.onCreateNode = ({
   node, actions, getNode, getNodesByType,
@@ -108,8 +110,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const categories = result.data.categories.nodes.map((c) => c.frontmatter.category);
   categories.forEach((category) => {
     actions.createPage({
-      path: `/${slugify(category)
-        .toLowerCase()}`,
+      path: categoryLink.categoryLink(category),
       component: homePage,
       context: {
         slug: slugify(category),
