@@ -14,7 +14,6 @@ const BlogPostCard = ({ post }) => {
       date,
       category,
     },
-    timeToRead,
     fields: { slug },
   } = post;
   return (
@@ -37,12 +36,6 @@ const BlogPostCard = ({ post }) => {
             </p>
             <p className={styles.dateRow}>
               {date}
-              {' '}
-              •
-              {' '}
-              {timeToRead}
-              {' '}
-              minute read
             </p>
           </div>
         </Link>
@@ -54,7 +47,6 @@ BlogPostCard.propTypes = {
   post: PropTypes.shape({
     frontmatter: PropTypes.object,
     fields: PropTypes.object,
-    timeToRead: PropTypes.number,
     excerpt: PropTypes.string,
   }).isRequired,
 };
