@@ -211,69 +211,6 @@ i {
   line-height: 32px;
 }
 
-h1 {
-  font-family: 'Manrope', sans-serif;
-  font-size: 38px;
-  line-height: 46px;
-  font-weight: normal;
-  @media (max-width: $breakpoint) {
-    padding-top: 0;
-    font-size: 25px;
-    line-height: 36px;
-  }
-
-}
-
-h2 {
-  font-family: 'Manrope', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 36px;
-  line-height: 45px;
-  margin-top: 64px;
-  @media (max-width: $breakpoint) {
-    font-size: 25px;
-    line-height: 36px;
-  }
-}
-
-h3 {
-  font-family: 'Manrope', sans-serif;
-  font-size: 30px;
-  line-height: 38px;
-  font-weight: normal;
-  margin-top: 64px;
-
-  @media (max-width: $breakpoint) {
-    font-size: 22px;
-    line-height: 30px;
-  }
-}
-
-h4 {
-  font-family: 'Manrope', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 26px;
-  line-height: 36px;
-  @media (max-width: $breakpoint) {
-    font-size: 20px;
-    line-height: 28px;
-  }
-}
-
-h5 {
-  font-family: 'Manrope', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 22px;
-  line-height: 30px;
-  color: $color-dark;
-  @media (max-width: $breakpoint) {
-    font-size: 18px;
-    line-height: 26px;
-  }
-}
 
 .image-xs {
   max-width: 15%;

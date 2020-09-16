@@ -15,6 +15,10 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-material-ui',
+
+    },
     'gatsby-plugin-scroll-reveal',
     {
       resolve: 'gatsby-source-filesystem',
