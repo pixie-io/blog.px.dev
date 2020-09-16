@@ -41,7 +41,7 @@ Let's see how uprobes actually function. To deploy uprobes and capture function 
 
 `main()` is a simple HTTP server that exposes a single _GET_ endpoint on _/e_, which computes Euler's number (__e__) using an iterative approximation. `computeE` takes in a single query param(_iters_), which specifies the number of iterations to run for the approximation. The more iterations, the more accurate the approximation, at the cost of compute cycles. It's not essential to understand the math behind the function. We are just interested in tracing the arguments of any invocation of `computeE`.
 
-```go
+```go:numbers
 // computeE computes the approximation of e by running a fixed number of iterations.
 func computeE(iterations int64) float64 {
   res := 2.0
