@@ -42,7 +42,7 @@ const BlogPostCard = ({ post }) => {
               {' '}
               {timeToRead}
               {' '}
-              minutes read
+              minute read
             </p>
           </div>
         </Link>
