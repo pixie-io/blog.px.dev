@@ -41,7 +41,10 @@ article {
 
       .authorAvatar {
         display: inline-block;
-        padding-right: 16px;
+        margin-right: 16px;
+        width: 50px;
+        border-radius: 50%;
+        overflow: hidden;
       }
 
       .authorDetails {
@@ -52,6 +55,7 @@ article {
           margin: 0;
           width: 100%;
           display: flex;
+          padding: 0;
           justify-content: space-between;
           flex-wrap: wrap;
 
