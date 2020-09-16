@@ -41,7 +41,7 @@ Let's see how uprobes actually function. To deploy uprobes and capture function 
 
 `main()` is a simple HTTP server that exposes a single _GET_ endpoint on _/e_, which computes Euler's number (__e__) using an iterative approximation. `computeE` takes in a single query param(_iters_), which specifies the number of iterations to run for the approximation. The more iterations, the more accurate the approximation, at the cost of compute cycles. It's not essential to understand the math behind the function. We are just interested in tracing the arguments of any invocation of `computeE`.
 
-```go
+```go:numbers
 // computeE computes the approximation of e by running a fixed number of iterations.
 func computeE(iterations int64) float64 {
   res := 2.0
@@ -65,14 +65,14 @@ func main() {
 ```
 To understand how uprobes work, let's look at how symbols are tracked inside binaries. Since uprobes work by inserting a debug trap instruction, we need to get the address where the function is located. Go binaries on Linux use ELF to store debug info. This information is available, even in optimized binaries, unless debug data has been stripped. We can use the command `objdump` to examine the symbols in the binary:
 
-```bash
+```bash:numbers
 [0] % objdump --syms app|grep computeE
 00000000006609a0 g     F .text    000000000000004b              main.computeE
 ```
 
 From the output, we know that the function `computeE` is located at address `0x6609a0`. To look at the instructions around it, we can ask `objdump` to disassemble to binary (done by adding `-d`). The disassembled code looks like:
 
-```bash
+```bash:numbers
 [0] % objdump -d app | less
 00000000006609a0 <main.computeE>:
   6609a0:       48 8b 44 24 08          mov    0x8(%rsp),%rax
@@ -102,7 +102,7 @@ Now that we understand the pieces involved, let's look into the details of what 
 
 The BPF function for this is relatively simple; the C code is shown below. We register this function so that it's invoked every time `main.computeE` is called. Once it's called, we simply read the function argument and write that the perf buffer. Lots of boilerplate is required to set up the buffers, etc. and this can be found in the complete example [here](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/trace_example/trace.go).
 
-```c
+```c:numbers
 #include <uapi/linux/ptrace.h>
 
 BPF_PERF_OUTPUT(trace);
@@ -123,7 +123,7 @@ Now we have a fully functioning end-to-end argument tracer for the `main.compute
 
 One of the cool things is that we can actually use GDB to see the modifications made to the binary. Here we dump out the instructions at the `0x6609a0` address, before running our tracer binary.
 
-```
+```bash:numbers
 (gdb) display /4i 0x6609a0
 10: x/4i 0x6609a0
    0x6609a0 <main.computeE>:    mov    0x8(%rsp),%rax
@@ -134,7 +134,7 @@ One of the cool things is that we can actually use GDB to see the modifications 
 
 Here it is after we run the tracer binary. We can clearly see that the first instruction is now `int3`.
 
-```
+```bash::numbers
 (gdb) display /4i 0x6609a0
 7: x/4i 0x6609a0
    0x6609a0 <main.computeE>:    int3

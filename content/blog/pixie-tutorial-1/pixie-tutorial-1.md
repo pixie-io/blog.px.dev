@@ -51,7 +51,7 @@ The first thing we need to install is `px`, the Pixie CLI tool. Once we have `px
 
 Run this command in your Linux shell or Mac terminal:
 
-```
+```bash:numbers
 bash -c "$(curl -fsSL https://work.withpixie.ai/install.sh)"
 ```
 
@@ -59,7 +59,7 @@ If you want to know what the installer does before you run it, you can [inspect 
 
 Let's see what that looks like:
 
-``` bash
+``` bash:numbers
 
   ___  _       _
  | _ \(_)__ __(_) ___
@@ -88,7 +88,7 @@ Install Path [/usr/local/bin]:
 
 The default install path (`/usr/local/bin`) should be fine, unless you want to install `px` somewhere else (if so, enter the path here). Otherwise, just press Enter to continue.
 
-```bash
+```bash:numbers
 
 ==> Authenticating with Pixie Cloud:
 [0000]  INFO Pixie CLI
@@ -115,7 +115,7 @@ First, let's make sure we're pointing at the right cluster. Although Pixie can m
 
 Try this command to find out what your Kubernetes config says your current cluster is:
 
-```bash
+```bash:numbers
 kubectl config current-context
 
 My-Awesome-Cluster
@@ -123,7 +123,7 @@ My-Awesome-Cluster
 
 If the answer isn't what you were expecting, select the right cluster by running:
 
-```bash
+```bash:numbers
 kubectl config use-context My-Awesome-Cluster
 
 Switched to context "My-Awesome-Cluster".
@@ -131,7 +131,7 @@ Switched to context "My-Awesome-Cluster".
 
 You're all set! Make Pixie go now:
 
-```bash
+```bash:numbers
 px deploy
 
 Running Cluster Checks:
@@ -152,7 +152,7 @@ Is the cluster correct? (y/n) [y] :
 
 Assuming it is, press Enter to continue:
 
-```bash
+```bash:numbers
 Found 3 nodes
  ✔    Creating namespace
  ✔    Deleting stale Pixie objects, if any
@@ -182,7 +182,7 @@ That's it! You're Pixified and ready to roll.
 
 If your cluster already has some services running in it, then Pixie will be able to give you some interesting data and views on them, so continue to the next section. If not, there's a demo application you can deploy using the CLI, to give Pixie something interesting to chew on:
 
-```bash
+```bash:numbers
 px demo deploy px-sock-shop
 
 Deploying demo app px-sock-shop to the following cluster: JIMSv2-Test-Cluster
@@ -226,7 +226,7 @@ Next is the _throughput_ (requests handled per second), and the error rate, as a
 
 While it's helpful to see this information in graph form, we can get a much more detailed view of the same data using the CLI tool:
 
-``` bash
+``` bash:numbers
 px run px/service_stats
 
 Table ID: Request Latency Histogram
@@ -258,11 +258,11 @@ Table ID: p90 Latency
 
 There's a ton of data here and, usefully, we can also get it in JSON format, for analysis with `jq` and other JSON processing tools:
 
-```
+```bash:numbers
 px run px/service_stats -o json |jq -r .
 ```
 
-```js
+```js:numbers
 {
   "_tableName_": "Request Latency Histogram",
   "request_latency_ms": 150,
@@ -282,7 +282,7 @@ If this makes you as joyful as I think it will, you'll want to play around with 
 
 The `service_stats` data we've been looking at it is just one of the query scripts supplied with Pixie. Try this command to see what other scripts are available:
 
-```
+```bash:numbers
 px script list
 
 Table ID: script_list
