@@ -22,7 +22,7 @@ In this guest blog post, infrastructure crime-fighter John Arundel, of [Bitfield
 It ain't easy being a cop. An infrastructure cop, that is. Every day on the beat, we deal with SLA parole violations, DDoS attacks, CPU stealing. Even the occasional cache poisoning.
 
 ::: div image-m
-![Infrastructure cops](./the-wire.webp)
+![Infrastructure cops](./the-wire.png)
 :::
 
 As any DevOps detective will tell you, the key to effective crime-solving is information. Faced with the Case of the Sluggish Service, or the Mystery of the Elevated Error Rate, we don't have a lot to go on. We could try interviewing suspects (checking log files), recruiting informants (setting up distributed tracing probes), or even reconstructing the crime (load testing).
