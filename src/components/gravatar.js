@@ -1,17 +1,21 @@
 import React, { useMemo } from 'react';
 import { toUrl } from 'gatsby-source-gravatar';
 import GatsbyImage from 'gatsby-image';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const GravatarIcon = withStyles(() => ({
+
+const useStyles = makeStyles(() => ({
   icon: {
     width: '45px',
     height: '45px',
     borderRadius: '50%',
   },
-}))(({ email, classes }) => {
-  const url = useMemo(() => toUrl(email || ''), []);
+}));
 
+
+const GravatarIcon = (({ email }) => {
+  const url = useMemo(() => toUrl(email || ''), []);
+  const classes = useStyles();
   return (
     <GatsbyImage
       className={classes.icon}

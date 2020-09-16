@@ -6,7 +6,6 @@ import BodyClassName from 'react-body-classname';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import { makeStyles } from '@material-ui/core/styles';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import styles from './header.module.scss';
@@ -20,11 +19,7 @@ import pixieLogo from '../../images/pixie-logo-header.svg';
 import betanaut from '../../images/betanaut.png';
 import { docsRedirect, loginRedirect, signupRedirect } from '../shared/tracking-utils';
 
-const useStyles = makeStyles(() => ({
-  menuItem: {
-    color: '#ffffff',
-  },
-}));
+
 const Header = ({
   whiteHeader, transparentMenu, onThemeTypeSwitch,
   theme,
@@ -32,7 +27,6 @@ const Header = ({
   const [open, setOpen] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
   const [showNewsBar, setShowNewsBar] = useState(true);
-  const classes = useStyles();
 
   const closeMenu = () => {
     setOpen(false);
@@ -104,29 +98,26 @@ const Header = ({
             </a>
           </div>
         </div>
-        <div className={`hide-mobile hide-tablet ${styles.menu}`}>
+        <div className={`${styles.menu}`}>
           <ul>
-
-              <li>
-                <IconButton
-                  className={classes.menuItem}
-                  size='small'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onThemeTypeSwitch();
-                  }}
-                >
-                  {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
-                </IconButton>
-              </li>
-
-            {' '}
-            <li>
+            <li className='hide-mobile hide-tablet'>
+              <IconButton
+                className={styles.menuItem}
+                size='small'
+                onClick={(e) => {
+                  e.preventDefault();
+                  onThemeTypeSwitch();
+                }}
+              >
+                {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
+              </IconButton>
+            </li>
+            <li className='hide-mobile hide-tablet'>
               <a href='https://pixielabs.ai/community'>
                 Community
               </a>
             </li>
-            <li>
+            <li className='hide-mobile hide-tablet'>
               <a href='https://work.withpixie.ai/docs' onClick={(e) => docsRedirect(e)}>
                 Docs
               </a>
@@ -144,9 +135,11 @@ const Header = ({
               <img src={pixieLogo} alt='pixie logo' />
               <img src={betanaut} alt='pixienaut beta' className={styles.betanaut} />
             </Link>
+
             <IconButton onClick={() => setOpen(false)} className={styles.close}>
               <CloseIcon style={{ color: 'white' }} />
             </IconButton>
+
           </div>
           <div className={styles.mobileNavMenu}>
             <div>
@@ -243,9 +236,22 @@ const Header = ({
             <Link to='/terms'>Terms & Privacy</Link>
           </div>
         </div>
-        <IconButton onClick={() => setOpen(true)} className='hide-desktop'>
-          <MenuIcon style={{ color: 'white' }} />
-        </IconButton>
+        <div className='hide-desktop'>
+          <IconButton
+            className={styles.menuItem}
+            size='small'
+            onClick={(e) => {
+              e.preventDefault();
+              onThemeTypeSwitch();
+            }}
+          >
+            {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
+          </IconButton>
+          <IconButton onClick={() => setOpen(true)}>
+            <MenuIcon style={{ color: 'white' }} />
+          </IconButton>
+        </div>
+
       </header>
     </>
   );
