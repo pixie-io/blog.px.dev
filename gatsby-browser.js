@@ -1,5 +1,6 @@
 import MainThemeProvider from './src/components/mainThemeProvider.tsx';
 import './src/scss/style.scss';
+import { processClientEntry, runZoom } from './src/components/image-zoom-modal.plugin';
 
 
 const React = require('react');
@@ -10,3 +11,10 @@ export const wrapRootElement = ({ element }) => (
     {element}
   </MainThemeProvider>
 );
+
+export const onClientEntry = () => {
+  processClientEntry();
+};
+export const onRouteUpdate = () => {
+  runZoom();
+};

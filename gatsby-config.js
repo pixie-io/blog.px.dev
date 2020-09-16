@@ -17,7 +17,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-material-ui',
-
     },
     'gatsby-plugin-scroll-reveal',
     {
@@ -61,6 +60,7 @@ module.exports = {
               maxWidth: 1035,
               showCaptions: true,
               markdownCaptions: false,
+              linkImagesToOriginal: false,
             },
           },
           {

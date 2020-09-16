@@ -43,5 +43,5 @@ export default {
   ol: (props: any) => <Typography {...props} component='ol' />,
   em: (props: any) => <Typography {...props} component='em' style={{ fontStyle: 'italic' }} />,
   li: (props: any) => <ListItem {...props} />,
-  img: (props: any) => <img {...props} className='blog-image' />,
+  img: (props: any) => <div className='blog-image-wrapper'><img {...props} className='blog-image' /></div>,
 };
