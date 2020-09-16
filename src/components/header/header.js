@@ -99,8 +99,8 @@ const Header = ({
           </div>
         </div>
         <div className={`${styles.menu}`}>
-          <ul>
-            <li className='hide-mobile hide-tablet'>
+          <ul className='hide-mobile hide-tablet'>
+            <li>
               <IconButton
                 className={styles.menuItem}
                 size='small'
@@ -113,13 +113,13 @@ const Header = ({
               </IconButton>
             </li>
             <li className='hide-mobile hide-tablet'>
-              <a href='https://pixielabs.ai/community'>
-                Community
-              </a>
-            </li>
-            <li className='hide-mobile hide-tablet'>
               <a href='https://work.withpixie.ai/docs' onClick={(e) => docsRedirect(e)}>
                 Docs
+              </a>
+            </li>
+            <li className={styles.colored}>
+              <a href='https://pixielabs.ai/'>
+                Try Community Beta
               </a>
             </li>
           </ul>

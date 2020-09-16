@@ -15,6 +15,9 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-material-ui',
+    },
     'gatsby-plugin-scroll-reveal',
     {
       resolve: 'gatsby-source-filesystem',
@@ -57,6 +60,7 @@ module.exports = {
               maxWidth: 1035,
               showCaptions: true,
               markdownCaptions: false,
+              linkImagesToOriginal: false,
             },
           },
           {
@@ -110,7 +114,7 @@ module.exports = {
           'manrope:300,400,400i,700',
           'roboto:300,400,400i,700',
         ],
-        display: 'swap',
+        display: 'block',
       },
     },
 
