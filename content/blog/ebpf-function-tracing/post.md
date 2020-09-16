@@ -153,7 +153,7 @@ BPF tracing using uprobes comes with its own set of pros and cons. It's benefici
 <svg src="wavingnaut.svg" width="40px" />
 :::
 
-Go dynamic logging is something we are working on at Pixie. If this post's contents are interesting, please give [Pixie](https://pixielabs.ai) a try, or check out our [open positions](https://pixielabs.ai/career).
+Go dynamic logging is something we are working on at Pixie. You can checkout [this](https://docs.pixielabs.ai/tutorials/simple-go-tracing/) to see how Pixie traces Go applications running on K8s clusters. If this post's contents are interesting, please give [Pixie](https://pixielabs.ai) a try, or check out our [open positions](https://pixielabs.ai/career).
 
 
 ## References
