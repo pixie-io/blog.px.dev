@@ -174,7 +174,7 @@ export const pageQuery = graphql`
         author
         email
         category
-        date(formatString: "DD MMMM YYYY")
+        date(formatString: "MMMM DD, YYYY")
         featured_image {
           childImageSharp {
             fluid(maxWidth: 1200, quality: 92) {
@@ -203,7 +203,7 @@ export const pageQuery = graphql`
           subtitle
           author
           email
-          date(formatString: "DD MMMM YYYY")
+          date(formatString: "MMMM DD, YYYY")
           category
           featured_image {
             childImageSharp {

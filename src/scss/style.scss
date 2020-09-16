@@ -276,10 +276,14 @@ h5 {
   }
 }
 
+.image-xs {
+  max-width: 15%;
+  margin: 32px auto;
+}
+
 .image-s {
   max-width: 30%;
   margin: 32px auto;
-
 }
 
 .image-m {
@@ -289,6 +293,16 @@ h5 {
 
 .image-l {
   max-width: 75%;
+  margin: 32px auto;
+  @media (max-width: $breakpoint) {
+    padding: 0;
+    max-width: 100%;
+  }
+}
+
+
+.image-xl {
+  max-width: 100%;
   margin: 32px auto;
   @media (max-width: $breakpoint) {
     padding: 0;
