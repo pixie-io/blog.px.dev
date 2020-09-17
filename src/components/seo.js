@@ -13,7 +13,7 @@ import favDark from '../images/favicon-dark.png';
 import favGreen from '../images/favicon-green.png';
 
 function SEO({
-  description, lang, meta, title,
+  description, lang, meta, title, url, image,
 }) {
   const { site } = useStaticQuery(
     graphql`
@@ -83,6 +83,35 @@ function SEO({
           name: 'twitter:description',
           content: metaDescription,
         },
+        {
+          name: 'twitter:description',
+          content: metaDescription,
+        },
+        {
+          property: 'og:locale',
+          content: 'en_US',
+        },
+        {
+          property: 'og:url',
+          content: url,
+        },
+        {
+          property: 'og:site_name',
+          content: site.siteMetadata.title,
+        },
+        {
+          property: 'og:image',
+          content: image,
+        },
+        {
+          property: 'og:image:width',
+          content: image ? 1200 : null,
+        },
+
+        {
+          property: 'og:image:height',
+          content: image ? 500 : null,
+        },
       ].concat(meta)}
     />
   );
@@ -92,11 +121,15 @@ SEO.defaultProps = {
   lang: 'en',
   meta: [],
   description: '',
+  image: null,
+  url: '',
 };
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
+  image: PropTypes.string,
+  url: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
 };
