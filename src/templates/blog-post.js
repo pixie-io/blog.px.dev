@@ -33,10 +33,15 @@ const MetaBar = ({ post, shareUrl, author }) => (
             <Typography variant='body1' className={styles.author}>
               {post.frontmatter.author}
               {author && (
-              <a href={author.twitter} target='_blank' rel='noopener noreferrer' className={styles.authorTwitter}>
-                {' '}
-                <img src={twitter} />
-              </a>
+                <a
+                  href={author.twitter}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className={styles.authorTwitter}
+                >
+                  {' '}
+                  <img src={twitter} />
+                </a>
               )}
             </Typography>
             <span className={styles.date}>{author ? author.bio : post.frontmatter.date}</span>
@@ -45,7 +50,7 @@ const MetaBar = ({ post, shareUrl, author }) => (
       </div>
       <div className='col-3'>
         {!author
-          && (
+        && (
           <div className={styles.socialIcons}>
             <RedditShareButton url={shareUrl}>
               <img src={reddit} />
@@ -61,7 +66,7 @@ const MetaBar = ({ post, shareUrl, author }) => (
               <img src={linkedin} />
             </LinkedinShareButton>
           </div>
-          )}
+        )}
       </div>
     </div>
   </div>
@@ -86,7 +91,14 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   return (
     <Layout showSwitch>
       <div className={`${styles.blogPost} ${muiClasses.body}`}>
-        <SEO title='Home' />
+        <SEO
+          title={post.frontmatter.title}
+          description={post.excerpt}
+          url={location.href}
+          image={post.frontmatter.featured_image
+            ? post.frontmatter.featured_image.childImageSharp.fluid.src
+            : null}
+        />
 
         <div className='container'>
           <div className='row'>
