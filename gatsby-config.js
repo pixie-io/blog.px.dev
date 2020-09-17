@@ -16,6 +16,12 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     {
+      resolve: 'gatsby-plugin-react-helmet-canonical-urls',
+      options: {
+        siteUrl: 'https://blog.pixielabs.ai',
+      },
+    },
+    {
       resolve: 'gatsby-plugin-material-ui',
     },
     'gatsby-plugin-scroll-reveal',
@@ -109,10 +115,9 @@ module.exports = {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: [
-          'Source Code Pro:400',
-          'Source Sans Pro:400',
           'manrope:300,400,400i,700',
           'roboto:300,400,400i,700',
+          'roboto+mono:300,400,400i,700',
         ],
         display: 'block',
       },
