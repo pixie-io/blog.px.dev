@@ -20,6 +20,7 @@ const Blog = (props) => {
   const {
     data,
     pageContext: { category: urlCategory },
+    location = { href: '' },
   } = props;
   const pageSize = 9;
   const paginate = (posts, pageNumber) => posts.slice(0, (pageNumber + 1) * pageSize);
@@ -65,7 +66,10 @@ const Blog = (props) => {
 
   return (
     <Layout>
-      <SEO title='Blog' />
+      <SEO
+        title='Blog'
+        url={location.href}
+      />
       <section className={`${styles.latestStories}  ${muiClasses.body}`}>
         <div className='container'>
           <div className={`row ${styles.blogCategory}`}>
@@ -92,7 +96,10 @@ const Blog = (props) => {
                 </li>
                 {categories.map((cat) => (
                   <li key={cat.label}>
-                    <Link to={`/${slugify(cat.label).toLowerCase()}`}>
+                    <Link
+                      to={`/${slugify(cat.label)
+                        .toLowerCase()}`}
+                    >
                       <button
                         type='button'
                         className={category === cat.label ? styles.active : ''}
@@ -136,6 +143,9 @@ Blog.propTypes = {
   pageContext: PropTypes.shape({
     category: PropTypes.string,
   }),
+  location: PropTypes.shape({
+    href: PropTypes.string,
+  }).isRequired,
   data: PropTypes.shape({
     posts: PropTypes.shape({
       nodes: PropTypes.array.isRequired,

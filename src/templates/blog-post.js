@@ -95,7 +95,9 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
           title={post.frontmatter.title}
           description={post.excerpt}
           url={location.href}
-          image={post.frontmatter.featured_image ? post.frontmatter.featured_image.childImageSharp.fluid.src : null}
+          image={post.frontmatter.featured_image
+            ? post.frontmatter.featured_image.childImageSharp.fluid.src
+            : null}
         />
 
         <div className='container'>
