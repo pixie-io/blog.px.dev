@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { Disqus, CommentCount } from 'gatsby-plugin-disqus';
 import styles from './blog-post.module.scss';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -88,6 +89,13 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   const muiClasses = useStyles();
   const author = data.authors.edges.map((a) => a.node)
     .find((a) => a.id === post.frontmatter.author);
+
+  const disqusConfig = {
+    url: location.href,
+    identifier: post.frontmatter.title,
+    title: post.frontmatter.title,
+  };
+
   return (
     <Layout showSwitch>
       <div className={`${styles.blogPost} ${muiClasses.body}`}>
@@ -142,6 +150,8 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
             </div>
           </div>
           <MetaBar post={post} author={author} shareUrl={location.href} />
+          <CommentCount config={disqusConfig} placeholder='...' />
+          <Disqus config={disqusConfig} />
         </div>
         <section className={styles.relatedStories}>
           <div className='container'>
