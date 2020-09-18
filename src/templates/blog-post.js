@@ -150,8 +150,11 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
             </div>
           </div>
           <MetaBar post={post} author={author} shareUrl={location.href} />
-          <CommentCount config={disqusConfig} placeholder='...' />
-          <Disqus config={disqusConfig} />
+          <div className='row'>
+            <div className='col-12'>
+              <Disqus config={disqusConfig} />
+            </div>
+          </div>
         </div>
         <section className={styles.relatedStories}>
           <div className='container'>
