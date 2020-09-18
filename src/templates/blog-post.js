@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { Disqus, CommentCount } from 'gatsby-plugin-disqus';
+import { Disqus } from 'gatsby-plugin-disqus';
 import styles from './blog-post.module.scss';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
