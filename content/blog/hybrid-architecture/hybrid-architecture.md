@@ -212,6 +212,6 @@ Although this architecture mitigates the cons of the non-hybrid system, the non-
 
 For us, the pros of the hybrid approach -- reducing the data transfer cost and keeping sensitive data within their environments — outweigh the cons. The approach you choose will depend on the overall use-case of the system which  determines which pros/cons should be weighed more significantly.
 
-Architecting fast and secure distributed systems is something we are working on at Pixie. You can checkout an overview of our architecture here. If working on hybrid systems is something that interests you, check out our [open positions](https://pixielabs.ai/careers).
+Architecting fast and secure distributed systems is something we are working on at Pixie. You can checkout an overview of our architecture [here](https://docs.pixielabs.ai/about-pixie/how-pixie-works/). If working on hybrid systems is something that interests you, check out our [open positions](https://pixielabs.ai/careers).
 
 
