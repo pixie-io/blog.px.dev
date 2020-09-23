@@ -80,7 +80,7 @@ const Header = ({
       ${showShadow ? styles.showShadow : ''} 
       `}
       >
-        <BodyClassName className={`${open ? 'menu-open' : ''}`} />
+        <BodyClassName className={`${open ? 'menu-open' : ''} theme-${theme}`} />
         <div className={styles.logos}>
           <Link to='/' className={styles.logo}>
             <img src={pixieLogo} alt='pixie logo' />

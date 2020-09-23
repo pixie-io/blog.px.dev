@@ -1,19 +1,22 @@
 export const processClientEntry = () => {
   // Inject styles.
   const styles = `
+  
+    body.theme-dark .modal{
+      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    }
     .modal {
       opacity: 0;
       position: fixed; 
       z-index: -1;
-      padding-top: 80px; /* Location of the box */
+      padding-top: 80px;
       left: 0;
       width: 100%; /* Full width */
       height: 100%; /* Full height */
       overflow:auto;
       transform: scale(0.5);
-    top:0;
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+      top:0;
+      background-color: rgba(255,255,255,0.9); /* Black w/ opacity */
       transition: transform 0.2s, opacity 0.6s, z-index 0.8s;
     }
     .modal.show {
@@ -24,7 +27,7 @@ export const processClientEntry = () => {
     .modal.show:hover {
       cursor: zoom-out;
     }
-    .gatsby-resp-image-wrapper:hover {
+    .blog-image:hover {
       cursor: zoom-in;
     }
     .modal-content picture {
@@ -34,15 +37,16 @@ export const processClientEntry = () => {
       max-width: 100%;
       height:100%;
       position: relative !important;
-          object-fit: contain !important;
+      object-fit: contain !important;
+       margin: 0 auto;
+      display: block;
 
     }
     .modal-content {
-      margin: auto;
-      display: grid;
-      width: 90%;
-      max-width: 90%;
-      height: 90%;
+    
+      width: 100%;
+      height: calc(100% - 160px);
+      
     }
 
       /* 100% Image Width on Smaller Screens */
