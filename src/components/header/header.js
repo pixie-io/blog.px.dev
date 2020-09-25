@@ -55,11 +55,11 @@ const Header = ({
   return (
     <>
       {showNewsBar && (
-        <a href='https://hopin.to/events/pixienaut-monthly-september'>
+        <a href='https://pixielabs.ai/events/pixieday'>
           <div className={styles.newsBar}>
             <div className='hide-mobile hide-tablet'>
-              We’re launching in October. Get a preview in our next
-              Pixienaut Monthly on Sep 24th!
+              We’re launching in October. Register for our Pixie Demo
+              Day on October 8th
             </div>
             <div className='hide-desktop'> Get a preview in the next Pixienaut Monthly</div>
             <div
