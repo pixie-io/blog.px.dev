@@ -61,7 +61,7 @@ const Header = ({
               We’re launching in October. Register for our Pixie Demo
               Day on October 8th
             </div>
-            <div className='hide-desktop'> Get a preview in the next Pixienaut Monthly</div>
+            <div className='hide-desktop'>Register for Pixie Day</div>
             <div
               className={`${styles.newsBarClose} hide-desktop`}
               onClick={(e) => closeTopBanner(e)}
