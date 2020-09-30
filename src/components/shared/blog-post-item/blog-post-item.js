@@ -25,7 +25,9 @@ const BlogPostItem = withStyles((theme) => ({
       title,
       featured_image: featuredImage,
       author,
+      authors,
       email,
+      emails,
       date,
       category,
     },
@@ -45,12 +47,20 @@ const BlogPostItem = withStyles((theme) => ({
             </div>
             <div className={styles.body}>
               <div className={styles.heading}>
-                <div className={styles.authorAvatar}>
-                  <GravatarIcon email={email} />
-                </div>
+
+                {email ? (
+                  <div className={styles.authorAvatar}>
+                    <GravatarIcon email={email} />
+                  </div>
+                ) : (emails || []).map((e) => (
+                  <div className={styles.authorAvatar}>
+                    <GravatarIcon email={e} />
+                  </div>
+                ))}
+
                 <div className={styles.authorDetails}>
                   <Typography variant='body1' className='m-0'>
-                    {author}
+                    {author || (authors || []).join(', ')}
                   </Typography>
                   <div className={styles.dateRow}>
                     <div>{date}</div>
