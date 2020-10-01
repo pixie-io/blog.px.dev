@@ -8,6 +8,7 @@ const useStyles = makeStyles(() => ({
   icon: {
     width: '45px',
     height: '45px',
+    overflow: 'hidden',
     borderRadius: '50%',
   },
 }));
