@@ -178,7 +178,9 @@ export const pageQuery = graphql`
         frontmatter {
           title
           author
+          authors
           email
+          emails
           category
           date(formatString: "MMMM DD YYYY")
           featured_image {
