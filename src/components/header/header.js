@@ -57,8 +57,13 @@ const Header = ({
       {showNewsBar && (
         <a href='https://blog.pixielabs.ai/blog/public-beta-launch/beta-launch/'>
           <div className={styles.newsBar}>
-            <div>
+            <div className='hide-mobile hide-tablet'>
               Check out Pixie Community’s Launch Announcement
+              &nbsp;
+              🚀
+            </div>
+            <div className='hide-desktop'>
+              Check out Pixie Community’s Launch
               &nbsp;
               🚀
             </div>
