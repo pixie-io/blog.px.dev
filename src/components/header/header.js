@@ -59,6 +59,8 @@ const Header = ({
           <div className={styles.newsBar}>
             <div>
               Check out Pixie Community’s Launch Announcement
+              &nbsp;
+              🚀
             </div>
             <div
               className={`${styles.newsBarClose} hide-desktop`}
