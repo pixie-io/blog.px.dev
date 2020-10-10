@@ -55,13 +55,18 @@ const Header = ({
   return (
     <>
       {showNewsBar && (
-        <a href='https://pixielabs.ai/events/pixieday'>
+        <a href='https://blog.pixielabs.ai/blog/public-beta-launch/beta-launch/'>
           <div className={styles.newsBar}>
             <div className='hide-mobile hide-tablet'>
-              We’re launching in October. Register for our Pixie Demo
-              Day on October 8th
+              Check out Pixie Community’s Launch Announcement
+              &nbsp;
+              🚀
             </div>
-            <div className='hide-desktop'>Register for Pixie Day</div>
+            <div className='hide-desktop'>
+              Check out Pixie Community’s Launch
+              &nbsp;
+              🚀
+            </div>
             <div
               className={`${styles.newsBarClose} hide-desktop`}
               onClick={(e) => closeTopBanner(e)}
