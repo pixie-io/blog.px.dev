@@ -55,13 +55,18 @@ const Header = ({
   return (
     <>
       {showNewsBar && (
-        <a href='https://hopin.to/events/pixienaut-monthly-september'>
+        <a href='https://blog.pixielabs.ai/blog/public-beta-launch/beta-launch/'>
           <div className={styles.newsBar}>
             <div className='hide-mobile hide-tablet'>
-              We’re launching in October. Get a preview in our next
-              Pixienaut Monthly on Sep 24th!
+              Check out Pixie Community’s Launch Announcement
+              &nbsp;
+              🚀
             </div>
-            <div className='hide-desktop'> Get a preview in the next Pixienaut Monthly</div>
+            <div className='hide-desktop'>
+              Check out Pixie Community’s Launch
+              &nbsp;
+              🚀
+            </div>
             <div
               className={`${styles.newsBarClose} hide-desktop`}
               onClick={(e) => closeTopBanner(e)}
@@ -80,7 +85,7 @@ const Header = ({
       ${showShadow ? styles.showShadow : ''} 
       `}
       >
-        <BodyClassName className={`${open ? 'menu-open' : ''}`} />
+        <BodyClassName className={`${open ? 'menu-open' : ''} theme-${theme}`} />
         <div className={styles.logos}>
           <Link to='/' className={styles.logo}>
             <img src={pixieLogo} alt='pixie logo' />

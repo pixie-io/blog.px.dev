@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { Disqus } from 'gatsby-plugin-disqus';
 import styles from './blog-post.module.scss';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -21,57 +22,85 @@ import GravatarIcon from '../components/gravatar';
 
 const categoryLink = require('../components/category-link');
 
-const MetaBar = ({ post, shareUrl, author }) => (
+const MetaBarHeader = ({ post, shareUrl }) => (
   <div className={styles.metaBar}>
     <div className='row'>
       <div className='col-9'>
         <div className={styles.postHeader}>
-          <div className={styles.authorAvatar}>
-            <GravatarIcon email={post.frontmatter.email} />
-          </div>
+
+          {post.frontmatter.email ? (
+            <div className={styles.authorAvatar}>
+              <GravatarIcon email={post.frontmatter.email} />
+            </div>
+          ) : (post.frontmatter.emails || []).map((e) => (
+            <div className={styles.authorAvatar}>
+              <GravatarIcon email={e} />
+            </div>
+          ))}
           <div>
             <Typography variant='body1' className={styles.author}>
-              {post.frontmatter.author}
-              {author && (
-                <a
-                  href={author.twitter}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className={styles.authorTwitter}
-                >
-                  {' '}
-                  <img src={twitter} />
-                </a>
-              )}
+              {post.frontmatter.author || (post.frontmatter.authors || []).join(', ')}
             </Typography>
-            <span className={styles.date}>{author ? author.bio : post.frontmatter.date}</span>
+            <span className={styles.date}>{post.frontmatter.date}</span>
           </div>
         </div>
       </div>
       <div className='col-3'>
-        {!author
-        && (
-          <div className={styles.socialIcons}>
-            <RedditShareButton url={shareUrl}>
-              <img src={reddit} />
-            </RedditShareButton>
-            <TwitterShareButton url={shareUrl}>
-              <img src={twitter} />
-            </TwitterShareButton>
-            <LinkedinShareButton
-              title={post.frontmatter.title}
-              summary={post.frontmatter.excerpt}
-              url={shareUrl}
-            >
-              <img src={linkedin} />
-            </LinkedinShareButton>
-          </div>
-        )}
+
+        <div className={styles.socialIcons}>
+          <RedditShareButton url={shareUrl}>
+            <img src={reddit} />
+          </RedditShareButton>
+          <TwitterShareButton url={shareUrl}>
+            <img src={twitter} />
+          </TwitterShareButton>
+          <LinkedinShareButton
+            title={post.frontmatter.title}
+            summary={post.frontmatter.excerpt}
+            url={shareUrl}
+          >
+            <img src={linkedin} />
+          </LinkedinShareButton>
+        </div>
+
       </div>
     </div>
   </div>
 );
+const MetaBarFooter = ({ author, authors }) => {
+  const mapAuthors = authors ?? [author];
+  return (
+    mapAuthors.map((a) => (
+      <div className={styles.metaBar}>
+        <div className='row'>
+          <div className='col-9'>
+            <div className={styles.postHeader}>
+              <div className={styles.authorAvatar}>
+                <GravatarIcon email={a.email} />
+              </div>
+              <div>
+                <Typography variant='body1' className={styles.author}>
+                  {a.id}
+                  <a
+                    href={a.twitter}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={styles.authorTwitter}
+                  >
+                    {' '}
+                    <img src={twitter} />
+                  </a>
 
+                </Typography>
+                <span className={styles.date}>{a.bio}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  );
+};
 const useStyles = makeStyles((theme) => ({
   body: {
     backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
@@ -88,6 +117,14 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   const muiClasses = useStyles();
   const author = data.authors.edges.map((a) => a.node)
     .find((a) => a.id === post.frontmatter.author);
+  const authors = data.authors.edges.map((a) => a.node)
+    .filter((a) => (post.frontmatter.authors || []).find((_) => _ === a.id));
+  const disqusConfig = {
+    url: location.href,
+    identifier: post.frontmatter.title,
+    title: post.frontmatter.title,
+  };
+
   return (
     <Layout showSwitch>
       <div className={`${styles.blogPost} ${muiClasses.body}`}>
@@ -131,7 +168,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
               <Typography variant='h1'>{post.frontmatter.title}</Typography>
             </div>
           </div>
-          <MetaBar post={post} shareUrl={location.href} />
+          <MetaBarHeader post={post} shareUrl={location.href} />
           <div className={styles.postBody}>
             <div className='row'>
               <div className='col-12'>
@@ -141,7 +178,12 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
               </div>
             </div>
           </div>
-          <MetaBar post={post} author={author} shareUrl={location.href} />
+          <MetaBarFooter author={author} authors={authors} />
+          <div className='row'>
+            <div className='col-12'>
+              <Disqus config={disqusConfig} />
+            </div>
+          </div>
         </div>
         <section className={styles.relatedStories}>
           <div className='container'>
@@ -188,7 +230,9 @@ export const pageQuery = graphql`
         title
         subtitle
         author
+        authors
         email
+        emails
         category
         date(formatString: "MMMM DD, YYYY")
         featured_image {
@@ -218,7 +262,9 @@ export const pageQuery = graphql`
           title
           subtitle
           author
+          authors
           email
+          emails
           date(formatString: "MMMM DD, YYYY")
           category
           featured_image {
