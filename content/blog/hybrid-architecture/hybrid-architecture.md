@@ -16,7 +16,7 @@ At Pixie, we are working on a Kubernetes native monitoring system which runs ent
 One benefit of building for the Kubernetes platform is that it simplifies the process of deploying applications to a user’s environment, often requiring only a few simple steps such as applying a set of YAMLs or installing a Helm Chart. Within minutes, users can easily have a running version of the application on their cluster. However, now that these applications are running entirely on prem, it becomes difficult for the developer to manage. In many cases, rolling out major updates or bug fixes relies on having the user manually update their deployment. This is unreliable for the developer and burdensome for the user.
 
 ::: div image-m
-<svg src='connected-on-prem.svg' />
+<svg title='Diagram of a traditional SaaS application deployed to a customer's cluster.' src='connected-on-prem.svg' />
 :::
 
 To address this problem, we propose a connected on-prem architecture which delegates the responsibility of managing the data and control planes of the application to the deployment running in the cluster and a developer-managed cloud environment, respectively. More concretely, the application deployed in the user’s cluster is solely responsible for collecting data and making that data accessible. Once the foundation of this data layer is established, the logic remains mostly stable and is infrequently updated. Meanwhile, a cloud-hosted system manages the core functionality and orchestration of the application. As the cloud is managed by the developer themselves, they are freely able to perform updates without any dependency on the users. This allows the developer to iterate quickly on the functionality of their system, all while maintaining data locality on prem.
@@ -35,7 +35,7 @@ For brevity, we will refer to the application running on the user’s cluster as
 The simplest approach for executing the query on a satellite is to have the UI make the request directly to the satellite itself. To do this, the UI must be able to get the (1) status and (2) address of the satellite from the cloud, so that it knows whether the satellite is available for querying and where it should make requests to. 
 
 ::: div image-m
-<svg src='non-passthrough.svg' />
+<svg title='Diagram of Non-Passthrough Mode where the UI makes requests directly to the satellite agent itself.' src='non-passthrough.svg' />
 :::
 
 ### Step 1: Heartbeating
@@ -63,7 +63,7 @@ The browser is blocking our requests because of the satellite’s SSL certs! A u
 However, this would need to be done per satellite and is disruptive to the user’s overall experience. It is possible to generate SSL certs for IP addresses, but this is uncommon and isn’t available with most free Certificate Authorities. This approach is also complicated if the satellite’s IP address is subject to change. 
 
 ::: div image-xl
-<svg src='SSL-cert-flow.svg' />
+<svg title='Diagram of SSL certification flow for Non-Passthrough Mode.' src='SSL-cert-flow.svg' />
 :::
 
 To solve this problem, we used the following solution:
@@ -81,7 +81,7 @@ Out-of-network users may also be unable to query a satellite when behind a firew
 ## Approach 2: Proxying Queries through the Server
 
 ::: div image-m
-<svg src='passthrough-general.svg' />
+<svg title='Diagram of Passthrough Mode where UI requests are proxied through the cloud.' src='passthrough-general.svg' />
 :::
 
 As seen in the previous approach, it is easiest to have the UI make requests to the cloud to avoid any certificate errors. However, we still want the actual query execution to be handled by the satellites themselves. To solve this, we architected another approach which follows these general steps:
@@ -122,7 +122,7 @@ These benchmarks were run on a 3-node GKE cluster with n1-standard-4 nodes, with
 **Self-Hosted Kafka**
 
 ::: div image-l
-<svg src='Kafka.png' />
+<svg title='Kafka benchmark results' src='Kafka.png' />
 :::
 
 ```text
@@ -137,7 +137,7 @@ Min:  3.586449ms
 **NATS Streaming**
 
 ::: div image-l
-<svg src='NATS-Streaming.png' />
+<svg title='NATS Streaming benchmark results' src='NATS-Streaming.png' />
 :::
 
 ```text
@@ -157,7 +157,7 @@ We ended up choosing NATS as our messaging system. Benchmarks performed by other
 ### The Implementation
 
 ::: div image-l
-<svg src='passthrough-diagram.svg' />
+<svg title='Implementation for Passthrough Mode where UI requests are proxied through the cloud.' src='passthrough-diagram.svg' />
 :::
 
 The actual implementation of our query request pipeline looks very similar to the benchmark case we ran above. 
