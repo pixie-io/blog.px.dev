@@ -1,6 +1,6 @@
 ---
 path: '/hybrid-architecture'
-title: 'Part 1: Connected SaaS applications - iterating quickly while deploying software on customer systems'
+title: 'Building K8s Native SaaS applications: iterating quickly by deploying in-cluster data planes"'
 date: 2020-10-15T06:00:00.000+00:00
 featured_image: hero-image.png
 category: 'Pixie Team Blogs'
