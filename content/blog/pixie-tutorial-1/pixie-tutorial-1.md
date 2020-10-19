@@ -4,9 +4,9 @@ title: 'Getting Your Pixie On: First Steps Installing and Deploying Pixie'
 date: 2020-06-11T12:30:00.000+00:00
 category: 'Guest Blogs'
 author: 'John Arundel'
-authors: ['']
+authors: []
 email: 'john@bitfieldconsulting.com'
-emails: ['']
+emails: []
 featured_image: hero-image.png
 featured: true
 ---

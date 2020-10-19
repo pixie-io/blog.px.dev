@@ -11,11 +11,13 @@ const BlogPostCard = ({ post }) => {
       title,
       featured_image: featuredImage,
       author,
+      authors,
       date,
       category,
     },
     fields: { slug },
   } = post;
+  const mapAuthors = authors ?? [author];
   return (
     <div className='col-4 '>
       <article className={`${styles.card} blog-post-card`}>
@@ -28,7 +30,7 @@ const BlogPostCard = ({ post }) => {
           <div className={styles.cardBody}>
             <h5>{title}</h5>
             <p className={styles.authorRow}>
-              {author}
+              {mapAuthors.join(', ')}
               {' '}
               in
               {' '}
