@@ -18,7 +18,6 @@ const BlogPostCard = ({ post }) => {
     fields: { slug },
   } = post;
   const mapAuthors = authors ?? [author];
-
   return (
     <div className='col-4 '>
       <article className={`${styles.card} blog-post-card`}>
