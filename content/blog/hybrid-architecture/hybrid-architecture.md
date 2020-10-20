@@ -9,7 +9,7 @@ email: 'michelle@pixielabs.ai'
 featured: true
 ---
 
-At Pixie, we are working on a Kubernetes native monitoring system which runs entirely within a user’s cluster. This is the first in a series of posts discussing techniques and best practices for effectively building Kubernetes native applications. In this post, we explore the trade-offs between using an air-gapped deployment that lives completely within a cluster and a system which splits the control and data planes between the cloud and cluster, respectively.  
+At Pixie, we are working on a Kubernetes native monitoring system which stores and processes the resulting data entirely within a user’s cluster. This is the first in a series of posts discussing techniques and best practices for effectively building Kubernetes native applications. In this post, we explore the trade-offs between using an air-gapped deployment that lives completely within a cluster and a system which splits the control and data planes between the cloud and cluster, respectively.  
 
 # Introduction
 
@@ -68,14 +68,14 @@ However, this would need to be done per satellite and is disruptive to the user�
 
 To solve this problem, we used the following solution:
 
-1. Pre-generate SSL certs under a subdomain that you control, for instance: `<uuid>.satellites.yourdomain.com`. This step is easy to do with any free Certificate Authority. You should make sure to generate more SSL certs than the number of expected satellites. 
+1. Pre-generate SSL certs under a subdomain that you control, for instance: `<uuid>.satellites.yourdomain.com`. This step is easy to do with any free Certificate Authority _and can be safely done if the subdomain has a well-known DNS address_. You should make sure to generate more SSL certs than the number of expected satellites. 
 2. When an satellite registers with the cloud, it should be assigned an unused SSL cert and associated subdomain. The SSL cert should be securely sent to the satellite and the satellite’s proxy should be updated to use the new cert.
 3. When the cloud receives the satellite’s IP address from its heartbeats, it updates the DNS record for the satellite’s subdomain to point to the IP address. 
 4. When executing queries, the UI can now safely make requests to the satellite’s assigned subdomain rather than directly to its IP address, all with valid certs!
 
-In the end, making requests directly to the satellites turned out to be more complicated (and hacky) than we’d originally thought. The solution also doesn’t scale well, since the SSL certs need to be pre-generated. Without having a fixed number of satellites, or an upperbound on the number of satellites, it isn’t long before all the certs have been assigned and someone needs to step in and manually generate more. It is possible to generate the certs and their DNS records on the fly, but we’ve found these operations can take too long to propagate to all networks.
+In the end, making requests directly to the satellites turned out to be more complicated (and hacky) than we’d originally thought. The solution also doesn’t scale well, since the SSL certs need to be pre-generated. Without having a fixed number of satellites, or an upperbound on the number of satellites, it isn’t long before all the certs have been assigned and someone needs to step in and manually generate more. It is possible to generate the certs and their DNS records on the fly, but we’ve found these operations can take too long to propagate to all networks. _It is also important to note that this approach may violate the terms of service for automated SSL generation and is susceptible to usual security risks of wildcard certificates._
 
-Out-of-network users may also be unable to query a satellite when behind a firewall. This makes the application less accessible, but ensures no sensitive data ever leaves the network.
+When a satellite is behind a firewall, it will only be queryable by users within the network. This further ensures that no sensitive data leaves the network.
 
 
 ## Approach 2: Proxying Queries through the Server
@@ -115,6 +115,10 @@ We also wanted to test each system on our particular use-case, and performed the
 3. A subscriber of topic A reads the message, and publishes it onto topic B.
 4. RequestProxyer reads the message on topic B, and writes a response back out to the WebSocket.
 
+::: div image-m
+<svg title='Diagram of the benchmark we used to test various message bus options.' src='message-bus-benchmark.svg' />
+:::
+
 In this case, the latency recorded for the benchmark is the time from which the websocket message is received in the RequestProxyer, to the time in which the server receives the response message from the subscriber.
 
 These benchmarks were run on a 3-node GKE cluster with n1-standard-4 nodes, with a static 6-byte message. These results may not be generalizable to all environments. We also acknowledge that these systems were not built for this particular use-case.
@@ -152,7 +156,7 @@ Min:  3.449084ms
 
 #### The Winner
 
-We ended up choosing NATS as our messaging system. Benchmarks performed by others and our own benchmark above showed that NATS is capable of efficiently handling our request and response messaging patterns. We also found it was extremely easy to create topics on-the-fly in NATS, whereas creating topics on Kafka can be fairly complicated since partitioning must be determined before start-up. Given that we will support many short-lived queries, we want to avoid any topic creation overhead. These points, paired with the lower operational complexity of NATS made it the clear winner for our case.
+We ended up choosing NATS as our messaging system. Benchmarks performed by others and our own benchmark above showed that NATS is capable of efficiently handling our request and response messaging patterns. We also found it was extremely easy to create topics on-the-fly in NATS, whereas creating topics on Kafka can be fairly complicated since partitioning must be determined before start-up. Given that we will support many short-lived queries, we want to avoid any topic creation overhead. These points, paired with the lower operational complexity of NATS made it the clear winner for our case. It is important to note that Kafka's system is built to provide additional guarantees and has many positives, which may be necessary for other use cases.
 
 ### The Implementation
 
