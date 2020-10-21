@@ -187,5 +187,5 @@ Overall, designing an split data/control plane architecture for Kubernetes nativ
 ### Footnotes
 
 - To see how Pixie has implemented this architecture to build our Kubernetes native monitoring system, check out the following video from our Demo Day:
-<iframe width="560" height="315" src="https://youtu.be/z0dz05StBII?t=111" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z0dz05StBII?t=111" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 - If working on connected on-prem systems is something that interests you, check out our [open positions](https://pixielabs.ai/careers).
