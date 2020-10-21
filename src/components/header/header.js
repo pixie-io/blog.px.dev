@@ -124,7 +124,7 @@ const Header = ({
             </li>
             <li className={styles.colored}>
               <a href='https://pixielabs.ai/'>
-                Try Community Beta
+                Learn about Pixie
               </a>
             </li>
           </ul>
