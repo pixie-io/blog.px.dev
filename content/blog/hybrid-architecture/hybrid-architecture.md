@@ -184,8 +184,11 @@ We use both approaches in Pixie, and have found either method allows us to effic
 
 Overall, designing an split data/control plane architecture for Kubernetes native applications will help developers iterate quickly despite the on-prem nature of Kubernetes deployments.
 
-### Footnotes
+## Footnotes
 
-- To see how Pixie has implemented this architecture to build our Kubernetes native monitoring system, check out the following video from our Demo Day:
+- Learn more about the [Pixie Community Beta](https://pixielabs.ai/).
+- Check out our [open positions](https://pixielabs.ai/careers).
+- Check out a recording of a talk on this blog post's content (video below):
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/z0dz05StBII?t=111" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-- If working on connected on-prem systems is something that interests you, check out our [open positions](https://pixielabs.ai/careers).
+
