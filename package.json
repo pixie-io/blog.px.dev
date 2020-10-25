@@ -26,6 +26,7 @@
     "gatsby-plugin-layout": "^1.0.15",
     "gatsby-plugin-manifest": "^2.2.41",
     "gatsby-plugin-mdx": "^1.2.12",
+    "gatsby-plugin-netlify": "^2.3.24",
     "gatsby-plugin-offline": "^2.1.1",
     "gatsby-plugin-react-css-modules-scss-support": "^0.1.0",
     "gatsby-plugin-react-helmet": "^3.0.12",
