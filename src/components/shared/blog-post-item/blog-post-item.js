@@ -36,7 +36,7 @@ const BlogPostItem = withStyles((theme) => ({
   } = post;
   return (
     <article className='row'>
-      <Link to={`/blog/${slug}`}>
+      <Link to={`/${slug}`}>
         <div className='col-2' />
         <div className='col-8'>
           <div className={classes.border}>

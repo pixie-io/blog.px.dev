@@ -57,6 +57,7 @@ exports.onCreateNode = ({
   }
 };
 exports.createPages = async ({ graphql, actions }) => {
+  const { createRedirect } = actions;
   const result = await graphql(`
     query {
   blog: allMdx(
@@ -96,8 +97,18 @@ exports.createPages = async ({ graphql, actions }) => {
 
 
   posts.forEach((post) => {
+    createRedirect({
+      fromPath: (blogPrefix + post.node.fields.slug).replace('//', '/'),
+      toPath: (post.node.fields.slug).replace('//', '/'),
+      redirectInBrowser: true,
+      isPermanent: true,
+    });
+  });
+
+
+  posts.forEach((post) => {
     const related = [...posts];
-    const urlPath = (blogPrefix + post.node.fields.slug).replace('//', '/');
+    const urlPath = (post.node.fields.slug).replace('//', '/');
     actions.createPage({
       path: urlPath,
       component: blogPost,

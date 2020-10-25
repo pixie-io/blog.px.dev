@@ -21,7 +21,7 @@ const BlogPostCard = ({ post }) => {
   return (
     <div className='col-4 '>
       <article className={`${styles.card} blog-post-card`}>
-        <Link to={`/blog/${slug}`}>
+        <Link to={`/${slug}`}>
           <div className={styles.cardImage}>
             {featuredImage
               ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
