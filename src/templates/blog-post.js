@@ -115,6 +115,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
   const post = data.mdx;
   const related = data.featured.nodes;
   const muiClasses = useStyles();
+  const category = post.frontmatter.categories[0];
   const author = data.authors.edges.map((a) => a.node)
     .find((a) => a.id === post.frontmatter.author);
   const authors = data.authors.edges.map((a) => a.node)
@@ -161,8 +162,8 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
                 {' '}
                 /
                 {' '}
-                <Link to={categoryLink.categoryLink(post.frontmatter.category)}>
-                  {post.frontmatter.category}
+                <Link to={categoryLink.categoryLink(category)}>
+                  {category}
                 </Link>
               </div>
               <Typography variant='h1'>{post.frontmatter.title}</Typography>
@@ -233,7 +234,7 @@ export const pageQuery = graphql`
         authors
         email
         emails
-        category
+        categories
         date(formatString: "MMMM DD, YYYY")
         featured_image {
           childImageSharp {
@@ -266,7 +267,7 @@ export const pageQuery = graphql`
           email
           emails
           date(formatString: "MMMM DD, YYYY")
-          category
+          categories
           featured_image {
             childImageSharp {
               fluid(maxWidth: 1920, quality: 92) {

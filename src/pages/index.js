@@ -30,17 +30,20 @@ const Blog = (props) => {
     posts: { nodes: allPosts },
   } = data;
   const {
-    categories: { nodes: allCategories },
+    categories: { group: allCategories },
   } = data;
+
   const categories = [
-    ...new Set((allCategories || []).map((c) => c.frontmatter.category)),
+    ...new Set((allCategories || []).map((c) => c.fieldValue)),
   ]
     .map((c) => ({
       label: c,
-      count: allPosts.filter((pos) => pos.frontmatter.category === c).length,
+      count: allPosts.filter((pos) => pos.frontmatter.categories.some((pc) => pc === c)).length,
       order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
     }))
     .sort((a, b) => (a.order >= b.order ? -1 : 1));
+
+
   const [category] = useState(urlCategory);
   const [page, setPage] = useState(0);
   const [posts, setPosts] = useState(paginate(allPosts, 0));
@@ -48,7 +51,7 @@ const Blog = (props) => {
 
   const filterPosts = (p, c) => {
     const filteredPosts = c
-      ? allPosts.filter((pos) => pos.frontmatter.category === c)
+      ? allPosts.filter((pos) => pos.frontmatter.categories.some((pc) => pc === c))
       : allPosts;
     const paginatedPosts = paginate(filteredPosts, p);
     setPosts(paginatedPosts);
@@ -151,7 +154,7 @@ Blog.propTypes = {
       nodes: PropTypes.array.isRequired,
     }),
     categories: PropTypes.shape({
-      nodes: PropTypes.array.isRequired,
+      group: PropTypes.array.isRequired,
     }),
   }).isRequired,
 };
@@ -181,7 +184,7 @@ export const pageQuery = graphql`
           authors
           email
           emails
-          category
+          categories
           date(formatString: "MMMM DD YYYY")
           featured_image {
             childImageSharp {
@@ -199,12 +202,10 @@ export const pageQuery = graphql`
       }
     }
 
-    categories: allMdx(filter: { frontmatter: { category: { ne: null } } }) {
-      nodes {
-        frontmatter {
-          category
+       categories: allMdx {
+      group(field: frontmatter___categories) {
+          fieldValue
         }
-      }
     }
   }
 `;
