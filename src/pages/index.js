@@ -200,7 +200,7 @@ export const pageQuery = graphql`
       }
     }
 
-       categories: allMdx {
+        categories: allMdx(sort: {fields: fields___slug, order: ASC}) {
       distinct(field: frontmatter___categories)
     }
   }
