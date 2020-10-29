@@ -32,17 +32,13 @@ const Blog = (props) => {
   const {
     categories: { group: allCategories },
   } = data;
-
-  const categories = [
-    ...new Set((allCategories || []).map((c) => c.fieldValue)),
-  ]
+  const categories = allCategories.map((c) => c.fieldValue)
     .map((c) => ({
       label: c,
       count: allPosts.filter((pos) => pos.frontmatter.categories.some((pc) => pc === c)).length,
       order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
     }))
     .sort((a, b) => (a.order >= b.order ? -1 : 1));
-
 
   const [category] = useState(urlCategory);
   const [page, setPage] = useState(0);
