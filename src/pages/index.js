@@ -32,7 +32,6 @@ const Blog = (props) => {
   const {
     categories: { distinct: allCategories },
   } = data;
-  console.log(allCategories);
 
   let categories = allCategories
     .map((c) => ({
@@ -41,7 +40,6 @@ const Blog = (props) => {
       order: c === PIXIE_TEAM_BLOGS ? 99 : c.length,
     }));
   categories = categories.sort((a, b) => (a.order >= b.order ? -1 : 1));
-  console.log(categories);
 
 
   const [category] = useState(urlCategory);
