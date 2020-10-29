@@ -3,7 +3,7 @@ path: '/beta-launch'
 title: 'Announcing Pixie’s Public Beta Launch and Series A'
 date: 2020-10-01T06:00:00.000+00:00
 featured_image: hero-image.png
-category: 'Pixie Team Blogs'
+categories: ['Pixie Team Blogs']
 authors: ['Zain Asgar', 'Ishan Mukherjee']
 emails: ['zasgar@pixielabs.ai','ishan@pixielabs.ai']
 featured: true

@@ -3,7 +3,7 @@ path: '/hybrid-architecture'
 title: 'Building Kubernetes Native SaaS applications: iterating quickly by deploying in-cluster data planes'
 date: 2020-10-15T06:00:00.000+00:00
 featured_image: hero-image.png
-category: 'Pixie Team Blogs'
+categories: ['Pixie Team Blogs']
 author: 'Michelle Nguyen'
 email: 'michelle@pixielabs.ai'
 featured: true

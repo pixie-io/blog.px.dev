@@ -76,12 +76,10 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
-            categories: allMdx(filter: { frontmatter: { category: { ne: null } } }) {
-      nodes {
-        frontmatter {
-          category
+   categories: allMdx {
+      group(field: frontmatter___categories) {
+          fieldValue
         }
-      }
     }
      }
   `);
@@ -118,7 +116,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   });
-  const categories = result.data.categories.nodes.map((c) => c.frontmatter.category);
+  const categories = (result.data.categories.group || []).map((c) => c.fieldValue);
   categories.forEach((category) => {
     actions.createPage({
       path: categoryLink.categoryLink(category),
@@ -143,7 +141,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       subtitle: String
       date: Date @dateformat(formatString: "MM-DD-YYYY")
       author: String
-      category: String
+      categories: [String]
       featured_image:   File @fileByRelativePath,
       featured: Boolean
     }
