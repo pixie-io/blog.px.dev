@@ -44,45 +44,14 @@ Back in the original terminal window, where the `perf` command is running, you s
 ```
 [0] % sudo perf trace -p 1011089
         ? (         ): app/1011089  ... [continued]: epoll_pwait())                                      = 1
-    0.014 ( 0.005 ms): app/1011089 futex(uaddr: 0x937d90, op: WAKE|PRIVATE_FLAG, val: 1)                 = 1
-    0.021 ( 0.014 ms): app/1011089 accept4(fd: 3<socket:[7062148]>, upeer_sockaddr: 0xc0000799c8, upeer_addrlen: 0xc0000799ac, flags: 526336) = 4
-    0.043 ( 0.003 ms): app/1011089 epoll_ctl(epfd: 5<anon_inode:[eventpoll]>, op: ADD, fd: 4, event: 0xc000079aac) = 0
-    0.047 ( 0.001 ms): app/1011089 getsockname(fd: 4, usockaddr: 0xc000079ae8, usockaddr_len: 0xc000079ae4) = 0
-    0.055 ( 0.001 ms): app/1011089 setsockopt(fd: 4, level: 6, optname: 1, optval: 0xc000079ba4, optlen: 4) = 0
-    0.059 ( 0.002 ms): app/1011089 setsockopt(fd: 4, level: 1, optname: 9, optval: 0xc000079ba4, optlen: 4) = 0
-    0.062 ( 0.001 ms): app/1011089 setsockopt(fd: 4, level: 6, optname: 5, optval: 0xc000079b8c, optlen: 4) = 0
-    0.065 ( 0.001 ms): app/1011089 setsockopt(fd: 4, level: 6, optname: 4, optval: 0xc000079b8c, optlen: 4) = 0
-    0.082 ( 0.003 ms): app/1011089 futex(uaddr: 0xc00006a848, op: WAKE|PRIVATE_FLAG, val: 1)             = 1
+    ...
     0.087 ( 0.004 ms): app/1011089 accept4(fd: 3<socket:[7062148]>, upeer_sockaddr: 0xc0000799c8, upeer_addrlen: 0xc0000799ac, flags: 526336) = -1 EAGAIN (Resource temporarily unavailable)
     0.196 ( 0.005 ms): app/1011089 read(fd: 4, buf: 0xc00010e000, count: 4096)                           = 88
     0.238 ( 0.005 ms): app/1011089 futex(uaddr: 0xc000098148, op: WAKE|PRIVATE_FLAG, val: 1)             = 1
     0.278 ( 0.023 ms): app/1011089 write(fd: 4, buf: 0xc00010f000, count: 128)                           = 128
-    0.312 ( 0.004 ms): app/1011089 futex(uaddr: 0xc000098148, op: WAKE|PRIVATE_FLAG, val: 1)             = 1
-    0.320 ( 0.002 ms): app/1011089 read(fd: 4, buf: 0xc00010e000, count: 4096)                           = -1 EAGAIN (Resource temporarily unavailable)
-        ? (         ): app/1011090  ... [continued]: restart_syscall())                                  = 0
-    0.324 (         ): app/1011089 futex(uaddr: 0x938608, op: WAIT|PRIVATE_FLAG)                      ...
-    0.031 ( 0.074 ms): app/1011090 nanosleep(rqtp: 0x7fa60bfa6dd8)                                       = 0
-    0.106 ( 0.073 ms): app/1011090 nanosleep(rqtp: 0x7fa60bfa6dd8)                                       = 0
-    0.181 ( 0.074 ms): app/1011090 nanosleep(rqtp: 0x7fa60bfa6dd8)                                       = 0
-    0.256 ( 0.074 ms): app/1011090 nanosleep(rqtp: 0x7fa60bfa6dd8)                                       = 0
-    0.331 ( 0.072 ms): app/1011090 futex(uaddr: 0x937d90, op: WAIT|PRIVATE_FLAG, utime: 0x7fa60bfa6d78)  = 0
-    0.405 ( 0.074 ms): app/1011090 nanosleep(rqtp: 0x7fa60bfa6dd8)                                       = 0
-        ? (         ): app/1011091  ... [continued]: futex())                                            = 0
-    0.479 (         ): app/1011090 futex(uaddr: 0x937d90, op: WAIT|PRIVATE_FLAG, utime: 0x7fa60bfa6d78) ...
-    0.105 ( 0.003 ms): app/1011091 epoll_pwait(epfd: 5<anon_inode:[eventpoll]>, events: 0x7fa60b7a5748, maxevents: 128) = 1
-    0.114 ( 0.278 ms): app/1011091 epoll_pwait(epfd: 5<anon_inode:[eventpoll]>, events: 0x7fa60b7a5748, maxevents: 128, timeout: 4294967295, sigsetsize: 3) = 1
-    0.397 ( 0.003 ms): app/1011091 futex(uaddr: 0x937d90, op: WAKE|PRIVATE_FLAG, val: 1)                 = 1
-    0.401 ( 0.003 ms): app/1011091 read(fd: 4, buf: 0xc00010e000, count: 4096)                           = 0
-    0.419 ( 0.002 ms): app/1011091 epoll_ctl(epfd: 5<anon_inode:[eventpoll]>, op: DEL, fd: 4, event: 0xc000119a6c) = 0
+    ...
     0.422 ( 0.002 ms): app/1011091 close(fd: 4)                                                          = 0
-    0.465 ( 0.001 ms): app/1011091 epoll_pwait(epfd: 5<anon_inode:[eventpoll]>, events: 0x7fa60b7a5738, maxevents: 128, sigsetsize: 824634875904) = 0
-        ? (         ): app/1011093  ... [continued]: futex())                                            = 0
-    0.468 (         ): app/1011091 epoll_pwait(epfd: 5<anon_inode:[eventpoll]>, events: 0x7fa60b7a5738, maxevents: 128, timeout: 4294967295, sigsetsize: 824634875904) ...
-    0.251 ( 0.056 ms): app/1011093 nanosleep(rqtp: 0x7fa60a7a3ce0)                                       = 0
-    0.310 ( 0.007 ms): app/1011093 futex(uaddr: 0xc000098148, op: WAIT|PRIVATE_FLAG)                     = 0
-    0.479 (59999.242 ms): app/1011090  ... [continued]: futex())                                            = -1 ETIMEDOUT (Connection timed out)
-    0.319 (         ): app/1011093 futex(uaddr: 0xc000098148, op: WAIT|PRIVATE_FLAG)                  ...
-	59999.731 ( 0.074 ms): app/1011090 nanosleep(rqtp: 0x7fa60bfa6dd8)                                       = 0
+    ... 
 ```
 
 Note that we took care not to have any additional print statements in our [app.go](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/app/app.go) simple Golang HTTP server to avoid creating extra system calls.
