@@ -30,15 +30,17 @@ const Blog = (props) => {
     posts: { nodes: allPosts },
   } = data;
   const {
-    categories: { group: allCategories },
+    categories: { distinct: allCategories },
   } = data;
-  const categories = allCategories.map((c) => c.fieldValue)
+
+  const categories = allCategories
     .map((c) => ({
       label: c,
       count: allPosts.filter((pos) => pos.frontmatter.categories.some((pc) => pc === c)).length,
       order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
     }))
     .sort((a, b) => (a.order >= b.order ? -1 : 1));
+  // console.log(categories);
 
   const [category] = useState(urlCategory);
   const [page, setPage] = useState(0);
@@ -150,7 +152,7 @@ Blog.propTypes = {
       nodes: PropTypes.array.isRequired,
     }),
     categories: PropTypes.shape({
-      group: PropTypes.array.isRequired,
+      distinct: PropTypes.array.isRequired,
     }),
   }).isRequired,
 };
@@ -199,9 +201,7 @@ export const pageQuery = graphql`
     }
 
        categories: allMdx {
-      group(field: frontmatter___categories) {
-          fieldValue
-        }
+      distinct(field: frontmatter___categories)
     }
   }
 `;
