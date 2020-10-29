@@ -36,12 +36,12 @@ const Blog = (props) => {
   const categories = allCategories
     .map((c) => ({
       label: c,
-      count: allPosts.filter((pos) => pos.frontmatter.categories.some((pc) => pc === c)).length,
+      count: allPosts.filter((pos) => pos.frontmatter.categories.includes(c.toString())).length,
       order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
     }))
     .sort((a, b) => (a.order >= b.order ? -1 : 1));
-  console.log(categories);
-  console.log(urlCategory);
+  console.log(categories[2]);
+
 
   const [category] = useState(urlCategory);
   const [page, setPage] = useState(0);
