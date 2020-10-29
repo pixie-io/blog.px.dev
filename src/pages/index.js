@@ -33,13 +33,13 @@ const Blog = (props) => {
     categories: { distinct: allCategories },
   } = data;
 
-  const categories = allCategories
+  let categories = allCategories.sort()
     .map((c) => ({
       label: c,
       count: allPosts.filter((pos) => pos.frontmatter.categories.includes(c.toString())).length,
       order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
-    }))
-    .sort((a, b) => (a.order >= b.order ? -1 : 1));
+    }));
+  categories = categories.sort((a, b) => (a.order >= b.order ? -1 : 1));
   console.log(categories[2]);
 
 
@@ -201,7 +201,7 @@ export const pageQuery = graphql`
       }
     }
 
-        categories: allMdx(sort: {fields: fields___slug, order: ASC}) {
+   categories: allMdx(sort: {fields: fields___slug, order: ASC}) {
       distinct(field: frontmatter___categories)
     }
   }
