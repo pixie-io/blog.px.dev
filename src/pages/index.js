@@ -34,11 +34,11 @@ const Blog = (props) => {
   } = data;
   console.log(allCategories);
 
-  let categories = allCategories.sort()
+  let categories = allCategories
     .map((c) => ({
       label: c,
       count: allPosts.filter((pos) => pos.frontmatter.categories.includes(c.toString())).length,
-      order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
+      order: c === PIXIE_TEAM_BLOGS ? 99 : c.length,
     }));
   categories = categories.sort((a, b) => (a.order >= b.order ? -1 : 1));
   console.log(categories);
