@@ -40,7 +40,8 @@ const Blog = (props) => {
       order: c === PIXIE_TEAM_BLOGS ? 99 : 0,
     }))
     .sort((a, b) => (a.order >= b.order ? -1 : 1));
-  // console.log(categories);
+  console.log(categories);
+  console.log(urlCategory);
 
   const [category] = useState(urlCategory);
   const [page, setPage] = useState(0);
