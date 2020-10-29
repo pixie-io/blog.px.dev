@@ -166,7 +166,7 @@ In order to compare our two different approaches, we must consider
 
 To answer the first question, let’s look at the pros and cons of each approach.
 
-### Kprobe
+### Kprobes
 Pros:
 - Target language agnostic.
 - Simpler to implement and more maintainable. It does not rely on the implementation details of other libraries.
@@ -176,7 +176,7 @@ Cons:
 - There is some complexity in re-assembling these requests. 
 - Doesn’t work with TLS.
 
-### Uprobe
+### Uprobes
 Pros:
 - We can access and capture application context, such as stack trace, in addition to the request itself.
 - We can build the uprobes to capture the data after parsing is complete, avoiding repeated work in tracer.
