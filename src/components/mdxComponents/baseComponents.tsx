@@ -10,6 +10,7 @@ import Pre from './pre';
 import AnchorTag from './anchor';
 import CodeRenderer from './codeRenderer';
 import ListItem from './listItem';
+import CustomTableCell from './custom-table-cell';
 
 const getChildren = (props) => props.children;
 
@@ -35,7 +36,7 @@ export default {
   a: (props: any) => <AnchorTag {...props} />,
   table: (props: any) => <Table {...props} />,
   tr: (props: any) => <TableRow {...props} />,
-  td: ({ align, ...props }) => <TableCell {...props} align={align || undefined} />,
+  td: ({ align, ...props }) => <CustomTableCell {...props} align={align || undefined} />,
   th: ({ align, ...props }) => <TableCell {...props} align={align || undefined} />,
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
