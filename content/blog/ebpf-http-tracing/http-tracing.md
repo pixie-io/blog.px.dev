@@ -223,8 +223,9 @@ From the results, we can see that if the HTTP latency is > 1ms the overhead intr
 
 Tracing HTTP requests using eBPF is possible using both kprobes and uprobes; however, the kprobe approach is more scalable as it is agnostic to the target language. The code used in this blog is available [here](https://github.com/pixie-labs/pixie/tree/main/demos/simple-gotracing) and should be fully functional to trace Go/Python applications. Making it robust and functional across the entire Kernel API surface can involve a significant amount of work. Some language stacks use different underlying syscalls such as writev, or excessively split requests over multiple system calls.
 
-## Footnotes
+At Pixie, we are building an auto-telemetry system for Kubernetes that requires no manual instrumentation to get started. eBPF provides most of the magic behind our platform. Pixie uses both uprobes and kprobes to enable a lot of our functionality. We’ll be discussing more of this in our future blogs posts. If this post's contents are interesting, please give Pixie a try, or check out our open positions.
 
+## Links
 - Learn more about the [Pixie Community Beta](https://pixielabs.ai/).
 - Check out our [open positions](https://pixielabs.ai/careers).
 
