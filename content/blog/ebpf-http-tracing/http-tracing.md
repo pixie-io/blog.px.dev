@@ -1,6 +1,6 @@
 ---
 path: '/ebpf-http-tracing'
-title: 'Part 2: Capturing full body HTTP request/responses using eBPF'
+title: 'Part 2: Full body HTTP request/responses tracing using eBPF'
 date: 2020-10-28T06:00:00.000+00:00
 featured_image: hero-image.png
 category: 'Pixie Team Blogs'
