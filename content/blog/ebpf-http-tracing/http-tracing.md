@@ -42,7 +42,7 @@ curl http://localhost:9090/e\?iters\=10
 Back in the original terminal window, where the `perf` command is running, you should see a spew of data:
 
 ```
-	[0] % sudo perf trace -p 1011089
+[0] % sudo perf trace -p 1011089
         ? (         ): app/1011089  ... [continued]: epoll_pwait())                                      = 1
     0.014 ( 0.005 ms): app/1011089 futex(uaddr: 0x937d90, op: WAKE|PRIVATE_FLAG, val: 1)                 = 1
     0.021 ( 0.014 ms): app/1011089 accept4(fd: 3<socket:[7062148]>, upeer_sockaddr: 0xc0000799c8, upeer_addrlen: 0xc0000799ac, flags: 526336) = 4
@@ -166,12 +166,28 @@ In order to compare our two different approaches, we must consider
 
 To answer the first question, let’s look at the pros and cons of each approach.
 
-|               | Support       | Version                 |
-| :------------ | :------------ | :---------------------- |
-| Kubernetes    | Supported     | V1.12+                  |
-| Docker Swarm  | Not Supported | Not on roadmap          |
-| Nomad         | Not Supported | Not on roadmap          |
-| Mesos-Marathon| Not Supported | Not on roadmap          |
+### Kprobe
+Pros:
+- Target language agnostic.
+- Simpler to implement and more maintainable. It does not rely on the implementation details of other libraries.
+
+Cons:
+- The user program might split a single request across multiple system calls. 
+- There is some complexity in re-assembling these requests. 
+- Doesn’t work with TLS.
+
+### Uprobe
+Pros:
+- We can access and capture application context, such as stack trace, in addition to the request itself.
+- We can build the uprobes to capture the data after parsing is complete, avoiding repeated work in tracer.
+- Works with TLS.
+
+Cons:
+- Sensitive to the version of the underlying library being used.
+- Will not function with binaries that are stripped of symbols.
+- Need to implement a different probe for each library (and each programming language may have its own set of libraries).
+- Might be hard (impossible?) with dynamic languages like Python, since  it’s hard to find the right location to probe in their underlying runtime environments.
+- Causes an extra system call.
 
 Conceptually, Kprobes are the clear winner since we can avoid any language dependence to perform HTTP capture. However, this method has the added caveat that we need to reparse every response, so we should investigate whether that introduces a significant performance overhead. It is worth calling out that kprobes do not work with TLS. However, we will share our method for tracing TLS requests using eBPF in a future blog post. 
 
