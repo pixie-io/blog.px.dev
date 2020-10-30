@@ -135,28 +135,10 @@ In order to compare our two different approaches, we must consider
 
 To answer the first question, let’s look at the pros and cons of each approach.
 
-### Kprobes
-Pros:
-- Target language agnostic.
-- Simpler to implement and more maintainable. It does not rely on the implementation details of other libraries.
-
-Cons:
-- The user program might split a single request across multiple system calls.
-- There is some complexity in re-assembling these requests.
-- Doesn’t work with TLS.
-
-### Uprobes
-Pros:
-- We can access and capture application context, such as stack trace, in addition to the request itself.
-- We can build the uprobes to capture the data after parsing is complete, avoiding repeated work in tracer.
-- Works with TLS.
-
-Cons:
-- Sensitive to the version of the underlying library being used.
-- Will not function with binaries that are stripped of symbols.
-- Need to implement a different probe for each library (and each programming language may have its own set of libraries).
-- Might be hard (impossible?) with dynamic languages like Python, since  it’s hard to find the right location to probe in their underlying runtime environments.
-- Causes an extra system call.
+|               | Pros       | Cons                 |
+| :------------ | :------------ | :---------------------- |
+| kprobe    | `* Target language agnostic. // * Simpler to implement and more maintainable. It does not rely on the implementation details of other libraries.`  | `* The user program might split a single request across multiple system calls. // * There is some complexity in re-assembling these requests. // * Doesn’t work with TLS.`                 |
+| uprobe  | `* We can access and capture application context, such as stack trace, in addition to the request itself. // * We can build the uprobes to capture the data after parsing is complete, avoiding repeated work in tracer. // * Works with TLS.` | `* Sensitive to the version of the underlying library being used. // * Will not function with binaries that are stripped of symbols. // * Need to implement a different probe for each library (and each programming language may have its own set of libraries). // * Might be hard (impossible?) with dynamic languages like Python, since  it’s hard to find the right location to probe in their underlying runtime environments. // * Causes an extra system call.` |
 
 Conceptually, Kprobes are the clear winner since we can avoid any language dependence to perform HTTP capture. However, this method has the added caveat that we need to reparse every response, so we should investigate whether that introduces a significant performance overhead. It is worth calling out that kprobes do not work with TLS. However, we will share our method for tracing TLS requests using eBPF in a future blog post.
 
