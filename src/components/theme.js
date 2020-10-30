@@ -93,7 +93,7 @@ const common = {
     body2: {
       marginBottom: '8px',
       marginTop: '10px',
-      fontSize: '13px',
+      fontSize: '16px',
       lineHeight: '21px',
       textRendering: 'optimizeLegibility',
       WebkitFontSmoothing: 'antialiased',
