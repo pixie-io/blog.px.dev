@@ -1,12 +1,11 @@
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Theme } from '@material-ui/core';
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import parseMd from './parseMd';
 
-const CustomTableCell = withStyles((theme: Theme) => ({
+const CustomTableCell = withStyles(() => ({
   td: {
-    '& li, & *': theme.typography.body2,
+    '& li, & *': 'inherit',
   },
 }))((props: any) => {
   const { children, classes, align } = props;
