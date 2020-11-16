@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
 import Cookies from 'js-cookie';
 import styles from './cookies-banner.module.scss';
 
