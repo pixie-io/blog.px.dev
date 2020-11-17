@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../header';
 import Footer from '../footer';
 import { ThemeModeContext } from '../mainThemeProvider.tsx';
+import CookiesBanner from '../cookies-banner/cookies-banner';
 
 const Layout = ({
   children, whiteHeader, whiteFooter, hideMenu,
@@ -20,6 +21,7 @@ const Layout = ({
           />
           <main>{children}</main>
           <Footer whiteFooter={whiteFooter || theme === 'light'} />
+          <CookiesBanner />
         </>
       )}
     </ThemeModeContext.Consumer>

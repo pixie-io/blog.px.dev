@@ -1,0 +1,40 @@
+.banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  opacity: 0.9;
+  background-color: #353535;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  .inner-text {
+    padding: 8px;
+    font-size: 14px;
+    color: white;
+    a{
+      color: #12d6d6;
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+     font-size: 12px;
+    }
+  }
+
+    .closeButton {
+      cursor: pointer;
+      padding: 6px;
+      font-weight: 500;
+      margin-left: 8px;
+      margin-right: 12px;
+      padding-left: 8px;
+      border-radius: 4px;
+      padding-right: 8px;
+      text-transform: none;
+      letter-spacing: normal;
+
+  }
+}
