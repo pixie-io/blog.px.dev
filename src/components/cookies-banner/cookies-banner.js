@@ -13,8 +13,9 @@ const CookiesBanner = () => {
     <div className={styles.banner}>
       <div className={styles.innerText}>
         This site uses cookies to provide you with a better user experience.
-        By using Pixie, you consent to our
-        <a href='https://pixielabs.ai/privacy/#Cookies' target='_blank' rel='noopener noreferrer'> use of cookies</a>
+        By using Pixie, you consent to our&nbsp;
+        <a href='https://pixielabs.ai/privacy/#Cookies' target='_blank' rel='noopener noreferrer'>use of cookies</a>
+        .
       </div>
       <button type='button' className={styles.closeButton} onClick={() => close()}>
         Close
