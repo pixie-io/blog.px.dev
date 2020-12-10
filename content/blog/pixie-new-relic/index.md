@@ -18,11 +18,11 @@ However, we knew that the most developer-friendly version of Pixie must be open-
 
 We are so excited to begin working with New Relic on our shared vision for the future of observability. In the coming months, we’ll be jointly committing our roadmap in the following initiatives:
 
-Pixie Core: An open-source and self-managed version of Pixie which we will release to the CNCF sandbox early next year. As part of the process, we look forward to speaking with you about this at Kubecon-EU on May’21. Due to Pixie’s and New Relic’s commitment to open standards, we also plan to build out integrations with OpenTelemetry, Prometheus, and Grafana.
+* **Pixie Core**: An open-source and self-managed version of Pixie which we will release to the CNCF sandbox early next year. As part of the process, we look forward to speaking with you about this at Kubecon-EU on May’21. Due to Pixie’s and New Relic’s commitment to open standards, we also plan to build out integrations with OpenTelemetry, Prometheus, and Grafana.
 
-Pixie By New Relic: Our current Pixie Community offering will continue as a hosted version of Pixie Core and existing New Relic One customers will soon get instant access to Pixie data with a few clicks. Their existing experiences will be augmented with the metrics, logs, events, and application traces that Pixie automatically provides.
+* **Pixie By New Relic**: Our current Pixie Community offering will continue as a hosted version of Pixie Core and existing New Relic One customers will soon get instant access to Pixie data with a few clicks. Their existing experiences will be augmented with the metrics, logs, events, and application traces that Pixie automatically provides.
 
-Pixie by New Relic, Enterprise Edition: Industry-specific solutions for sectors such as Media, Telecommunications, and Government that allow enterprise customers to install Pixie entirely inside production clusters while meeting compliance, data security, support, and performance requirements.
+* **Pixie by New Relic, Enterprise Edition**: Industry-specific solutions for sectors such as Media, Telecommunications, and Government that allow enterprise customers to install Pixie entirely inside production clusters while meeting compliance, data security, support, and performance requirements.
 
 Finally, our journey is just beginning. We are a team of 12 people with a huge vision to reach every Kubernetes developer. As we embark on this part of our journey, we encourage anyone passionate about open source, Kubernetes, and observability to apply to join us [here](https://pixielabs.ai/careers/).
 
