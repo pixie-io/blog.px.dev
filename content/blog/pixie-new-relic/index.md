@@ -8,15 +8,15 @@ authors: ['Zain Asgar', 'Ishan Mukherjee', 'Pixie Founding Team']
 emails: ['zasgar@pixielabs.ai', 'ishan@pixielabs.ai']
 featured: true
 ---
-We are excited to announce that we signed a definitive agreement to join New Relic -- an outcome we certainly never predicted after only just two years. 
+We are excited to announce that we signed a [definitive agreement](http://blog.newrelic.com/product-news/pixie-developer-first-observability) to join New Relic -- an outcome we certainly never predicted after only just two years.
 
-New Relic’s focus on the developer is legendary. When Lew first started tinkering around with Pixie and participating in our community, we noticed an alignment in our visions for the future of observability, as well as echoes of New Relic’s developer-centric roots in Pixie. Joining New Relic will provide us with an unprecedented opportunity to reach millions of developers faster by open-sourcing a self-managed version of Pixie in the upcoming months. 
+New Relic’s focus on the developer is legendary. When New Relic's Founder/CEO, Lew Cirne, first started tinkering around with Pixie and participating in our community, we noticed an alignment in our visions for the future of observability, as well as echoes of New Relic’s developer-centric roots in Pixie. Joining New Relic will provide us with an unprecedented opportunity to reach millions of developers faster by open-sourcing a self-managed version of Pixie in the upcoming months.
 
 When we started Pixie in 2018, Kubernetes was rapidly gaining traction. We felt that a new approach to observability was needed due to the new, fundamental challenges in observing distributed, ephemeral systems. We founded Pixie in order to provide instant, flexible observability for developers like ourselves who were building applications on Kubernetes.
 
 However, we knew that the most developer-friendly version of Pixie must be open-source. In a forward-looking move, New Relic is giving us the opportunity to open-source Pixie and focus on providing world-class observability to all developers. The developer community is a core element of New Relic’s vision, and Pixie’s open-source offering will be a key part of that initiative and the primary area of focus for the Pixie team going forward.
 
-We are so excited to begin working with New Relic on our shared vision for the future of observability. In the coming months, we’ll be jointly committing our roadmap in the following initiatives: 
+We are so excited to begin working with New Relic on our shared vision for the future of observability. In the coming months, we’ll be jointly committing our roadmap in the following initiatives:
 
 Pixie Core: An open-source and self-managed version of Pixie which we will release to the CNCF sandbox early next year. As part of the process, we look forward to speaking with you about this at Kubecon-EU on May’21. Due to Pixie’s and New Relic’s commitment to open standards, we also plan to build out integrations with OpenTelemetry, Prometheus, and Grafana.
 
