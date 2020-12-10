@@ -10,7 +10,7 @@ featured: true
 ---
 We are excited to announce that we signed a [definitive agreement](http://blog.newrelic.com/product-news/pixie-developer-first-observability) to join New Relic -- an outcome we certainly never predicted after only just two years.
 
-New Relic’s focus on the developer is legendary. When New Relic's CEO, Lew Cirne, first started tinkering around with Pixie and participating in our community, we noticed an alignment in our visions for the future of observability, as well as echoes of New Relic’s developer-centric roots in Pixie. Joining New Relic will provide us with an unprecedented opportunity to reach millions of developers faster by open-sourcing a self-managed version of Pixie in the upcoming months.
+New Relic’s focus on the developer is legendary. When New Relic's Founder/CEO, Lew Cirne, first started tinkering around with Pixie and participating in our community, we noticed an alignment in our visions for the future of observability, as well as echoes of New Relic’s developer-centric roots in Pixie. Joining New Relic will provide us with an unprecedented opportunity to reach millions of developers faster by open-sourcing a self-managed version of Pixie in the upcoming months.
 
 When we started Pixie in 2018, Kubernetes was rapidly gaining traction. We felt that a new approach to observability was needed due to the new, fundamental challenges in observing distributed, ephemeral systems. We founded Pixie in order to provide instant, flexible observability for developers like ourselves who were building applications on Kubernetes.
 
