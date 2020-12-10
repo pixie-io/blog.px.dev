@@ -8,7 +8,7 @@ authors: ['Zain Asgar', 'Ishan Mukherjee', 'Pixie Founding Team']
 emails: ['zasgar@pixielabs.ai', 'ishan@pixielabs.ai']
 featured: true
 ---
-We are excited to announce that we signed a [definitive agreement](https://newrelic.com/press-release/20201210) to join New Relic -- an outcome we certainly never predicted after only just two years.
+We are excited to announce that we signed a [definitive agreement](http://blog.newrelic.com/product-news/pixie-developer-first-observability) to join New Relic -- an outcome we certainly never predicted after only just two years.
 
 New Relic’s focus on the developer is legendary. When Lew first started tinkering around with Pixie and participating in our community, we noticed an alignment in our visions for the future of observability, as well as echoes of New Relic’s developer-centric roots in Pixie. Joining New Relic will provide us with an unprecedented opportunity to reach millions of developers faster by open-sourcing a self-managed version of Pixie in the upcoming months.
 
