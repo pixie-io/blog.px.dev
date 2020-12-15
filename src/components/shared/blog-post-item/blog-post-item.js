@@ -9,15 +9,8 @@ import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
 
 const BlogPostItem = withStyles((theme) => ({
-  border: {
-    borderColor: theme.palette.type === 'light' ? '#ddd' : '#353535',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    boxSizing: 'border-box',
-    borderRadius: '5px',
-  },
   image: {
-    margin: '20px',
+    margin: 0,
   },
 }))(({ post, classes }) => {
   const {
@@ -36,45 +29,44 @@ const BlogPostItem = withStyles((theme) => ({
   } = post;
   return (
     <article className='row'>
-      <Link to={`/${slug}`}>
-        <div className='col-1' />
-        <div className='col-10'>
-          <div className={classes.border}>
-            <div className={classes.image}>
-              {featuredImage
-                ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
-                : <PostPlaceholder />}
-            </div>
-            <div className={styles.body}>
-              <div className={styles.heading}>
+      <div className='col-1' />
+      <div className='col-10'>
+        <Link to={`/${slug}`}>
 
-                {email ? (
-                  <div className={styles.authorAvatar}>
-                    <GravatarIcon email={email} />
-                  </div>
-                ) : (emails || []).map((e) => (
-                  <div className={styles.authorAvatar}>
-                    <GravatarIcon email={e} />
-                  </div>
-                ))}
+          <div className={classes.image}>
+            {featuredImage
+              ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
+              : <PostPlaceholder />}
+          </div>
+          <div className={styles.body}>
+            <Typography variant='h3'>{title}</Typography>
+            <Typography variant='body1'>{excerpt}</Typography>
+            <div className={styles.heading}>
+              {email ? (
+                <div className={styles.authorAvatar}>
+                  <GravatarIcon email={email} />
+                </div>
+              ) : (emails || []).map((e) => (
+                <div className={styles.authorAvatar}>
+                  <GravatarIcon email={e} />
+                </div>
+              ))}
 
-                <div className={styles.authorDetails}>
-                  <Typography variant='body1' className='m-0'>
-                    {author || (authors || []).join(', ')}
-                  </Typography>
-                  <div className={styles.dateRow}>
-                    <div>{date}</div>
-                    <div>{category}</div>
-                  </div>
+              <div className={styles.authorDetails}>
+                <Typography variant='body1' className='m-0'>
+                  {author || (authors || []).join(', ')}
+                </Typography>
+                <div className={styles.dateRow}>
+                  <div>{date}</div>
+                  <div>{category}</div>
                 </div>
               </div>
-              <Typography variant='h3'>{title}</Typography>
-              <p>{excerpt}</p>
-              <div className='col-1' />
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+
+      </div>
+      <div className='col-1' />
     </article>
   );
 });

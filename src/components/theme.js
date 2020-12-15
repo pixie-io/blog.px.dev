@@ -37,12 +37,12 @@ const common = {
     },
     h3: {
       fontFamily: ['Roboto'],
-      marginBottom: '16px',
-      marginTop: '24px',
+      marginBottom: '12px',
+      marginTop: '12px',
       fontStyle: 'normal',
-      fontWeight: 'bold',
-      fontSize: '20px',
-      lineHeight: '25px',
+      fontWeight: 300,
+      fontSize: '46px',
+      lineHeight: '64px',
     },
     h4: {
       fontFamily: ['Roboto'],

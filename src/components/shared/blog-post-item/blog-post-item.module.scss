@@ -9,10 +9,7 @@ article {
   font-size: 16px;
   line-height: 26px;
 
-
-
-
-  p, span {
+ pan {
     color: #9696A5;
   }
 
@@ -33,7 +30,6 @@ article {
   }
 
   .body {
-    padding: 24px;
 
     .heading {
       display: flex;
@@ -56,12 +52,8 @@ article {
           padding: 0;
           justify-content: space-between;
           flex-wrap: wrap;
-
         }
-
-
       }
-
     }
   }
 
