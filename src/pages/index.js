@@ -8,7 +8,6 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
 import styles from '../scss/pages/blog.module.scss';
-import blogIcon from '../images/blog-icon.svg';
 
 const useStyles = makeStyles((theme) => ({
   body: {

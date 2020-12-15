@@ -20,7 +20,7 @@ const Layout = ({
             theme={theme}
           />
           <main>{children}</main>
-          <Footer whiteFooter={whiteFooter || theme === 'light'} />
+          <Footer />
           <CookiesBanner />
         </>
       )}
