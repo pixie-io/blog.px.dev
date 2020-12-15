@@ -30,10 +30,9 @@ const common = {
       marginTop: '24px',
       paddingBottom: '8px',
       fontStyle: 'normal',
-      fontWeight: 'bold',
-      fontSize: '24px',
-      lineHeight: '30px',
-      borderBottom: '1px solid #dcdde0',
+      fontWeight: 300,
+      fontSize: '52px',
+      lineHeight: '70px',
     },
     h3: {
       fontFamily: ['Roboto'],
