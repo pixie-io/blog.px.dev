@@ -13,7 +13,7 @@ export const ThemeModeContext = React.createContext(
 );
 export default function MainThemeProvider({ children }) {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [theme, setTheme] = React.useState('dark');
+  const [theme, setTheme] = React.useState('light');
   const firstRun = useRef(true);
   useEffect(
     () => {

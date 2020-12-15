@@ -17,13 +17,12 @@ const common = {
     h1: {
       fontFamily: ['Roboto'],
       marginBottom: '16px',
-      marginTop: '0px',
-      fontSize: '32px',
-      lineHeight: '40px',
+      marginTop: '12px',
+      fontSize: '52px',
+      lineHeight: '70px',
       paddingBottom: '10px',
-      paddingTop: '30px',
       fontStyle: 'normal',
-      fontWeight: 'bold',
+      fontWeight: 300,
     },
     h2: {
       fontFamily: ['Roboto'],

@@ -37,8 +37,8 @@ const BlogPostItem = withStyles((theme) => ({
   return (
     <article className='row'>
       <Link to={`/${slug}`}>
-        <div className='col-2' />
-        <div className='col-8'>
+        <div className='col-1' />
+        <div className='col-10'>
           <div className={classes.border}>
             <div className={classes.image}>
               {featuredImage
@@ -70,7 +70,7 @@ const BlogPostItem = withStyles((theme) => ({
               </div>
               <Typography variant='h3'>{title}</Typography>
               <p>{excerpt}</p>
-              <div className='col-2' />
+              <div className='col-1' />
             </div>
           </div>
         </div>

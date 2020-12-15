@@ -8,14 +8,16 @@
     padding-bottom: 60px;
     padding-top: 150px;
 
-    h1 {
-      font-weight: normal;
-      text-align: center;
+    .topDecorator {
+      display: block;
+      height: 11px;
+      width: 59px;
+      background-color: $color-green;
     }
 
-    .blogLogo {
-      display: block;
-      margin: 0 auto;
+    h1 {
+      font-weight: normal;
+      text-align: left;
     }
 
     h3 {
@@ -42,7 +44,7 @@
     ul {
       list-style: none;
       padding: 0;
-      text-align: center;
+      text-align: left;
 
       @media (max-width: $breakpoint) {
         @include padding-mobile;
