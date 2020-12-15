@@ -8,7 +8,7 @@ import styles from './blog-post-item.module.scss';
 import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
 
-const BlogPostItem = withStyles((theme) => ({
+const BlogPostItem = withStyles(() => ({
   image: {
     marginTop: '80px',
   },

@@ -7,7 +7,7 @@ import { ThemeModeContext } from '../mainThemeProvider.tsx';
 import CookiesBanner from '../cookies-banner/cookies-banner';
 
 const Layout = ({
-  children, whiteHeader, whiteFooter, hideMenu,
+  children, whiteHeader, hideMenu,
 }) => (
   <>
     <ThemeModeContext.Consumer>
@@ -31,12 +31,10 @@ const Layout = ({
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   whiteHeader: PropTypes.bool,
-  whiteFooter: PropTypes.bool,
   hideMenu: PropTypes.bool,
 };
 Layout.defaultProps = {
   whiteHeader: false,
-  whiteFooter: false,
   hideMenu: false,
 };
 export default Layout;
