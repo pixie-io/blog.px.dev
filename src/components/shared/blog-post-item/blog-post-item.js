@@ -10,7 +10,7 @@ import GravatarIcon from '../../gravatar';
 
 const BlogPostItem = withStyles((theme) => ({
   image: {
-    margin: 0,
+    marginTop: '80px',
   },
 }))(({ post, classes }) => {
   const {
@@ -22,9 +22,9 @@ const BlogPostItem = withStyles((theme) => ({
       email,
       emails,
       date,
-      category,
     },
     excerpt,
+    timeToRead,
     fields: { slug },
   } = post;
   return (
@@ -51,16 +51,23 @@ const BlogPostItem = withStyles((theme) => ({
                   <GravatarIcon email={e} />
                 </div>
               ))}
-
-              <div className={styles.authorDetails}>
-                <Typography variant='body1' className='m-0'>
-                  {author || (authors || []).join(', ')}
-                </Typography>
-                <div className={styles.dateRow}>
-                  <div>{date}</div>
-                  <div>{category}</div>
+              <Typography variant='body1' className='m-0'>
+                <div className={styles.authorDetails}>
+                  <div className={styles.authorName}>
+                    {author || (authors || []).join(', ')}
+                  </div>
+                  <div className={styles.dot}>•</div>
+                  <div className={styles.postDetails}>
+                    {date}
+                  </div>
+                  <div className={styles.dot}>•</div>
+                  <div className={styles.postDetails}>
+                    {timeToRead}
+                    {' '}
+                    minutes read
+                  </div>
                 </div>
-              </div>
+              </Typography>
             </div>
           </div>
         </Link>
