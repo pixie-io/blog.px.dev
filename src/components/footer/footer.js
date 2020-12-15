@@ -12,7 +12,10 @@ import youtube from '../../images/footer/youtube-icon.svg';
 import twitter from '../../images/footer/twitter-icon.svg';
 
 const Footer = ({ whiteFooter }) => (
-  <footer className={`${whiteFooter ? styles.whitefooter : ''} ${styles.footer}`} style={{ position: 'relative' }}>
+  <footer
+    className={`${whiteFooter ? styles.whitefooter : ''} ${styles.footer}`}
+    style={{ position: 'relative' }}
+  >
     <Link to='/'><img src={pixieLogo} alt='Pixie logo' className={styles.logo} /></Link>
     <div className='container hide-not-desktop'>
       <div className={styles.divider} />
@@ -39,12 +42,7 @@ const Footer = ({ whiteFooter }) => (
       <div className={styles.divider} />
       <ul className={styles.linksRow}>
 
-        <li>
-          <Link to='/beta'>WHAT&apos;S IN BETA?</Link>
-        </li>
-        <li>
-          <Link to='/about'>ABOUT</Link>
-        </li>
+
         <li>
           <a
             href='https://work.withpixie.ai/login'
@@ -54,21 +52,37 @@ const Footer = ({ whiteFooter }) => (
           </a>
         </li>
         <li>
-          <Link to='/terms'>TERMS & PRIVACY</Link>
-        </li>
-        <li>
-          <Link to='/community'>COMMUNITY</Link>
-        </li>
-        <li>
-          <Link to='/careers'>CAREERS</Link>
-        </li>
-        <li>
-          <a href='https://blog.pixielabs.ai/' target='_blank' rel='noreferrer noopener'>
-            BLOG
+          <a href='https://pixielabs.ai/terms' target='_blank' rel='noreferrer noopener'>
+            TERMS &
+            PRIVACY
           </a>
         </li>
         <li>
-          <Link to='/contact'>CONTACT</Link>
+          <a
+            href='https://pixielabs.ai/community'
+            target='_blank'
+            rel='noreferrer noopener'
+          >
+            COMMUNITY
+          </a>
+        </li>
+        <li>
+          <a
+            href='https://pixielabs.ai/careers'
+            target='_blank'
+            rel='noreferrer noopener'
+          >
+            CAREERS
+          </a>
+        </li>
+        <li>
+          <a
+            href='https://pixielabs.ai/contact'
+            target='_blank'
+            rel='noreferrer noopener'
+          >
+            CONTACT
+          </a>
         </li>
       </ul>
     </div>
