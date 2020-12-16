@@ -80,8 +80,7 @@ const Blog = (props) => {
               <div className='col-10'>
                 <div className={styles.topDecorator} />
                 <Typography variant='h1'>
-                  The latest news and announcements on Pixie, products, partners,
-                  and more.
+                  Updates and ideas from Pixie Labs and the Pixienaut developer community
                 </Typography>
               </div>
               <div className='col-1' />
