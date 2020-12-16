@@ -55,27 +55,31 @@ const Header = ({
   return (
     <>
       {showNewsBar && (
-        <a href='https://blog.pixielabs.ai/blog/public-beta-launch/beta-launch/'>
-          <div className={styles.newsBar}>
-            <div className='hide-mobile hide-tablet'>
-              Check out Pixie Community’s Launch Announcement
-              &nbsp;
-              🚀
-            </div>
-            <div className='hide-desktop'>
-              Check out Pixie Community’s Launch
-              &nbsp;
-              🚀
-            </div>
-            <div
-              className={`${styles.newsBarClose} hide-desktop`}
-              onClick={(e) => closeTopBanner(e)}
-            >
-              {' '}
-              &#10005;
-            </div>
+
+        <div className={styles.newsBar}>
+
+          <span className='hide-not-desktop'>
+             We&apos;re  joining forces with New Relic to accelerate the Pixie Community.
+            {' '}
+            <a href='https://newrelic.com/press-release/20201210'>
+                   Learn more
+            </a>
+            {' '}
+             🚀
+          </span>
+          <span className='hide-desktop'>
+                <a href='https://newrelic.com/press-release/20201210'>We&apos;re joining forces with New Relic</a>
+          </span>
+
+          <div
+            className={`${styles.newsBarClose} hide-desktop`}
+            onClick={(e) => closeTopBanner(e)}
+          >
+            {' '}
+            &#10005;
           </div>
-        </a>
+        </div>
+
       )}
       <header
         className={`
