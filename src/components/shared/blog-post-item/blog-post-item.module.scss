@@ -9,10 +9,7 @@ article {
   font-size: 16px;
   line-height: 26px;
 
-
-
-
-  p, span {
+  pan {
     color: #9696A5;
   }
 
@@ -33,7 +30,6 @@ article {
   }
 
   .body {
-    padding: 24px;
 
     .heading {
       display: flex;
@@ -48,20 +44,34 @@ article {
       .authorDetails {
         display: inline-block;
         width: 100%;
-        .dateRow {
-          color: #9696A5;
-          margin: 0;
-          width: 100%;
-          display: flex;
-          padding: 0;
-          justify-content: space-between;
-          flex-wrap: wrap;
+        font-size: 15px;
+        line-height: 28px;
 
+        .authorName {
+          display: inline-block;
         }
 
+        .dot {
+          display: inline-block;
+          color: #9696A5;
+          margin: 0 6px 0 6px;
+          @media (max-width: 700px) {
+            margin: 0;
+            display: none;
+          }
+        }
+
+        .postDetails {
+          display: inline-block;
+          color: #9696A5;
+          padding: 0;
+          margin: 0;
+          @media (max-width: 700px) {
+            display: block;
+          }
+        }
 
       }
-
     }
   }
 

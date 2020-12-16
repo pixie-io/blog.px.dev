@@ -5,7 +5,6 @@
   padding-bottom: 33px;
   position: relative;
 
-
   &.whitefooter {
     background: $color-white;
   }
@@ -89,8 +88,11 @@
       @media (min-width: 768px) {
         &:after {
           content: "|";
-          margin: 0 25px;
+          margin: 0 24px;
           color: #596274;
+          @media (max-width: 1300px) {
+            margin: 0 14px;
+          }
         }
 
         &:last-child:after {

@@ -21,7 +21,7 @@ import { docsRedirect, loginRedirect, signupRedirect } from '../shared/tracking-
 
 
 const Header = ({
-  whiteHeader, transparentMenu, onThemeTypeSwitch,
+  transparentMenu, onThemeTypeSwitch,
   theme,
 }) => {
   const [open, setOpen] = useState(false);
@@ -55,33 +55,37 @@ const Header = ({
   return (
     <>
       {showNewsBar && (
-        <a href='https://blog.pixielabs.ai/blog/public-beta-launch/beta-launch/'>
-          <div className={styles.newsBar}>
-            <div className='hide-mobile hide-tablet'>
-              Check out Pixie Community’s Launch Announcement
-              &nbsp;
-              🚀
-            </div>
-            <div className='hide-desktop'>
-              Check out Pixie Community’s Launch
-              &nbsp;
-              🚀
-            </div>
-            <div
-              className={`${styles.newsBarClose} hide-desktop`}
-              onClick={(e) => closeTopBanner(e)}
-            >
-              {' '}
-              &#10005;
-            </div>
+
+        <div className={styles.newsBar}>
+
+          <span className='hide-not-desktop'>
+             We&apos;re  joining forces with New Relic to accelerate the Pixie Community.
+            {' '}
+            <a href='https://newrelic.com/press-release/20201210'>
+                   Learn more
+            </a>
+            {' '}
+             🚀
+          </span>
+          <span className='hide-desktop'>
+                <a href='https://newrelic.com/press-release/20201210'>We&apos;re joining forces with New Relic</a>
+          </span>
+
+          <div
+            className={`${styles.newsBarClose} hide-desktop`}
+            onClick={(e) => closeTopBanner(e)}
+          >
+            {' '}
+            &#10005;
           </div>
-        </a>
+        </div>
+
       )}
       <header
         className={`
       ${transparentMenu ? styles.transparentMenu : ''}  
       ${showNewsBar ? styles.showNewsBar : ''}  
-      ${whiteHeader ? styles.whiteHeader : ''}  
+        ${theme === 'light' ? styles.whiteHeader : ''}
       ${showShadow ? styles.showShadow : ''} 
       `}
       >
@@ -89,7 +93,6 @@ const Header = ({
         <div className={styles.logos}>
           <Link to='/' className={styles.logo}>
             <img src={pixieLogo} alt='pixie logo' />
-            <span>Blog</span>
           </Link>
           <div className={styles.socialIcons}>
             <a href='https://slackin.withpixie.ai'>
@@ -124,7 +127,7 @@ const Header = ({
             </li>
             <li className={styles.colored}>
               <a href='https://pixielabs.ai/'>
-                Learn about Pixie
+                LEARN MORE
               </a>
             </li>
           </ul>
@@ -180,10 +183,10 @@ const Header = ({
               <em>Company</em>
               <ul>
                 <li>
-                  <Link to='/community'>Community</Link>
+                  <a href='https://pixielabs.ai/community'>Community</a>
                 </li>
                 <li>
-                  <Link to='/careers'>Careers</Link>
+                  <a href='https://pixielabs.ai/careers'>Careers</a>
                 </li>
               </ul>
             </div>
@@ -196,10 +199,10 @@ const Header = ({
                   </a>
                 </li>
                 <li>
-                  <Link to='/contact/#sales'>Contact Sales</Link>
+                  <a href='https://pixielabs.ai//contact/#sales'>Contact Sales</a>
                 </li>
                 <li>
-                  <Link to='/contact/#support'>Email us</Link>
+                  <a href='https://pixielabs.ai//contact/#support'>Email us</a>
                 </li>
               </ul>
             </div>
@@ -238,7 +241,7 @@ const Header = ({
               </li>
             </ul>
 
-            <Link to='/terms'>Terms & Privacy</Link>
+            <a href='https://pixielabs.ai/terms'>Terms & Privacy</a>
           </div>
         </div>
         <div className='hide-desktop'>
@@ -253,7 +256,7 @@ const Header = ({
             {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
           </IconButton>
           <IconButton onClick={() => setOpen(true)}>
-            <MenuIcon style={{ color: 'white' }} />
+            <MenuIcon />
           </IconButton>
         </div>
 
@@ -263,13 +266,11 @@ const Header = ({
 };
 
 Header.propTypes = {
-  whiteHeader: PropTypes.bool,
   transparentMenu: PropTypes.bool,
   onThemeTypeSwitch: PropTypes.func.isRequired,
   theme: PropTypes.string.isRequired,
 };
 Header.defaultProps = {
-  whiteHeader: false,
   transparentMenu: false,
 };
 export default Header;

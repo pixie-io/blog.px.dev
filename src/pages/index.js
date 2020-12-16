@@ -8,7 +8,8 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
 import styles from '../scss/pages/blog.module.scss';
-import blogIcon from '../images/blog-icon.svg';
+import spaceGuys from '../images/homepage/sspace-illustration.svg';
+import Button from '../components/shared/button';
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -73,48 +74,55 @@ const Blog = (props) => {
       />
       <section className={`${styles.latestStories}  ${muiClasses.body}`}>
         <div className='container'>
-          <div className={`row ${styles.blogCategory}`}>
-            <div className='col-12'>
-              <img src={blogIcon} alt='blog icon' className={styles.blogLogo} />
-              <Typography variant='h1'>
-                The latest news and announcements on Pixie, products, partners,
-                and more.
-              </Typography>
+          <div className={styles.blogCategory}>
+            <div className='row'>
+              <div className='col-1' />
+              <div className='col-10'>
+                <div className={styles.topDecorator} />
+                <Typography variant='h1'>
+                  Updates and ideas from Pixie Labs and the Pixienaut developer community
+                </Typography>
+              </div>
+              <div className='col-1' />
             </div>
-            <div className='col-12'>
-              <ul>
-                <li>
-                  <Link to='/'>
-                    <button
-                      type='button'
-                      className={!category ? styles.active : ''}
-                    >
-                      All (
-                      {allPosts.length}
-                      )
-                    </button>
-                  </Link>
-                </li>
-                {categories.map((cat) => (
-                  <li key={cat.label}>
-                    <Link
-                      to={`/${slugify(cat.label)
-                        .toLowerCase()}`}
-                    >
+            <div className='row'>
+              <div className='col-1' />
+              <div className='col-10'>
+                <ul>
+                  <li>
+                    <Link to='/'>
                       <button
                         type='button'
-                        className={category === cat.label ? styles.active : ''}
+                        className={!category ? styles.active : ''}
                       >
-                        {cat.label}
-                        {' '}
-                        (
-                        {cat.count}
+                        All (
+                        {allPosts.length}
                         )
                       </button>
                     </Link>
                   </li>
-                ))}
-              </ul>
+                  {categories.map((cat) => (
+                    <li key={cat.label}>
+                      <Link
+                        to={`/${slugify(cat.label)
+                          .toLowerCase()}`}
+                      >
+                        <button
+                          type='button'
+                          className={category === cat.label ? styles.active : ''}
+                        >
+                          {cat.label}
+                          {' '}
+                          (
+                          {cat.count}
+                          )
+                        </button>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className='col-1' />
             </div>
           </div>
           {posts.map((post) => (
@@ -136,6 +144,30 @@ const Blog = (props) => {
           <div className='clearfix' />
         </div>
       </section>
+      <div className={styles.bottomStars}>
+        <section className={styles.communitySection}>
+          <img className={styles.spaceGuys} loading='lazy' src={spaceGuys} alt='' />
+          <div className='container'>
+            <div className='col-12'>
+              <div className={styles.communitySectionTitle}>
+                <div className={styles.topDecorator} />
+                <Typography variant='h2'>
+                  Interested in helping shape
+                  {' '}
+                  <br className='hide-mobile hide-tablet' />
+                  {' '}
+                  our product & community?
+                </Typography>
+                <div>
+                  <Button className={styles.button} to='/community'>
+                    BE A PIXIENAUT
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </Layout>
   );
 };
@@ -183,7 +215,7 @@ export const pageQuery = graphql`
           email
           emails
           categories
-          date(formatString: "MMMM DD YYYY")
+          date(formatString: "MMM DD YYYY")
           featured_image {
             childImageSharp {
               id
