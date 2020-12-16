@@ -24,7 +24,7 @@ const Button = ({
         className={`${styles.linkButton} ${className} ${outline ? styles.outline : ''}`}
         href={link}
         target='_blank'
-        rel='noreferrer'
+        rel='noreferrer noopener'
       >
         {children}
       </a>
