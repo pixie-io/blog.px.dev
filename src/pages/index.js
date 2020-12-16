@@ -83,10 +83,6 @@ const Blog = (props) => {
                   The latest news and announcements on Pixie, products, partners,
                   and more.
                 </Typography>
-                <Typography variant='body1'>
-                  Send us a message with any questions or requests you
-                  have and we’ll get right back to you.
-                </Typography>
               </div>
               <div className='col-1' />
             </div>
