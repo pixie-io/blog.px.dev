@@ -23,6 +23,10 @@ const common = {
       paddingBottom: '10px',
       fontStyle: 'normal',
       fontWeight: 300,
+      [breakpoints.down('md')]: {
+        fontSize: '32px',
+        lineHeight: '48px',
+      },
     },
     h2: {
       fontFamily: ['Roboto'],
@@ -42,6 +46,10 @@ const common = {
       fontWeight: 300,
       fontSize: '46px',
       lineHeight: '64px',
+      [breakpoints.down('md')]: {
+        fontSize: '24px',
+        lineHeight: '32px',
+      },
     },
     h4: {
       fontFamily: ['Roboto'],

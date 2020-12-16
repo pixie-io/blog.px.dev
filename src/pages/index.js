@@ -8,7 +8,6 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
 import styles from '../scss/pages/blog.module.scss';
-import bottomSpaceStars from '../images/homepage/bottom-stars.png';
 import spaceGuys from '../images/homepage/sspace-illustration.svg';
 import Button from '../components/shared/button';
 
@@ -150,31 +149,29 @@ const Blog = (props) => {
           <div className='clearfix' />
         </div>
       </section>
-      <div
-        style={{ backgroundImage: `url(${bottomSpaceStars})` }}
-        className={styles.bottomStars}
-      >
+      <div className={styles.bottomStars}>
         <section className={styles.communitySection}>
           <img className={styles.spaceGuys} loading='lazy' src={spaceGuys} alt='' />
           <div className='container'>
-            <div className={styles.communitySectionTitle}>
-              <div className={styles.topDecorator} />
-              <Typography variant='h2'>
-                Interested in helping shape
-                {' '}
-                <br className='hide-mobile hide-tablet' />
-                {' '}
-                our product & community?
-              </Typography>
-              <div>
-                <Button className={styles.button} to='/community'>
-                  BE A PIXIENAUT
-                </Button>
+            <div className='col-12'>
+              <div className={styles.communitySectionTitle}>
+                <div className={styles.topDecorator} />
+                <Typography variant='h2'>
+                  Interested in helping shape
+                  {' '}
+                  <br className='hide-mobile hide-tablet' />
+                  {' '}
+                  our product & community?
+                </Typography>
+                <div>
+                  <Button className={styles.button} to='/community'>
+                    BE A PIXIENAUT
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </section>
-        <div className='clear-both' />
       </div>
     </Layout>
   );
