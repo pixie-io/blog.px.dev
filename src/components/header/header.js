@@ -256,7 +256,7 @@ const Header = ({
             {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
           </IconButton>
           <IconButton onClick={() => setOpen(true)}>
-            <MenuIcon style={{ color: 'white' }} />
+            <MenuIcon />
           </IconButton>
         </div>
 
