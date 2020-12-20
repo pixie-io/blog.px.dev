@@ -37,7 +37,7 @@ Uprobes allow you to intercept a userspace program by inserting a debug trap ins
 ![BPF for tracing (from Brendan Gregg)](./bpf-tracing.jpg)
 :::
 
-Let's see how uprobes actually function. To deploy uprobes and capture function arguments, we will be using [this](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/app.go) simple demo application. The relevant parts of this Go program are shown below.
+Let's see how uprobes actually function. To deploy uprobes and capture function arguments, we will be using [this](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/app/app.go) simple demo application. The relevant parts of this Go program are shown below.
 
 `main()` is a simple HTTP server that exposes a single _GET_ endpoint on _/e_, which computes Euler's number (__e__) using an iterative approximation. `computeE` takes in a single query param(_iters_), which specifies the number of iterations to run for the approximation. The more iterations, the more accurate the approximation, at the cost of compute cycles. It's not essential to understand the math behind the function. We are just interested in tracing the arguments of any invocation of `computeE`.
 
