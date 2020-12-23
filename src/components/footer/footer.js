@@ -86,7 +86,7 @@ const Footer = ({ whiteFooter }) => (
         </li>
       </ul>
     </div>
-    <div className={styles.copyrightLink}>© 2020, Pixie Labs Inc.</div>
+    <div className={styles.copyrightLink}>© 2020, Pixie Labs</div>
   </footer>
 );
 Footer.propTypes = {

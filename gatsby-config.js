@@ -11,7 +11,7 @@ module.exports = {
   siteMetadata: {
     title: 'Pixie Labs Blog',
     description: 'Pixie Blog',
-    author: 'Pixie Labs Inc.',
+    author: 'Pixie Labs',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
