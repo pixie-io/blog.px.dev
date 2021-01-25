@@ -90,7 +90,7 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "lint": "./lint.sh",
+    "lint": "eslint src ./*.js",
     "lint-fix": "eslint src ./*.js --fix",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
