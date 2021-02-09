@@ -64,7 +64,7 @@ const BlogPostItem = withStyles(() => ({
                   <div className={styles.postDetails}>
                     {timeToRead}
                     {' '}
-                    minutes read
+                    minute read
                   </div>
                 </div>
               </Typography>
