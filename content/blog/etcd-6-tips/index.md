@@ -2,7 +2,7 @@
 path: '/etcd-6-tips'
 title: 'How etcd works and 6 tips to keep in mind'
 date: 2021-02-08T06:00:00.000+00:00
-featured_image: hero-image.png
+featured_image: etcd-hero.png
 categories: ['Pixie Team Blogs']
 author: 'Michelle Nguyen'
 email: 'michelle@pixielabs.ai'
