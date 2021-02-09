@@ -9,7 +9,7 @@ email: 'michelle@pixielabs.ai'
 featured: true
 ---
 
-etcd is a distributed key-value store designed to be a highly available and strongly consistent data store for distributed systems. In fact, by default Kubernetes itself uses etcd to store all of its cluster data, such as configs and metadata.
+[etcd](https://etcd.io/) is a distributed key-value store designed to be a highly available and strongly consistent data store for distributed systems. In fact, by default Kubernetes itself uses etcd to store all of its cluster data, such as configs and metadata.
 
 As with designing any system, different architectural decisions lead to different tradeoffs that impact the optimal way a system should be used and operated. In this blogpost, we discuss the inner workings of etcd to help draw conclusions for how you can best use this key-value store in your own application.
 
@@ -30,13 +30,13 @@ In order to provide high availability, etcd is run as a cluster of replicated no
 
 More specifically, the leader node has the following responsibilities:
 
-## Maintaining Leadership
+### Maintaining Leadership
 
 The leader node must periodically send a heartbeat to all followers to notify them that it is still alive and active. If the followers have not received a heartbeat after a configurable timeout, a new leader election is initiated. During this process, the system will be unavailable, as a leader is necessary to enforce the current state.
 
 By effect, the etcd cluster's stability is very sensitive to network and disk IO. This means that etcd's stability is susceptible to heavy workloads, both from itself and other applications running in the environment. <u><a name="leadership">It is recommended to add robust handling, such as retries, to account for the possibility of lost leadership.</a></u>
 
-## Log Replication
+### Log Replication
 
 ::: div image-m
 <svg title="Screenshot from raft.github.io's helpful Raft Visualization, which demonstrates how Log Replication works. In this screenshot, S2 is the leader and broadcasting the log entries to all followers." src='logreplication.png' />
@@ -69,7 +69,7 @@ This helps visualize that a cluster of size 4 has the same failure tolerance as 
 
 Now that we have an understanding of how etcd maintains its availability and consistency, we discuss how data is actually stored in the system.
 
-## BoltDB
+### BoltDB
 etcd's datastore is built on top of [BoltDB](https://github.com/boltdb/bolt), or more specifically, [BBoltDB](https://github.com/etcd-io/bbolt), which is a forked and modified version of BoltDB maintained by the etcd contributors.
 
 Bolt is a Go key-value store which writes its data to a single memory-mapped file. This means that the underlying operating system is responsible for handling how the data is cached, typically caching as much of the file in memory as possible. This, however, means that Bolt will show high memory usage when working with large datasets. Assuming that the relevant page is in the cache, this method allows for fast reads.
@@ -86,7 +86,7 @@ Bolt operations are copy-on-write. This means that when a page is updated, it is
 <svg title="When data is deleted from Bolt, unused pages are not released back to disk, but kept in Bolt’s freelist for future use." src='freelist.png' />
 :::
 
-## etcd's Data Model
+### etcd's Data Model
 etcd uses MVCC in order to safely handle concurrent operations. This goes hand-in-hand with the Raft protocol, as each version in MVCC corresponds to an index in the Raft log. To handle MVCC, etcd tracks changes by revisions. Each transaction made to etcd is a new revision. For example, if you were to load up a fresh instance of etcd and ran the following operations, the revision state would look like so:
 ```
 ---- Revision begins at 1 ----
@@ -114,7 +114,7 @@ By writing the keys in this scheme, etcd is able to make all writes sequential, 
 
 However, this makes reading keys a little more difficult. For example, to find the current value of `foo`, you would have to read each entry starting from the latest revision, until finding the revision containing the value for `foo`. 
 
-## etcd's Key Index
+### etcd's Key Index
 To address the key reading problem described above, etcd builds an in-memory [B-tree](https://www.cs.cornell.edu/courses/cs3110/2012sp/recitations/rec25-B-trees/rec25.html) index which maps each key to its related revisions.
 
 The actual keys and values of this tree are a little more complex, but the information it provides can most simply be reduced to:
@@ -134,7 +134,7 @@ If anything, <u><a name="ssd">range reads will be slightly more efficient if you
 :::
 
 
-## Compacting and Defragmenting
+### Compacting and Defragmenting
 etcd's use of revisions and key history enables useful features, such as the `watch` capability, where you can listen for changes on a particular key or set of keys.
 
 However, etcd's list of revisions can grow very large overtime, accumulating lots of disk and memory. Even if a large number of keys are deleted from etcd, the space will continue to grow since the prior history of those keys will still be retained. <u><a name="compact">Frequent compactions are essential to maintaining etcd's memory and disk usage.</a></u> A compaction in etcd will drop all superseded revisions smaller than the revision that is being compacted to.
@@ -179,13 +179,13 @@ However, <u><a name="defrag">if you have workloads where keys are frequently upd
 As with any system, the optimal use and operation of etcd is informed by tradeoffs based on the system’s architecture. To understand etcd’s best practices, we dove into the details for how etcd provides availability and consistency. This helped us draw conclusions about how applications should account for system failures, and how etcd should be deployed to best prevent these failures. Exploring the internals for how etcd stores its data allowed us to reason about useful access patterns and practices for managing memory. With these considerations in mind, etcd serves as a key component for storing metadata in our system at Pixie. We hope that this information also helps others determine how to best use etcd in their own applications. 
 
 
-## Footnotes
+### Footnotes
 
 - Learn more about the [Pixie](https://pixielabs.ai/).
 - Check out our [open positions](https://pixielabs.ai/careers).
 
 
-## Sources
+### Sources
 
  - [https://raft.github.io/](https://raft.github.io/)
  - [https://etcd.io/docs/v3.4.0/faq/](https://etcd.io/docs/v3.4.0/faq/)
