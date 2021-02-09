@@ -35,7 +35,7 @@ const common = {
       paddingBottom: '8px',
       fontStyle: 'normal',
       fontWeight: 300,
-      fontSize: '52px',
+      fontSize: '48px',
       lineHeight: '70px',
     },
     h3: {
