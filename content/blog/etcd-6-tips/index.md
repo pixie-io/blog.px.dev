@@ -28,7 +28,7 @@ etcd is a key-value store built to serve data for highly distributed systems. Bu
 
 In order to provide high availability, etcd is run as a cluster of replicated nodes. To ensure data consistency across these nodes, etcd uses a popular consensus algorithm called [Raft](https://raft.github.io/). In Raft, one node is elected as leader, while the remaining nodes are designated as followers. The leader is responsible for maintaining the current state of the system and ensuring that the followers are up-to-date.
 
-More specifically, the leader node has the following responsibilities:
+More specifically, the leader node has the following responsibilities: (1) maintaining leadership and (2) log replication.
 
 ### Maintaining Leadership
 
@@ -44,7 +44,7 @@ By effect, the etcd cluster's stability is very sensitive to network and disk IO
 
 The leader node is responsible for handling incoming write transactions from the client. The write operation is written to a Raft log entry, which the leader broadcasts to the followers to ensure consistency across all nodes. Once a majority of the followers have successfully acknowledged and applied the Raft log entry, the leader considers the transaction as committed. If at any point the leader is unable to receive acknowledgement from the <em>majority</em> of followers, (for instance, if some node(s) fail), then the transaction cannot be committed and the write fails.
 
-As a result, if the leader is unable to reach a majority, the cluster is declared to have "lost quorum" and no transactions can be made until it has recovered. This is why it is recommended to <u><a name="nodes">carefully tune the number of etcd nodes in your cluster</a></u> to reduce the chance of lost quorum.
+As a result, if the leader is unable to reach a majority, the cluster is declared to have "lost quorum" and no transactions can be made until it has recovered. This is why you should <u><a name="nodes">carefully tune the number of etcd nodes in your cluster</a></u> to reduce the chance of lost quorum.
 
 A good rule of thumb is to select an odd number of nodes. This is because adding an additional node to an odd number of nodes does not help increase the failure tolerance. Consider the following table, where the failure tolerance is the number of nodes that can fail without the cluster losing quorum:
 
@@ -67,27 +67,27 @@ This helps visualize that a cluster of size 4 has the same failure tolerance as 
 
 # How etcd stores data
 
-Now that we have an understanding of how etcd maintains its availability and consistency, we discuss how data is actually stored in the system.
+Now that we understand how etcd maintains high availability and consistency, let's discuss how data is actually stored in the system.
 
 ### BoltDB
-etcd's datastore is built on top of [BoltDB](https://github.com/boltdb/bolt), or more specifically, [BBoltDB](https://github.com/etcd-io/bbolt), which is a forked and modified version of BoltDB maintained by the etcd contributors.
+etcd's datastore is built on top of [BoltDB](https://github.com/boltdb/bolt), or more specifically, [BBoltDB](https://github.com/etcd-io/bbolt), a fork of BoltDB maintained by the etcd contributors.
 
-Bolt is a Go key-value store which writes its data to a single memory-mapped file. This means that the underlying operating system is responsible for handling how the data is cached, typically caching as much of the file in memory as possible. This, however, means that Bolt will show high memory usage when working with large datasets. Assuming that the relevant page is in the cache, this method allows for fast reads.
+Bolt is a Go key-value store which writes its data to a single memory-mapped file. This means that the underlying operating system is responsible for handling how the data is cached, typically caching as much of the file in memory as possible. Thus, Bolt shows high memory usage when working with large datasets. However, assuming that the relevant page is in the cache, this method allows for fast reads.
 
 Bolt's underlying data structure is a B+ tree consisting of 4KB pages that are allocated as needed. The [B+ tree](https://en.wikipedia.org/wiki/B%2B_tree) structure helps with quick reads and sequential writes. However, Bolt does not perform as well on random writes, since the writes might be made to different pages on disk.
 
 ::: div image-m
-<svg title="Bolt stores its data in a B+ tree, which has a structure that helps with quick reads and sequential writes. Highlighted in green is the path taken to find the data with 4 as the key." src='bplustree.svg' />
+<svg title="Bolt stores its data in a B+ tree, a structure that helps with quick reads and sequential writes. Highlighted in green is the path taken to find the data with 4 as the key." src='bplustree.svg' />
 :::
 
-Bolt operations are copy-on-write. This means that when a page is updated, it is copied to a completely new page. The old page is added to a "freelist", which Bolt refers to when it needs a new page. This means that deleting large amounts of data will not actually free up space on disk, as the pages are instead kept on Bolt's freelist for future use. In order to free up this space to disk, you will need to perform a defrag, which we'll discuss later in this post.
+Bolt operations are copy-on-write. When a page is updated, it is copied to a completely new page. The old page is added to a "freelist", which Bolt refers to when it needs a new page. This means that deleting large amounts of data will not actually free up space on disk, as the pages are instead kept on Bolt's freelist for future use. In order to free up this space to disk, you will need to perform a defrag, which we'll discuss later in this post.
 
 ::: div image-m
 <svg title="When data is deleted from Bolt, unused pages are not released back to disk, but kept in Bolt’s freelist for future use." src='freelist.png' />
 :::
 
 ### etcd's Data Model
-etcd uses MVCC in order to safely handle concurrent operations. This goes hand-in-hand with the Raft protocol, as each version in MVCC corresponds to an index in the Raft log. To handle MVCC, etcd tracks changes by revisions. Each transaction made to etcd is a new revision. For example, if you were to load up a fresh instance of etcd and ran the following operations, the revision state would look like so:
+etcd uses [MultiVersion Concurrency Control](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) in order to safely handle concurrent operations. This goes hand-in-hand with the Raft protocol, as each version in MVCC corresponds to an index in the Raft log. To handle MVCC, etcd tracks changes by revisions. Each transaction made to etcd is a new revision. For example, if you were to load up a fresh instance of etcd and ran the following operations, the revision state would look like so:
 ```
 ---- Revision begins at 1 ----
 tx: [put foo bar] -> Revision is 2
@@ -129,7 +129,7 @@ etcd also supports range reads: "get me the values for `foo1` to `foo3`" or "fin
 
 If anything, <u><a name="ssd">range reads will be slightly more efficient if you tend to read and write the same pieces of information together.</a></u> For example, if you update all `foo*` keys at the same time (possibly in the same transaction), and later read all `foo*` keys, they will most likely be on the same page. This will help reduce the number of pages that may need to be read from disk.
 
-::: div image-m
+::: div image-l
 <svg title="An example of which pages are read on disk when trying to read all foo* keys, depending on the write pattern." src='rangereads.png' />
 :::
 
@@ -161,7 +161,7 @@ These compactions are just deletions in Bolt. As mentioned previously, Bolt does
 
 The frequency at which defrags should be run depend on your workload in etcd.
 
-::: div image-m
+::: div image-l
 <svg title="An example of what the pages on disk may look like after compaction, when mostly writing only new keys." src='compact-create.svg' />
 :::
 
@@ -181,7 +181,7 @@ As with any system, the optimal use and operation of etcd is informed by tradeof
 
 ### Footnotes
 
-- Learn more about the [Pixie](https://pixielabs.ai/).
+- Learn more about [Pixie](https://pixielabs.ai/).
 - Check out our [open positions](https://pixielabs.ai/careers).
 
 
