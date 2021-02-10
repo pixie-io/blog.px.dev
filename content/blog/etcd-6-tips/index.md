@@ -15,7 +15,7 @@ As with designing any system, different architectural decisions lead to differen
 
 # TL;DR
 
-1. The stability of etcd's Raft cluster is sensitive to network and disk IO. Add robust handling (such as retries) for possible downtime, when the cluster has lost its leadership.
+1. The stability of etcd's Raft cluster is sensitive to network and disk IO. Add robust handling in clients (such as retries) for possible downtime, when the cluster has lost its leadership.
 2. Carefully tune the number of nodes in your cluster to account for failure tolerance and network utilization.
 3. If running a large datastore that can't fit into memory, try to run etcd with SSDs to help with reads and general disk latency.
 4. Range reads will be most efficient if you tend to write and read the same pieces of information together.
@@ -34,7 +34,7 @@ More specifically, the leader node has the following responsibilities: (1) maint
 
 The leader node must periodically send a heartbeat to all followers to notify them that it is still alive and active. If the followers have not received a heartbeat after a configurable timeout, a new leader election is initiated. During this process, the system will be unavailable, as a leader is necessary to enforce the current state.
 
-By effect, the etcd cluster's stability is very sensitive to network and disk IO. This means that etcd's stability is susceptible to heavy workloads, both from itself and other applications running in the environment. <b><u>It is recommended to add robust handling, such as retries, to account for the possibility of lost leadership.</u></b>
+By effect, the etcd cluster's stability is very sensitive to network and disk IO. This means that etcd's stability is susceptible to heavy workloads, both from itself and other applications running in the environment. <b><u>It is recommended clients use robust handling, such as retries, to account for the possibility of lost leadership.</u></b>
 
 ### Log Replication
 
