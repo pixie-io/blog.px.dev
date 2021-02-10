@@ -37,6 +37,10 @@ const common = {
       fontWeight: 300,
       fontSize: '46px',
       lineHeight: '60px',
+      [breakpoints.down('md')]: {
+        fontSize: '26px',
+        lineHeight: '36px',
+      },
     },
     h3: {
       fontFamily: ['Roboto'],
