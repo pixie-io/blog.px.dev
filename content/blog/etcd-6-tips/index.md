@@ -34,7 +34,7 @@ More specifically, the leader node has the following responsibilities: (1) maint
 
 The leader node must periodically send a heartbeat to all followers to notify them that it is still alive and active. If the followers have not received a heartbeat after a configurable timeout, a new leader election is initiated. During this process, the system will be unavailable, as a leader is necessary to enforce the current state.
 
-By effect, the etcd cluster's stability is very sensitive to network and disk IO. This means that etcd's stability is susceptible to heavy workloads, both from itself and other applications running in the environment. <b>It is recommended to add robust handling, such as retries, to account for the possibility of lost leadership.</b>
+By effect, the etcd cluster's stability is very sensitive to network and disk IO. This means that etcd's stability is susceptible to heavy workloads, both from itself and other applications running in the environment. <b><u>It is recommended to add robust handling, such as retries, to account for the possibility of lost leadership.</u></b>
 
 ### Log Replication
 
@@ -44,7 +44,7 @@ By effect, the etcd cluster's stability is very sensitive to network and disk IO
 
 The leader node is responsible for handling incoming write transactions from the client. The write operation is written to a Raft log entry, which the leader broadcasts to the followers to ensure consistency across all nodes. Once a majority of the followers have successfully acknowledged and applied the Raft log entry, the leader considers the transaction as committed. If at any point the leader is unable to receive acknowledgement from the <em>majority</em> of followers, (for instance, if some node(s) fail), then the transaction cannot be committed and the write fails.
 
-As a result, if the leader is unable to reach a majority, the cluster is declared to have "lost quorum" and no transactions can be made until it has recovered. This is why you should <b>carefully tune the number of etcd nodes in your cluster</b> to reduce the chance of lost quorum.
+As a result, if the leader is unable to reach a majority, the cluster is declared to have "lost quorum" and no transactions can be made until it has recovered. This is why you should <b><u>carefully tune the number of etcd nodes in your cluster</u></b> to reduce the chance of lost quorum.
 
 A good rule of thumb is to select an odd number of nodes. This is because adding an additional node to an odd number of nodes does not help increase the failure tolerance. Consider the following table, where the failure tolerance is the number of nodes that can fail without the cluster losing quorum:
 
@@ -125,9 +125,9 @@ The actual keys and values of this tree are a little more complex, but the infor
 
 This index says that `foo` was updated in revision 4, sub 0, and revision 2, sub 0. `foo1` was updated in revision 3, sub 0, and so on. Using this information, you can easily find the current value of `foo`, along with its previous values, in Bolt.
 
-etcd also supports range reads: "get me the values for `foo1` to `foo3`" or "find me all keys and values prefixed with `foo`". Although these keys are logically sequential, they are not stored in Bolt as so. Performing the range read will require using the key index to find the keys that fall within the range, and then finding their associated revisions in Bolt. Given that these keys could have been written at any revision, these would essentially be random reads on Bolt. Efficiency for this operation heavily relies on the hope that most of Bolt's file is in the cache. If your datastore is large, chances are that the relevant pages will need to be read from disk. <b>If you have a large dataset, run etcd with SSDs, as they are much faster than spinning disk.</b>
+etcd also supports range reads: "get me the values for `foo1` to `foo3`" or "find me all keys and values prefixed with `foo`". Although these keys are logically sequential, they are not stored in Bolt as so. Performing the range read will require using the key index to find the keys that fall within the range, and then finding their associated revisions in Bolt. Given that these keys could have been written at any revision, these would essentially be random reads on Bolt. Efficiency for this operation heavily relies on the hope that most of Bolt's file is in the cache. If your datastore is large, chances are that the relevant pages will need to be read from disk. <b><u>If you have a large dataset, run etcd with SSDs, as they are much faster than spinning disk.</u></b>
 
-If anything, <b>range reads will be slightly more efficient if you tend to read and write the same pieces of information together.</b> For example, if you update all `foo*` keys at the same time (possibly in the same transaction), and later read all `foo*` keys, they will most likely be on the same page. This will help reduce the number of pages that may need to be read from disk.
+If anything, <b><u>range reads will be slightly more efficient if you tend to read and write the same pieces of information together.</u></b> For example, if you update all `foo*` keys at the same time (possibly in the same transaction), and later read all `foo*` keys, they will most likely be on the same page. This will help reduce the number of pages that may need to be read from disk.
 
 ::: div image-l
 <svg title="An example of which pages are read on disk when trying to read all foo* keys, depending on the write pattern." src='rangereads.png' />
@@ -137,7 +137,7 @@ If anything, <b>range reads will be slightly more efficient if you tend to read 
 ### Compacting and Defragmenting
 etcd's use of revisions and key history enables useful features, such as the `watch` capability, where you can listen for changes on a particular key or set of keys.
 
-However, etcd's list of revisions can grow very large overtime, accumulating lots of disk and memory. Even if a large number of keys are deleted from etcd, the space will continue to grow since the prior history of those keys will still be retained. <b>Frequent compactions are essential to maintaining etcd's memory and disk usage.</b> A compaction in etcd will drop all superseded revisions smaller than the revision that is being compacted to.
+However, etcd's list of revisions can grow very large overtime, accumulating lots of disk and memory. Even if a large number of keys are deleted from etcd, the space will continue to grow since the prior history of those keys will still be retained. <b><u>Frequent compactions are essential to maintaining etcd's memory and disk usage.</u></b> A compaction in etcd will drop all superseded revisions smaller than the revision that is being compacted to.
 
 For example, consider the following revision history, where key/value pairs in orange represent outdated key values:
 ```
@@ -171,7 +171,7 @@ In general, if your workload on etcd mostly consists of creating new keys rather
 <svg title="An example of what the pages on disk may look like after compaction and defrag, when mostly updating existing keys." src='compact-update.svg' />
 :::
 
-However, <b>if you have workloads where keys are frequently updated, defrags are necessary to free unused disk space.</b> This is because a compaction will result in more deletes, as most of the key history can be pruned. In an extreme example, consider a case where your workload on etcd consists of updating only a single key. After many updates to the key, the total number of revisions will span N pages. After a compaction, this will be pruned to a single revision on one page, leaving N-1 pages free.
+However, <b><u>if you have workloads where keys are frequently updated, defrags are necessary to free unused disk space.</u></b> This is because a compaction will result in more deletes, as most of the key history can be pruned. In an extreme example, consider a case where your workload on etcd consists of updating only a single key. After many updates to the key, the total number of revisions will span N pages. After a compaction, this will be pruned to a single revision on one page, leaving N-1 pages free.
 
 
 # Conclusion 
