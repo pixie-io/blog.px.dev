@@ -34,7 +34,7 @@ const BlogPostCard = ({ post }) => {
               {' '}
               in
               {' '}
-              {categories}
+              {(categories || []).join(', ')}
             </p>
             <p className={styles.dateRow}>
               {date}
