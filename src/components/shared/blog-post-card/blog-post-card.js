@@ -13,7 +13,7 @@ const BlogPostCard = ({ post }) => {
       author,
       authors,
       date,
-      category,
+      categories,
     },
     fields: { slug },
   } = post;
@@ -34,7 +34,7 @@ const BlogPostCard = ({ post }) => {
               {' '}
               in
               {' '}
-              {category}
+              {(categories || []).join(', ')}
             </p>
             <p className={styles.dateRow}>
               {date}
