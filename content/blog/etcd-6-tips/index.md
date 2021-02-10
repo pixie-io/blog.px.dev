@@ -139,7 +139,7 @@ etcd's use of revisions and key history enables useful features, such as the `wa
 
 However, etcd's list of revisions can grow very large overtime, accumulating lots of disk and memory. Even if a large number of keys are deleted from etcd, the space will continue to grow since the prior history of those keys will still be retained. <b><u>Frequent compactions are essential to maintaining etcd's memory and disk usage.</u></b> A compaction in etcd will drop all superseded revisions smaller than the revision that is being compacted to.
 
-For example, consider the following revision history, where key/value pairs in orange represent outdated key values:
+For example, consider the following revision history:
 ```
 Revision 2: foo1 bar1 
 Revision 3: foo2 bar2
