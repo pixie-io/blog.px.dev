@@ -20,7 +20,7 @@ Enter Kubernetes. Kubernetes has dramatically shifted the tradeoffs of on-prem v
 
 In response to this shift, companies such as [Okera](https://www.okera.com), [Sourcegraph](https://about.sourcegraph.com) (self-hosted offering), and [Pixie Labs have](https://pixielabs.ai) decided to deploy their products directly on customers' Kubernetes clusters, rather than in a hosted cloud/SaaS environment. At Pixie Labs, we predict that more B2B tools will move to support deploying on-prem to their customers' Kubernetes clusters, a mirror of the most recent shift where many applications moved from on-prem to SaaS.
 
-# 1. Where we were: The historical pros and cons of on-prem deployments
+# Where we were: The historical pros and cons of on-prem deployments
 ## What is on-prem?
 First, let's quickly define "on-prem" because that can mean different things to different people. Some people define "on-prem" to be running on a bare metal server environment, with machines managed by the customer themselves. We take a broader definition, where "on-prem" refers to deploying directly on the customer's servers, wherever they may be.
 As long as it is running directly on a customer's environment rather than a hosted cloud, this includes all of the following:
@@ -79,7 +79,7 @@ It's one thing to build a set of binaries for your application for each target O
 ### 🔴 Resource utilization of product must be carefully managed
 Resource-intensive applications that need a lot of CPU or memory can impose a significant burden on their host system. Many of us have seen supposedly "lightweight" agents using 50% of CPU or memory on our production clusters, so resource utilization must be carefully managed, especially in sensitive environments.
 
-# 2. What changed: how Kubernetes makes on-prem deployments easier
+# What changed: how Kubernetes makes on-prem deployments easier
 Kubernetes provides a powerful and rich set of abstractions across highly diverse customer environments. As a result, it is now significantly easier for developers to deploy their products on-prem directly on a customer Kubernetes cluster. Thanks to the high adoption of Kubernetes, this is a very large section of the market, which is likely to continue to increase for the foreseeable future.
 
 Let's dive into how Kubernetes mitigates some of the above "cons" when deploying software on-prem to a customer.
@@ -117,7 +117,7 @@ Kubernetes supports specifying resource limits for your application. That way, t
 
 Finally, pod affinity and anti-affinity policies (also via config) allow the vendor to easily specify that especially resource-intensive parts of their application be scheduled on separate nodes, or only on nodes containing sufficient resources.
 
-# 3. Where we are now: Remaining challenges with on-prem on Kubernetes
+# Where we are now: Remaining challenges with on-prem on Kubernetes
 Now that we have reviewed what Kubernetes has brought to the table, let's go back to the initial list of cons for on-prem deployments and see where they stand, post-Kubernetes.
 
 ### 🔴 → 🟢 Heterogeneous customer environments create higher technical complexity
