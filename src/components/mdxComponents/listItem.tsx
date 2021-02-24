@@ -8,6 +8,8 @@ const useStyles = makeStyles(() => ({
     fontStyle: 'inherit',
     fontSize: 'inherit',
     lineHeight: 'inherit',
+    paddingBottom: '12px',
+    paddingLeft: '12px',
   },
 }));
 const ListItem = ({ children }) => (<li className={useStyles().listItem}>{children}</li>);

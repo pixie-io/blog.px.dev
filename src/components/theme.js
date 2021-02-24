@@ -16,13 +16,12 @@ const common = {
     },
     h1: {
       fontFamily: ['Roboto'],
-      marginBottom: '16px',
-      marginTop: '12px',
-      fontSize: '52px',
-      lineHeight: '70px',
-      paddingBottom: '10px',
+      marginBottom: '18px',
+      marginTop: '40px',
+      fontSize: '30px',
+      lineHeight: '40px',
       fontStyle: 'normal',
-      fontWeight: 300,
+      fontWeight: 500,
       [breakpoints.down('md')]: {
         fontSize: '32px',
         lineHeight: '48px',
@@ -30,13 +29,12 @@ const common = {
     },
     h2: {
       fontFamily: ['Roboto'],
-      marginBottom: '16px',
-      marginTop: '24px',
-      paddingBottom: '8px',
+      marginBottom: '18px',
+      marginTop: '40px',
       fontStyle: 'normal',
-      fontWeight: 300,
-      fontSize: '46px',
-      lineHeight: '60px',
+      fontWeight: 500,
+      fontSize: '32px',
+      lineHeight: '40px',
       [breakpoints.down('md')]: {
         fontSize: '26px',
         lineHeight: '36px',
@@ -44,12 +42,12 @@ const common = {
     },
     h3: {
       fontFamily: ['Roboto'],
-      marginBottom: '12px',
-      marginTop: '12px',
+      marginBottom: '14px',
+      marginTop: '40px',
       fontStyle: 'normal',
-      fontWeight: 300,
-      fontSize: '42px',
-      lineHeight: '58px',
+      fontWeight: 400,
+      fontSize: '26px',
+      lineHeight: '36px',
       [breakpoints.down('md')]: {
         fontSize: '24px',
         lineHeight: '32px',
@@ -57,12 +55,12 @@ const common = {
     },
     h4: {
       fontFamily: ['Roboto'],
-      marginBottom: '16px',
+      marginBottom: '14px',
       marginTop: '24px',
       fontStyle: 'normal',
       fontWeight: 'bold',
-      fontSize: '16px',
-      lineHeight: '20px',
+      fontSize: '18px',
+      lineHeight: '28px',
       WebkitFontSmoothing: 'antialiased',
       [breakpoints.down('md')]: {
         fontSize: '14px',
@@ -92,8 +90,8 @@ const common = {
     body1: {
       marginBottom: '16px',
       marginTop: '0px',
-      fontSize: '16px',
-      lineHeight: '26px',
+      fontSize: '18px',
+      lineHeight: '32px',
       fontStyle: 'normal',
       fontWeight: 'normal',
       textRendering: 'optimizeLegibility',
@@ -211,11 +209,11 @@ const appThemeOptions = {
         h6: {
           color: '#000000',
         },
+        body1: {
+          color: '#000000',
+        },
         body2: {
           color: '#272822',
-        },
-        body1: {
-          color: '#4F4F4F',
         },
       },
     },
@@ -324,7 +322,7 @@ const appThemeOptions = {
           color: '#D2D5DD',
         },
         body1: {
-          color: '#E2E5EE',
+          color: '#ffffff',
         },
       },
     },

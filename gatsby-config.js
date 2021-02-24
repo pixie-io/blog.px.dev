@@ -116,7 +116,7 @@ module.exports = {
       options: {
         fonts: [
           'manrope:300,400,400i,700',
-          'roboto:300,400,400i,700',
+          'roboto:300,400,400i,500,700',
           'roboto+mono:300,400,400i,700',
         ],
         display: 'block',
