@@ -18,7 +18,7 @@ const common = {
       fontFamily: ['Roboto'],
       marginBottom: '18px',
       marginTop: '40px',
-      fontSize: '30px',
+      fontSize: '36px',
       lineHeight: '40px',
       fontStyle: 'normal',
       fontWeight: 500,
@@ -36,7 +36,7 @@ const common = {
       fontSize: '32px',
       lineHeight: '40px',
       [breakpoints.down('md')]: {
-        fontSize: '26px',
+        fontSize: '28px',
         lineHeight: '36px',
       },
     },
