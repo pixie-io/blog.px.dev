@@ -59,16 +59,13 @@ const Header = ({
         <div className={styles.newsBar}>
 
           <span className='hide-not-desktop'>
-             We&apos;re  joining forces with New Relic to accelerate the Pixie Community.
+             Join us for our next Pixienaut Monthly call on March 25th.
             {' '}
-            <a href='https://newrelic.com/press-release/20201210'>
-                   Learn more
-            </a>
-            {' '}
+            <a href='/community/'>
              🚀
           </span>
           <span className='hide-desktop'>
-                <a href='https://newrelic.com/press-release/20201210'>We&apos;re joining forces with New Relic</a>
+                <a href='/community/'>Join us for our Pixienaut Monthly on March 25th.</a>
           </span>
 
           <div
