@@ -62,6 +62,9 @@ const Header = ({
              Join us for our next Pixienaut Monthly call on March 25th.
             {' '}
             <a href='/community/'>
+                   Learn more
+            </a>
+            {' '}
              🚀
           </span>
           <span className='hide-desktop'>
