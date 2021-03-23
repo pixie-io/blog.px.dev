@@ -61,14 +61,14 @@ const Header = ({
           <span className='hide-not-desktop'>
              Join us for our next Pixienaut Monthly call on March 25th.
             {' '}
-            <a href='/community/'>
+            <a href='https://pixielabs.ai/community/'>
                    Learn more
             </a>
             {' '}
              🚀
           </span>
           <span className='hide-desktop'>
-                <a href='/community/'>Join us for our Pixienaut Monthly on March 25th.</a>
+                <a href='https://pixielabs.ai/community/'>Join us for our Pixienaut Monthly on March 25th.</a>
           </span>
 
           <div
