@@ -59,7 +59,7 @@ const Header = ({
         <div className={styles.newsBar}>
 
           <span className='hide-not-desktop'>
-             Join us for our next Pixienaut Monthly call on March 25th.
+             Join us for our next Pixienaut Monthly call on April 22nd.
             {' '}
             <a href='https://pixielabs.ai/community/'>
                    Learn more
@@ -68,7 +68,7 @@ const Header = ({
              🚀
           </span>
           <span className='hide-desktop'>
-                <a href='https://pixielabs.ai/community/'>Join us for our Pixienaut Monthly on March 25th.</a>
+                <a href='https://pixielabs.ai/community/'>Join us for our Pixienaut Monthly on April 22nd.</a>
           </span>
 
           <div
