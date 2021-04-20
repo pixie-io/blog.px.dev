@@ -20,7 +20,7 @@ In this blog post we will discuss
 
 [Pixie](https://pixielabs.ai/) is an observability platform for developers. In order to make Pixie more accessible to the developer community, New Relic (which owns Pixie) is open-sourcing the project and donating it to CNCF. We're super excited to bring open-source Pixie to the world, but first we need to rethink a part of our backend architecture so that Pixie users can rely on a completely open-source environment.
 
-Pixie's authentication flow used to rely on Auth0, but we couldn't force our users to rely on third-party providers like Auth0 in order to run Pixie. In this post, we detail how we made Pixie's auth open-source compatible. We discuss tradeoffs of several approaches and dive into our final open-source implementation. But first, let's start with our original implementation.
+Pixie's authentication flow used to rely on Auth0, but we couldn't force our users to rely on third-party providers in order to run Pixie. In this post, we detail how we made Pixie's auth open-source compatible. We discuss tradeoffs of several approaches and dive into our final open-source implementation. But first, let's start with our original implementation.
 
 ## Initial design with Auth0
 
@@ -34,13 +34,13 @@ In our original authentication scheme (*figure below*), Pixie's UI redirects to 
 
 Auth0 does all of the heavy lifting and provides an easy way to setup different login providers. We started off with Google-based Signup and Login flows. This came with the added benefit that users could permit us to receive their name and profile picture which we used to create a well-rounded profile experience.
 
-The simplicity and reliability of this Auth0 + Google minimum viable auth flow meant we could focus more time on our core observability product without sacrificing the security of our cloud backend. We would recommend Auth0 to anyone who is comfortable with a hosted, third party solution.
+The simplicity and reliability of this Auth0 + Google flow gave us more time to focus on our core observability product without sacrificing the security of our cloud backend. We would recommend Auth0 to anyone who is comfortable with a hosted, third party solution.
 
 ## New requirements
 
-Unfortunately, Auth0 does not work for Pixie's open-source offering. As part of our commitment to open-source, we don't want to require users to depend on remotely hosted, closed source APIs. This is especially important for air-gapped clusters that cannot make external network requests. We need a standalone version of Pixie that exclusively relies on open-source components.
+Unfortunately, Auth0 does not work for Pixie's open-source offering. We don't want to require open-source users to depend on remotely hosted, closed source APIs. This is especially important for air-gapped clusters that cannot make external network requests. We need a standalone version of Pixie that exclusively relies on open-source components.
 
-As part of this change, we also needed to enable username and password login. Our hosted implementation required an identity from a third-party provider (ie Google) - violating that open-source commitment. Username / password is agnostic and works for anyone, regardless of their clusters' network connectivity and their third-party accounts.
+As part of this change, we also needed to enable username and password login. Our hosted implementation requires an identity from a third-party provider (ie Google) - another dependency that breaks our open-source commitment. Username / password, on the other hand, can be implemented with open-source libraries and works regardless of a cluster's network connectivity.
 
 ## Options
 
@@ -120,8 +120,6 @@ We document our design here for reference in case future readers also want an ac
 ::: div image-l
 ![Auth0 architecture diagram](./kratos_login_flow.svg)
 :::
-
-[](https://lucid.app/documents/embeddedchart/1396f577-4cd3-432a-90e6-3b5ec51ce9ed)
 
 The Hydra/Kratos integration is complex, so it's easiest to demonstrate with an example. Let's break down a successful login flow. *The steps match the diagram above.*
 
