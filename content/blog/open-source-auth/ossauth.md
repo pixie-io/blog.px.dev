@@ -2,7 +2,7 @@
 path: '/open-source-auth-with-hydra-kratos'
 title: 'Open-Source Authentication with Hydra and Kratos'
 date: 2021-04-20T06:00:00.000+00:00
-featured_image: hero-image.png
+featured_image: hero.svg 
 categories: ['Pixie Team Blogs']
 author: 'Phillip Kuznetsov'
 email: 'philkuz@pixielabs.ai'
