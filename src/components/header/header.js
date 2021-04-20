@@ -59,7 +59,7 @@ const Header = ({
         <div className={styles.newsBar}>
 
           <span className='hide-not-desktop'>
-             Join us for our next Pixienaut Monthly call on April 22nd.
+             Join us for our next Pixienaut Monthly call on May 27th.
             {' '}
             <a href='https://pixielabs.ai/community/'>
                    Learn more
@@ -68,7 +68,7 @@ const Header = ({
              🚀
           </span>
           <span className='hide-desktop'>
-                <a href='https://pixielabs.ai/community/'>Join us for our Pixienaut Monthly on April 22nd.</a>
+                <a href='https://pixielabs.ai/community/'>Join us for our Pixienaut Monthly on May 27th.</a>
           </span>
 
           <div
@@ -83,10 +83,10 @@ const Header = ({
       )}
       <header
         className={`
-      ${transparentMenu ? styles.transparentMenu : ''}  
-      ${showNewsBar ? styles.showNewsBar : ''}  
+      ${transparentMenu ? styles.transparentMenu : ''}
+      ${showNewsBar ? styles.showNewsBar : ''}
         ${theme === 'light' ? styles.whiteHeader : ''}
-      ${showShadow ? styles.showShadow : ''} 
+      ${showShadow ? styles.showShadow : ''}
       `}
       >
         <BodyClassName className={`${open ? 'menu-open' : ''} theme-${theme}`} />
