@@ -2,7 +2,7 @@
 path: '/open-source-auth-with-hydra-kratos'
 title: 'Open-Source Authentication with Hydra and Kratos'
 date: 2021-04-20T06:00:00.000+00:00
-featured_image: hero.svg 
+featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
 author: 'Phillip Kuznetsov'
 email: 'philkuz@pixielabs.ai'
@@ -162,8 +162,9 @@ To support this flexibility, the auth solution can be reduced to a simple interf
 :::
 
 The logic described above for combining Kratos/Hydra are responsible for implementing the methods in this interface.
+
 ::: div image-l
-![Pixie's Auth interface](./auth_interface_kratos_impl.svg)
+![Pixie's Auth interface implemented for kratos](./auth_interface_kratos_impl.svg)
 :::
 
 
