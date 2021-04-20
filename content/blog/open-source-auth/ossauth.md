@@ -8,8 +8,6 @@ author: 'Phillip Kuznetsov'
 email: 'philkuz@pixielabs.ai'
 featured: true
 ---
-# Open-source authentication with Hydra and Kratos
-
 In this blog post we will discuss
 
 - Why we redesigned Pixie to support an authentication flow exclusively from open-source components
