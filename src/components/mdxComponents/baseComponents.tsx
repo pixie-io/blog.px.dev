@@ -5,12 +5,14 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { idFromSlug } from 'components/utils';
 import Code from './code';
 import Pre from './pre';
 import AnchorTag from './anchor';
 import CodeRenderer from './codeRenderer';
 import ListItem from './listItem';
 import CustomTableCell from './custom-table-cell';
+import HLink from './h-link';
 
 const getChildren = (props) => props.children;
 
@@ -19,11 +21,29 @@ export default {
   // so this cannot be set here. The default mui h1 has been updated to match
   // the design and overwritten on homepage (only 1 implementation).
   // The problem seems to occur only on the H1 (to be investigated).
-  h1: (props: any) => <Typography {...props} variant='h1' />,
-  h2: (props: any) => <Typography {...props} variant='h2' />,
-  h3: (props: any) => <Typography {...props} variant='h3' />,
-  h4: (props: any) => <Typography {...props} variant='h4' />,
-  h5: (props: any) => <Typography {...props} variant='h5' />,
+  h1: (props: any) => (
+    <HLink id={idFromSlug(getChildren(props))} variant='h1' />
+  ),
+  h2: (props: any) => {
+    const { children } = props;
+    return <HLink id={idFromSlug(getChildren(props))} variant='h2'>{children}</HLink>;
+  },
+  h3: (props: any) => {
+    const { children } = props;
+    return <HLink id={idFromSlug(getChildren(props))} variant='h3'>{children}</HLink>;
+  },
+  h4: (props: any) => {
+    const { children } = props;
+    return <HLink id={idFromSlug(getChildren(props))} variant='h4'>{children}</HLink>;
+  },
+  h5: (props: any) => {
+    const { children } = props;
+    return <HLink id={idFromSlug(getChildren(props))} variant='h5'>{children}</HLink>;
+  },
+  h6: (props: any) => {
+    const { children } = props;
+    return <HLink id={idFromSlug(getChildren(props))} variant='h6'>{children}</HLink>;
+  },
   p: (props: any) => <Typography {...props} variant='body1' />,
   pre: Pre,
   code: (props: any) => (

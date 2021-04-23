@@ -63,6 +63,7 @@ func main() {
   // Start server...
 }
 ```
+
 To understand how uprobes work, let's look at how symbols are tracked inside binaries. Since uprobes work by inserting a debug trap instruction, we need to get the address where the function is located. Go binaries on Linux use ELF to store debug info. This information is available, even in optimized binaries, unless debug data has been stripped. We can use the command `objdump` to examine the symbols in the binary:
 
 ```bash:numbers
