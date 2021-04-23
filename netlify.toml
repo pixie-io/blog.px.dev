@@ -1,6 +1,6 @@
 [build]
   publish ="public/"
-  command = "yarn install && yarn lint && gatsby build && cp netlify_passwd_header public/_headers"
+  command = "sed -i s/HEADER_PLACEHOLDER/pixie:${BASIC_AUTH}/g netlify.toml && yarn install && yarn lint && gatsby build"
 
 [build.environment]
   # Staging environment.
@@ -9,7 +9,12 @@
 # Uncomment when we want to disable password.
 [context.production]
   # No password on prod.
-  command = "yarn install && yarn lint && gatsby build"
+  command = "sed -i s/HEADER_PLACEHOLDER//g netlify.toml && yarn install && yarn lint && gatsby build"
 
 [context.production.environment]
   TRACKING_ID = "UA-141511669-1"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Basic-Auth = "HEADER_PLACEHOLDER"
