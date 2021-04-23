@@ -38,7 +38,6 @@ const useStyles = makeStyles(() => ({
     opacity: 0,
     marginLeft: '10px',
     position: 'relative',
-
     '& img': {
       height: '70%',
       position: 'absolute',
