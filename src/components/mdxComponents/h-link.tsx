@@ -51,14 +51,17 @@ interface Props {
   variant: TypographyVariant
 }
 
-const HLink: React.FC<Props> = ({ id, children, variant }) => (
-  <div className={useStyles().linkContainer}>
-    <span className={useStyles().tocAnchor} id={id} />
-    <Typography variant={variant}>
-      {children}
-      {children && <a href={`#${id}`} className={useStyles().link}><img src={clipLink} alt='' /></a>}
-    </Typography>
-  </div>
-);
+const HLink: React.FC<Props> = ({ id, children, variant }) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.linkContainer}>
+      <span className={classes.tocAnchor} id={id} />
+      <Typography variant={variant}>
+        {children}
+        {children && <a href={`#${id}`} className={classes.link}><img src={clipLink} alt='' /></a>}
+      </Typography>
+    </div>
+  );
+};
 
 export default HLink;
