@@ -19,10 +19,14 @@ import twitter from '../images/icons/twitter-icon.svg';
 import linkedin from '../images/icons/linkedin-icon.svg';
 import BlogPostCard from '../components/shared/blog-post-card';
 import GravatarIcon from '../components/gravatar';
+import HLink from '../components/mdxComponents/h-link.tsx';
 
 const categoryLink = require('../components/category-link');
 
-const MetaBarHeader = ({ post, shareUrl }) => (
+const MetaBarHeader = ({
+  post,
+  shareUrl,
+}) => (
   <div className={styles.metaBar}>
     <div className='row'>
       <div className='col-9'>
@@ -67,7 +71,10 @@ const MetaBarHeader = ({ post, shareUrl }) => (
     </div>
   </div>
 );
-const MetaBarFooter = ({ author, authors }) => {
+const MetaBarFooter = ({
+  author,
+  authors,
+}) => {
   const mapAuthors = authors ?? [author];
   return (
     mapAuthors.map((a) => (
@@ -111,7 +118,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // eslint-disable-next-line react/prop-types
-const BlogPostTemplate = ({ data, location = { href: '' } }) => {
+const BlogPostTemplate = ({
+  data,
+  location = { href: '' },
+}) => {
   const post = data.mdx;
   const related = data.featured.nodes;
   const muiClasses = useStyles();
@@ -166,7 +176,7 @@ const BlogPostTemplate = ({ data, location = { href: '' } }) => {
                   {category}
                 </Link>
               </div>
-              <Typography variant='h1'>{post.frontmatter.title}</Typography>
+              <HLink id='title' variant='h1'>{post.frontmatter.title}</HLink>
             </div>
           </div>
           <MetaBarHeader post={post} shareUrl={location.href} />
@@ -221,6 +231,8 @@ BlogPostTemplate.propTypes = {
     featured: PropTypes.object,
     authors: PropTypes.object,
   }).isRequired,
+  location: PropTypes.shape({ href: PropTypes.string }).isRequired,
+
 };
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
