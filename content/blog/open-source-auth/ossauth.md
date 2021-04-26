@@ -149,7 +149,7 @@ However, we still appreciate the benefits that Auth0 provides.
 - Can automatically query user email, profile, and photo to enhance our admin UI
 - No need to build any UI for login or authentication flows
 
-Given the benefits, we still want to support Auth0 in Pixie. Pixie users will have the choice of configuring their deployment with Auth0 or relying on Kratos and Hydra. We reduced the auth solution to a simple interface, as shown in the following diagram.
+Given the benefits, we will still support Auth0 in Pixie. Pixie users will have the choice of configuring their deployment with Auth0 or relying on Kratos and Hydra. We reduced the auth solution to a simple interface, as shown in the following diagram.
 
 ::: div image-l
 ![Pixie's Auth interface](./auth_interface.svg)
