@@ -117,7 +117,7 @@ The Kratos maintainers [intend to build an explicit integration between Hydra an
 We document our design here for reference in case future readers also want an access token based, open source, auth solution.
 
 ### Example login flow
-::: div image-l
+::: div image-xl
 ![Auth0 architecture diagram](./kratos_login_flow.svg)
 :::
 
