@@ -17,7 +17,7 @@ We are excited to have you contribute to Pixie's documentation!
 4. To run in development mode, run the following commands:
 ```shell
 yarn install
-yarn start
+yarn develop
 ```
 5. Visit `http://localhost:8000/` to view the local build of the blog.
 6. To generate a production build, run:
