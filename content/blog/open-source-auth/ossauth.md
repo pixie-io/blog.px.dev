@@ -1,6 +1,6 @@
 ---
 path: '/open-source-auth-with-hydra-kratos'
-title: 'Open-Source Authentication with Hydra and Kratos'
+title: 'Open Source Authentication with Hydra and Kratos'
 date: 2021-04-27T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
@@ -10,15 +10,15 @@ featured: true
 ---
 In this blog post we will discuss
 
-- Why we redesigned Pixie to support an authentication flow exclusively from open-source components.
-- The designs we considered for open-source authentication, and why we selected [Hydra](https://www.ory.sh/hydra/)/[Kratos](https://www.ory.sh/kratos/).
+- Why we redesigned Pixie to support an authentication flow exclusively from open source components.
+- The designs we considered for open source authentication, and why we selected [Hydra](https://www.ory.sh/hydra/)/[Kratos](https://www.ory.sh/kratos/).
 - The technical challenges we ran into with our Hydra/Kratos-based solution, and how we addressed them.
 
 ## Context
 
-[Pixie](https://pixielabs.ai/) is an observability platform recently acquired by New Relic. To make the project more accessible to the developer community, New Relic is open-sourcing Pixie. As part of our commitment to OSS, we want Pixie to be deployable in a completely open-source environment. However, Pixie had a strong dependency on Auth0 that would complicate this effort.
+[Pixie](https://pixielabs.ai/) is an observability platform recently acquired by New Relic. To make the project more accessible to the developer community, New Relic is open sourcing Pixie. As part of our commitment to OSS, we want Pixie to be deployable in a completely open source environment. However, Pixie had a strong dependency on Auth0 that would complicate this effort.
 
-In this post we detail how we redesigned Pixie's auth to be open-source compatible. We discuss trade offs of several approaches and dive into our final open-source implementation. Let's start with our Auth0 design.
+In this post we detail how we redesigned Pixie's auth to be open source compatible. We discuss trade offs of several approaches and dive into our final open source implementation. Let's start with our Auth0 design.
 
 ## Initial design with Auth0
 
@@ -36,17 +36,17 @@ The Auth0 + Google flow was simple and worked extremely well for us. Auth0 saved
 
 ## New requirements
 
-Unfortunately, Auth0 does not work for Pixie's open-source offering. We don't want to require open-source users to depend on remotely hosted, closed source APIs. This is especially important for air-gapped clusters that cannot make external network requests. We need a standalone version of Pixie that exclusively relies on open-source components.
+Unfortunately, Auth0 does not work for Pixie's open source offering. We don't want to require open source users to depend on remotely hosted, closed source APIs. This is especially important for air-gapped clusters that cannot make external network requests. We need a standalone version of Pixie that exclusively relies on open source components.
 
-As part of this change, we also needed to enable username and password login. Our hosted implementation requires an identity from a third-party provider (ie Google) - another dependency that breaks our open-source commitment. Username / password, on the other hand, can be implemented with open-source libraries and works regardless of a cluster's network connectivity.
+As part of this change, we also needed to enable username and password login. Our hosted implementation requires an identity from a third-party provider (ie Google) - another dependency that breaks our open source commitment. Username / password, on the other hand, can be implemented with open source libraries and works regardless of a cluster's network connectivity.
 
 ## Options
 
-We considered three designs to support open-sourced authentication in Pixie.
+We considered three designs to support open sourced authentication in Pixie.
 
 1. Allow users to configure their own Auth0
 2. Roll our own auth
-3. Use an existing open-source auth library
+3. Use an existing open source auth library
 
 ### Option 1. Allow users to configure their own Auth0
 
@@ -68,16 +68,16 @@ This option is compelling, but would limit our users to only those willing and a
 Pros
 
 - Can tailor a solution exactly to our own needs
-- Many other open-source developer tools do this
+- Many other open source developer tools do this
 
 Cons
 
 - Time-intensive to do right
 - Risky to get wrong
 
-While open source projects commonly implement authentication from scratch, we're wary of spending time rolling our own solution. Pixie, like all development teams, has an engineering budget that we allocate across our products. Rolling our own auth would require us to spend a large chunk of that budget on this feature, while taking on the risk of opening security vulnerabilities if done incorrectly. We would rather rely on a project that has been built by experts and has been vetted by the open-source community.
+While open source projects commonly implement authentication from scratch, we're wary of spending time rolling our own solution. Pixie, like all development teams, has an engineering budget that we allocate across our products. Rolling our own auth would require us to spend a large chunk of that budget on this feature, while taking on the risk of opening security vulnerabilities if done incorrectly. We would rather rely on a project that has been built by experts and has been vetted by the open source community.
 
-### Option 3. Use an existing open-source authentication library
+### Option 3. Use an existing open source authentication library
 
 Pros
 
@@ -92,7 +92,7 @@ Outsourcing logic to third-party libraries is often easier said than done. Using
 
 In this case, we felt the benefits outweigh the disadvantages. Security is extremely important to us because we deal with sensitive user data. It was worth the effort to redesign our system to use an existing solution written by security/authentication experts.
 
-We found that a combination of [Ory](http://ory.sh)'s [Kratos](https://github.com/ory/kratos) and [Hydra](https://github.com/ory/hydra) projects best fit our needs. Many other alternatives don't provide username/password authentication, and instead rely on OAuth/OIDC. Others restrict users to pre-built UIs. Kratos and Hydra together gave us a flexible and full solution that fit our needs while also remaining accessible to anyone in the open-source community.
+We found that a combination of [Ory](http://ory.sh)'s [Kratos](https://github.com/ory/kratos) and [Hydra](https://github.com/ory/hydra) projects best fit our needs. Many other alternatives don't provide username/password authentication, and instead rely on OAuth/OIDC. Others restrict users to pre-built UIs. Kratos and Hydra together gave us a flexible and full solution that fit our needs while also remaining accessible to anyone in the open source community.
 
 ## New authentication flow with Kratos/Hydra
 
@@ -100,7 +100,7 @@ Before we jump into our implementation, let's quickly discuss Kratos and Hydra's
 
 ### What is Kratos?
 
-At a high level, [Ory](http://ory.sh)'s [Kratos](https://github.com/ory/kratos)  is an open-source system for identity and user management. Kratos supports registration, login, authentication, and other user-related tasks, all through a convenient  [REST API](https://www.ory.sh/kratos/docs/reference/api/). At the moment, Pixie only uses Kratos for username/password-based authentication, but Kratos also supports login with third-party identity providers through OIDC (ie Google Identity Platform).
+At a high level, [Ory](http://ory.sh)'s [Kratos](https://github.com/ory/kratos)  is an open source system for identity and user management. Kratos supports registration, login, authentication, and other user-related tasks, all through a convenient  [REST API](https://www.ory.sh/kratos/docs/reference/api/). At the moment, Pixie only uses Kratos for username/password-based authentication, but Kratos also supports login with third-party identity providers through OIDC (ie Google Identity Platform).
 
 Unlike our Auth0 use-case, Kratos uses stateful session cookies rather than stateless access tokens to store identity information. The most important difference is that session cookies require a service roundtrip to check authorization, while access tokens like JWTs can be verified at the endpoint, reducing the latency necessary to access an authenticated endpoint. (You can learn more about the difference [here](https://dzone.com/articles/cookies-vs-tokens-the-definitive-guide)).
 
@@ -108,13 +108,13 @@ Our auth design incorporates JWTs for their performance advantage, but Kratos on
 
 ### What is Hydra?
 
-[Hydra](https://github.com/ory/hydra), another project by [Ory](http://ory.sh), is an open-source OAuth 2.0 server and OpenID Connect provider. Hydra does not come packaged with identity or user management - instead it completely focuses on enabling API access to the OAuth flows and expects users to come with their own identity solutions (such as Kratos). An added benefit is that the project is very mature and also in production [at several notable companies.](https://github.com/ory/hydra#whos-using-it)  We use Hydra in Pixie Cloud to create the stateless access tokens we use for auth in the rest of our backend. However, we had to do some work to convert the Kratos session cookies into the access tokens.
+[Hydra](https://github.com/ory/hydra), another project by [Ory](http://ory.sh), is an open source OAuth 2.0 server and OpenID Connect provider. Hydra does not come packaged with identity or user management - instead it completely focuses on enabling API access to the OAuth flows and expects users to come with their own identity solutions (such as Kratos). An added benefit is that the project is very mature and also in production [at several notable companies.](https://github.com/ory/hydra#whos-using-it)  We use Hydra in Pixie Cloud to create the stateless access tokens we use for auth in the rest of our backend. However, we had to do some work to convert the Kratos session cookies into the access tokens.
 
 ### Integrated Kratos/Hydra design
 
 The Kratos maintainers [intend to build an explicit integration between Hydra and Kratos](https://github.com/ory/kratos/issues/273), and they've [prototyped an integration in Javascript](https://github.com/ory/kratos-selfservice-ui-node/tree/hydra-integration). However, (at the time of writing) the integration is still a work in progress so we needed to build it ourselves.
 
-We document our design here for reference in case future readers also want an access token based, open-source, auth solution.
+We document our design here for reference in case future readers also want an access token based, open source, auth solution.
 
 ### Example login flow
 ::: div image-l
@@ -139,7 +139,7 @@ The Hydra/Kratos integration is complex, so it's easiest to demonstrate with an 
 With the Hydra/Kratos implementation for authentication, the following users will be able to use Pixie:
 
 - Users who require username/password login
-- Users who need a fully open-source observability solution that works out of the box
+- Users who need a fully open source observability solution that works out of the box
 - Users whose clusters cannot make external network requests
 
 However, we still appreciate the benefits that Auth0 provides.
