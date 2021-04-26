@@ -8,7 +8,7 @@ author: 'Phillip Kuznetsov'
 email: 'philkuz@pixielabs.ai'
 featured: true
 ---
-In this blog post we will discuss
+In this blog post we will discuss:
 
 - Why we redesigned Pixie to support an authentication flow exclusively from open source components.
 - The designs we considered for open source authentication, and why we selected [Hydra](https://www.ory.sh/hydra/)/[Kratos](https://www.ory.sh/kratos/).
@@ -30,13 +30,13 @@ In our original authentication scheme (*figure below*), Pixie's UI redirects to 
 ![Auth0 architecture diagram](./auth0_impl.svg)
 :::
 
-Auth0 does all the heavy lifting and provides an easy way to setup different login providers - we went with Google-based Signup and Login flows. While logging in, users could give us access to their name and profile picture. We incorporated this into our small profile dropdown, rounding out the user experience.
+Auth0 does all the heavy lifting and provides an easy way to setup different login providers - we went with Google-based Signup and Login flows. During signup, users could give us access to their name and profile picture. We incorporated this into our small profile dropdown, rounding out the user experience.
 
 The Auth0 + Google flow was simple and worked extremely well for us. Auth0 saved development time that we later spent on our core observability product. We would recommend Auth0 to anyone who is comfortable with a hosted, third party solution.
 
 ## New requirements
 
-Unfortunately, Auth0 does not work for Pixie's open source offering. We don't want to require open source users to depend on remotely hosted, closed source APIs. This is especially important for air-gapped clusters that cannot make external network requests. We need a standalone version of Pixie that exclusively relies on open source components.
+Unfortunately, Auth0 does not work for Pixie's open source offering. We don't want to require open source users to depend on remotely hosted, closed source APIs. This is especially important for our users with air-gapped clusters that cannot make external network requests. We need a standalone version of Pixie that exclusively relies on open source components.
 
 As part of this change, we also needed to enable username and password login. Our hosted implementation requires an identity from a third-party provider (ie Google) - another dependency that breaks our open source commitment. Username / password, on the other hand, can be implemented with open source libraries and works regardless of a cluster's network connectivity.
 
@@ -90,7 +90,7 @@ Cons
 
 Outsourcing logic to third-party libraries is often easier said than done. Using an off-the-shelf solution sounds appealing, but integration into an existing project requires time to learn the new system and adapt it to your specific needs. The upside is that you inherit the working knowledge of the library's developers and save yourself many pains of edge-case discovery.
 
-In this case, we felt the benefits outweigh the disadvantages. Security is extremely important to us because we deal with sensitive user data. It was worth the effort to redesign our system to use an existing solution written by security/authentication experts.
+In this case, we felt the benefits outweighed the disadvantages. Security is extremely important to us because we deal with sensitive user data. It was worth the effort to redesign our system to use an existing solution written by security/authentication experts.
 
 We found that a combination of [Ory](http://ory.sh)'s [Kratos](https://github.com/ory/kratos) and [Hydra](https://github.com/ory/hydra) projects best fit our needs. Many other alternatives don't provide username/password authentication, and instead rely on OAuth/OIDC. Others restrict users to pre-built UIs. Kratos and Hydra together gave us a flexible and full solution that fit our needs while also remaining accessible to anyone in the open source community.
 
@@ -125,12 +125,12 @@ The Hydra/Kratos integration is complex, so it's easiest to demonstrate with an 
 
 1. User submits a form with their username and password to Kratos.
 2. Kratos logs in the user, sets the session cookie, and redirects the user to an endpoint on the Pixie backend API service.
-3. Pixie's API service requests Kratos to validate the session cookie
+3. Pixie's API service requests Kratos to validate the session cookie.
 4. Kratos responds that the cookie is valid and the user is authenticated.
 5. Pixie's API service tells Hydra to accept the user's login because the user has a valid session cookie.
 6. Hydra redirects the UI (via the backend API response not drawn above) to an endpoint where the UI receives an [OAuth Access Token](https://www.oauth.com/oauth2-servers/access-tokens/).
 7. The UI sends the access token to the `/login` endpoint in Pixie's API service.
-8. Pixie's API service, sends the login request to Pixie's Auth service
+8. Pixie's API service, sends the login request to Pixie's Auth service.
 9. Pixie's Auth service validates the access token with Hydra, to ensure that it is receiving a legitimate request from a user.
 10. Hydra responds that the access token is valid, and Pixie's Auth service generates an augmented token. This augmented token is stored as part of the user's encrypted session cookie. When the UI makes subsequent requests to auth-restricted endpoints, the API-service verifies the augmented token stored in the user's session.
 
@@ -142,7 +142,7 @@ With the Hydra/Kratos implementation for authentication, the following users wil
 - Users who need a fully open source observability solution that works out of the box
 - Users whose clusters cannot make external network requests
 
-However, we still appreciate the benefits that Auth0 provides.
+However, we still appreciate the benefits that Auth0 provides:
 
 - Mature and battle-tested solution
 - Easy to implement login with third-party accounts
