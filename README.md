@@ -1,56 +1,50 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e0b67b72-c88e-4474-8083-097c91dfb2c5/deploy-status)](https://app.netlify.com/sites/distracted-beaver-cdfcdf/deploys)
+# [blog.pixielabs.ai](http://blog.pixielabs.ai/) &middot; [![CC BY 4.0 license](https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/) <a href="https://twitter.com/intent/follow?screen_name=pixie_run"><img src="https://img.shields.io/twitter/follow/pixie_run.svg?label=Follow%20@pixie_run" alt="Follow @pixie_run" /></a>
 
-# Pixie Blog
+This repo contains the source code and content for the [Pixie Blog](http://blog.pixielabs.ai/) website.
 
-Built with [Gatsby](https://www.gatsbyjs.com/).
+## Reporting Issues
+Submit any issues or enhancement requests by [filing an issue](https://github.com/pixie-labs/pixie-blog/issues/new). Please search for and review the existing open issues before submitting a new issue.
 
-### Contributing
+## Contributing
 
-We're excited to have you contribute to Pixie's blog.
-Our community has adopted the [Contributor Covenant](https://github.com/pixie-labs/pixie/blob/main/CODE_OF_CONDUCT.md) as its code of conduct, and we expect all participants to adhere to it.
-Please report any violations to <community@pixielabs.ai>.
-All code contributions require the [Contributor License Agreement](https://github.com/pixie-labs/pixie/blob/main/CLA.md).
-The CLA can be signed when creating your first PR.
+We are excited to have you contribute to Pixie's documentation! 
 
-To contribute, follow these steps:
+### Dev Setup
 
-1. Fork this repo.
+1. Fork this repo. 
 2. Create a directory in `content/blogs`.
 3. Add markdown files and media assets.
-4. Iterate and verify by building the site locally.
-5. Submit a PR against the upstream  [repo](https://github.com/pixie-labs/pixie-blog).
+4. To run in development mode, run the following commands:
+```shell
+yarn install
+yarn develop
+```
+5. Visit `http://localhost:8000/` to view the local build of the blog.
+6. To generate a production build, run:
+```shell
+yarn install
+yarn build
+```
+7. Submit a PR against the upstream  [repo](https://github.com/pixie-labs/pixie-blog).
 
-There are many other ways to contribute to Pixie, as well:
-
-- **Bugs:** Something not working as expected? [Send a bug report](https://github.com/pixie-labs/pixie/issues/new?template=Bug_report.md).
-- **Features:** Need new Pixie capabilities? [Send a feature request](https://github.com/pixie-labs/pixie/issues/new?template=Feature_request.md).
-- **Views & Scripts Requests:** Need help building a live view or pxl scripts? [Send a live view request](https://github.com/pixie-labs/pixie/issues/new?template=Live_view_request.md).
-- **PxL Scripts:** PxL scripts are used by Pixie's API to query telemetry data collected by the Pixie Platform (DNS events, HTTP events, etc) and to extend the platform to collect new data sources.
-  PxL can be executed using the web based Live UI, CLI or API. Look [here](https://github.com/pixie-labs/pixie/blob/main/pxl_scripts/README.md#Contributing) for more information.
-- **Documentation:** Is the [documentation](https://docs.pixielabs.ai) not explaining something well enough? Contribute to its [repository](https://github.com/pixie-labs/pixie-docs/).
-- **Pixienaut Community:** Interested in becoming a [Pixienaut](https://github.com/pixie-labs/pixie/tree/master/pixienauts) and in helping shape our community? [Apply here](https://pixielabs.ai/community/).
-- **Community Slack:** Pixie users can also chat with one another in our [community Slack](https://pixie-community.slack.com).
-
-
-### Markdown File Guidelines
+### Markdown Guidelines
 
 - Update `Author` , `Path`, `Title` and `Date`
 - Update `category` as Guest Blogs, Pixie Team Blogs, Pixienaut Blogs
 - Try to keep your images to be less than 1MB and gids less than 2MB
 
+### Deploy Previews
 
-### Local Development
+Once you submit a pull request to this repo, Netlify creates a [deploy preview](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for the changes in the specific PR. You can view the deploy preview in the Netlify panel that appears under the PR description. 
 
-To run in development mode run the following commands:
+### Publishing the Site
 
-```
-yarn install
-yarn develop
-```
+The Pixie website is published automatically by [Netlify](https://www.netlify.com/). Whenever changes are merged into the `prod` branch, Netlify re-builds and re-deploys the site. 
 
-Visit `http://localhost:8000/` to view the app.
+## License
 
+Pixie is [Apache 2.0](https://github.com/pixie-labs/pixie-blog/blob/main/LICENSE) licensed.
 
-### Questions
+Pixie Blog website source code is [Apache 2.0](https://github.com/pixie-labs/pixie-blog/blob/main/LICENSE) licensed.
 
-Ping us on [slack](https://slackin.withpixie.ai/) or file an issue in this repo. 
+Pixie Blog content is [Creative Commons](https://creativecommons.org/licenses/by/4.0/) licensed.
