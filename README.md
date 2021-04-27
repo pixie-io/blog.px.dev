@@ -7,11 +7,11 @@ Submit any issues or enhancement requests by [filing an issue](https://github.co
 
 ## Contributing
 
-We are excited to have you contribute to Pixie's documentation! 
+We are excited to have you contribute to Pixie's blog!
 
 ### Dev Setup
 
-1. Fork this repo. 
+1. Fork this repo.
 2. Create a directory in `content/blogs`.
 3. Add markdown files and media assets.
 4. To run in development mode, run the following commands:
@@ -35,16 +35,14 @@ yarn build
 
 ### Deploy Previews
 
-Once you submit a pull request to this repo, Netlify creates a [deploy preview](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for the changes in the specific PR. You can view the deploy preview in the Netlify panel that appears under the PR description. 
+Once you submit a pull request to this repo, Netlify creates a [deploy preview](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for the changes in the specific PR. You can view the deploy preview in the Netlify panel that appears under the PR description.
 
 ### Publishing the Site
 
-The Pixie website is published automatically by [Netlify](https://www.netlify.com/). Whenever changes are merged into the `prod` branch, Netlify re-builds and re-deploys the site. 
+The Pixie website is published automatically by [Netlify](https://www.netlify.com/). Whenever changes are merged into the `prod` branch, Netlify re-builds and re-deploys the site.
 
-## License
+## Blog License
 
-Pixie is [Apache 2.0](https://github.com/pixie-labs/pixie-blog/blob/main/LICENSE) licensed.
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
-Pixie Blog website source code is [Apache 2.0](https://github.com/pixie-labs/pixie-blog/blob/main/LICENSE) licensed.
-
-Pixie Blog content is [Creative Commons](https://creativecommons.org/licenses/by/4.0/) licensed.
+Please note the Creative Commons Attribution 4.0 license applies to the creative work of this site (documentation, blog content, visual assets, etc.) and not to the underlying code and does not supersede any licenses of the source code, its dependencies, etc.
