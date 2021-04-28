@@ -16,6 +16,9 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+# This is copied from, and should be kept up to date with
+# https://github.com/pixie-labs/pixielabs/blob/main/tools/licenses/checker.py
+
 import argparse
 import logging
 import os.path
