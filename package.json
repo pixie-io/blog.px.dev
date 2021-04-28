@@ -90,7 +90,7 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "lint": "eslint src ./*.js; git ls-files '**/*.tsx' '**/*.js' '**/*.jsx' '**/*.scss' | xargs -l1 tools/licenses/checker.py -a -f",
+    "lint": "eslint src ./*.js; git ls-files '**/*.tsx' '**/*.ts' '**/*.js' '**/*.jsx' '**/*.scss' '**/*.py' | xargs -l1 tools/licenses/checker.py -a -f",
     "lint-fix": "eslint src ./*.js --fix",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
