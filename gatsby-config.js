@@ -99,8 +99,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-segment-js',
       options: {
-        prodKey: 'VULqApc857abNmNJNaYj8e289YbGT5xu',
-        devKey: '5GNWfA2PU9v2FDdHx2R6hI0j7vs9heqW',
+        prodKey: process.env.SEGMENT_PRODUCTION_WRITE_KEY,
+        devKey: process.env.SEGMENT_DEV_WRITE_KEY,
         trackPage: true,
         host: 'https://segment.withpixie.ai/',
       },
