@@ -3,11 +3,14 @@
 This repo contains the source code and content for the [Pixie Blog](http://blog.pixielabs.ai/) website.
 
 ## Reporting Issues
+
 Submit any issues or enhancement requests by [filing an issue](https://github.com/pixie-labs/pixie-blog/issues/new). Please search for and review the existing open issues before submitting a new issue.
 
 ## Contributing
 
 We are excited to have you contribute to Pixie's blog!
+
+Before contributing blog content, please [file an issue](https://github.com/pixie-labs/pixie-blog/issues/new) outlining your intended additions.
 
 ### Dev Setup
 
@@ -15,23 +18,27 @@ We are excited to have you contribute to Pixie's blog!
 2. Create a directory in `content/blogs`.
 3. Add markdown files and media assets.
 4. To run in development mode, run the following commands:
+
 ```shell
 yarn install
 yarn develop
 ```
+
 5. Visit `http://localhost:8000/` to view the local build of the blog.
 6. To generate a production build, run:
+
 ```shell
 yarn install
 yarn build
 ```
+
 7. Submit a PR against the upstream  [repo](https://github.com/pixie-labs/pixie-blog).
 
 ### Markdown Guidelines
 
 - Update `Author` , `Path`, `Title` and `Date`
 - Update `category` as Guest Blogs, Pixie Team Blogs, Pixienaut Blogs
-- Try to keep your images to be less than 1MB and gids less than 2MB
+- Try to keep your images to be less than 1MB and gifs less than 2MB
 
 ### Deploy Previews
 
