@@ -4,8 +4,8 @@ title: 'Open Source Authentication with Hydra and Kratos'
 date: 2021-04-27T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
-author: 'Phillip Kuznetsov'
-email: 'philkuz@pixielabs.ai'
+authors: ['Phillip Kuznetsov']
+emails: ['philkuz@pixielabs.ai']
 featured: true
 ---
 In this blog post we will discuss:

@@ -230,7 +230,6 @@ export const pageQuery = graphql`
           title
           author
           authors
-          email
           emails
           categories
           date(formatString: "MMM DD YYYY")

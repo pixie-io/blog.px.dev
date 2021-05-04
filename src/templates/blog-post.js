@@ -50,11 +50,7 @@ const MetaBarHeader = ({
       <div className='col-9'>
         <div className={styles.postHeader}>
 
-          {post.frontmatter.email ? (
-            <div className={styles.authorAvatar}>
-              <GravatarIcon email={post.frontmatter.email} />
-            </div>
-          ) : (post.frontmatter.emails || []).map((e) => (
+          {(post.frontmatter.emails || []).map((e) => (
             <div className={styles.authorAvatar}>
               <GravatarIcon email={e} />
             </div>
@@ -260,9 +256,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         subtitle
-        author
         authors
-        email
         emails
         categories
         date(formatString: "MMMM DD, YYYY")
@@ -292,9 +286,7 @@ export const pageQuery = graphql`
         frontmatter {
           title
           subtitle
-          author
           authors
-          email
           emails
           date(formatString: "MMMM DD, YYYY")
           categories

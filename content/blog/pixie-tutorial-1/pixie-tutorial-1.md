@@ -3,10 +3,8 @@ path: '/pixie-tutorial-1'
 title: 'Getting Your Pixie On: First Steps Installing and Deploying Pixie'
 date: 2020-06-11T12:30:00.000+00:00
 categories: ['Guest Blogs']
-author: 'John Arundel'
-authors: []
-email: 'john@bitfieldconsulting.com'
-emails: []
+authors: ['John Arundel']
+emails: ['john@bitfieldconsulting.com']
 featured_image: hero-image.png
 featured: true
 ---
@@ -85,7 +83,7 @@ More Info:
 
 ==> Installing PX CLI:
 Install Path [/usr/local/bin]:
-``` 
+```
 
 
 The default install path (`/usr/local/bin`) should be fine, unless you want to install `px` somewhere else (if so, enter the path here). Otherwise, just press Enter to continue.
@@ -299,7 +297,7 @@ Table ID: script_list
                             Service
   px/jvm_data               JVM stats
   px/jvm_stats              JVM Stats per Pod
-  px/largest_http_request   Largest HTTP Request    
+  px/largest_http_request   Largest HTTP Request
   ...
 ```
 

@@ -3,8 +3,8 @@ path: '/pixie-intro'
 title: 'Put a Little Pixie in Your Cluster: Auto-Telemetry for Live-Debugging Distributed Environments'
 date: 2020-05-06T06:00:00.000+00:00
 categories: ['Guest Blogs']
-author: 'John Arundel'
-email: 'john@bitfieldconsulting.com'
+authors: ['John Arundel']
+emails: ['john@bitfieldconsulting.com']
 featured: true
 featured_image: hero-image.png
 

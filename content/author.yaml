@@ -1,5 +1,5 @@
 - id: Zain Asgar
-  bio: Co-Founder/CEO of Pixie Labs
+  bio: GVP/GM @ New Relic, Co-Founder/CEO of Pixie Labs
   twitter: 'https://twitter.com/zainasgar'
   email: 'zasgar@pixielabs.ai'
 
@@ -19,11 +19,16 @@
   email: 'adam@hawkins.io'
 
 - id: Michelle Nguyen
-  bio: Founding engineer at Pixie Labs
+  bio: Principal Engineer @ New Relic, Founding engineer @ Pixie Labs
   twitter: 'https://twitter.com/michelle_aimi'
   email: 'michelle@pixielabs.ai'
 
+- id: Natalie Serrino
+  bio: Principal Engineer @ New Relic, Founding engineer @ Pixie Labs
+  twitter: 'https://twitter.com/nserrino'
+  email: 'nserrino@pixielabs.ai'
+
 - id: Phillip Kuznetsov
-  bio: Founding engineer at Pixie Labs
+  bio: Lead SWE @ New Relic, Founding engineer @ Pixie Labs
   twitter: 'https://twitter.com/philkuznets'
   email: 'philkuz@pixielabs.ai'
