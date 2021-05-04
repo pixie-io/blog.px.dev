@@ -2,17 +2,10 @@
   publish ="public/"
   command = "sed -i s/HEADER_PLACEHOLDER/pixie:${BASIC_AUTH}/g netlify.toml && yarn install && yarn lint && gatsby build"
 
-[build.environment]
-  # Staging environment.
-  TRACKING_ID = "UA-141615052-1"
-
 # Uncomment when we want to disable password.
 [context.production]
   # No password on prod.
   command = "sed -i s/HEADER_PLACEHOLDER//g netlify.toml && yarn install && yarn lint && gatsby build"
-
-[context.production.environment]
-  TRACKING_ID = "UA-141511669-1"
 
 [[headers]]
   for = "/*"
