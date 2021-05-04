@@ -4,8 +4,8 @@ title: 'Part 1: Debugging Go in prod using eBPF'
 date: 2020-09-10T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
-author: 'Zain Asgar'
-email: 'zasgar@pixielabs.ai'
+authors: ['Zain Asgar']
+emails: ['zasgar@pixielabs.ai']
 featured: true
 ---
 

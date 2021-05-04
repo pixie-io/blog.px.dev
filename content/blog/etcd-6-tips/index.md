@@ -4,8 +4,8 @@ title: 'How etcd works and 6 tips to keep in mind'
 date: 2021-02-08T06:00:00.000+00:00
 featured_image: etcd-hero.png
 categories: ['Pixie Team Blogs']
-author: 'Michelle Nguyen'
-email: 'michelle@pixielabs.ai'
+authors: ['Michelle Nguyen']
+emails: ['michelle@pixielabs.ai']
 featured: true
 ---
 
@@ -22,7 +22,7 @@ As with designing any system, different architectural decisions lead to differen
 5. Frequent compactions are essential to maintaining etcd's memory and disk usage.
 6. For applications with workloads where keys are frequently updated, defrags should be run to free up unneeded space to disk.
 
-etcd is a key-value store built to serve data for highly distributed systems. Building an understanding of how etcd is designed to support this use-case can help reason through its best use. To do so, we will explore how etcd provides availability and consistency, and how it stores data internally. Design decisions, such as the consensus algorithm chosen for guaranteeing consistency, can heavily influence the system’s operation. Meanwhile, the underlying structure of the datastore can impact how the data is optimally accessed and managed. With these considerations in mind, etcd can serve as a reliable store for even the most critical data in your system. 
+etcd is a key-value store built to serve data for highly distributed systems. Building an understanding of how etcd is designed to support this use-case can help reason through its best use. To do so, we will explore how etcd provides availability and consistency, and how it stores data internally. Design decisions, such as the consensus algorithm chosen for guaranteeing consistency, can heavily influence the system’s operation. Meanwhile, the underlying structure of the datastore can impact how the data is optimally accessed and managed. With these considerations in mind, etcd can serve as a reliable store for even the most critical data in your system.
 
 # How etcd provides high availability and consistency
 
@@ -100,10 +100,10 @@ By keeping a history of the revisions, etcd is able to provide the version histo
 This means that keys must be associated with their revision numbers, along with their new values. To do so, etcd stores each operation in Bolt as the following key-value pairs:
 
 ```
-key: (rev, sub, type)                                                 
+key: (rev, sub, type)
 value: { key: keyName, value: keyValue, ...metadata }
 ```
-Here, `rev` is the revision, `sub` is a number used to differentiate keys within a single revision (for example, multiple PUTs in a transaction), and `type` is an optional suffix, usually used for tombstoning. 
+Here, `rev` is the revision, `sub` is a number used to differentiate keys within a single revision (for example, multiple PUTs in a transaction), and `type` is an optional suffix, usually used for tombstoning.
 
 For example, if you ran `put foo hello` following the above example, the corresponding Bolt entry might look like:
 ```
@@ -112,7 +112,7 @@ value: { key: "foo", value: "hello", ...metadata }
 ```
 By writing the keys in this scheme, etcd is able to make all writes sequential, circumventing Bolt's weakness to random writes.
 
-However, this makes reading keys a little more difficult. For example, to find the current value of `foo`, you would have to read each entry starting from the latest revision, until finding the revision containing the value for `foo`. 
+However, this makes reading keys a little more difficult. For example, to find the current value of `foo`, you would have to read each entry starting from the latest revision, until finding the revision containing the value for `foo`.
 
 ### etcd's Key Index
 To address the key reading problem described above, etcd builds an in-memory [B-tree](https://www.cs.cornell.edu/courses/cs3110/2012sp/recitations/rec25-B-trees/rec25.html) index which maps each key to its related revisions.
@@ -141,17 +141,17 @@ However, etcd's list of revisions can grow very large overtime, accumulating lot
 
 For example, consider the following revision history:
 ```
-Revision 2: foo1 bar1 
+Revision 2: foo1 bar1
 Revision 3: foo2 bar2
-Revision 4: foo3 bar3 
-Revision 5: foo2 bar2_1 
+Revision 4: foo3 bar3
+Revision 5: foo2 bar2_1
 Revision 6: foo3 bar3
 ```
 
 If you were to compact to Revision 5, the saved history would be:
 ```
-Revision 2: foo1 bar1 
-Revision 5: foo2 bar2_1 
+Revision 2: foo1 bar1
+Revision 5: foo2 bar2_1
 Revision 6: foo3 bar3
 ```
 
@@ -174,9 +174,9 @@ In general, if your workload on etcd mostly consists of creating new keys rather
 However, <b><u>if you have workloads where keys are frequently updated, defrags are necessary to free unused disk space.</u></b> This is because a compaction will result in more deletes, as most of the key history can be pruned. In an extreme example, consider a case where your workload on etcd consists of updating only a single key. After many updates to the key, the total number of revisions will span N pages. After a compaction, this will be pruned to a single revision on one page, leaving N-1 pages free.
 
 
-# Conclusion 
+# Conclusion
 
-As with any system, the optimal use and operation of etcd is informed by tradeoffs based on the system’s architecture. To understand etcd’s best practices, we dove into the details for how etcd provides availability and consistency. This helped us draw conclusions about how applications should account for system failures, and how etcd should be deployed to best prevent these failures. Exploring the internals for how etcd stores its data allowed us to reason about useful access patterns and practices for managing memory. With these considerations in mind, etcd serves as a key component for storing metadata in our system at Pixie. We hope that this information also helps others determine how to best use etcd in their own applications. 
+As with any system, the optimal use and operation of etcd is informed by tradeoffs based on the system’s architecture. To understand etcd’s best practices, we dove into the details for how etcd provides availability and consistency. This helped us draw conclusions about how applications should account for system failures, and how etcd should be deployed to best prevent these failures. Exploring the internals for how etcd stores its data allowed us to reason about useful access patterns and practices for managing memory. With these considerations in mind, etcd serves as a key component for storing metadata in our system at Pixie. We hope that this information also helps others determine how to best use etcd in their own applications.
 
 
 ### Footnotes

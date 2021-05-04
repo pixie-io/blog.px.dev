@@ -4,8 +4,8 @@ title: 'Part 2: Full body HTTP request/responses tracing using eBPF'
 date: 2020-10-28T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
-author: 'Zain Asgar'
-email: 'zasgar@pixielabs.ai'
+authors: ['Zain Asgar']
+emails: ['zasgar@pixielabs.ai']
 featured: true
 ---
 

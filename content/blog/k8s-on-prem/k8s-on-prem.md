@@ -4,8 +4,8 @@ title: 'How Kubernetes Made On-Prem Cool Again'
 date: 2021-02-24T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
-author: 'Natalie Serrino'
-email: 'nserrino@pixielabs.ai'
+authors: ['Natalie Serrino']
+emails: ['nserrino@pixielabs.ai']
 featured: true
 ---
 In this post, we will discuss the following:
@@ -141,4 +141,3 @@ Resource limits and deployment specifications allow the vendor or customer to de
 It is worth mentioning that none of these cons are solved if Kubernetes is not an appropriate target environment for your product. However, we believe that with the adoption that Kubernetes has seen, more and more products and tools will be able to target Kubernetes for their on-prem deployments in the future.
 
 Although some challenges still remain with on-prem, we believe that the benefits provided by Kubernetes for on-prem deployments will shift the needle on the on-prem vs. SaaS question. Deploying applications on-prem has many compelling advantages, such as maintaining customer privacy, enabling open source tools and free tiers of software products, and support for more types of customer environments (such as air-gapped clusters). We hope to see more projects joining Sourcegraph, Okera, Pixie Labs, and many others in making on-prem "cool again".
-

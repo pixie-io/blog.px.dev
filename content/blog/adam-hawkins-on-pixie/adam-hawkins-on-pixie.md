@@ -2,8 +2,8 @@
 path: '/adam-hawkins-on-pixie'
 title: 'Adam Hawkins On Pixie'
 categories: ['Guest Blogs']
-author: 'Adam Hawkins'
-email: 'adam@hawkins.io'
+authors: ['Adam Hawkins']
+emails: ['adam@hawkins.io']
 featured: true
 featured_image: hero-image.png
 date: 2020-06-17T06:00:00.000+00:00
@@ -41,14 +41,14 @@ these are different than Pixie becauase:
 * Telemetry is collected then shipped off to a centralized service
   (which drives up the cost).
 
-Pixie is radically different. 
+Pixie is radically different.
 
 * First, it integrates with eBPF so it can
 collect data about application traffic without application code
 changes.  Pixie provides common HTTP telemetry (think request counts,
 latencies, and status codes) for all services running on your
 Kubernetes cluster.  Better yet, Pixie generates service to service
-telemetry, so you're given a service map right out of the box. 
+telemetry, so you're given a service map right out of the box.
 * Second, it bakes infrastructure-as-code principles into the core DX. Every
 Pixie Dashboard is a program, which you can manage with version
 control and distribute amongst your team, or even take with to
@@ -61,7 +61,7 @@ the cost is signicantly lower. It's easy to pay $XXX,XXX dollars per
 year for other tools. Pixie's cost promises to be orders of
 magnitude less.
 
-Sounds interesting right? 
+Sounds interesting right?
 
 Check out my demo video for quick
 walkthrough.
