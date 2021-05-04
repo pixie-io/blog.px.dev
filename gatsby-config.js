@@ -18,7 +18,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-react-helmet-canonical-urls',
       options: {
-        siteUrl: 'https://blog.pixielabs.ai',
+        siteUrl: 'https://blog.px.dev',
       },
     },
     {

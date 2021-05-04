@@ -9,13 +9,13 @@ email: 'zasgar@pixielabs.ai'
 featured: true
 ---
 
-This is the second in a series of posts in which we share how you can use eBPF to debug applications without recompilation / redeployment. The [first post](https://blog.pixielabs.ai/blog/ebpf-function-tracing/post/) provided a short introduction to eBPF and demonstrated how to use it to write a simple function argument tracer. In this second post, we will look at how to use eBPF to capture HTTP 1.X traffic.
+This is the second in a series of posts in which we share how you can use eBPF to debug applications without recompilation / redeployment. The [first post](https://blog.px.dev/blog/ebpf-function-tracing/post/) provided a short introduction to eBPF and demonstrated how to use it to write a simple function argument tracer. In this second post, we will look at how to use eBPF to capture HTTP 1.X traffic.
 
 # Introduction
 
 Gaining visibility into HTTP traffic is valuable when working with distributed applications. This data can be used for performance, functional and security monitoring. Many applications accomplish this by utilizing middleware to add tracing or logging to HTTP requests in the application. One can also utilize popular open source frameworks like [Open Telemetry](https://opentelemetry.io/) to instrument requests and related context. In this post, we will take a look at an alternative approach that utilizes eBPF to capture HTTP data without having to manually add instrumentation. One advantage of this approach is that it always works, even if applications have not been specifically instrumented.
 
-[Part 1](https://blog.pixielabs.ai/blog/ebpf-function-tracing/post/) of this series provides a more detailed overview of eBPF, which allows you to run restricted C code upon some trigger event. Kprobes provide a mechanism to trace the Kernel API or internals and uprobes provide a mechanism to intercept specific instructions in a user program. Since applications typically sit on top of the Kernel system API, if we capture the Kernel interface we should be able to capture all the ingress and egress data and reconstruct the HTTP requests.
+[Part 1](https://blog.px.dev/blog/ebpf-function-tracing/post/) of this series provides a more detailed overview of eBPF, which allows you to run restricted C code upon some trigger event. Kprobes provide a mechanism to trace the Kernel API or internals and uprobes provide a mechanism to intercept specific instructions in a user program. Since applications typically sit on top of the Kernel system API, if we capture the Kernel interface we should be able to capture all the ingress and egress data and reconstruct the HTTP requests.
 
 Alternatively, we can use uprobes to carefully instrument underlying HTTP libraries (eg. net/http in Go) to capture HTTP requests directly. Since uprobes work at the application level, their implementation will be dependent on the underlying language used.
 

@@ -1,6 +1,6 @@
-# [blog.pixielabs.ai](http://blog.pixielabs.ai/) &middot; [![CC BY 4.0 license](https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/) <a href="https://twitter.com/intent/follow?screen_name=pixie_run"><img src="https://img.shields.io/twitter/follow/pixie_run.svg?label=Follow%20@pixie_run" alt="Follow @pixie_run" /></a>
+# [blog.px.dev](http://blog.px.dev/) &middot; [![CC BY 4.0 license](https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/) <a href="https://twitter.com/intent/follow?screen_name=pixie_run"><img src="https://img.shields.io/twitter/follow/pixie_run.svg?label=Follow%20@pixie_run" alt="Follow @pixie_run" /></a>
 
-This repo contains the source code and content for the [Pixie Blog](http://blog.pixielabs.ai/) website.
+This repo contains the source code and content for the [Pixie Blog](http://blog.px.dev/) website.
 
 ## Reporting Issues
 
