@@ -4,7 +4,7 @@ title: 'Open-sourcing Pixie: an in-cluster observability platform for Kubernetes
 date: 2021-5-04T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
-authors: ['Zain Asgar']
+authors: ['Zain Asgar', 'Pixie Founding Team']
 emails: ['zasgar@pixielabs.ai']
 featured: true
 ---
