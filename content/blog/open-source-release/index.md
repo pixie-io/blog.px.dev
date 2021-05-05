@@ -1,6 +1,6 @@
 ---
 path: '/open-source-release'
-title: 'Open-sourcing Pixie: an in-cluster observability platform for Kubernetes'
+title: 'Open sourcing Pixie under Apache 2.0 license'
 date: 2021-5-04T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
@@ -9,7 +9,7 @@ emails: ['zasgar@pixielabs.ai']
 featured: true
 ---
 
-We are thrilled to announce that Pixie has officially been open-sourced by New Relic. Pixie is an in-cluster observability platform for Kubernetes. It's designed to be a low-friction tool for developers to debug and monitor their applications.
+We are thrilled to announce that Pixie has officially been open sourced by New Relic. Pixie is an in-cluster observability platform for Kubernetes. It's designed to be a low friction tool for developers to debug and monitor their applications.
 
 As a quick background for those new to the project, here are Pixie's three most important capabilities:
 
@@ -25,7 +25,7 @@ As developers, we wanted Pixie to be a fully programmatic interface so that it c
 
 Shipping large amounts of telemetry data to remote data stores often introduces a significant burden on the network as well as privacy concerns when the data is sensitive. Pixie performs all data storage and computation entirely on the user’s Kubernetes cluster. This architecture allows the user to isolate data storage and computation within their environment for finer-grained context, faster performance, and a greater level of data security.
 
-## What is being open-sourced?
+## What is being open sourced?
 
 With today's release, it is now possible to run an entirely self-hosted version of Pixie without third-party dependencies or vendor lock-in.
 
@@ -43,18 +43,18 @@ Users can choose to self-host Pixie entirely, or to run Vizier in conjunction wi
 
 The blog and website assets look similar today, but we expect them to diverge over time as the OSS project develops.
 
-## Why open-source?
+## Why open source?
 
-Our vision for Pixie is to build a ubiquitous data platform for application infrastructure. We hope that developers will build new applications that use Pixie data in ways we haven't thought of yet. In terms of building a community around Pixie, it was important to make Pixie accessible to any developer using Kubernetes. In order to support these goals, we decided to open-source the project. New Relic boldly supported this decision as part of acquiring Pixie Labs in December 2020. After the acquisition, New Relic also committed to ensuring that the entire Pixie Labs team remain 100% focused on the Pixie project.
+Our vision for Pixie is to build a ubiquitous data platform for application infrastructure. We hope that developers will build new applications that use Pixie data in ways we haven't thought of yet. In terms of building a community around Pixie, it was important to make Pixie accessible to any developer using Kubernetes. In order to support these goals, we decided to open source the project. New Relic boldly supported this decision as part of acquiring Pixie Labs in December 2020. After the acquisition, New Relic also committed to ensuring that the entire Pixie Labs team remain 100% focused on the Pixie project.
 
-Here are three decisions we made in order to preserve the integrity of Pixie as an open-source project:
+Here are three decisions we made in order to preserve the integrity of Pixie as an open source project:
 
 - **Apache 2.0 License**: Pixie is an Apache 2.0 Licensed project.
-- **Contributing Pixie to CNCF**: New Relic [started the process](https://github.com/cncf/toc/issues/651) to contribute Pixie as a new CNCF observability open-source Sandbox project. CNCF is the home for cloud-native open-source projects dedicated to vendor neutrality.
+- **Contributing Pixie to CNCF**: New Relic [started the process](https://github.com/cncf/toc/issues/651) to contribute Pixie as a new CNCF observability open source Sandbox project. CNCF is the home for cloud-native open source projects dedicated to vendor neutrality.
 - **Built to integrate with other tools**: We are working to add support to export data to OpenTracing. This will allow Pixie data to easily interoperate with data collected by other observability tools. We have a Grafana data-source plugin under development and will be building a native Prometheus integration. Developers can also use our client API in order to easily export Pixie data anywhere.
 - **Cross-vendor governance structure**: Pixie's board is made up of 2 members from the Pixie team ([Zain Asgar](https://twitter.com/zainasgar) and [Michelle Nguyen](https://twitter.com/michelle_aimi)), 2 community members ([Kelsey Hightower](https://twitter.com/kelseyhightower) and [Jaana Dogan](https://twitter.com/rakyll)), and 2 end-user community members (currently [Dax McDonald](https://twitter.com/cloudmarooned)).
 
-We believe that by contributing Pixie as a truly open-source project to the community, we can maximize the impact it has. We hope to see it power entirely new applications build on top of the data we collect.
+We believe that by contributing Pixie as a truly open source project to the community, we can maximize the impact it has. We hope to see it power entirely new applications build on top of the data we collect.
 
 ## Getting started
 
@@ -73,4 +73,4 @@ As mentioned earlier, docs for our hosted solution can be found at [pixielabs.ai
 
 ### Acknowledgements
 
-We would like to thank all of our users for their feedback and help in building Pixie. Big thanks to our advisors, Kelsey Hightower and Jaana Dogan, as well as the entire Pixie team. Thanks to New Relic for supporting our open-source vision for Pixie. Finally, thank you to Brendan Gregg for his trailblazing work with eBPF.
+We would like to thank all of our users for their feedback and help in building Pixie. Big thanks to our advisors, Kelsey Hightower and Jaana Dogan, as well as the entire Pixie team. Thanks to New Relic for supporting our open source vision for Pixie. Finally, thank you to Brendan Gregg for his trailblazing work with eBPF.
