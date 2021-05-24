@@ -4,8 +4,8 @@ title: 'Building an Always-On CPU Profiler'
 date: 2021-5-24T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
-authors: ['Omid Oazizi', 'Pete Stevenson']
-emails: ['omid@pixielabs.ai', 'pete@pixielabs.ai']
+authors: ['Omid Azizi', 'Pete Stevenson']
+emails: ['oazizi@pixielabs.ai', 'pete@pixielabs.ai']
 featured: true
 ---
 
