@@ -77,8 +77,8 @@ The table below summarizes properties of a number of popular performance profile
 | Profiler | Methodology | Deployment | Traces Libraries/System Calls? | Performance Overhead
 | --- | --- | --- | --- | --- |
 | [gprof](https://sourceware.org/binutils/docs/gprof/) | Instrumentation + Sampling | Recompile & Rerun | No | High (up to [260%](https://www.researchgate.net/publication/221235356_Low-overhead_call_path_profiling_of_unmodified_optimized_code)) |
-| [Callgrind](https://valgrind.org/docs/manual/cl-manual.html) | Simulation | Rerun | Yes? | Very High ([>400%](https://www.cs.cmu.edu/afs/cs.cmu.edu/project/cmt-40/Nice/RuleRefinement/bin/valgrind-3.2.0/docs/html/cl-manual.html)) |
-| [gperftools](https://github.com/gperftools/gperftools) | Sampling (User-space only) | Rerun | Yes? | Low |
+| [Callgrind](https://valgrind.org/docs/manual/cl-manual.html) | Simulation | Rerun | Yes | Very High ([>400%](https://www.cs.cmu.edu/afs/cs.cmu.edu/project/cmt-40/Nice/RuleRefinement/bin/valgrind-3.2.0/docs/html/cl-manual.html)) |
+| [gperftools](https://github.com/gperftools/gperftools) | Sampling (User-space only) | Rerun | Yes | Low |
 | [oprofile](https://oprofile.sourceforge.io/about/), linux [perf](https://github.com/torvalds/linux/tree/master/tools/perf), [bcc_profile](https://github.com/iovisor/bcc/blob/master/tools/profile.py) | Sampling (Kernel-assisted) | Profile any running process | Yes | Low |
 
 For Pixie, we wanted a profiling methodology that (1) had very low overheads, and (2) required no recompilation or redeployment. This meant we were clearly looking at sampling-based profilers.
