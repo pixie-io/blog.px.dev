@@ -5,7 +5,7 @@ date: 2021-5-24T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
 authors: ['Omid Azizi', 'Pete Stevenson']
-emails: ['oazizi@pixielabs.ai', 'pete@pixielabs.ai']
+emails: ['oazizi@pixielabs.ai', 'jps@pixielabs.ai']
 featured: true
 ---
 
@@ -22,7 +22,7 @@ We built Pixie’s profiler for compiled languages (Go, C/C++, Rust), using eBPF
 
 We learnt a lot through the process of building the profiler, and this series of blog posts will share our experience:
 
-- [Part 1: An Introduction to Application Performance Profiling](/cpu-profiling/#part-1:-an-introduction-to-application-performance-profiling).
+- [Part 1: An Introduction to Application Performance Profiling](/data/blog/cpu-profiling/#part-1:-an-introduction-to-application-performance-profiling).
 - Part 2: A Simple eBPF-based CPU profiler.
 - Part 3: The challenges of building a continuous CPU profiler in production.
 - Part 4: Future directions for CPU profiling.
