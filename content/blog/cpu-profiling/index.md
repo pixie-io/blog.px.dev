@@ -1,6 +1,6 @@
 ---
 path: '/cpu-profiling'
-title: 'Building an Always-On CPU Profiler'
+title: 'Building a Continuous Cross-Language (Go, Rust, C/C++) Profiler'
 date: 2021-5-24T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
@@ -9,23 +9,18 @@ emails: ['oazizi@pixielabs.ai', 'jps@pixielabs.ai']
 featured: true
 ---
 
+Application profiling tools are not new, but they are often a hassle to use. Many profilers require you to recompile your application or at the very least to rerun it, making them less than ideal for the lazy developer who would like to debug performance issues on the fly. 
 
-At Pixie, we are always looking for new ways to bring insight to developers about their applications. Our no-instrumentation [eBPF protocol tracers](https://blog.px.dev/ebpf-http-tracing), for example, automatically capture the messages of your K8s applications, which helps identify outages and functional issues.
+Earlier this year, we built the tool we’d like to have in our personal perf toolkit - a continuous profiler that is incredibly easy to use: no instrumentation, no redeployment, no enablement; just automatic access to CPU profiles whenever needed.
 
-But what about when you have a performance issue? As developers, this is a problem we often face, and we wanted to make it easier for developers to gain insight into what their applications were doing. While Pixie shows basic metrics like the CPU usage of your applications, when your application is using an unexpected amount of CPU cycles, you often need more detail. And so, earlier this year, we set out to build out an application profiler to give you insight into what parts of your code are consuming your CPU resources.
+Over the next 4 blog posts, we’ll show how to build and productionize this continuous profiler for Go and other compiled languages (C/C++, Rust) with very low overhead (<1% and decreasing): 
 
-CPU profilers are not new, but they are often a hassle to deploy. Many profilers require you to recompile your application with additional instrumentation or linked libraries. Others don’t require recompilation, but still require you to rerun your application. Making matters worse, it can be hard to deploy a profiler in production environments where you may not have the required privileges.
-
-Our primary goal for Pixie’s always-on profiler was to make one that is really easy to use. We wanted the profiling data to just be there for your apps: no instrumentation, no redeployment, no enablement; just automatic access to profiles when you need them.
-
-We built Pixie’s profiler for compiled languages (Go, C/C++, Rust), using eBPF. It’s low overhead (<1% and decreasing) and always-on, so you can get visibility into your application’s performance profile instantly. If you use Pixie, you can see the profiler in action today [link](https://docs.px.dev/tutorials/profiler).
-
-We learnt a lot through the process of building the profiler, and this series of blog posts will share our experience:
-
-- [Part 1: An Introduction to Application Performance Profiling](/cpu-profiling/#part-1:-an-introduction-to-application-performance-profiling).
-- Part 2: A Simple eBPF-based CPU profiler.
+- Part 1: [An intro to application performance profiling.](/cpu-profiling/#part-1:-an-introduction-to-application-performance-profiling)
+- Part 2: A simple eBPF-based CPU profiler.
 - Part 3: The challenges of building a continuous CPU profiler in production.
-- Part 4: Future directions for CPU profiling.
+- Part 4: Future additions to our CPU profiler.
+
+Want to try out Pixie’s profiler before seeing how we built it? Check out the [tutorial](https://docs.px.dev/tutorials/profiler).  
 
 ## Part 1: An Introduction to Application Performance Profiling
 
