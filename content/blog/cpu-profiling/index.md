@@ -63,7 +63,7 @@ More recently, sampling-based profilers have become widely used due to their low
 
 By sampling stack traces many thousands of times, one gets a good idea of where the code spends its time. This is fundamentally a statistical approach, so the more samples are collected, the more confidence you’ll have that you’ve found a real hot-spot. You also have to ensure there’s no correlation between your sampling methodology and the target application, so you can trust the results, but a simple timer-based approach typically works well.
 
-Sampling profilers can be very efficient, to the point that there is negligible overhead. For example, if one samples a stack trace every 10 ms, and we assume (1) the sampling process requires 50,000 instructions, and (2) that the CPU processes 5 billion instructions per second, then a rough calculation (10000*100/5 B) shows a theoretical performance overhead of only 0.1%.
+Sampling profilers can be very efficient, to the point that there is negligible overhead. For example, if one samples a stack trace every 10 ms, and we assume (1) the sampling process requires 50,000 instructions (this is a generous upper-bound according to our measurements), and (2) that the CPU processes 5 billion instructions per second, then a rough calculation (10000*100/5 B) shows a theoretical performance overhead of only 0.1%.
 
 A third approach to profiling is simulation, as used by Valgrind/Callgrind. Valgrind uses no instrumentation, but runs your program through a virtual machine which profiles the execution. This approach provides a lot of information, but is also high in overheads.
 
