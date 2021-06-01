@@ -1,6 +1,6 @@
 ---
 path: '/cpu-profiling'
-title: 'Part 2: A Simple eBPF Continuous Cross-Language (Go, Rust, C/C++) Profiler'
+title: 'Part 2: A Simple Continuous Cross-Language (Go, Rust, C/C++) Profiler written in eBPF'
 date: 2021-6-1T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
@@ -13,7 +13,7 @@ In the last [blog post](/cpu-profiling/#part-1:-an-introduction-to-application-p
 
 1. Does not require recompilation or redeployment: This is critical to Pixie’s auto-telemetry approach to observability. You shouldn’t have to instrument or even re-run your application to get observability.
 
-2. Has very low overheads: This is required for an always-on profiler, which was desirable for making performance profiling as low-effort as possible.
+2. Has very low overheads: This is required for a continuous (always-on) profiler, which was desirable for making performance profiling as low-effort as possible.
 
 A few existing profilers met these requirements, including the Linux [perf](https://github.com/torvalds/linux/tree/master/tools/perf) tool. In the end, we settled on the BCC eBPF-based profiler developed by Brendan Gregg [[1]](http://www.brendangregg.com/blog/2016-10-21/linux-efficient-profiler.html) as the best reference. With eBPF already at the heart of the Pixie platform, it was a natural fit, and the efficiency of eBPF is undeniable.
 
