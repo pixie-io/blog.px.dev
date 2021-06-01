@@ -1,6 +1,6 @@
 ---
 path: '/cpu-profiling'
-title: 'Building a Continuous Cross-Language (Go, Rust, C/C++) Profiler'
+title: 'Part 1: Building a Continuous Cross-Language (Go, Rust, C/C++) Profiler'
 date: 2021-5-24T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
@@ -9,18 +9,18 @@ emails: ['oazizi@pixielabs.ai', 'jps@pixielabs.ai']
 featured: true
 ---
 
-Application profiling tools are not new, but they are often a hassle to use. Many profilers require you to recompile your application or at the very least to rerun it, making them less than ideal for the lazy developer who would like to debug performance issues on the fly. 
+Application profiling tools are not new, but they are often a hassle to use. Many profilers require you to recompile your application or at the very least to rerun it, making them less than ideal for the lazy developer who would like to debug performance issues on the fly.
 
 Earlier this year, we built the tool we’d like to have in our personal perf toolkit - a continuous profiler that is incredibly easy to use: no instrumentation, no redeployment, no enablement; just automatic access to CPU profiles whenever needed.
 
-Over the next 4 blog posts, we’ll show how to build and productionize this continuous profiler for Go and other compiled languages (C/C++, Rust) with very low overhead (<1% and decreasing): 
+Over the next 4 blog posts, we’ll show how to build and productionize this continuous profiler for Go and other compiled languages (C/C++, Rust) with very low overhead (<1% and decreasing):
 
-- Part 1: [An intro to application performance profiling.](/cpu-profiling/#part-1:-an-introduction-to-application-performance-profiling)
-- Part 2: A simple eBPF-based CPU profiler.
+- [Part 1: An intro to application performance profiling.](/cpu-profiling/#part-1:-an-introduction-to-application-performance-profiling)
+- [Part 2: A simple eBPF-based CPU profiler.](/cpu-profiling-2)
 - Part 3: The challenges of building a continuous CPU profiler in production.
 - Part 4: Future additions to our CPU profiler.
 
-Want to try out Pixie’s profiler before seeing how we built it? Check out the [tutorial](https://docs.px.dev/tutorials/profiler).  
+Want to try out Pixie’s profiler before seeing how we built it? Check out the [tutorial](https://docs.px.dev/tutorials/profiler).
 
 ## Part 1: An Introduction to Application Performance Profiling
 
@@ -78,4 +78,4 @@ The table below summarizes properties of a number of popular performance profile
 
 For Pixie, we wanted a profiling methodology that (1) had very low overheads, and (2) required no recompilation or redeployment. This meant we were clearly looking at sampling-based profilers.
 
-In the next blog in this series, we’ll examine how to build a simple sampling-based profiler using eBPF and [BCC](https://github.com/iovisor/bcc/).
+In [part two](/cpu-profiling-2) of this series, we’ll examine how to build a simple sampling-based profiler using eBPF and [BCC](https://github.com/iovisor/bcc/).
