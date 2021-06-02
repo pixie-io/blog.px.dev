@@ -70,11 +70,10 @@ const Footer = ({ whiteFooter }) => (
           </a>
         </li>
         <li>
-          <a href='//pixielabs.ai/terms'>TERMS & PRIVACY</a>
-          <a href='https://newrelic.com/termsandconditions/terms'>TERMS OF SERVICE</a>
-        </li>
-        <li>
-          <a href='https://newrelic.com/termsandconditions/privacy'>PRIVACY POLICY</a>
+          <a href='https://pixielabs.ai/terms' target='_blank' rel='noreferrer noopener'>
+            TERMS &
+            PRIVACY
+          </a>
         </li>
         <li>
           <a
