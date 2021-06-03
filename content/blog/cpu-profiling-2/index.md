@@ -160,6 +160,10 @@ It actually turns out that the process of turning the stack traces into symbols 
 
 ## Running the Demo Profiler
 
+::: div image-xl
+<svg title="Running the simple CPU profiler." src='simple-cpu-profiler.gif' />
+:::
+
 The code and instructions for running the simple eBPF based profiler can be found [here](https://github.com/pixie-labs/pixie-demos/tree/main/ebpf-profiler).
 
 The code was designed to have as few dependencies as possible, but you need BCC installed. Follow the instructions in [`README.md`](https://github.com/pixie-labs/pixie-demos/tree/main/ebpf-profiler/README.md) for more details on building the profiler and a toy app to profiler.
