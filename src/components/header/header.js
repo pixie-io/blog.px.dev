@@ -175,55 +175,27 @@ const Header = ({
               <em>Product</em>
               <ul>
                 <li>
-                  <a
-                    href='https://withpixie.ai/login'
-                    onClick={(e) => loginRedirect(e)}
-                  >
-                    Log-in
-                  </a>
+                  <a href='https://px.dev'>Product Page</a>
                 </li>
                 <li>
-                  <a
-                    href='https://withpixie.ai/signup'
-                    onClick={(e) => signupRedirect(e)}
-                  >
-                    Sign-up
-                  </a>
+                  <a href='https://docs.px.dev'>Docs</a>
                 </li>
                 <li>
-                  <a
-                    href='https://work.withpixie.ai/docs'
-                    onClick={(e) => docsRedirect(e)}
-                  >
-                    Docs
-                  </a>
+                  <a href='https://github.com/pixie-labs/pixie'>GitHub</a>
+                </li>
+                <li>
+                  <a href='https://slackin.px.dev'>Slack</a>
                 </li>
               </ul>
             </div>
             <div>
-              <em>Company</em>
+              <em>Social</em>
               <ul>
                 <li>
-                  <a href='https://pixielabs.ai/community'>Community</a>
+                  <a href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'>YouTube</a>
                 </li>
                 <li>
-                  <a href='https://pixielabs.ai/careers'>Careers</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <em>Help & support</em>
-              <ul>
-                <li>
-                  <a href='https://slackin.px.dev'>
-                    Join Slack Community
-                  </a>
-                </li>
-                <li>
-                  <a href='https://pixielabs.ai//contact/#sales'>Contact Sales</a>
-                </li>
-                <li>
-                  <a href='https://pixielabs.ai//contact/#support'>Email us</a>
+                  <a href='https://twitter.com/pixie_run'>Twitter</a>
                 </li>
               </ul>
             </div>
