@@ -59,47 +59,10 @@ const Footer = ({ whiteFooter }) => (
       </div>
       <div className={styles.divider} />
       <ul className={styles.linksRow}>
-
-
-        <li>
-          <a
-            href='https://work.withpixie.ai/login'
-            onClick={(e) => loginRedirect(e)}
-          >
-            SIGN IN
-          </a>
-        </li>
         <li>
           <a href='https://pixielabs.ai/terms' target='_blank' rel='noreferrer noopener'>
             TERMS &
             PRIVACY
-          </a>
-        </li>
-        <li>
-          <a
-            href='https://pixielabs.ai/community'
-            target='_blank'
-            rel='noreferrer noopener'
-          >
-            COMMUNITY
-          </a>
-        </li>
-        <li>
-          <a
-            href='https://pixielabs.ai/careers'
-            target='_blank'
-            rel='noreferrer noopener'
-          >
-            CAREERS
-          </a>
-        </li>
-        <li>
-          <a
-            href='https://pixielabs.ai/contact'
-            target='_blank'
-            rel='noreferrer noopener'
-          >
-            CONTACT
           </a>
         </li>
       </ul>
