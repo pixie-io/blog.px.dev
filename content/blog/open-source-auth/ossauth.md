@@ -16,7 +16,7 @@ In this blog post we will discuss:
 
 ## Context
 
-[Pixie](https://pixielabs.ai/) is an observability platform recently acquired by New Relic. To make the project more accessible to the developer community, New Relic is open sourcing Pixie. As part of our commitment to OSS, we want Pixie to be deployable in a completely open source environment. However, Pixie had a strong dependency on Auth0 that would complicate this effort.
+[Pixie](https://px.dev/) is an observability platform recently acquired by New Relic. To make the project more accessible to the developer community, New Relic is open sourcing Pixie. As part of our commitment to OSS, we want Pixie to be deployable in a completely open source environment. However, Pixie had a strong dependency on Auth0 that would complicate this effort.
 
 In this post we detail how we redesigned Pixie's auth to be open source compatible. We discuss trade offs of several approaches and dive into our final open source implementation. Let's start with our Auth0 design.
 
@@ -164,6 +164,6 @@ We then implemented the interface with the Kratos/Hydra logic from above.
 
 ## Conclusion
 
-We are big fans of both Auth0 and Ory's Hydra/Kratos. Each comes with their own sets of trade-offs and we offer both options to enable our users to choose the use case that works best for them.  Most importantly, both solutions are vetted by security experts and hardened by their wide user-base. Pixie's development team can spend less time worrying about security and instead focus on [making our no-instrumentation observability platform](https://pixielabs.ai/) better. We hope this blog post will help you decide which auth solution works best for you.
+We are big fans of both Auth0 and Ory's Hydra/Kratos. Each comes with their own sets of trade-offs and we offer both options to enable our users to choose the use case that works best for them.  Most importantly, both solutions are vetted by security experts and hardened by their wide user-base. Pixie's development team can spend less time worrying about security and instead focus on [making our no-instrumentation observability platform](https://px.dev) better. We hope this blog post will help you decide which auth solution works best for you.
 
 If you want to dive into our auth code, check out our [Github](https://github.com/pixie-labs/pixie). If you have any questions about the topic, join our [Slack](https://slackin.px.dev/) and send us a message.

@@ -35,8 +35,6 @@ import youtube from '../../images/footer/youtube-icon.svg';
 import twitter from '../../images/footer/twitter-icon.svg';
 import pixieLogo from '../../images/pixie-logo-header.svg';
 import betanaut from '../../images/betanaut.png';
-import { docsRedirect, loginRedirect, signupRedirect } from '../shared/tracking-utils';
-
 
 const Header = ({
   transparentMenu, onThemeTypeSwitch,
@@ -142,7 +140,7 @@ const Header = ({
               </IconButton>
             </li>
             <li className='hide-mobile hide-tablet'>
-              <a href='https://work.withpixie.ai/docs' onClick={(e) => docsRedirect(e)}>
+              <a href='https://docs.px.dev'>
                 Docs
               </a>
             </li>
@@ -206,9 +204,7 @@ const Header = ({
 
               <li>
                 <a
-                  href='https://work.withpixie.ai/docs'
-                  onClick={(e) => docsRedirect(e)}
-                >
+                  href='https://docs.px.dev'>
                   <img src={docs} className={styles.socialIcon} />
                 </a>
               </li>

@@ -26,4 +26,4 @@ We are so excited to begin working with New Relic on our shared vision for the f
 
 Finally, our journey is just beginning. We are a team of 12 people with a huge vision to reach every Kubernetes developer. As we embark on this part of our journey, we encourage anyone passionate about open source, Kubernetes, and observability to apply to join us [here](https://pixielabs.ai/careers/).
 
-You can try out Pixie [here](https://work.withpixie.ai/auth/signup?UTM=PXNR), learn more about us [here](https://pixielabs.ai/) and ping us anytime on our Pixienaut community slack.
+You can try out Pixie [here](https://work.withpixie.ai/auth/signup?UTM=PXNR), learn more about us [here](https://px.dev/) and ping us anytime on our Pixienaut community slack.

@@ -21,7 +21,6 @@ Alternatively, we can use uprobes to carefully instrument underlying HTTP librar
 
 This post will explore tracing HTTP requests using both kprobes and uprobes and compare the tradeoffs for each.
 
-
 ## What happens during an HTTP request?
 
 Before we start writing any BPF code, let’s try to understand how HTTP requests are handled by the system. We will utilize the same [test application](https://github.com/pixie-labs/pixie-demos/blob/main/simple-gotracing/app/app.go) we used in Part 1, a simple Golang HTTP server (simpleHTTP), however the results are generalizable to other HTTP applications.
@@ -177,5 +176,6 @@ Tracing HTTP requests using eBPF is possible using both kprobes and uprobes; how
 At Pixie, we are building an auto-telemetry system for Kubernetes that requires no manual instrumentation to get started. eBPF provides most of the magic behind our platform. Pixie uses both uprobes and kprobes to enable a lot of our functionality. We’ll be discussing more of this in our future blogs posts. If this post's contents are interesting, please give Pixie a try, or check out our open positions.
 
 ## Links
-- Learn more about the [Pixie Community Beta](https://pixielabs.ai/).
+
+- Learn more about the [Pixie Community Beta](https://px.dev/).
 - Check out our [open positions](https://pixielabs.ai/careers).

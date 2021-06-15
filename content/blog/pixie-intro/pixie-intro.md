@@ -31,7 +31,7 @@ All these have their uses, but what we really want is a way to eavesdrop on who'
 
 Suppose you could see every HTTP request going through your cluster, or every MySQL query going to your database. Suppose you could get instant, live stats on the throughput, response time, and error rate of every service you're running, including internal-only services. And suppose you had a spy-cam that showed you the resource usage of every process or container in your system. What would that do to your clearance rate?
 
-There's a new recruit on the force who can help you do exactly that. [Pixie](https://docs.withpixie.ai/getting-started/what-is-pixie/) is a software tool for monitoring and tracing in Kubernetes clusters, letting you see what's going on _without_ making any code changes, or sending any customer data outside the cluster. It can reduce the time to triage issues from days to just hours.
+There's a new recruit on the force who can help you do exactly that. [Pixie](https://docs.px.dev/about-pixie/what-is-pixie/) is a software tool for monitoring and tracing in Kubernetes clusters, letting you see what's going on _without_ making any code changes, or sending any customer data outside the cluster. It can reduce the time to triage issues from days to just hours.
 
 ::: div image-m
 

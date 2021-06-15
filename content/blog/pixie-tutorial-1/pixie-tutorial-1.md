@@ -15,7 +15,7 @@ This is a guest tutorial by John Arundel, of [Bitfield Consulting](https://bitfi
 
 ## Introduction
 
-[Pixie](https://docs.withpixie.ai/getting-started/what-is-pixie/) is a new software tool for monitoring and tracing software in Kubernetes clusters. It can generate automatic telemetry to help you live-debug your distributed system, without needing to instrument your application, or install complicated service mesh frameworks.
+[Pixie](https://docs.px.dev/about-pixie/what-is-pixie/) is a new software tool for monitoring and tracing software in Kubernetes clusters. It can generate automatic telemetry to help you live-debug your distributed system, without needing to instrument your application, or install complicated service mesh frameworks.
 
 To learn more about how Pixie works, and why it's so valuable for SREs and infrastructure engineers, read my introductory post, [Put a Little Pixie in Your Cluster](../blog/pixie-intro).
 
@@ -41,7 +41,7 @@ There's also the Pixie _control cloud_, which handles authentication, admin, and
 
 Here's what you'll need in order to use Pixie. First, you'll need a machine to run the CLI tool on. At the moment, this will need to be either Linux or Mac, though support for other platforms is in the pipeline.
 
-Second, you'll need a Kubernetes cluster to run the Pixie command module. If you don't already have one, or you don't want to use your existing cluster to try out Pixie, that's fine. Pixie will work with a local Kubernetes cluster on your machine, provided by tools like [Docker Desktop](https://www.docker.com/products/docker-desktop), [Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/), and [kind](https://kind.sigs.k8s.io/). Follow one of Pixie's handy [install guides](https://docs.withpixie.ai/install-guides/) to set up a suitable cluster using the software of your choice.
+Second, you'll need a Kubernetes cluster to run the Pixie command module. If you don't already have one, or you don't want to use your existing cluster to try out Pixie, that's fine. Pixie will work with a local Kubernetes cluster on your machine, provided by tools like [Docker Desktop](https://www.docker.com/products/docker-desktop), [Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/), and [kind](https://kind.sigs.k8s.io/). Follow one of Pixie's handy [install guides](https://docs.px.dev/installing-pixie/install-guides/) to set up a suitable cluster using the software of your choice.
 
 Now read on!
 
@@ -85,7 +85,6 @@ More Info:
 Install Path [/usr/local/bin]:
 ```
 
-
 The default install path (`/usr/local/bin`) should be fine, unless you want to install `px` somewhere else (if so, enter the path here). Otherwise, just press Enter to continue.
 
 ```bash:numbers
@@ -98,8 +97,6 @@ true&redirect_uri=http%3A%2F%2Flocalhost%3A8085%2Fauth_complete
 [0000]  INFO Starting browser
 
 ```
-
-
 
 This will open your browser to [work.withpixie.ai](https://work.withpixie.ai/), where you'll be prompted to log in (if you have an existing Pixie account) or sign up for a new account:
 

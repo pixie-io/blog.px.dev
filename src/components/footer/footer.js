@@ -20,7 +20,6 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import styles from './footer.module.scss';
-import { docsRedirect, loginRedirect } from '../shared/tracking-utils';
 import pixieLogo from '../../images/pixie-new-logo.svg';
 
 import docs from '../../images/footer/docs-icon.svg';
@@ -38,10 +37,7 @@ const Footer = ({ whiteFooter }) => (
     <div className='container hide-not-desktop'>
       <div className={styles.divider} />
       <div className={styles.socialIcons}>
-        <a
-          href='https://work.withpixie.ai/docs'
-          onClick={(e) => docsRedirect(e)}
-        >
+        <a href='https://docs.px.dev'>
           <img src={docs} className={styles.socialIcon} alt='pixie docs' />
         </a>
         <a href='https://github.com/pixie-labs/pixie'>
