@@ -77,16 +77,16 @@ const Header = ({
         <div className={styles.newsBar}>
 
           <span className='hide-not-desktop'>
-             Join us for our next Pixienaut Monthly call on May 27th.
+             Join us for our next Pixienaut Monthly call on July 22nd.
             {' '}
-            <a href='https://px.dev/community/'>
+            <a href='https://px.dev/community/#events'>
                    Learn more
             </a>
             {' '}
              🚀
           </span>
           <span className='hide-desktop'>
-                <a href='https://px.dev/community/'>Join us for our Pixienaut Monthly on May 27th.</a>
+                <a href='https://px.dev/community/#events'>Join us for our Pixienaut Monthly on July 22nd.</a>
           </span>
 
           <div
