@@ -98,7 +98,7 @@ const Blog = (props) => {
               <div className='col-10'>
                 <div className={styles.topDecorator} />
                 <Typography variant='h1'>
-                  Updates and ideas from Pixie Labs and the Pixienaut developer community
+                  Updates and ideas from Pixie and the Pixienaut developer community
                 </Typography>
               </div>
               <div className='col-1' />
