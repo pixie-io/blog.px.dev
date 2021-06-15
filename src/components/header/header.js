@@ -79,14 +79,14 @@ const Header = ({
           <span className='hide-not-desktop'>
              Join us for our next Pixienaut Monthly call on May 27th.
             {' '}
-            <a href='https://pixielabs.ai/community/'>
+            <a href='https://px.dev/community/'>
                    Learn more
             </a>
             {' '}
              🚀
           </span>
           <span className='hide-desktop'>
-                <a href='https://pixielabs.ai/community/'>Join us for our Pixienaut Monthly on May 27th.</a>
+                <a href='https://px.dev/community/'>Join us for our Pixienaut Monthly on May 27th.</a>
           </span>
 
           <div
@@ -144,7 +144,7 @@ const Header = ({
               </a>
             </li>
             <li className={styles.colored}>
-              <a href='https://pixielabs.ai/'>
+              <a href='https://px.dev/'>
                 LEARN MORE
               </a>
             </li>

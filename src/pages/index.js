@@ -177,7 +177,7 @@ const Blog = (props) => {
                   our product & community?
                 </Typography>
                 <div>
-                  <Button className={styles.button} link='https://pixielabs.ai/community/'>
+                  <Button className={styles.button} link='https://px.dev/community/'>
                     BE A PIXIENAUT
                   </Button>
                 </div>
