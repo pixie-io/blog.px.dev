@@ -77,7 +77,6 @@ In the end, making requests directly to the satellites turned out to be more com
 
 When a satellite is behind a firewall, it will only be queryable by users within the network. This further ensures that no sensitive data leaves the network.
 
-
 ## Approach 2: Proxying Queries through the Server
 
 ::: div image-m
@@ -172,11 +171,9 @@ The actual implementation of our query request pipeline looks very similar to th
 4. The service responsible for handling satellite communication (such as heartbeats) is subscribed to the `satellite/*` NATS topic. It reads the query request and sends it to the appropriate satellite via its usual communication channels. The satellite streams the response back to this service. The service then puts these responses on the `reply-<query-id>` NATS topic.
 5. The RequestProxyer receives the responses on the `reply-<query-id>` topic and sends them back to the UI.
 
-
 It is worth noting that in this approach, since data is now funneled through the cloud rather than directly from the satellite to the browser, there may be additional network latency.
 
 In clusters behind a firewall, proxying the request through the cloud will allow data access to out-of-network users. This can be both a positive and negative, as it makes the application easier to use but relies on potentially sensitive data exiting the network.
-
 
 # Conclusion
 
@@ -186,7 +183,7 @@ Overall, designing an split data/control plane architecture for Kubernetes nativ
 
 ## Footnotes
 
-- Learn more about the [Pixie Community Beta](https://pixielabs.ai/).
+- Learn more about the [Pixie Community Beta](https://px.dev/).
 - Check out our [open positions](https://pixielabs.ai/careers).
 - Check out a recording of a talk on this blog post's content (video below):
 

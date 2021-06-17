@@ -20,7 +20,6 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import styles from './footer.module.scss';
-import { docsRedirect, loginRedirect } from '../shared/tracking-utils';
 import pixieLogo from '../../images/pixie-new-logo.svg';
 
 import docs from '../../images/footer/docs-icon.svg';
@@ -38,16 +37,13 @@ const Footer = ({ whiteFooter }) => (
     <div className='container hide-not-desktop'>
       <div className={styles.divider} />
       <div className={styles.socialIcons}>
-        <a
-          href='https://work.withpixie.ai/docs'
-          onClick={(e) => docsRedirect(e)}
-        >
+        <a href='https://docs.px.dev'>
           <img src={docs} className={styles.socialIcon} alt='pixie docs' />
         </a>
         <a href='https://github.com/pixie-labs/pixie'>
           <img src={github} className={styles.socialIcon} alt='github' />
         </a>
-        <a href='https://slackin.withpixie.ai'>
+        <a href='https://slackin.px.dev'>
           <img src={slack} className={styles.socialIcon} alt='slack' />
         </a>
         <a href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'>
@@ -59,47 +55,10 @@ const Footer = ({ whiteFooter }) => (
       </div>
       <div className={styles.divider} />
       <ul className={styles.linksRow}>
-
-
-        <li>
-          <a
-            href='https://work.withpixie.ai/login'
-            onClick={(e) => loginRedirect(e)}
-          >
-            SIGN IN
-          </a>
-        </li>
         <li>
           <a href='https://pixielabs.ai/terms' target='_blank' rel='noreferrer noopener'>
             TERMS &
             PRIVACY
-          </a>
-        </li>
-        <li>
-          <a
-            href='https://pixielabs.ai/community'
-            target='_blank'
-            rel='noreferrer noopener'
-          >
-            COMMUNITY
-          </a>
-        </li>
-        <li>
-          <a
-            href='https://pixielabs.ai/careers'
-            target='_blank'
-            rel='noreferrer noopener'
-          >
-            CAREERS
-          </a>
-        </li>
-        <li>
-          <a
-            href='https://pixielabs.ai/contact'
-            target='_blank'
-            rel='noreferrer noopener'
-          >
-            CONTACT
           </a>
         </li>
       </ul>

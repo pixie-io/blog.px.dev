@@ -31,8 +31,6 @@ Functionally, eBPF allows you to run restricted C code upon some event (eg. time
 
 Uprobes allow you to intercept a userspace program by inserting a debug trap instruction (`int3` on an x86) that triggers a soft-interrupt . This is also [how debuggers work](https://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints). The flow for an uprobe is essentially the same as any other BPF program and is summarized in the diagram below. The compiled and verified BPF program is executed as part of a uprobe, and the results can be written into a buffer.
 
-
-
 ::: div image-l
 ![BPF for tracing (from Brendan Gregg)](./bpf-tracing.jpg)
 :::
@@ -154,8 +152,7 @@ BPF tracing using uprobes comes with its own set of pros and cons. It's benefici
 <svg src="wavingnaut.svg" width="40px" />
 :::
 
-Go dynamic logging is something we are working on at Pixie. You can checkout [this](https://docs.pixielabs.ai/tutorials/simple-go-tracing/) to see how Pixie traces Go applications running on K8s clusters. If this post's contents are interesting, please give [Pixie](https://pixielabs.ai) a try, or check out our [open positions](https://pixielabs.ai/careers).
-
+Go dynamic logging is something we are working on at Pixie. You can checkout [this](https://docs.px.dev/tutorials/simple-go-tracing/) to see how Pixie traces Go applications running on K8s clusters. If this post's contents are interesting, please give [Pixie](https://px.dev) a try, or check out our [open positions](https://pixielabs.ai/careers).
 
 ## References
 

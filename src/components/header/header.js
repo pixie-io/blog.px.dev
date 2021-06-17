@@ -35,8 +35,6 @@ import youtube from '../../images/footer/youtube-icon.svg';
 import twitter from '../../images/footer/twitter-icon.svg';
 import pixieLogo from '../../images/pixie-logo-header.svg';
 import betanaut from '../../images/betanaut.png';
-import { docsRedirect, loginRedirect, signupRedirect } from '../shared/tracking-utils';
-
 
 const Header = ({
   transparentMenu, onThemeTypeSwitch,
@@ -77,16 +75,16 @@ const Header = ({
         <div className={styles.newsBar}>
 
           <span className='hide-not-desktop'>
-             Join us for our next Pixienaut Monthly call on May 27th.
+             Join us for our next Pixienaut Monthly call on July 22nd.
             {' '}
-            <a href='https://pixielabs.ai/community/'>
+            <a href='https://px.dev/community/#events'>
                    Learn more
             </a>
             {' '}
              🚀
           </span>
           <span className='hide-desktop'>
-                <a href='https://pixielabs.ai/community/'>Join us for our Pixienaut Monthly on May 27th.</a>
+                <a href='https://px.dev/community/#events'>Join us for our Pixienaut Monthly on July 22nd.</a>
           </span>
 
           <div
@@ -113,7 +111,7 @@ const Header = ({
             <img src={pixieLogo} alt='pixie logo' />
           </Link>
           <div className={styles.socialIcons}>
-            <a href='https://slackin.withpixie.ai'>
+            <a href='https://slackin.px.dev'>
               <img src={slack} alt='slack' />
             </a>
             <a href='https://github.com/pixie-labs/pixie'>
@@ -121,6 +119,9 @@ const Header = ({
             </a>
             <a href='https://twitter.com/pixie_run'>
               <img src={twitter} alt='twitter' />
+            </a>
+            <a href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'>
+              <img src={youtube} alt='youtube' />
             </a>
           </div>
         </div>
@@ -139,12 +140,12 @@ const Header = ({
               </IconButton>
             </li>
             <li className='hide-mobile hide-tablet'>
-              <a href='https://work.withpixie.ai/docs' onClick={(e) => docsRedirect(e)}>
+              <a href='https://docs.px.dev'>
                 Docs
               </a>
             </li>
             <li className={styles.colored}>
-              <a href='https://pixielabs.ai/'>
+              <a href='https://px.dev/'>
                 LEARN MORE
               </a>
             </li>
@@ -172,55 +173,27 @@ const Header = ({
               <em>Product</em>
               <ul>
                 <li>
-                  <a
-                    href='https://withpixie.ai/login'
-                    onClick={(e) => loginRedirect(e)}
-                  >
-                    Log-in
-                  </a>
+                  <a href='https://px.dev'>Product Page</a>
                 </li>
                 <li>
-                  <a
-                    href='https://withpixie.ai/signup'
-                    onClick={(e) => signupRedirect(e)}
-                  >
-                    Sign-up
-                  </a>
+                  <a href='https://docs.px.dev'>Docs</a>
                 </li>
                 <li>
-                  <a
-                    href='https://work.withpixie.ai/docs'
-                    onClick={(e) => docsRedirect(e)}
-                  >
-                    Docs
-                  </a>
+                  <a href='https://github.com/pixie-labs/pixie'>GitHub</a>
+                </li>
+                <li>
+                  <a href='https://slackin.px.dev'>Slack</a>
                 </li>
               </ul>
             </div>
             <div>
-              <em>Company</em>
+              <em>Social</em>
               <ul>
                 <li>
-                  <a href='https://pixielabs.ai/community'>Community</a>
+                  <a href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'>YouTube</a>
                 </li>
                 <li>
-                  <a href='https://pixielabs.ai/careers'>Careers</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <em>Help & support</em>
-              <ul>
-                <li>
-                  <a href='https://slackin.withpixie.ai'>
-                    Join Slack Community
-                  </a>
-                </li>
-                <li>
-                  <a href='https://pixielabs.ai//contact/#sales'>Contact Sales</a>
-                </li>
-                <li>
-                  <a href='https://pixielabs.ai//contact/#support'>Email us</a>
+                  <a href='https://twitter.com/pixie_run'>Twitter</a>
                 </li>
               </ul>
             </div>
@@ -231,9 +204,7 @@ const Header = ({
 
               <li>
                 <a
-                  href='https://work.withpixie.ai/docs'
-                  onClick={(e) => docsRedirect(e)}
-                >
+                  href='https://docs.px.dev'>
                   <img src={docs} className={styles.socialIcon} />
                 </a>
               </li>
@@ -243,7 +214,7 @@ const Header = ({
                 </a>
               </li>
               <li>
-                <a href='https://slackin.withpixie.ai'>
+                <a href='https://slackin.px.dev'>
                   <img src={slack} className={styles.socialIcon} />
                 </a>
               </li>

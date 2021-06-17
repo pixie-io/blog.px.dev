@@ -70,6 +70,7 @@ This helps visualize that a cluster of size 4 has the same failure tolerance as 
 Now that we understand how etcd maintains high availability and consistency, let's discuss how data is actually stored in the system.
 
 ### BoltDB
+
 etcd's datastore is built on top of [BoltDB](https://github.com/boltdb/bolt), or more specifically, [BBoltDB](https://github.com/etcd-io/bbolt), a fork of BoltDB maintained by the etcd contributors.
 
 Bolt is a Go key-value store which writes its data to a single memory-mapped file. This means that the underlying operating system is responsible for handling how the data is cached, typically caching as much of the file in memory as possible. Thus, Bolt shows high memory usage when working with large datasets. However, assuming that the relevant page is in the cache, this method allows for fast reads.
@@ -87,7 +88,9 @@ Bolt operations are copy-on-write. When a page is updated, it is copied to a com
 :::
 
 ### etcd's Data Model
+
 etcd uses [MultiVersion Concurrency Control](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) in order to safely handle concurrent operations. This goes hand-in-hand with the Raft protocol, as each version in MVCC corresponds to an index in the Raft log. To handle MVCC, etcd tracks changes by revisions. Each transaction made to etcd is a new revision. For example, if you were to load up a fresh instance of etcd and ran the following operations, the revision state would look like so:
+
 ```
 ---- Revision begins at 1 ----
 tx: [put foo bar] -> Revision is 2
@@ -95,6 +98,7 @@ tx: [put foo1 bar1] -> Revision is 3
 tx: [put foo updatedBar] -> Revision is 4
 tx: [put foo2 bar2, put foo3 bar3] -> Revision is 5
 ```
+
 By keeping a history of the revisions, etcd is able to provide the version history for specific keys. In the example above, you would just need to read Revisions 4 and 2 in order to see that the current value of `foo` is `updatedBar`, and the previous value was `bar`.
 
 This means that keys must be associated with their revision numbers, along with their new values. To do so, etcd stores each operation in Bolt as the following key-value pairs:
@@ -103,18 +107,22 @@ This means that keys must be associated with their revision numbers, along with 
 key: (rev, sub, type)
 value: { key: keyName, value: keyValue, ...metadata }
 ```
+
 Here, `rev` is the revision, `sub` is a number used to differentiate keys within a single revision (for example, multiple PUTs in a transaction), and `type` is an optional suffix, usually used for tombstoning.
 
 For example, if you ran `put foo hello` following the above example, the corresponding Bolt entry might look like:
+
 ```
 key: (6, 0, nil)
 value: { key: "foo", value: "hello", ...metadata }
 ```
+
 By writing the keys in this scheme, etcd is able to make all writes sequential, circumventing Bolt's weakness to random writes.
 
 However, this makes reading keys a little more difficult. For example, to find the current value of `foo`, you would have to read each entry starting from the latest revision, until finding the revision containing the value for `foo`.
 
 ### etcd's Key Index
+
 To address the key reading problem described above, etcd builds an in-memory [B-tree](https://www.cs.cornell.edu/courses/cs3110/2012sp/recitations/rec25-B-trees/rec25.html) index which maps each key to its related revisions.
 
 The actual keys and values of this tree are a little more complex, but the information it provides can most simply be reduced to:
@@ -133,13 +141,14 @@ If anything, <b><u>range reads will be slightly more efficient if you tend to re
 <svg title="An example of which pages are read on disk when trying to read all foo* keys, depending on the write pattern." src='rangereads.png' />
 :::
 
-
 ### Compacting and Defragmenting
+
 etcd's use of revisions and key history enables useful features, such as the `watch` capability, where you can listen for changes on a particular key or set of keys.
 
 However, etcd's list of revisions can grow very large overtime, accumulating lots of disk and memory. Even if a large number of keys are deleted from etcd, the space will continue to grow since the prior history of those keys will still be retained. <b><u>Frequent compactions are essential to maintaining etcd's memory and disk usage.</u></b> A compaction in etcd will drop all superseded revisions smaller than the revision that is being compacted to.
 
 For example, consider the following revision history:
+
 ```
 Revision 2: foo1 bar1
 Revision 3: foo2 bar2
@@ -149,6 +158,7 @@ Revision 6: foo3 bar3
 ```
 
 If you were to compact to Revision 5, the saved history would be:
+
 ```
 Revision 2: foo1 bar1
 Revision 5: foo2 bar2_1
@@ -173,23 +183,20 @@ In general, if your workload on etcd mostly consists of creating new keys rather
 
 However, <b><u>if you have workloads where keys are frequently updated, defrags are necessary to free unused disk space.</u></b> This is because a compaction will result in more deletes, as most of the key history can be pruned. In an extreme example, consider a case where your workload on etcd consists of updating only a single key. After many updates to the key, the total number of revisions will span N pages. After a compaction, this will be pruned to a single revision on one page, leaving N-1 pages free.
 
-
 # Conclusion
 
 As with any system, the optimal use and operation of etcd is informed by tradeoffs based on the system’s architecture. To understand etcd’s best practices, we dove into the details for how etcd provides availability and consistency. This helped us draw conclusions about how applications should account for system failures, and how etcd should be deployed to best prevent these failures. Exploring the internals for how etcd stores its data allowed us to reason about useful access patterns and practices for managing memory. With these considerations in mind, etcd serves as a key component for storing metadata in our system at Pixie. We hope that this information also helps others determine how to best use etcd in their own applications.
 
-
 ### Footnotes
 
-- Learn more about [Pixie](https://pixielabs.ai/).
+- Learn more about [Pixie](https://px.dev/).
 - Check out our [open positions](https://pixielabs.ai/careers).
-
 
 ### Sources
 
- - [https://raft.github.io/](https://raft.github.io/)
- - [https://etcd.io/docs/v3.4.0/faq/](https://etcd.io/docs/v3.4.0/faq/)
- - [https://github.com/boltdb/bolt](https://github.com/boltdb/bolt)
- - [https://etcd.io/docs/v3.4.0/op-guide/maintenance/](https://etcd.io/docs/v3.4.0/op-guide/maintenance/)
- - [https://etcd.io/docs/v3.4.0/learning/data_model/](https://etcd.io/docs/v3.4.0/learning/data_model/)
- - [https://github.com/boltdb/bolt/issues/308#issuecomment-74811638](https://github.com/boltdb/bolt/issues/308#issuecomment-74811638)
+- [https://raft.github.io/](https://raft.github.io/)
+- [https://etcd.io/docs/v3.4.0/faq/](https://etcd.io/docs/v3.4.0/faq/)
+- [https://github.com/boltdb/bolt](https://github.com/boltdb/bolt)
+- [https://etcd.io/docs/v3.4.0/op-guide/maintenance/](https://etcd.io/docs/v3.4.0/op-guide/maintenance/)
+- [https://etcd.io/docs/v3.4.0/learning/data_model/](https://etcd.io/docs/v3.4.0/learning/data_model/)
+- [https://github.com/boltdb/bolt/issues/308#issuecomment-74811638](https://github.com/boltdb/bolt/issues/308#issuecomment-74811638)

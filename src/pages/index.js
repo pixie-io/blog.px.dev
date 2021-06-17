@@ -98,7 +98,7 @@ const Blog = (props) => {
               <div className='col-10'>
                 <div className={styles.topDecorator} />
                 <Typography variant='h1'>
-                  Updates and ideas from Pixie Labs and the Pixienaut developer community
+                  Updates and ideas from Pixie and the Pixienaut developer community
                 </Typography>
               </div>
               <div className='col-1' />
@@ -177,7 +177,7 @@ const Blog = (props) => {
                   our product & community?
                 </Typography>
                 <div>
-                  <Button className={styles.button} link='https://pixielabs.ai/community/'>
+                  <Button className={styles.button} link='https://px.dev/community/'>
                     BE A PIXIENAUT
                   </Button>
                 </div>
