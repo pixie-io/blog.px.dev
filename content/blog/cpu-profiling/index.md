@@ -13,12 +13,11 @@ Application profiling tools are not new, but they are often a hassle to use. Man
 
 Earlier this year, we built the tool we’d like to have in our personal perf toolkit - a continuous profiler that is incredibly easy to use: no instrumentation, no redeployment, no enablement; just automatic access to CPU profiles whenever needed.
 
-Over the next 4 blog posts, we’ll show how to build and productionize this continuous profiler for Go and other compiled languages (C/C++, Rust) with very low overhead (<1% and decreasing):
+Over the next 3 blog posts, we’ll show how to build and productionize this continuous profiler for Go and other compiled languages (C/C++, Rust) with very low overhead (<1% and decreasing):
 
 - [Part 1: An intro to application performance profiling.](/cpu-profiling/#part-1:-an-introduction-to-application-performance-profiling)
 - [Part 2: A simple eBPF-based CPU profiler.](/cpu-profiling-2)
-- Part 3: The challenges of building a continuous CPU profiler in production.
-- Part 4: Future additions to our CPU profiler.
+- [Part 3: The challenges of building a continuous CPU profiler in production.](/cpu-profiling-3)
 
 Want to try out Pixie’s profiler before seeing how we built it? Check out the [tutorial](https://docs.px.dev/tutorials/profiler).
 

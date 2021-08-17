@@ -1,5 +1,5 @@
 ---
-path: '/cpu-profiling'
+path: '/cpu-profiling-2'
 title: 'Part 2: A Simple Continuous Cross-Language (Go, Rust, C/C++) Profiler written in eBPF'
 date: 2021-6-1T06:00:00.000+00:00
 featured_image: hero-image.png
@@ -189,4 +189,4 @@ You can then experiment by running it against other running processes in your sy
 
 Another fun experiment is to run it against a program written in a different language, like Python or Java. You’ll see stack traces, but they’re probably not what you’re expecting. For example, with Python, what you’ll see is the Python interpreter’s stack traces rather than the Python application (Note: you’ll need the interpreter’s debug symbols to see the functions; On Ubuntu, you can get these by running something like `apt install python3.6-dbg`) . We’ll cover profiling for Java and interpreted languages in a future post.
 
-In part three of this series, we’ll discuss the challenges we faced in building out this simple profiler into a production ready profiler.
+In [part three](/cpu-profiling-3) of this series, we’ll discuss the challenges we faced in building out this simple profiler into a production ready profiler.
