@@ -31,8 +31,6 @@ With CPU overhead much higher than anticipated, we used our profiler to identify
 <svg title="A flamegraph of the continuous profiler showing significant time spent in BPF system calls:  clear_table_non_atomic(), get_addr_symbol(), bpf_get_first_key()." src='profiler-flamegraph.png' />
 :::
 
-[^1] _Based on the following assumptions: (1) about 3500 CPU instructions executed to collect a stack trace sample, (2) a CPU that processes 1B instructions per second, and (3) a sampling frequency of 100 Hz (or 10 ms.). The expected overhead with theses assumptions is 3500 * 100 / 1B =  0.035%. Note that this figure ignores the stack trace post-processing overheads._
-
 ## Performance optimizations
 
 Based on the performance insights above, we implemented three specific optimizations:
@@ -55,8 +53,6 @@ speeds up the process of symbolization." src='symbol-cache.png' />
 We chose to cache individual stack trace addresses, rather than entire stack frames. This is effective because while many stack traces diverge at their tip, they often share common ancestry towards their base. For example, main is a common symbol at the base of many stack traces.
 
 Adding a symbol cache provided a 25% reduction (from 1.27% to 0.95%) in CPU utilization.
-
-[^2] _If the ELF debug information is not available, Pixie’s profiler cannot symbolize._
 
 ### Reducing the number of BPF system calls
 
@@ -103,8 +99,6 @@ In the end, it turned out the benefit of the perf buffer’s more efficient tran
 and increases the speed of data transfer." src='perf-buffer.png' />
 :::
 
-[^3] _The Stack Traces Map cannot be converted to a perf buffer because it is populated by a BPF helper function._
-
 ### Conclusion
 
 In the process of building a continuous profiler, we learned that the cost of symbolizing and moving stack trace data was far more expensive than the underlying cost of collecting the raw stack trace data.
@@ -116,3 +110,11 @@ Our efforts to optimize these costs led to a 4x reduction (from 1.27% to 0.31%) 
 :::
 
 The result of all this work is a low overhead continuous profiler that is always running in the Pixie platform. To see this profiler in action, check out the [tutorial](https://docs.px.dev/tutorials/pixie-101/profiler/)!
+
+### Footnotes
+
+[^1] _Based on the following assumptions: (1) about 3500 CPU instructions executed to collect a stack trace sample, (2) a CPU that processes 1B instructions per second, and (3) a sampling frequency of 100 Hz (or 10 ms.). The expected overhead with theses assumptions is 3500 * 100 / 1B =  0.035%. Note that this figure ignores the stack trace post-processing overheads._
+
+[^2] _If the ELF debug information is not available, Pixie’s profiler cannot symbolize._
+
+[^3] _The Stack Traces Map cannot be converted to a perf buffer because it is populated by a BPF helper function._
