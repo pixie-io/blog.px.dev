@@ -111,7 +111,7 @@ In the process of building a continuous profiler, we learned that the cost of sy
 
 Our efforts to optimize these costs led to a 4x reduction (from 1.27% to 0.31%) in CPU overhead -- a level we’re pretty happy with, even if we’re not done optimizing yet.
 
-::: div image-xl
+::: div image-l
 <svg title="Graph of the incremental improvement in CPU utilization for each optimization." src='optimizations.png' />
 :::
 
