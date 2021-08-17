@@ -21,7 +21,7 @@ In this post, we discuss the process of turning the basic profiler into one with
 
 To turn the basic profiler implementation from Part 2 into a continuous profiler, it was just a “simple” matter of leaving the eBPF profiler running all the time, such that it continuously collects stack traces into eBPF maps. We then periodically gather the stack traces and store them to generate flamegraphs when needed.
 
-While this approach works, we had expected our profiler to have <0.1% CPU overhead based on the low cost of gathering stack trace data [measured at ~3500 CPU instructions per stack trace](1). The actual overhead of the initial implementation, however, was 1.3% CPU utilization -- over 10x what we had expected. It turned out that the stack trace processing costs, which we had not accounted for, matter quite a lot for continuous profilers.
+While this approach works, we had expected our profiler to have <0.1% CPU overhead based on the low cost of gathering stack trace data (measured at ~3500 CPU instructions per stack trace)[^1]. The actual overhead of the initial implementation, however, was 1.3% CPU utilization -- over 10x what we had expected. It turned out that the stack trace processing costs, which we had not accounted for, matter quite a lot for continuous profilers.
 
 Most basic profilers can be described as “single shot” in that they first collect raw stack traces for a period of time, and then process the stack traces after all the data is collected. With “single shot” profilers, the one-time post-processing costs of moving data from the kernel to user space and looking up address symbols are usually ignored. For a continuous profiler, however, these costs are also running continuously and become as important as the other overheads.
 
@@ -31,7 +31,7 @@ With CPU overhead much higher than anticipated, we used our profiler to identify
 <svg title="A flamegraph of the continuous profiler showing significant time spent in BPF system calls:  clear_table_non_atomic(), get_addr_symbol(), bpf_get_first_key()." src='profiler-flamegraph.png' />
 :::
 
-[1] _Based on the following assumptions: (1) about 3500 CPU instructions executed to collect a stack trace sample, (2) a CPU that processes 1B instructions per second, and (3) a sampling frequency of 100 Hz (or 10 ms.). The expected overhead with theses assumptions is 3500 * 100 / 1B =  0.035%. Note that this figure ignores the stack trace post-processing overheads._
+[^1] _Based on the following assumptions: (1) about 3500 CPU instructions executed to collect a stack trace sample, (2) a CPU that processes 1B instructions per second, and (3) a sampling frequency of 100 Hz (or 10 ms.). The expected overhead with theses assumptions is 3500 * 100 / 1B =  0.035%. Note that this figure ignores the stack trace post-processing overheads._
 
 ## Performance optimizations
 
@@ -43,9 +43,9 @@ Based on the performance insights above, we implemented three specific optimizat
 
 ### Adding a symbol cache
 
-For a stack trace to be human readable, the raw instruction addresses need to be translated into function names or symbols. To symbolize a particular address, ELF debug information from the underlying binary is searched for the address range that includes the instruction address [2].
+For a stack trace to be human readable, the raw instruction addresses need to be translated into function names or symbols. To symbolize a particular address, ELF debug information from the underlying binary is searched for the address range that includes the instruction address[^2].
 
-The flamegraph clearly showed that we were spending a lot of time in symbolization, as evidenced by the time spent in ebpf::BPFStackTable::get_addr_symbol(). To reduce this cost, we implemented a symbol cache that is checked before accessing the ELF information.
+The flamegraph clearly showed that we were spending a lot of time in symbolization, as evidenced by the time spent in `ebpf::BPFStackTable::get_addr_symbol()`. To reduce this cost, we implemented a symbol cache that is checked before accessing the ELF information.
 
 ::: div image-l
 <svg title="Caching the symbols for individual instruction addresses
@@ -56,7 +56,7 @@ We chose to cache individual stack trace addresses, rather than entire stack fra
 
 Adding a symbol cache provided a 25% reduction (from 1.27% to 0.95%) in CPU utilization.
 
-[2] _If the ELF debug information is not available, Pixie’s profiler cannot symbolize._
+[^2] _If the ELF debug information is not available, Pixie’s profiler cannot symbolize._
 
 ### Reducing the number of BPF system calls
 
@@ -92,7 +92,7 @@ When applied to both data structures, this optimization provided a further 58% r
 
 The high costs of accessing the BPF maps repeatedly made us wonder if there was a more efficient way to transfer the stack trace data to user space.
 
-We realized that by switching the histogram table to a BPF perf buffer (which is essentially a circular buffer), we could avoid the need to clear the stack trace keys from the map [3]. Perf buffers also allow faster data transfer because they use fewer system calls per readout.
+We realized that by switching the histogram table to a BPF perf buffer (which is essentially a circular buffer), we could avoid the need to clear the stack trace keys from the map [^3]. Perf buffers also allow faster data transfer because they use fewer system calls per readout.
 
 On the flip side, the BPF maps were performing some amount of stack trace aggregation in kernel space. Since perf buffers report every stack trace without aggregation, this would require us to transfer about twice as much data according to our experiments.
 
@@ -103,7 +103,7 @@ In the end, it turned out the benefit of the perf buffer’s more efficient tran
 and increases the speed of data transfer." src='perf-buffer.png' />
 :::
 
-[3] _The Stack Traces Map cannot be converted to a perf buffer because it is populated by a BPF helper function._
+[^3] _The Stack Traces Map cannot be converted to a perf buffer because it is populated by a BPF helper function._
 
 ### Conclusion
 
