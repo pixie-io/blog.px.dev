@@ -40,7 +40,7 @@ const AnchorTag = ({ children: link, ...props }) => {
   // This assumes that any internal link (intended for Gatsby)
   // will start with exactly one slash, and that anything else is external.
   const { href } = props;
-  const internal = /^\/(?!\/)/.test(href);
+  const internal = /^\/(?!\/)/.test(href) || href.includes('#fn');
   let target = '_self';
   if (!internal) {
     target = '_blank';

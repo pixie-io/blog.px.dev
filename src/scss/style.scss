@@ -300,3 +300,12 @@ iframe{
 a code{
   color: #3FE7E7!important;
 }
+sup[id]::before {
+  content: '';
+  display: inline-block;
+  height: 110px;
+  margin-top: -110px;
+  visibility: hidden;
+  margin-left: -1px;
+  width: 1px;
+}
