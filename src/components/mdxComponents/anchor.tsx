@@ -41,10 +41,8 @@ const AnchorTag = ({ children: link, ...props }) => {
   // will start with exactly one slash, and that anything else is external.
   const { href } = props;
   const internal = /^\/(?!\/)/.test(href) || href.includes('#fn');
-  let target = '_self';
-  if (!internal) {
-    target = '_blank';
-  }
+  const target = internal ? '_self' : '_blank';
+
   if (link) {
     return (
       <Typography {...props} target={target} component='a' rel='noopener noreferrer' className={classes.link}>

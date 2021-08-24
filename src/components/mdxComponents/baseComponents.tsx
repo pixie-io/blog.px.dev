@@ -31,6 +31,7 @@ import CodeRenderer from './codeRenderer';
 import ListItem from './listItem';
 import CustomTableCell from './custom-table-cell';
 import HLink from './h-link';
+import Footnotes from './footnotes';
 
 
 export default {
@@ -66,10 +67,14 @@ export default {
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
   ul: (props: any) => <Typography {...props} component='ul' />,
-  sup: (props: any) => {
-    const { id: id1 } = props;
-    const id = id1 ? id1.replace('fnref', 'fn') : '';
-    return <Typography {...props} id={id} component='sup' />;
+  wrapper: ({ children, ...props }) => {
+    const updatedChildren = children.map((child) => {
+      if (child.props.className === 'footnotes') {
+        return <Footnotes key={1} {...child.props} />;
+      }
+      return child;
+    });
+    return <>{updatedChildren}</>;
   },
   ol: (props: any) => <Typography {...props} component='ol' />,
   em: (props: any) => <Typography {...props} component='em' style={{ fontStyle: 'italic' }} />,

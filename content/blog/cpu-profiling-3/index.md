@@ -113,8 +113,10 @@ The result of all this work is a low overhead continuous profiler that is always
 
 ### Footnotes
 
-[^1] _Based on the following assumptions: (1) about 3500 CPU instructions executed to collect a stack trace sample, (2) a CPU that processes 1B instructions per second, and (3) a sampling frequency of 100 Hz (or 10 ms.). The expected overhead with theses assumptions is 3500 * 100 / 1B =  0.035%. Note that this figure ignores the stack trace post-processing overheads._
+[^1]: Based on the following assumptions: (1) about 3500 CPU instructions executed to collect a stack trace sample, (2) a CPU that processes 1B instructions per second, and (3) a sampling frequency of 100 Hz (or 10 ms.). The expected overhead with theses assumptions is 3500 * 100 / 1B =  0.035%. Note that this figure ignores the stack trace post-processing overheads.
 
-[^2] _If the ELF debug information is not available, Pixie’s profiler cannot symbolize._
+[^2]: If the ELF debug information is not available, Pixie’s profiler cannot symbolize.
 
-[^3] _The Stack Traces Map cannot be converted to a perf buffer because it is populated by a BPF helper function._
+[^3]: The Stack Traces Map cannot be converted to a perf buffer because it is populated by a BPF helper function.
+
+
