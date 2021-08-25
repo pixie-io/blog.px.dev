@@ -30,7 +30,9 @@ const useStyles = makeStyles(() => ({
       fontSize: '14px',
       lineHeight: '1.4em',
       opacity: 0.6,
-
+      '& a': {
+        lineHeight: 'inherit',
+      },
     },
   },
 }));
