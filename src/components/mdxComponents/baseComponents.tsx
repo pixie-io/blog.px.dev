@@ -67,13 +67,14 @@ export default {
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
   ul: (props: any) => <Typography {...props} component='ul' />,
-  wrapper: ({ children, ...props }) => {
-    const updatedChildren = children.map((child) => {
+  wrapper: ({ children }) => {
+    // eslint-disable-next-line no-prototype-builtins
+    const updatedChildren = children.hasOwnProperty('map') ? children.map((child) => {
       if (child.props.className === 'footnotes') {
         return <Footnotes key={1} {...child.props} />;
       }
       return child;
-    });
+    }) : children;
     return <>{updatedChildren}</>;
   },
   ol: (props: any) => <Typography {...props} component='ol' />,
