@@ -69,7 +69,7 @@ export default {
   ul: (props: any) => <Typography {...props} component='ul' />,
   wrapper: ({ children }) => {
     // eslint-disable-next-line no-prototype-builtins
-    const updatedChildren = children.hasOwnProperty('map') ? children.map((child) => {
+    const updatedChildren = children.map ? children.map((child) => {
       if (child.props.className === 'footnotes') {
         return <Footnotes key={1} {...child.props} />;
       }
