@@ -288,15 +288,32 @@ figcaption {
     }
   }
 }
-iframe{
+
+iframe {
   padding: 24px 0;
   @media (max-width: $breakpoint) {
     width: 100%;
   }
 }
-.m-0{
-  margin: 0!important;
+
+.m-0 {
+  margin: 0 !important;
 }
-a code{
-  color: #3FE7E7!important;
+
+a code {
+  color: #3FE7E7 !important;
+}
+
+sup[id]::before {
+  content: '';
+  display: inline-block;
+  height: 110px;
+  margin-top: -110px;
+  visibility: hidden;
+  margin-left: -1px;
+  width: 1px;
+}
+
+li {
+  scroll-margin-top: 110px !important;
 }

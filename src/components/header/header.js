@@ -204,7 +204,8 @@ const Header = ({
 
               <li>
                 <a
-                  href='https://docs.px.dev'>
+                  href='https://docs.px.dev'
+                >
                   <img src={docs} className={styles.socialIcon} />
                 </a>
               </li>

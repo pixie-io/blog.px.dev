@@ -40,11 +40,9 @@ const AnchorTag = ({ children: link, ...props }) => {
   // This assumes that any internal link (intended for Gatsby)
   // will start with exactly one slash, and that anything else is external.
   const { href } = props;
-  const internal = /^\/(?!\/)/.test(href);
-  let target = '_self';
-  if (!internal) {
-    target = '_blank';
-  }
+  const internal = /^\/(?!\/)/.test(href) || href.includes('#fn');
+  const target = internal ? '_self' : '_blank';
+
   if (link) {
     return (
       <Typography {...props} target={target} component='a' rel='noopener noreferrer' className={classes.link}>

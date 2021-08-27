@@ -43,7 +43,7 @@
     "gatsby-source-filesystem": "^2.0.38",
     "gatsby-source-gravatar": "^1.0.0",
     "gatsby-theme-material-ui": "^1.0.8",
-    "gatsby-transformer-remark": "^2.6.50",
+    "gatsby-transformer-remark": "4.9.0",
     "gatsby-transformer-sharp": "^2.1.21",
     "gatsby-transformer-yaml": "^2.4.11",
     "node-fetch": "^2.6.0",

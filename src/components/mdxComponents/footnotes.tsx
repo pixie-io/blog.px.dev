@@ -20,15 +20,21 @@ import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-  listItem: {
-    color: 'inherit',
-    fontFamily: 'inherit',
-    fontStyle: 'inherit',
-    fontSize: 'inherit',
-    lineHeight: 'inherit',
-    paddingBottom: '12px',
-    paddingLeft: '12px',
+  footnotes: {
+    '& hr': {
+      display: 'none',
+    },
+    '& li': {
+      display: 'list-item',
+      fontStyle: 'italic',
+      fontSize: '14px',
+      lineHeight: '1.4em',
+      opacity: 0.6,
+      '& a': {
+        lineHeight: 'inherit',
+      },
+    },
   },
 }));
-const ListItem = ({ children, id }) => (<li className={useStyles().listItem} id={id}>{children}</li>);
-export default ListItem;
+const Footnotes = ({ children, id }) => (<div className={useStyles().footnotes} id={id}>{children}</div>);
+export default Footnotes;

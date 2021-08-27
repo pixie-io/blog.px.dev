@@ -31,6 +31,7 @@ import CodeRenderer from './codeRenderer';
 import ListItem from './listItem';
 import CustomTableCell from './custom-table-cell';
 import HLink from './h-link';
+import Footnotes from './footnotes';
 
 
 export default {
@@ -66,6 +67,16 @@ export default {
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
   ul: (props: any) => <Typography {...props} component='ul' />,
+  wrapper: ({ children }) => {
+    // eslint-disable-next-line no-prototype-builtins
+    const updatedChildren = children.map ? children.map((child) => {
+      if (child.props.className === 'footnotes') {
+        return <Footnotes key={1} {...child.props} />;
+      }
+      return child;
+    }) : children;
+    return <>{updatedChildren}</>;
+  },
   ol: (props: any) => <Typography {...props} component='ol' />,
   em: (props: any) => <Typography {...props} component='em' style={{ fontStyle: 'italic' }} />,
   li: (props: any) => <ListItem {...props} />,
