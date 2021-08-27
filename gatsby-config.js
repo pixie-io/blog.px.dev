@@ -21,9 +21,9 @@ module.exports = {
         siteUrl: 'https://blog.px.dev',
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-material-ui',
-    // },
+    {
+      resolve: 'gatsby-plugin-material-ui',
+    },
     'gatsby-plugin-scroll-reveal',
     {
       resolve: 'gatsby-source-filesystem',
