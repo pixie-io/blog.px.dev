@@ -114,7 +114,7 @@ const Header = ({
             <a href='https://slackin.px.dev'>
               <img src={slack} alt='slack' />
             </a>
-            <a href='https://github.com/pixie-labs/pixie'>
+            <a href='https://github.com/pixie-io/pixie'>
               <img src={github} alt='github' />
             </a>
             <a href='https://twitter.com/pixie_run'>
@@ -179,7 +179,7 @@ const Header = ({
                   <a href='https://docs.px.dev'>Docs</a>
                 </li>
                 <li>
-                  <a href='https://github.com/pixie-labs/pixie'>GitHub</a>
+                  <a href='https://github.com/pixie-io/pixie'>GitHub</a>
                 </li>
                 <li>
                   <a href='https://slackin.px.dev'>Slack</a>
@@ -210,7 +210,7 @@ const Header = ({
                 </a>
               </li>
               <li>
-                <a href='https://github.com/pixie-labs/pixie'>
+                <a href='https://github.com/pixie-io/pixie'>
                   <img src={github} className={styles.socialIcon} />
                 </a>
               </li>
