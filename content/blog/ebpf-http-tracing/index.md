@@ -23,7 +23,7 @@ This post will explore tracing HTTP requests using both kprobes and uprobes and 
 
 ## What happens during an HTTP request?
 
-Before we start writing any BPF code, let’s try to understand how HTTP requests are handled by the system. We will utilize the same [test application](https://github.com/pixie-labs/pixie-demos/blob/main/simple-gotracing/app/app.go) we used in Part 1, a simple Golang HTTP server (simpleHTTP), however the results are generalizable to other HTTP applications.
+Before we start writing any BPF code, let’s try to understand how HTTP requests are handled by the system. We will utilize the same [test application](https://github.com/pixie-io/pixie-demos/blob/main/simple-gotracing/app/app.go) we used in Part 1, a simple Golang HTTP server (simpleHTTP), however the results are generalizable to other HTTP applications.
 The first step is to understand what Linux kernel APIs are used to send and receive data for a simple HTTP request.
 
 We can use the Linux [perf](https://perf.wiki.kernel.org/index.php/Main_Page) command to understand what system calls are invoked:
@@ -53,7 +53,7 @@ Back in the original terminal window, where the `perf` command is running, you s
     ...
 ```
 
-Note that we took care not to have any additional print statements in our [app.go](https://github.com/pixie-labs/pixie-demos/blob/main/simple-gotracing/app/app.go) simple Golang HTTP server to avoid creating extra system calls.
+Note that we took care not to have any additional print statements in our [app.go](https://github.com/pixie-io/pixie-demos/blob/main/simple-gotracing/app/app.go) simple Golang HTTP server to avoid creating extra system calls.
 
 Examining the output of the `perf` call shows us that there are 3 relevant system calls: `accept4`, `write`, `close`. Tracing these system calls should allow us to capture all of the data the server is sending out in response to a request.
 
@@ -84,7 +84,7 @@ Note that kprobes work across the entire system so we need to filter by PID to l
 
 Once the data is captured, we can read it to our Go userspace program and parse the HTTP response using the [`net/http`](https://golang.org/pkg/net/http/) library.
 
-The kprobe approach is conceptually simple, but the implementation is fairly long. You can check out the detailed code [here](https://github.com/pixie-labs/pixie-demos/blob/main/simple-gotracing/http_trace_kprobe/http_trace_kprobe.go). For brevity, we left out a few details such as reading the return value from write to know how many bytes were actually written.
+The kprobe approach is conceptually simple, but the implementation is fairly long. You can check out the detailed code [here](https://github.com/pixie-io/pixie-demos/blob/main/simple-gotracing/http_trace_kprobe/http_trace_kprobe.go). For brevity, we left out a few details such as reading the return value from write to know how many bytes were actually written.
 
 One downside to capturing data using kprobes is that we land up reparsing all responses since we intercept them after they have been converted to the write format. An alternative approach is to use uprobes to capture the data before it gets sent to the kernel where we can read the data before it has been serialized.
 
@@ -122,7 +122,7 @@ As discussed earlier, the `write` syscall is utilized by the operating system in
 
 Examining the stack, we find that the `net/http.(*response).finishRequest` function on line 9 looks promising. The Go source code tells us that this function is invoked every time an HTTP request is completed. This function is a good spot to grab the data with uprobes for a particular request.
 
-The capture of the data is a direct extension of our approach in Part 1. We employ the same strategy to read variables in the struct, except this time we need to chase a few pointers. The BPF code for this is documented and located [here](https://github.com/pixie-labs/pixie-demos/tree/main/simple-gotracing/http_trace_uprobe), along with the user space code required to read the recorded data.
+The capture of the data is a direct extension of our approach in Part 1. We employ the same strategy to read variables in the struct, except this time we need to chase a few pointers. The BPF code for this is documented and located [here](https://github.com/pixie-io/pixie-demos/tree/main/simple-gotracing/http_trace_uprobe), along with the user space code required to read the recorded data.
 
 # Uprobes vs Kprobes
 
@@ -171,7 +171,7 @@ From the results, we can see that if the HTTP latency is > 1ms the overhead intr
 <svg title='Running the eBPF HTTP tracing demo code.' src='ebpf-http-tracing.gif' />
 :::
 
-Tracing HTTP requests using eBPF is possible using both kprobes and uprobes; however, the kprobe approach is more scalable as it is agnostic to the target language. The code used in this blog is available [here](https://github.com/pixie-labs/pixie-demos/tree/main/simple-gotracing) and should be fully functional to trace Go/Python applications. Making it robust and functional across the entire Kernel API surface can involve a significant amount of work. Some language stacks use different underlying syscalls such as writev, or excessively split requests over multiple system calls.
+Tracing HTTP requests using eBPF is possible using both kprobes and uprobes; however, the kprobe approach is more scalable as it is agnostic to the target language. The code used in this blog is available [here](https://github.com/pixie-io/pixie-demos/tree/main/simple-gotracing) and should be fully functional to trace Go/Python applications. Making it robust and functional across the entire Kernel API surface can involve a significant amount of work. Some language stacks use different underlying syscalls such as writev, or excessively split requests over multiple system calls.
 
 At Pixie, we are building an auto-telemetry system for Kubernetes that requires no manual instrumentation to get started. eBPF provides most of the magic behind our platform. Pixie uses both uprobes and kprobes to enable a lot of our functionality. We’ll be discussing more of this in our future blogs posts. If this post's contents are interesting, please give Pixie a try, or check out our open positions.
 
