@@ -4,13 +4,13 @@ This repo contains the source code and content for the [Pixie Blog](http://blog.
 
 ## Reporting Issues
 
-Submit any issues or enhancement requests by [filing an issue](https://github.com/pixie-labs/pixie-blog/issues/new). Please search for and review the existing open issues before submitting a new issue.
+Submit any issues or enhancement requests by [filing an issue](https://github.com/pixie-io/pixie-blog/issues/new). Please search for and review the existing open issues before submitting a new issue.
 
 ## Contributing
 
 We are excited to have you contribute to Pixie's blog!
 
-Before contributing blog content, please [file an issue](https://github.com/pixie-labs/pixie-blog/issues/new) outlining your intended additions.
+Before contributing blog content, please [file an issue](https://github.com/pixie-io/pixie-blog/issues/new) outlining your intended additions.
 
 ### Dev Setup
 
@@ -32,7 +32,7 @@ yarn install
 yarn build
 ```
 
-7. Submit a PR against the upstream  [repo](https://github.com/pixie-labs/pixie-blog).
+7. Submit a PR against the upstream  [repo](https://github.com/pixie-io/pixie-blog).
 
 ### Markdown Guidelines
 

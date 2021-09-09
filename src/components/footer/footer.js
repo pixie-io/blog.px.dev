@@ -40,7 +40,7 @@ const Footer = ({ whiteFooter }) => (
         <a href='https://docs.px.dev'>
           <img src={docs} className={styles.socialIcon} alt='pixie docs' />
         </a>
-        <a href='https://github.com/pixie-labs/pixie'>
+        <a href='https://github.com/pixie-io/pixie'>
           <img src={github} className={styles.socialIcon} alt='github' />
         </a>
         <a href='https://slackin.px.dev'>

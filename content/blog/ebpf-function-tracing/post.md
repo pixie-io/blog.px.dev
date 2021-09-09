@@ -35,7 +35,7 @@ Uprobes allow you to intercept a userspace program by inserting a debug trap ins
 ![BPF for tracing (from Brendan Gregg)](./bpf-tracing.jpg)
 :::
 
-Let's see how uprobes actually function. To deploy uprobes and capture function arguments, we will be using [this](https://github.com/pixie-labs/pixie-demos/blob/main/simple-gotracing/app/app.go) simple demo application. The relevant parts of this Go program are shown below.
+Let's see how uprobes actually function. To deploy uprobes and capture function arguments, we will be using [this](https://github.com/pixie-io/pixie-demos/blob/main/simple-gotracing/app/app.go) simple demo application. The relevant parts of this Go program are shown below.
 
 `main()` is a simple HTTP server that exposes a single _GET_ endpoint on _/e_, which computes Euler's number (__e__) using an iterative approximation. `computeE` takes in a single query param(_iters_), which specifies the number of iterations to run for the approximation. The more iterations, the more accurate the approximation, at the cost of compute cycles. It's not essential to understand the math behind the function. We are just interested in tracing the arguments of any invocation of `computeE`.
 
@@ -99,7 +99,7 @@ Now that we understand the pieces involved, let's look into the details of what 
 <svg title='Details of how a debug trap instruction is used call a BPF program' src='app-trace.svg' />
 :::
 
-The BPF function for this is relatively simple; the C code is shown below. We register this function so that it's invoked every time `main.computeE` is called. Once it's called, we simply read the function argument and write that the perf buffer. Lots of boilerplate is required to set up the buffers, etc. and this can be found in the complete example [here](https://github.com/pixie-labs/pixie-demos/blob/main/simple-gotracing/trace_example/trace.go).
+The BPF function for this is relatively simple; the C code is shown below. We register this function so that it's invoked every time `main.computeE` is called. Once it's called, we simply read the function argument and write that the perf buffer. Lots of boilerplate is required to set up the buffers, etc. and this can be found in the complete example [here](https://github.com/pixie-io/pixie-demos/blob/main/simple-gotracing/trace_example/trace.go).
 
 ```c:numbers
 #include <uapi/linux/ptrace.h>

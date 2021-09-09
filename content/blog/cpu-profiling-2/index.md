@@ -21,7 +21,7 @@ If you’re familiar with eBPF, it’s worth checking out the source code of the
 
 ## An eBPF-based profiler
 
-The code to our simple eBPF-based profiler can be found [here](https://github.com/pixie-labs/pixie-demos/tree/main/ebpf-profiler), with further instructions included at the end of this blog (see [Running the Demo Profiler](/cpu-profiling-2/#running-the-demo-profiler)). We’ll be explaining how it works, so now’s a good time to clone the repo.
+The code to our simple eBPF-based profiler can be found [here](https://github.com/pixie-io/pixie-demos/tree/main/ebpf-profiler), with further instructions included at the end of this blog (see [Running the Demo Profiler](/cpu-profiling-2/#running-the-demo-profiler)). We’ll be explaining how it works, so now’s a good time to clone the repo.
 
 Also, before diving into the code, we should mention that the Linux developers have already put in dedicated hooks for collecting stack traces in the kernel. These are the main APIs we use to collect stack traces (and this is how the official BCC profiler works well). We won’t, however, go into Linux’s implementation of these APIs, as that’s beyond the scope of this blog.
 
@@ -164,9 +164,9 @@ It actually turns out that the process of turning the stack traces into symbols 
 <svg title="Running the simple CPU profiler." src='simple-cpu-profiler.gif' />
 :::
 
-The code and instructions for running the simple eBPF based profiler can be found [here](https://github.com/pixie-labs/pixie-demos/tree/main/ebpf-profiler).
+The code and instructions for running the simple eBPF based profiler can be found [here](https://github.com/pixie-io/pixie-demos/tree/main/ebpf-profiler).
 
-The code was designed to have as few dependencies as possible, but you need BCC installed. Follow the instructions in [`README.md`](https://github.com/pixie-labs/pixie-demos/tree/main/ebpf-profiler/README.md) for more details on building the profiler and a toy app to profiler.
+The code was designed to have as few dependencies as possible, but you need BCC installed. Follow the instructions in [`README.md`](https://github.com/pixie-io/pixie-demos/tree/main/ebpf-profiler/README.md) for more details on building the profiler and a toy app to profiler.
 
 Once built, you can run the profiler as follows:
 
