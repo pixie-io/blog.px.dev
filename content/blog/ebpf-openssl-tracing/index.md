@@ -40,7 +40,7 @@ The BPF kprobe approach outlined above works well for all plain-text traffic, bu
 
 The approach taken by Wireshark and other low-level packet captures is to ask for the key so that the data can be decrypted. TLS handshakes are fairly complex and consist of a number of different keys and secrets, but at a high-level, there are two modes for this:
 
-1. Give Wireshare the RSA private key, so that it can trace the entire connection. In this setup, Wireshark is able to trace the data as long as it was able to observe the initial key-exchange; for existing connections, you’ll be out of luck.
+1. Give Wireshark the RSA private key, so that it can trace the entire connection. In this setup, Wireshark is able to trace the data as long as it was able to observe the initial key-exchange; for existing connections, you’ll be out of luck.
 2. Give Wireshark the (pre)-master key which was negotiated during the key exchange—if you know it. In this setup, Wireshark can decrypt the data even without seeing the initial connection. Because this is a common use case, you can actually ask your [browser to dump the session keys](https://redflagsecurity.net/2019/03/10/decrypting-tls-wireshark/) for this purpose.
 
 Sharing encryption keys works well for Wireshark’s use case, but this approach is not scalable enough to use in an observability platform whose mantra is “up and running in seconds.”
