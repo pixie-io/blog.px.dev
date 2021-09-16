@@ -20,7 +20,7 @@ This post is part of our ongoing series sharing how you can use eBPF to debug ap
 
 [BPF](https://www.brendangregg.com/ebpf.html) can be used to interrupt the execution of a program at virtually any point—much like how one can set a breakpoint in an application using a debugger.
 
-However, unlike a debugger, which stops a program indefinitely to allow you to poke around, with BPF the kernel simply runs a BPF program when the specified trigger occurs and then immediately resumes execution of the original program.
+However, unlike a debugger, which stops a program indefinitely to allow you to poke around, with BPF, the kernel simply runs a BPF program when the specified trigger occurs and then immediately resumes execution of the original program.
 
 One interesting application of BPF is the tracing of network traffic. Many network traffic tracers, like Wireshark, use pcap (**p**acket **cap**ture) to capture the data as it is sent to the network interface card (NIC). These days, pcap actually uses BPF under the hood. Whenever a packet is sent to the NIC, a BPF program captures the packet data.
 
@@ -61,7 +61,7 @@ The diagram above shows the common setup for encrypting application traffic with
 
 This strategy is well supported by BPF *uprobes*. With uprobes, we set our triggers to be events that happen in user-space. Often, uprobes are set in the user’s own compiled code, but there’s nothing preventing us from placing them on a shared library.
 
-By placing the uprobe on a *shared* library, we end up tracing *all* applications that use the shared library, so we’ll need to filter out the data for the processes we’re actually interested in. This is no different than when we put a kprobe on Linux’s `send()` and `recv()` syscalls, though. Those kprobes also end up tracing *all* applications —- in fact, they trace more applications, as not all applications will use OpenSSL, but all applications will go through the kernel. In the context of a full system tracer, however, a probe on *shared* library is actually an advantage, since a single probe gives us wide observability coverage.
+By placing the uprobe on a *shared* library, we end up tracing *all* applications that use the shared library, so we’ll need to filter out the data for the processes we’re actually interested in. This is no different than when we put a kprobe on Linux’s `send()` and `recv()` syscalls, though. Those kprobes also end up tracing *all* applications —- in fact, they trace more applications, as not all applications use OpenSSL, but all applications go through the kernel. In the context of a full system tracer, however, a probe on *shared* library is actually an advantage, since a single probe gives us wide observability coverage.
 
 ## Setting a uprobe on a shared library
 
@@ -92,7 +92,7 @@ $ nm /usr/lib/x86_64-linux-gnu/libssl.so.1.1
 nm: /usr/lib/x86_64-linux-gnu/libssl.so.1.1: no symbols
 ```
 
-Uh-oh. No symbols? They’ve been stripped. So how will we call `attach_uprobe`?
+Uh-oh. No symbols? They’ve been stripped? So how will we call `attach_uprobe`?
 
 After a brief moment of panic, you ask yourself, how does the application even call OpenSSL functions like `SSL_write`? That information must be somewhere, right? Reading through the man pages for `nm` reveals the answer. We need to pass the flag `--dynamic` to see the dynamic symbols. Those are never stripped, otherwise no binary could possibly link to the shared library. Running `nm` again with this flag reveals something a lot more interesting
 
@@ -123,8 +123,8 @@ A fully working version of the OpenSSL tracer can be found [here](https://github
 
 The main project files are:
 
-- `Openssl_tracer.cc`: the user-space tracer
-- `Openssl_tracer_bpf_funcs.c`: the BPF probes to deploy
+- `openssl_tracer.cc`: the user-space tracer
+- `openssl_tracer_bpf_funcs.c`: the BPF probes to deploy
 - `probe_deployment.h/cc`: a thin wrapper around BCC
 
 ### User-space tracer
