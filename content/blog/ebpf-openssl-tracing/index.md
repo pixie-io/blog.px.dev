@@ -67,11 +67,11 @@ By placing the uprobe on a *shared* library, we end up tracing *all* application
 
 Attaching uprobes to shared library is no different than setting uprobes on application code.
 
-[BCC](https://github.com/iovisor/bcc) makes it easy to attach a uprobe to a function in your application code. For example, if you had a function called `foo()` in a program called `dummy`, you’d use BCC to attach a uprobe in the following way:
+[BCC](https://github.com/iovisor/bcc) makes it easy to attach a uprobe to a function in your application code. For example, if you had a function called `foo()` in a program called `demo`, you’d use BCC to attach a uprobe in the following way:
 
 ```
 attach_uprobe(
-	"/home/user/dummy",
+	"/home/user/demo",
 	"foo",
 	<your BPF code here>);
 ```
@@ -79,7 +79,7 @@ attach_uprobe(
 Note that for this to work, you must have compiled your code with debug symbols. You can verify that a binary has symbols by running a program like `nm`; below we also run grep to search for a particular symbol of interest.
 
 ```bash
-$ nm -C dummy | grep foo
+$ nm -C demo | grep foo
 0000000000401110 T foo()
 ```
 
