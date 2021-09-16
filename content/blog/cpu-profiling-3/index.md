@@ -118,5 +118,3 @@ The result of all this work is a low overhead continuous profiler that is always
 [^2]: If the ELF debug information is not available, Pixie’s profiler cannot symbolize.
 
 [^3]: The Stack Traces Map cannot be converted to a perf buffer because it is populated by a BPF helper function.
-
-

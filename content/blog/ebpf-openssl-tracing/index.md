@@ -135,7 +135,7 @@ At the top of `openssl_tracer.cc`, we list out the probes that we want to attach
 
 In our OpenSSL tracer, we want to trace `SSL_write` and `SSL_read`. Since we are interested in both inputs and outputs to both these functions, we actually need 4 probes: an entry and return probe on `SSL_write`, and an entry and return probe on `SSL_read`. We’ll look at the content of the BPF probe functions in the next section.
 
-```
+```cpp
 // A probe on entry of SSL_write
 UProbeSpec kSSLWriteEntryProbeSpec{
     .binary_path = "/usr/lib/x86_64-linux-gnu/libssl.so.1.1",
@@ -180,7 +180,7 @@ Next, we set-up the perf buffer output. Recall that the perf buffer is just an o
 
 Once again, we have defined a custom `PerfBufferSpec` to specify the perf buffer we want to read. In this case, the perf_buffer is called `tls_events`. This name must match the perf buffer that is specified in the BPF probes, otherwise we wouldn’t be able find the pushed data. We also set a `probe_output_fn`, that specifies which user-space function to call when we read an event from the buffer. In this case, we call `handle_output`, which simply prints out the information to `stdout`. Since the buffer is essentially a circular buffer and can drop events, there is also an optional `probe_loss_fn` to handle the loss incidents; for simplicity, we ignore such events in this example.
 
-```
+```cpp
 void handle_output(void* /*cb_cookie*/, void* data, int /*data_size*/) {
   // Cast the raw memory into the ssl_data_event_t struct that we know it is.
   struct ssl_data_event_t r = *static_cast<struct ssl_data_event_t*>(data);
@@ -207,7 +207,7 @@ Next, we have the `main` function of our tracer, which is not too complex. The m
 - Opening the perf buffer so we can read the data being inserted by the uprobes.
 - Using a loop to periodically read all the events in the perf buffer. Each time an event is read out of here, it will trigger `handle_output` as described above.
 
-```
+```cpp
 int main(int argc, char** argv) {
   // Read arguments to get the target PID to trace.
   if (argc != 2) {
@@ -256,7 +256,7 @@ Walking through the BPF code in a bit more detail, there are a few things to hig
 
 First, we have some globals at the top of the file:
 
-```
+```cpp
 BPF_PERF_OUTPUT(tls_events);
 
 // Key is thread ID (from bpf_get_current_pid_tgid).
@@ -279,7 +279,7 @@ The entry probe, `probe_entry_SSL_read` first gets the pid to see if the probe t
 
 Soon after the entry probe is triggered, we’ll expect the return probe, `probe_ret_SSL_read` to be triggered. When that happens, we again make sure that we’re tracing a PID of interest. If so, we’ll “unstash” the buf argument which tells us where the `SSL_read` data was copied to. Then we make a copy of that data as well and push it to the output perf_buffer via `process_SSL_data`.
 
-```
+```cpp
 static int process_SSL_data(struct pt_regs* ctx, uint64_t id, enum ssl_data_event_type type,
                             const char* buf) {
   int len = (int)PT_REGS_RC(ctx);
