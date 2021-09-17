@@ -105,6 +105,18 @@ const common = {
       lineHeight: '17px',
       WebkitFontSmoothing: 'antialiased',
     },
+    subtitle1: {
+      fontFamily: ['Roboto'],
+      marginBottom: '16px',
+      marginTop: '0px',
+      fontSize: '21px',
+      lineHeight: '32px',
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      textRendering: 'optimizeLegibility',
+      WebkitFontSmoothing: 'antialiased',
+      overflowWrap: 'break-word',
+    },
     body1: {
       fontFamily: ['charter', 'Georgia', 'serif'],
       marginBottom: '16px',
@@ -229,6 +241,9 @@ const appThemeOptions = {
         h6: {
           color: '#000000',
         },
+        subtitle1: {
+          color: '#000000',
+        },
         body1: {
           color: '#000000',
         },
@@ -338,11 +353,14 @@ const appThemeOptions = {
         h6: {
           color: '#D2D5DD',
         },
-        body2: {
-          color: '#D2D5DD',
+        subtitle1: {
+          color: '#cecac3',
         },
         body1: {
           color: '#cecac3',
+        },
+        body2: {
+          color: '#D2D5DD',
         },
       },
     },
