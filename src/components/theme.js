@@ -105,10 +105,23 @@ const common = {
       lineHeight: '17px',
       WebkitFontSmoothing: 'antialiased',
     },
-    body1: {
+    subtitle1: {
+      fontFamily: ['Roboto'],
       marginBottom: '16px',
       marginTop: '0px',
-      fontSize: '18px',
+      fontSize: '21px',
+      lineHeight: '32px',
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      textRendering: 'optimizeLegibility',
+      WebkitFontSmoothing: 'antialiased',
+      overflowWrap: 'break-word',
+    },
+    body1: {
+      fontFamily: ['charter', 'Georgia', 'serif'],
+      marginBottom: '16px',
+      marginTop: '0px',
+      fontSize: '21px',
       lineHeight: '32px',
       fontStyle: 'normal',
       fontWeight: 'normal',
@@ -117,10 +130,11 @@ const common = {
       overflowWrap: 'break-word',
     },
     body2: {
+      fontFamily: ['charter', 'Georgia', 'serif'],
       marginBottom: '8px',
       marginTop: '10px',
-      fontSize: '16px',
-      lineHeight: '21px',
+      fontSize: '18px',
+      lineHeight: '24px',
       textRendering: 'optimizeLegibility',
       WebkitFontSmoothing: 'antialiased',
       overflowWrap: 'break-word',
@@ -225,6 +239,9 @@ const appThemeOptions = {
           color: '#272822',
         },
         h6: {
+          color: '#000000',
+        },
+        subtitle1: {
           color: '#000000',
         },
         body1: {
@@ -336,11 +353,14 @@ const appThemeOptions = {
         h6: {
           color: '#D2D5DD',
         },
-        body2: {
-          color: '#D2D5DD',
+        subtitle1: {
+          color: '#cecac3',
         },
         body1: {
-          color: '#ffffff',
+          color: '#cecac3',
+        },
+        body2: {
+          color: '#D2D5DD',
         },
       },
     },
