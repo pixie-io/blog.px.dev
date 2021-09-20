@@ -58,7 +58,7 @@ const BlogPostItem = withStyles(() => ({
           </div>
           <div className={styles.body}>
             <Typography variant='h3'>{title}</Typography>
-            <Typography variant='body1'>{excerpt}</Typography>
+            <Typography variant='subtitle1'>{excerpt}</Typography>
             <div className={styles.heading}>
               {email ? (
                 <div className={styles.authorAvatar}>
