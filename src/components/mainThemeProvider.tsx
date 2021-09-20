@@ -30,7 +30,7 @@ export const ThemeModeContext = React.createContext(
   },
 );
 export default function MainThemeProvider({ children }) {
-  const [theme, setTheme] = React.useState('dark');
+  const [theme, setTheme] = React.useState('light');
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
