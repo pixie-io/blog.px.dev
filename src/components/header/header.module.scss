@@ -124,7 +124,7 @@ header {
   }
 
   &.whiteHeader {
-    background: $color-white;
+    background: $color-dark;
   }
 
   &.showNewsBar {
@@ -307,7 +307,7 @@ header {
   }
 
   .menuItem {
-   // color: white;
+    color: $color-grey1;
   }
 
   .links {

@@ -172,7 +172,7 @@ const appThemeOptions = {
       MuiToolbar: {
         root: {
           minHeight: '54px',
-          backgroundColor: '#212324',
+          backgroundColor: '#161616',
           boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.35)',
         },
         icon: {

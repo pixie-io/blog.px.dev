@@ -24,8 +24,8 @@ import BodyClassName from 'react-body-classname';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 import styles from './header.module.scss';
 
 import docs from '../../images/footer/docs-icon.svg';
