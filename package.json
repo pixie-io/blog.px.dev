@@ -97,6 +97,9 @@
     "prepare": "yarn run snyk-protect",
     "snyk-protect": "snyk-protect"
   },
+  "resolutions": {
+    "potrace": "./tools/no-potrace"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gatsbyjs/gatsby-starter-default"
