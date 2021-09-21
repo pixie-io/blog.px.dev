@@ -8,11 +8,4 @@ ignore:
         expires: 2022-09-21T04:36:35.857Z
         created: 2021-09-21T04:36:35.859Z
 # patches apply the minimum changes required to fix a vulnerability
-patch:
-  SNYK-JS-LODASH-567746:
-    - eslint > lodash:
-        patched: '2021-09-19T20:18:15.276Z'
-    - eslint > inquirer > lodash:
-        patched: '2021-09-19T20:18:15.276Z'
-    - eslint > table > lodash:
-        patched: '2021-09-19T20:18:15.276Z'
+patch: {}
