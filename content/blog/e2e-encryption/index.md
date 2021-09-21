@@ -15,7 +15,7 @@ In this post, we’ll cover what end-to-end encryption is and walk you through h
 
 ## Why End-to-End Encryption?
 
-Pixie is designed with a [hybrid cloud architecture](/hybrid-architecture/hybrid-architecture/) where the data is collected and stored on the customers enviroment. The cloud component is used for user management, authentication and proxying data.
+Pixie is designed with a [hybrid cloud architecture](/hybrid-architecture/hybrid-architecture/) where data is collected and stored on the customer's environment. The cloud component is used for user management, authentication and proxying data.
 
 ::: div image-xl
 <svg title="This is a simplified architecture diagram of our system before end-to-end encryption." src='before-e2e.svg' />
