@@ -20,7 +20,7 @@
   margin-top: 94px;
 
   .postImage {
-    height: 500px;
+    max-height: 440px;
     overflow: hidden;
     margin-bottom: 30px;
     @media (max-width: 1300px) {
@@ -84,7 +84,7 @@
 
     img {
       height: 32px;
-      margin: 0 10px;
+      margin: 0 8px;
 
       &:hover {
         filter: brightness(0) saturate(100%) invert(69%) sepia(85%) saturate(2173%) hue-rotate(130deg) brightness(102%) contrast(86%);
