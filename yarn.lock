@@ -3181,7 +3181,7 @@
     escape-string-regexp "^2.0.0"
     lodash.deburr "^4.1.0"
 
-"@snyk/protect@^1.717.0":
+"@snyk/protect@latest":
   version "1.717.0"
   resolved "https://registry.yarnpkg.com/@snyk/protect/-/protect-1.717.0.tgz#72cd254e9a79e396988e76a287254ec2acb2406c"
   integrity sha512-EsNhwYzJFUqj+ZA9YV5nhPUywlZNoVZWVD7nADG2a3cdctXKHydpevYF99Ta1V2Bqk3hEmyr5K2y2SHXcQjQYQ==
