@@ -127,6 +127,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
     '& figcaption': {
       color: theme.palette.primary.main,
+      fontSize: '16px',
     },
   },
 }));
