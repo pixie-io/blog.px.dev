@@ -82,6 +82,10 @@
       text-align: left;
     }
 
+    button {
+      margin: 0;
+    }
+
     img {
       height: 32px;
       margin: 0 8px;
@@ -91,8 +95,6 @@
 
       }
     }
-
-
   }
 
   .postBody {
@@ -106,13 +108,9 @@
       opacity: 0.3;
     }
 
-    h4 {
-    }
-
     .viewAll {
       text-align: center;
       display: block;
     }
   }
-
 }
