@@ -34,7 +34,7 @@ Pixie provides multiple clients for developers to interact with its platform:
 * a CLI (Golang)
 * APIs (client libraries: Golang, Python)
 
-Since we needed to support E2E encryption across multiple languages, using a crypto standard with readily available implementations in multiple languages was a must. Given that we already use [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519/) for user claims, we chose to look at the IETF proposed [JSON Object Signing and Encryption (JOSE) standard](https://datatracker.ietf.org/group/jose/documents/) for our E2E encryption needs. We settled on using [JSON Web Key (JWK)](https://datatracker.ietf.org/doc/html/rfc7517/) for key exchange and [JSON Web Encryption (JWE)](https://datatracker.ietf.org/doc/html/rfc7516/) as our encryption format.
+Since we needed to support E2E encryption across multiple languages, using a crypto standard with readily available implementations in multiple languages was a must. Given that we already use [JSON Web Token](https://datatracker.ietf.org/doc/html/rfc7519/) (JWT) for user claims, we chose to look at the IETF proposed [JSON Object Signing and Encryption](https://datatracker.ietf.org/group/jose/documents/) (JOSE) standard for our E2E encryption needs. We settled on using [JSON Web Key](https://datatracker.ietf.org/doc/html/rfc7517/) (JWK) for key exchange and [JSON Web Encryption](https://datatracker.ietf.org/doc/html/rfc7516/) (JWE) as our encryption format.
 
 There are multiple libraries that implement the JOSE spec in different languages. We chose the following:
 * [jose](https://www.npmjs.com/package/jose) for JavaScript (imported as [@inrupt/jose-legacy-modules](https://www.npmjs.com/package/@inrupt/jose-legacy-modules) for compatibility with our tooling)
