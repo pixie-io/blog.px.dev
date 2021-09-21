@@ -15,6 +15,8 @@ In this post, we’ll cover what end-to-end encryption is and walk you through h
 
 ## Why End-to-End Encryption?
 
+Pixie is designed with a [hybrid cloud architecture](/hybrid-architecture/hybrid-architecture/) where the data is collected and stored on the customers enviroment. The cloud component is used for user management, authentication and proxying data.
+
 ::: div image-xl
 <svg title="This is a simplified architecture diagram of our system before end-to-end encryption." src='before-e2e.svg' />
 :::
@@ -39,7 +41,11 @@ There are multiple libraries that implement the JOSE spec in different languages
 * [lestrrat-go/jwx](https://pkg.go.dev/github.com/lestrrat-go/jwx) for Golang
 * [Authlib](https://pypi.org/project/Authlib/) for Python (notably, this library successfully handles messages that include null bytes)
 
+All three libraries seem to have an active community of maintainers and users, well designed and thoroughly documented APIs, and extensive test suites.
+
 ## End-to-End Encryption in Pixie
+
+JWE supports a variety of key types and algorithms, however [RSA-OAEP](https://datatracker.ietf.org/doc/html/rfc3447#section-7.1) seems to be the most widely supported one across the many libraries. So we chose to use 4096 bit RSA keys across all our clients.
 
 ::: div image-xl
 <svg title="This is how a client interacts with Pixie after enabling end-to-end encryption." src='after-e2e.svg' />
