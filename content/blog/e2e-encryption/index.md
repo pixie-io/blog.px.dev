@@ -45,7 +45,7 @@ All three libraries seem to have an active community of maintainers and users, w
 
 ## End-to-End Encryption in Pixie
 
-JWE supports a variety of key types and algorithms, however [RSA-OAEP](https://datatracker.ietf.org/doc/html/rfc3447#section-7.1) seems to be the most widely supported one across the many libraries. So we chose to use 4096 bit RSA keys across all our clients.
+JWE supports a variety of key types and algorithms, however [RSA-OAEP](https://datatracker.ietf.org/doc/html/rfc3447#section-7.1) seems to be the most widely supported one across the many libraries. So we chose to use 4096 bit RSA keys with the RSA-OAEP encryption scheme across all our clients.
 
 ::: div image-xl
 <svg title="This is how a client interacts with Pixie after enabling end-to-end encryption." src='after-e2e.svg' />
