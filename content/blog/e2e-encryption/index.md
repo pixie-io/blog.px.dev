@@ -41,7 +41,7 @@ There are multiple libraries that implement the JOSE spec in different languages
 * [lestrrat-go/jwx](https://pkg.go.dev/github.com/lestrrat-go/jwx) for Golang
 * [Authlib](https://pypi.org/project/Authlib/) for Python (notably, this library successfully handles messages that include null bytes)
 
-All three libraries seem to have active communities, be well designed and have thoroughly documented APIs, and contain extensive test suites.
+All three libraries have active communities, are well designed, have thoroughly documented APIs, and contain extensive test suites.
 
 ## End-to-End Encryption in Pixie
 
