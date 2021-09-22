@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/pixie-io/pixie-blog"
   },
-  "license": "MIT",
+  "license": "Apache-2.0 and CC-BY-4.0",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -25,6 +25,9 @@
     "lint-fix": "eslint src ./*.js --fix",
     "prepare": "yarn run snyk-protect",
     "snyk-protect": "snyk-protect"
+  },
+  "resolutions": {
+    "potrace": "./tools/no-potrace"
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
