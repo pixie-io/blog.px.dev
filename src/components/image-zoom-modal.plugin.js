@@ -96,7 +96,7 @@ export function runZoom() {
 
   children.forEach(
     (e) => {
-      e.onclick = function (event) {
+      e.onclick = (event) => {
         const picture = this.getElementsByClassName('blog-image')[0];
         modalImg.innerHTML = picture.outerHTML;
         isModalVisible = true;
@@ -111,12 +111,12 @@ export function runZoom() {
     isModalVisible = false;
   }
 
-  window.onclick = function () {
+  window.onclick = () => {
     if (isModalVisible) {
       hideModal();
     }
   };
-  window.onscroll = function () {
+  window.onscroll = () => {
     if (isModalVisible) {
       hideModal();
     }
