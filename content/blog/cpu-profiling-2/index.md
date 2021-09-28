@@ -1,9 +1,9 @@
 ---
 path: '/cpu-profiling-2'
-title: 'Part 2: A Simple Continuous Cross-Language (Go, Rust, C/C++) Profiler written in eBPF'
+title: 'Building a Continuous Profiler Part 2: A Simple eBPF-Based Profiler'
 date: 2021-6-1T06:00:00.000+00:00
 featured_image: hero-image.png
-categories: ['Pixie Team Blogs']
+categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Omid Azizi', 'Pete Stevenson']
 emails: ['oazizi@pixielabs.ai', 'jps@pixielabs.ai']
 featured: true
