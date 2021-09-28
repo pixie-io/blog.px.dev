@@ -127,6 +127,13 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-redirect-from',
+      options: {
+        query: 'allMdx',
+      },
+    },
+    'gatsby-plugin-meta-redirect',
+    {
       resolve: 'gatsby-plugin-disqus',
       options: {
         shortname: 'https-blog-pixielabs-ai',
