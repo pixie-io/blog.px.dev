@@ -94,7 +94,7 @@ It can do the same thing with computed values inside a component, with hooks lik
 Okay, let's throw memoization at everything[^3] that isn't nailed down.
 Using React DevTools and WDYR like above, we found the worst offenders and [fixed them](https://github.com/search?o=desc&q=author%3ANickLanam+repo%3Apixie-io%2Fpixie+%22%5D+Memoize%22+OR+%22rerenders%22&s=committer-date&type=Commits).
 For the most part, this meant wrapping various components in `React.memo` and computed values in `React.useMemo` or similar.
-Eventually, a typical render when the UI starts rendering results looked like this:
+Eventually, a typical profile when the UI starts rendering results looked like this:
 
 ::: div image-xl
 <figure>
