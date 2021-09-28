@@ -1,9 +1,9 @@
 ---
 path: '/cpu-profiling-3'
-title: 'Part 3: Optimizing a continuous eBPF-based profiler for production systems'
+title: 'Building a Continuous Profiler Part 3: Optimizing for Prod Systems'
 date: 2021-8-16T06:00:00.000+00:00
 featured_image: hero-image.png
-categories: ['Pixie Team Blogs']
+categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Pete Stevenson', 'Omid Azizi']
 emails: ['jps@pixielabs.ai', 'oazizi@pixielabs.ai']
 featured: true

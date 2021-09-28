@@ -1,9 +1,9 @@
 ---
 path: '/cpu-profiling'
-title: 'Part 1: Building a Continuous Cross-Language (Go, Rust, C/C++) Profiler'
+title: 'Building a Continuous Profiler Part 1: An Intro to App Profiling'
 date: 2021-5-24T06:00:00.000+00:00
 featured_image: hero-image.png
-categories: ['Pixie Team Blogs']
+categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Omid Azizi', 'Pete Stevenson']
 emails: ['oazizi@pixielabs.ai', 'jps@pixielabs.ai']
 featured: true
