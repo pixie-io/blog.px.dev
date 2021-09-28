@@ -7,6 +7,8 @@ categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Zain Asgar']
 emails: ['zasgar@pixielabs.ai']
 featured: true
+redirect_from:
+    - /ebpf-function-tracing/post/
 ---
 
 This is the first in a series of posts describing how we can debug applications in production using eBPF, without recompilation/redeployment. This post describes how to use [gobpf](https://github.com/iovisor/gobpf) and uprobes to build a function argument tracer for Go applications. This technique is also extendable to other compiled languages such as C++, Rust, etc. The next sets of posts in this series will discuss using eBPF for tracing HTTP/gRPC data, SSL, etc.
