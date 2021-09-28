@@ -7,6 +7,8 @@ categories: ['Pixie Team Blogs']
 authors: ['Michelle Nguyen']
 emails: ['michelle@pixielabs.ai']
 featured: true
+redirect_from:
+    - /hybrid-architecture/hybrid-architecture/
 ---
 
 At Pixie, we are working on a Kubernetes native monitoring system which stores and processes the resulting data entirely within a user’s cluster. This is the first in a series of posts discussing techniques and best practices for effectively building Kubernetes native applications. In this post, we explore the trade-offs between using an air-gapped deployment that lives completely within a cluster and a system which splits the control and data planes between the cloud and cluster, respectively.

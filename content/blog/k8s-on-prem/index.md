@@ -7,6 +7,8 @@ categories: ['Pixie Team Blogs']
 authors: ['Natalie Serrino']
 emails: ['nserrino@pixielabs.ai']
 featured: true
+redirect_from:
+    - /k8s-on-prem/k8s-on-prem/
 ---
 In this post, we will discuss the following:
 

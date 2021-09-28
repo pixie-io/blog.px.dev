@@ -7,6 +7,8 @@ categories: ['Pixie Team Blogs']
 authors: ['Phillip Kuznetsov']
 emails: ['philkuz@pixielabs.ai']
 featured: true
+redirect_from:
+    - /open-source-auth/ossauth/
 ---
 In this blog post we will discuss:
 

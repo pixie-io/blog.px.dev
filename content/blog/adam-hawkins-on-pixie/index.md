@@ -7,6 +7,8 @@ emails: ['adam@hawkins.io']
 featured: true
 featured_image: hero-image.png
 date: 2020-06-17T06:00:00.000+00:00
+redirect_from:
+    - /adam-hawkins-on-pixie/adam-hawkins-on-pixie/
 ---
 
 I, [Adam Hawkins](https://hawkins.io), recently tried Pixie. I was
