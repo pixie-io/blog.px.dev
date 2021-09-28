@@ -8,7 +8,7 @@ emails: ['john@bitfieldconsulting.com']
 featured: true
 featured_image: hero-image.png
 redirect_from:
-    - /pixie-intro/pixie-intro
+    - /pixie-intro/pixie-intro/
 ---
 
 In this guest blog post, infrastructure crime-fighter John Arundel, of [Bitfield Consulting](https://bitfieldconsulting.com), enlists Pixie's help to solve the Case of the Sluggish Service.

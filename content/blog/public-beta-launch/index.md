@@ -8,7 +8,7 @@ authors: ['Zain Asgar', 'Ishan Mukherjee']
 emails: ['zasgar@pixielabs.ai','ishan@pixielabs.ai']
 featured: true
 redirect_from:
-    - /beta-launch/beta-launch
+    - /beta-launch/beta-launch/
 ---
 
 In 2018, we started Pixie to build a magical developer experience to redefine how we explore, monitor, secure, and manage our applications. Today, we’re excited to finally share it with the broader developer community by launching [Pixie Community’s Public Beta](https://pixielabs.ai/) along with announcing our Series A investment by Benchmark and GV!
