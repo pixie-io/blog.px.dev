@@ -144,6 +144,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       categories: [String]
       featured_image:   File @fileByRelativePath,
       featured: Boolean
+      redirect_from: String
     }
     type FeaturedImage{
       absolutePath:String
