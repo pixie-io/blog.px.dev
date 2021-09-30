@@ -1,13 +1,3 @@
 [build]
   publish ="public/"
-  command = "sed -i s/HEADER_PLACEHOLDER/pixie:${BASIC_AUTH}/g netlify.toml && yarn install && yarn lint && gatsby build"
-
-# Uncomment when we want to disable password.
-[context.production]
-  # No password on prod.
-  command = "sed -i s/HEADER_PLACEHOLDER//g netlify.toml && yarn install && yarn lint && gatsby build"
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Basic-Auth = "HEADER_PLACEHOLDER"
+  command = "yarn install && yarn lint && gatsby build"
