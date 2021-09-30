@@ -174,7 +174,7 @@ const Blog = (props) => {
                   {' '}
                   <br className='hide-mobile hide-tablet' />
                   {' '}
-                  our product & community?
+                  Pixie?
                 </Typography>
                 <div>
                   <Button className={styles.button} link='https://px.dev/community/'>
