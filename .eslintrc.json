@@ -1,38 +1,18 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es6": true
     },
+    "ignorePatterns": [
+        "dist/**"
+    ],
     "extends": [
         "plugin:react/recommended",
         "airbnb-base",
         "airbnb/rules/react"
     ],
     "overrides": [
-        {
-            "files": [
-                "*.js",
-                "*.ts",
-                ".jsx",
-                "*.tsx"
-            ],
-            "rules": {
-                "react/jsx-filename-extension": "off",
-                "react/prop-types": [
-                    2,
-                    {
-                        "skipUndeclared": true
-                    }
-                ],
-                "react/jsx-props-no-spreading": [
-                    0
-                ],
-                "jsx-quotes": [
-                    "error",
-                    "prefer-single"
-                ]
-            }
-        },
         {
             "files": [
                 "*.ts",
@@ -57,7 +37,10 @@
             "jsx": true
         },
         "ecmaVersion": 2018,
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": [
+            "./tsconfig.json"
+        ]
     },
     "plugins": [
         "react",
@@ -70,6 +53,23 @@
             2,
             "single",
             "avoid-escape"
+        ],
+        "import/no-extraneous-dependencies": [
+            "error"
+        ],
+        "react/jsx-filename-extension": "off",
+        "react/prop-types": [
+            2,
+            {
+                "skipUndeclared": true
+            }
+        ],
+        "react/jsx-props-no-spreading": [
+            0
+        ],
+        "jsx-quotes": [
+            "error",
+            "prefer-single"
         ]
     }
 }
