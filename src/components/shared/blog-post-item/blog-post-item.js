@@ -28,7 +28,7 @@ import GravatarIcon from '../../gravatar';
 
 const BlogPostItem = withStyles(() => ({
   image: {
-    marginTop: '80px',
+    marginTop: '40px',
   },
 }))(({ post, classes }) => {
   const {
