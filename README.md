@@ -1,16 +1,16 @@
-# [blog.px.dev](http://blog.px.dev/) &middot; [![CC BY 4.0 license](https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/) <a href="https://twitter.com/intent/follow?screen_name=pixie_run"><img src="https://img.shields.io/twitter/follow/pixie_run.svg?label=Follow%20@pixie_run" alt="Follow @pixie_run" /></a>
+# [blog.px.dev](http://blog.px.dev/) &middot; [![Netlify Status](https://api.netlify.com/api/v1/badges/0e00be9c-373b-43b5-9b31-f4ce40b9fea9/deploy-status)](https://app.netlify.com/sites/blog-px-dev/deploys) [![CC BY 4.0 license](https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/) <a href="https://twitter.com/intent/follow?screen_name=pixie_run"><img src="https://img.shields.io/twitter/follow/pixie_run.svg?label=Follow%20@pixie_run" alt="Follow @pixie_run" /></a>
 
 This repo contains the source code and content for the [Pixie Blog](http://blog.px.dev/) website.
 
 ## Reporting Issues
 
-Submit any issues or enhancement requests by [filing an issue](https://github.com/pixie-io/pixie-blog/issues/new). Please search for and review the existing open issues before submitting a new issue.
+Submit any issues or enhancement requests by [filing an issue](https://github.com/pixie-io/blog.px.dev/issues/new). Please search for and review the existing open issues before submitting a new issue.
 
 ## Contributing
 
 We are excited to have you contribute to Pixie's blog!
 
-Before contributing blog content, please [file an issue](https://github.com/pixie-io/pixie-blog/issues/new) outlining your intended additions.
+Before contributing blog content, please [file an issue](https://github.com/pixie-io/blog.px.dev/issues/new) outlining your intended additions.
 
 ### Dev Setup
 
@@ -32,7 +32,7 @@ yarn install
 yarn build
 ```
 
-7. Submit a PR against the upstream  [repo](https://github.com/pixie-io/pixie-blog).
+7. Submit a PR against the upstream  [repo](https://github.com/pixie-io/blog.px.dev).
 
 ### Markdown Guidelines
 
