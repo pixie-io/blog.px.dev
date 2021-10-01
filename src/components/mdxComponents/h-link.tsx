@@ -66,7 +66,7 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
   id: string;
-  variant: TypographyVariant
+  variant: TypographyVariant;
 }
 
 const HLink: React.FC<Props> = ({ id, children, variant }) => {

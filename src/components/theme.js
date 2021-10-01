@@ -147,7 +147,7 @@ const common = {
         marginTop: '28px',
         fontSize: '18px',
         lineHeight: '28px',
-      }
+      },
     },
     body2: {
       fontFamily: ['charter', 'Georgia', 'serif'],

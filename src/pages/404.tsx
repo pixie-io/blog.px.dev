@@ -28,12 +28,12 @@ interface Props {
   data: {
     site: {
       siteMetadata: {
-        title: string
-      }
-    }
-    allMdx: any
-    mainCategories: any
-  }
+        title: string;
+      };
+    };
+    allMdx: any;
+    mainCategories: any;
+  };
 }
 
 const NotFoundPage = withStyles((theme: Theme) => ({

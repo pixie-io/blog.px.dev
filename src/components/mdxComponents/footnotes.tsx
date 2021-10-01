@@ -36,5 +36,7 @@ const useStyles = makeStyles(() => ({
     },
   },
 }));
-const Footnotes = ({ children, id }) => (<div className={useStyles().footnotes} id={id}>{children}</div>);
+const Footnotes = ({ children, id }) => (
+  <div className={useStyles().footnotes} id={id}>{children}</div>
+);
 export default Footnotes;
