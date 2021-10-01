@@ -1,6 +1,6 @@
 ---
 path: '/ebpf-openssl-tracing'
-title: 'Debugging with eBPF Part 3: Tracing SSL/TLS connections'
+title: 'Part 3: Tracing SSL/TLS connections using eBPF'
 date: 2021-09-16T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
