@@ -110,7 +110,7 @@ module.exports = {
       options: {
         includePaths: ['node_modules', './src/scss'],
         // eslint-disable-next-line global-require
-        implementation: require('dart-sass'),
+        implementation: require('sass'),
       },
     },
     {
