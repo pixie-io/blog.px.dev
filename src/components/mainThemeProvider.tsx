@@ -17,9 +17,8 @@
  */
 
 import * as React from 'react';
-import { useEffect, useRef } from 'react';
 import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme, useMediaQuery } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core';
 
 import AppThemeOptions from './theme';
 
