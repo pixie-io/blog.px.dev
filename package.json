@@ -21,7 +21,7 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "lint": "eslint '**/*.{js,jsx,ts,tsx}' && git ls-files '**/*.tsx' '**/*.ts' '**/*.js' '**/*.jsx' '**/*.scss' '**/*.py' | xargs -l1 tools/licenses/checker.py -f",
+    "lint": "eslint '**/*.{js,jsx,ts,tsx}' && git ls-files '**/*.tsx' '**/*.ts' '**/*.js' '**/*.jsx' '**/*.scss' '**/*.py' | xargs -n1 tools/licenses/checker.py -f",
     "lint-fix": "eslint '**/*.{js,jsx,ts,tsx}' --fix",
     "prepare": "yarn run snyk-protect",
     "snyk-protect": "snyk-protect"
@@ -37,6 +37,7 @@
     "@material-ui/styles": "^4.9.6",
     "@mdx-js/mdx": "^1.0.10",
     "@mdx-js/react": "^1.6.1",
+    "@mdx-js/runtime": "^1.6.1",
     "@snyk/protect": "^1.717.0",
     "babel-plugin-styled-components": "^1.10.6",
     "dotenv": "^8.2.0",

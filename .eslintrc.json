@@ -10,12 +10,40 @@
     ],
     "overrides": [
         {
-          "files": ["*.js", "*.ts", ".jsx", "*.tsx"],
-          "rules": {
-              "react/jsx-filename-extension": "off",
-              "react/prop-types": [2, {"skipUndeclared": true}],
-              "react/jsx-props-no-spreading": [0],
-              "jsx-quotes": ["error", "prefer-single"]
+            "files": [
+                "*.js",
+                "*.ts",
+                ".jsx",
+                "*.tsx"
+            ],
+            "rules": {
+                "react/jsx-filename-extension": "off",
+                "react/prop-types": [
+                    2,
+                    {
+                        "skipUndeclared": true
+                    }
+                ],
+                "react/jsx-props-no-spreading": [
+                    0
+                ],
+                "jsx-quotes": [
+                    "error",
+                    "prefer-single"
+                ]
+            }
+        },
+        {
+            "files": [
+                "*.ts",
+                "*.tsx"
+            ],
+            "extends": [
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "rules": {
+                "@typescript-eslint/explicit-function-return-type": "off",
+                "@typescript-eslint/no-explicit-any": "off"
             }
         }
     ],
@@ -36,6 +64,12 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "quotes": [2, "single", "avoid-escape"]
+        "import/extensions": 0,
+        "import/no-unresolved": 0,
+        "quotes": [
+            2,
+            "single",
+            "avoid-escape"
+        ]
     }
 }
