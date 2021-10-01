@@ -28,11 +28,11 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import styles from './header.module.scss';
 
-import docs from '../../images/footer/docs-icon.svg';
-import github from '../../images/footer/github-icon.svg';
-import slack from '../../images/footer/slack-icon.svg';
-import youtube from '../../images/footer/youtube-icon.svg';
-import twitter from '../../images/footer/twitter-icon.svg';
+import docs from '../../images/icons/docs-icon.svg';
+import github from '../../images/icons/github-icon.svg';
+import slack from '../../images/icons/slack-icon.svg';
+import twitter from '../../images/icons/twitter-icon.svg';
+import youtube from '../../images/icons/youtube-icon.svg';
 import pixieLogo from '../../images/pixie-logo-header.svg';
 import betanaut from '../../images/betanaut.png';
 
