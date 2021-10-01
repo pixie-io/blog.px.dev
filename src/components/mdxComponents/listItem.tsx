@@ -30,5 +30,7 @@ const useStyles = makeStyles(() => ({
     paddingLeft: '12px',
   },
 }));
-const ListItem = ({ children, id }) => (<li className={useStyles().listItem} id={id}>{children}</li>);
+const ListItem = ({ children, id }) => (
+  <li className={useStyles().listItem} id={id}>{children}</li>
+);
 export default ListItem;

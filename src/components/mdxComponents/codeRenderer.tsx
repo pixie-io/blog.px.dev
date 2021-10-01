@@ -98,7 +98,7 @@ const CodeRenderer = withStyles((theme) => ({
               {...defaultProps}
               code={code.trim()}
               language={language}
-              theme={theme == 'light' ? vsLight : vsDark}
+              theme={theme === 'light' ? vsLight : vsDark}
             >
               {({
                 className, style, tokens, getLineProps, getTokenProps,

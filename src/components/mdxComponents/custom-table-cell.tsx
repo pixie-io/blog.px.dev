@@ -32,7 +32,9 @@ const CustomTableCell = withStyles(() => ({
     parsableChildren = children.props.children.split('//').join('\n');
   }
   return (
-    <TableCell className={classes.td} align={align || undefined}>{parsableChildren ? parseMd(parsableChildren) : children}</TableCell>
+    <TableCell className={classes.td} align={align || undefined}>
+      {parsableChildren ? parseMd(parsableChildren) : children}
+    </TableCell>
   );
 });
 
