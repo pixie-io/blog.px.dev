@@ -20,51 +20,49 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import styles from './footer.module.scss';
-import pixieLogo from '../../images/pixie-new-logo.svg';
-
-import docs from '../../images/footer/docs-icon.svg';
-import github from '../../images/footer/github-icon.svg';
-import slack from '../../images/footer/slack-icon.svg';
-import youtube from '../../images/footer/youtube-icon.svg';
-import twitter from '../../images/footer/twitter-icon.svg';
+import cncfLogo from '../../images/footer/cncf-white.svg';
+import github from '../../images/icons/github-icon.svg';
 
 const Footer = ({ whiteFooter }) => (
   <footer
     className={`${whiteFooter ? styles.whitefooter : ''} ${styles.footer}`}
     style={{ position: 'relative' }}
   >
-    <Link to='/'><img src={pixieLogo} alt='Pixie logo' className={styles.logo} /></Link>
-    <div className='container hide-not-desktop'>
-      <div className={styles.divider} />
-      <div className={styles.socialIcons}>
-        <a href='https://docs.px.dev'>
-          <img src={docs} className={styles.socialIcon} alt='pixie docs' />
-        </a>
-        <a href='https://github.com/pixie-io/pixie'>
-          <img src={github} className={styles.socialIcon} alt='github' />
-        </a>
-        <a href='https://slackin.px.dev'>
-          <img src={slack} className={styles.socialIcon} alt='slack' />
-        </a>
-        <a href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'>
-          <img src={youtube} className={styles.socialIcon} alt='youtube' />
-        </a>
-        <a href='https://twitter.com/pixie_run'>
-          <img src={twitter} className={styles.socialIcon} alt='twitter' />
+    <p align='center'>
+      We are a
+      {' '}
+      <a href='https://cncf.io/' target='_blank' rel='noopener noreferrer'>Cloud Native Computing Foundation</a>
+      {' '}
+      sandbox project.
+    </p>
+    <img src={cncfLogo} alt='CNCF logo' className={styles.logo} />
+    <div className={styles.copyrightBar}>
+      <div className={styles.verticalCenter}>
+        <Link to='https://www.linuxfoundation.org/terms' className={styles.mutedLink}>Terms of Service</Link>
+        <span>
+          |
+        </span>
+        <Link to='https://www.linuxfoundation.org/privacy' className={styles.mutedLink}>Privacy Policy</Link>
+      </div>
+      <div className={styles.centerContent}>
+        Copyright © 2018- The Pixie Authors. All Rights Reserved.
+        <br />
+        The Linux Foundation has registered trademarks and uses trademarks.
+        For a list of trademarks of The Linux Foundation, please see our
+        {' '}
+        <a href='https://www.linuxfoundation.org/trademark-usage'>Trademark Usage Page</a>
+        .
+        <br />
+        Pixie was originally created and contributed by
+        {' '}
+        <a href='https://newrelic.com/' target='_blank' rel='noopener noreferrer'>New Relic, Inc.</a>
+      </div>
+      <div className={`${styles.githubLink} ${styles.verticalCenter}`}>
+        <a href='https://github.com/pixie-io/px.dev' target='_blank' rel='noopener noreferrer'>
+          <img src={github} alt='github' />
+          Edit on GitHub
         </a>
       </div>
-      <div className={styles.divider} />
-      <ul className={styles.linksRow}>
-        <li>
-          <a href='https://pixielabs.ai/terms' target='_blank' rel='noreferrer noopener'>
-            TERMS &
-            PRIVACY
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div className={styles.copyrightLink}>
-      Copyright © 2018- The Pixie Authors. All Rights Reserved.
     </div>
   </footer>
 );
