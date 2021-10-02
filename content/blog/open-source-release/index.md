@@ -3,7 +3,7 @@ path: '/open-source-release'
 title: 'Open sourcing Pixie under Apache 2.0 license'
 date: 2021-5-04T06:00:00.000+00:00
 featured_image: hero-image.png
-categories: ['Pixie Team Blogs']
+categories: ['Pixie Team Blogs', 'Announcements']
 authors: ['Zain Asgar', 'Pixie Founding Team']
 emails: ['zasgar@pixielabs.ai']
 featured: true

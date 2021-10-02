@@ -3,7 +3,7 @@ path: '/k8s-on-prem'
 title: 'How Kubernetes Made On-Prem Cool Again'
 date: 2021-02-24T06:00:00.000+00:00
 featured_image: hero-image.png
-categories: ['Pixie Team Blogs']
+categories: ['Pixie Team Blogs', 'Kubernetes']
 authors: ['Natalie Serrino']
 emails: ['nserrino@pixielabs.ai']
 featured: true
