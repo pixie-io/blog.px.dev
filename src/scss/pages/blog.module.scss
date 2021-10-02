@@ -152,14 +152,13 @@ section.communitySection {
     top: -30%;
     transform: translateX(-50%);
     position: absolute;
-    z-index: 0;
+    z-index: -1000;
     width: 1000px;
     @media (max-width: 1000px) {
       width: 100%;
       position: static;
       transform: translateX(0);
     }
-
   }
 
   .communitySectionTitle {
