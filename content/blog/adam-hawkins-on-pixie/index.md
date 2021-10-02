@@ -1,7 +1,7 @@
 ---
 path: '/adam-hawkins-on-pixie'
 title: 'Adam Hawkins On Pixie'
-categories: ['Guest Blogs']
+categories: []
 authors: ['Adam Hawkins']
 emails: ['adam@hawkins.io']
 featured: true

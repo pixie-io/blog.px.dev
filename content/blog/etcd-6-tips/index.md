@@ -3,7 +3,7 @@ path: '/etcd-6-tips'
 title: 'How etcd works and 6 tips to keep in mind'
 date: 2021-02-08T06:00:00.000+00:00
 featured_image: etcd-hero.png
-categories: ['Pixie Team Blogs']
+categories: ['Pixie Team Blogs', 'Kubernetes']
 authors: ['Michelle Nguyen']
 emails: ['michelle@pixielabs.ai']
 featured: true
