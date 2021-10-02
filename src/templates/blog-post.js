@@ -140,7 +140,7 @@ const BlogPostTemplate = ({
   const post = data.mdx;
   const related = data.featured.nodes;
   const muiClasses = useStyles();
-  const category = post.frontmatter.categories[0];
+  const { categories } = post.frontmatter;
   const author = data.authors.edges.map((a) => a.node)
     .find((a) => a.id === post.frontmatter.author);
   const authors = data.authors.edges.map((a) => a.node)
@@ -187,9 +187,12 @@ const BlogPostTemplate = ({
                 {' '}
                 /
                 {' '}
-                <Link to={categoryLink.categoryLink(category)}>
-                  {category}
-                </Link>
+                {categories.length
+                  ? (
+                    <Link to={categoryLink.categoryLink(categories[0])}>
+                      {categories[0]}
+                    </Link>
+                  ) : <></>}
               </div>
               <HLink id='title' variant='h1'>{post.frontmatter.title}</HLink>
             </div>

@@ -18,5 +18,5 @@
 
 const slugify = require('slugify');
 
-exports.categoryLink = (category) => `/${slugify(category)
-  .toLowerCase()}`;
+exports.categoryLink = (category) => (category ? `/${slugify(category)
+  .toLowerCase()}` : '');
