@@ -26,7 +26,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
 import styles from '../scss/pages/blog.module.scss';
-import spaceGuys from '../images/homepage/sspace-illustration.svg';
+import spaceGuys from '../images/homepage/space-illustration.svg';
 import Button from '../components/shared/button';
 
 const useStyles = makeStyles((theme) => ({
