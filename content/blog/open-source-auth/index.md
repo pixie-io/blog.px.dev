@@ -1,6 +1,6 @@
 ---
 path: '/open-source-auth-with-hydra-kratos'
-title: 'OSS projects: You probably do not need to roll your own auth'
+title: "OSS projects: You probably don't need to roll your own auth"
 date: 2021-04-27T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
