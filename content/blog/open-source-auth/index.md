@@ -1,6 +1,6 @@
 ---
 path: '/open-source-auth-with-hydra-kratos'
-title: 'Open Source Authentication with Hydra and Kratos'
+title: 'OSS projects: You probably don't need to roll your own auth'
 date: 2021-04-27T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
@@ -10,17 +10,13 @@ featured: true
 redirect_from:
     - /open-source-auth/ossauth/
 ---
-In this blog post we will discuss:
 
-- Why we redesigned Pixie to support an authentication flow exclusively from open source components.
-- The designs we considered for open source authentication, and why we selected [Hydra](https://www.ory.sh/hydra/)/[Kratos](https://www.ory.sh/kratos/).
-- The technical challenges we ran into with our Hydra/Kratos-based solution, and how we addressed them.
 
-## Context
+In May 2021, we open sourced [Pixie](https://px.dev/), which had previously been a closed source application with closed source dependencies. As part of that process, we needed to change all of those dependencies from our system. In this case, we needed to create an authentication path that didn't rely on Auth0.
 
-[Pixie](https://px.dev/) is an observability platform recently acquired by New Relic. To make the project more accessible to the developer community, New Relic is open sourcing Pixie. As part of our commitment to OSS, we want Pixie to be deployable in a completely open source environment. However, Pixie had a strong dependency on Auth0 that would complicate this effort.
+When reviewing how other open source projects handled authentication, we noticed that most of them rolled their own auth. We don't think that is necessary or advisable for the vast majority of projects.
 
-In this post we detail how we redesigned Pixie's auth to be open source compatible. We discuss trade offs of several approaches and dive into our final open source implementation. Let's start with our Auth0 design.
+In this post we detail how we redesigned Pixie's auth to be open source compatible using existing projects. We discuss the tradeoffs of several approaches and dive into our final open source implementation. Let's start with our Auth0 design.
 
 ## Initial design with Auth0
 
