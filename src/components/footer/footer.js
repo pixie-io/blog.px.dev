@@ -58,7 +58,7 @@ const Footer = ({ whiteFooter }) => (
         <a href='https://newrelic.com/' target='_blank' rel='noopener noreferrer'>New Relic, Inc.</a>
       </div>
       <div className={`${styles.githubLink} ${styles.verticalCenter}`}>
-        <a href='https://github.com/pixie-io/px.dev' target='_blank' rel='noopener noreferrer'>
+        <a href='https://github.com/pixie-io/blog.px.dev' target='_blank' rel='noopener noreferrer'>
           <img src={github} alt='github' />
           Edit on GitHub
         </a>
