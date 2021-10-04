@@ -1,75 +1,91 @@
 {
-    "root": true,
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "ignorePatterns": [
-        "dist/**"
-    ],
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb-base",
-        "airbnb/rules/react"
-    ],
-    "overrides": [
-        {
-            "files": [
-                "*.ts",
-                "*.tsx"
-            ],
-            "extends": [
-                "plugin:@typescript-eslint/recommended"
-            ],
-            "rules": {
-                "@typescript-eslint/explicit-function-return-type": "off",
-                "@typescript-eslint/no-explicit-any": "off"
-            }
-        }
-    ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module",
-        "project": [
-            "./tsconfig.json"
-        ]
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint"
-    ],
-    "rules": {
-        "import/extensions": 0,
-        "import/no-unresolved": 0,
-        "quotes": [
-            2,
-            "single",
-            "avoid-escape"
-        ],
-        "import/no-extraneous-dependencies": [
-            "error"
-        ],
-        "react/jsx-filename-extension": "off",
-        "react/prop-types": [
-            2,
-            {
-                "skipUndeclared": true
-            }
-        ],
-        "react/jsx-props-no-spreading": [
-            0
-        ],
-        "jsx-quotes": [
-            "error",
-            "prefer-single"
-        ]
+  "root": true,
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "ignorePatterns": [
+    "dist/**"
+  ],
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb-base",
+    "airbnb/rules/react"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "off"
+      }
     }
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ],
+        "moduleDirectory": [
+          "node_modules",
+          "src/"
+        ]
+      }
+    }
+  },
+  "rules": {
+    "import/extensions": 0,
+    "import/no-unresolved": 1,
+    "quotes": [
+      2,
+      "single",
+      "avoid-escape"
+    ],
+    "import/no-extraneous-dependencies": [
+      "error"
+    ],
+    "react/jsx-filename-extension": "off",
+    "react/prop-types": [
+      2,
+      {
+        "skipUndeclared": true
+      }
+    ],
+    "react/jsx-props-no-spreading": [
+      0
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ]
+  }
 }
