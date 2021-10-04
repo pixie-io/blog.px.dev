@@ -13,8 +13,8 @@ This post will demonstrate how to use eBPF to trace encrypted connections that o
 
 This post is part of our ongoing series sharing how you can use eBPF to debug applications without recompilation or redeployment. For more eBPF projects, check out:
 
-- [Part 1](https://blog.pixielabs.ai/blog/ebpf-function-tracing/post/): Debugging Go function arguments in prod
-- [Part 2](https://blog.pixielabs.ai/ebpf-http-tracing/): Full body HTTP request/response tracing
+- [Part 1](/ebpf-function-tracing/): Debugging Go function arguments in prod
+- [Part 2](/ebpf-http-tracing/): Full body HTTP request/response tracing
 
 ## Tracing with BPF
 
