@@ -102,7 +102,7 @@ function SEO({
         },
         {
           name: 'twitter:image',
-          content: image,
+          content: `https://blog.px.dev${image}`,
         },
         {
           name: 'twitter:site',
