@@ -28,11 +28,10 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import styles from './header.module.scss';
 
-import docs from '../../images/icons/docs-icon.svg';
-import github from '../../images/icons/github-icon.svg';
-import slack from '../../images/icons/slack-icon.svg';
-import twitter from '../../images/icons/twitter-icon.svg';
-import youtube from '../../images/icons/youtube-icon.svg';
+import github from '../../images/header/github-icon.svg';
+import slack from '../../images/header/slack-icon.svg';
+import twitter from '../../images/header/twitter-icon.svg';
+import youtube from '../../images/header/youtube-icon.svg';
 import pixieLogo from '../../images/pixie-logo-header.svg';
 import betanaut from '../../images/betanaut.png';
 
@@ -166,7 +165,6 @@ const Header = ({
             <IconButton onClick={() => setOpen(false)} className={styles.close}>
               <CloseIcon style={{ color: 'white' }} />
             </IconButton>
-
           </div>
           <div className={styles.mobileNavMenu}>
             <div>
@@ -199,16 +197,7 @@ const Header = ({
             </div>
           </div>
           <div className={styles.links}>
-
             <ul className={styles.socialIcons}>
-
-              <li>
-                <a
-                  href='https://docs.px.dev'
-                >
-                  <img src={docs} className={styles.socialIcon} />
-                </a>
-              </li>
               <li>
                 <a href='https://github.com/pixie-io/pixie'>
                   <img src={github} className={styles.socialIcon} />
@@ -230,8 +219,6 @@ const Header = ({
                 </a>
               </li>
             </ul>
-
-            <a href='https://pixielabs.ai/terms'>Terms & Privacy</a>
           </div>
         </div>
         <div className='hide-desktop'>
@@ -246,7 +233,7 @@ const Header = ({
             {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
           </IconButton>
           <IconButton onClick={() => setOpen(true)}>
-            <MenuIcon />
+            <MenuIcon style={{ color: 'white' }} />
           </IconButton>
         </div>
 
