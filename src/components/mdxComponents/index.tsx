@@ -23,6 +23,7 @@ import SvgRenderer from './svg';
 import Command from './command';
 import Quote from './quote';
 import BlockQuote from './block-quote';
+import CustomTableCell from './custom-table-cell';
 
 export default {
   ...baseComponents,
@@ -30,4 +31,6 @@ export default {
   quote: (props: any) => <Quote {...props} />,
   blockquote: (props: any) => <BlockQuote {...props} />,
   command: (props: any) => <Command {...props} />,
+  td: ({ align, ...props }) => <CustomTableCell {...props} align={align || undefined} />,
+
 };

@@ -29,7 +29,6 @@ import Pre from './pre';
 import AnchorTag from './anchor';
 import CodeRenderer from './codeRenderer';
 import ListItem from './listItem';
-import CustomTableCell from './custom-table-cell';
 import HLink from './h-link';
 import Footnotes from './footnotes';
 
@@ -62,7 +61,6 @@ export default {
   a: (props: any) => <AnchorTag {...props} />,
   table: (props: any) => <Table {...props} />,
   tr: (props: any) => <TableRow {...props} />,
-  td: ({ align, ...props }) => <CustomTableCell {...props} align={align || undefined} />,
   th: ({ align, ...props }) => <TableCell {...props} align={align || undefined} />,
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
