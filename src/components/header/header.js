@@ -33,7 +33,6 @@ import slack from '../../images/header/slack-icon.svg';
 import twitter from '../../images/header/twitter-icon.svg';
 import youtube from '../../images/header/youtube-icon.svg';
 import pixieLogo from '../../images/pixie-logo-header.svg';
-import betanaut from '../../images/betanaut.png';
 
 const Header = ({
   transparentMenu, onThemeTypeSwitch,
@@ -159,11 +158,9 @@ const Header = ({
           <div className={styles.headerResponsive}>
             <Link to='/' className={styles.icon}>
               <img src={pixieLogo} alt='pixie logo' />
-              <img src={betanaut} alt='pixienaut beta' className={styles.betanaut} />
             </Link>
-
             <IconButton onClick={() => setOpen(false)} className={styles.close}>
-              <CloseIcon style={{ color: 'white' }} />
+              <CloseIcon className={styles.menuItem} />
             </IconButton>
           </div>
           <div className={styles.mobileNavMenu}>
@@ -233,7 +230,7 @@ const Header = ({
             {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
           </IconButton>
           <IconButton onClick={() => setOpen(true)}>
-            <MenuIcon style={{ color: 'white' }} />
+            <MenuIcon className={styles.menuItem} />
           </IconButton>
         </div>
 
