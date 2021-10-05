@@ -2,7 +2,7 @@
 path: '/k8s-122-challenge'
 title: 'Unexpected Challenges Supporting Kubernetes 1.22 in Pixie'
 date: 2021-10-05T06:00:00.000+00:00
-featured_image: k8si122challenge.png
+featured_image: k8s122challenge.png
 categories: ['Pixie Team Blogs']
 authors: ['Phillip Kuznetsov']
 emails: ['philkuz@pixielabs.ai']
@@ -18,7 +18,7 @@ Pixie's [on-prem data collector](https://blog.px.dev/hybrid-architecture/), Vizi
 Unfortunately, both operators chose to define their CRD inside of their code (rather than as a separate yaml) and the latest releases[^1] still used the beta version of the API. That meant our Kubernetes 1.22 cluster rejected CRD creation requests from these operators because those APIs no longer existed. Since [NATS no longer recommends using nats-operator](https://github.com/nats-io/nats-operator#nats-operator) and coreos [archived etcd-operator](https://github.com/coreos/etcd-operator/pull/2169), we needed a new deployment model.
 
 ## The Solution: StatefulSets
-We decided to switch away from CustomResources over to StatefulSet equivalents ([etcd](https://github.com/pixie-io/pixie/commit/305726d4bbb4c1587a323d20361525bb0ee8c0cd),[nats](https://github.com/pixie-io/pixie/commit/35d3aec70a1d85e06703b7a044057787d82c0e64)). Forking the operator code bases was an option, but we did not need all of the features provided by the operators nor did we want to maintain a forked project. The main operator feature that we needed was dynamic configuration; the operator deployments knew the name of the pods in their configuration before the pods were deployed. We replicated this with StatefulSets (which gave us predictable naming) combined with [environment variable substitution](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/#using-environment-variables-inside-of-your-config).
+We decided to switch away from CustomResources over to StatefulSet equivalents ([etcd](https://github.com/pixie-io/pixie/commit/305726d4bbb4c1587a323d20361525bb0ee8c0cd), [nats](https://github.com/pixie-io/pixie/commit/35d3aec70a1d85e06703b7a044057787d82c0e64)). Forking the operator code bases was an option, but we did not need all of the features provided by the operators nor did we want to maintain a forked project. The main operator feature that we needed was dynamic configuration; the operator deployments knew the name of the pods in their configuration before the pods were deployed. We replicated this with StatefulSets (which gave us predictable naming) combined with [environment variable substitution](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/#using-environment-variables-inside-of-your-config).
 
 ## Another Challenge: Updating Active Deployments
 Although updating to StatefulSet NATS/etcd deployments is only necessary for Kubernetes 1.22+, we wanted to reduce our operational burden by updating all running Viziers.
