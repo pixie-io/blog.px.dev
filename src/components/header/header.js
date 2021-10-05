@@ -75,14 +75,14 @@ const Header = ({
           <span className='hide-not-desktop'>
              Join us for our KubeCon Happy Hour on October 12th.
             {' '}
-            <a href='https://px.dev/community/#events'>
+            <a href='https://pixiehh.eventbrite.com/'>
                    Learn more
             </a>
             {' '}
              🚀
           </span>
           <span className='hide-desktop'>
-                <a href='https://px.dev/community/#events'>Join us for our KubeCon Happy Hour on October 12th.</a>
+                <a href='https://pixiehh.eventbrite.com/'>Join us for our KubeCon Happy Hour on October 12th.</a>
           </span>
 
           <div
