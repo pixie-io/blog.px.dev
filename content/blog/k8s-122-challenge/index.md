@@ -2,7 +2,7 @@
 path: '/k8s-122-challenge'
 title: 'Unexpected Challenges Supporting Kubernetes 1.22 in Pixie'
 date: 2021-10-05T06:00:00.000+00:00
-featured_image: k8s122challenge.png
+featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Kubernetes']
 authors: ['Phillip Kuznetsov']
 emails: ['philkuz@pixielabs.ai']
