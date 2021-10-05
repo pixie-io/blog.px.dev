@@ -4,7 +4,6 @@ const fetch = require('node-fetch');
 const slugify = require('slugify');
 const categoryLink = require('./src/components/category-link');
 
-
 exports.onCreateNode = ({
   node, actions, getNode, getNodesByType,
 }) => {
@@ -30,7 +29,6 @@ exports.onCreateNode = ({
     const fileNode = (node.parent && node.parent !== 'undefined')
       ? getNode(node.parent)
       : node;
-
 
     const slug = createFilePath({
       node,
@@ -93,7 +91,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const posts = result.data.blog.edges;
 
-
   posts.forEach((post) => {
     createRedirect({
       fromPath: (blogPrefix + post.node.fields.slug).replace('//', '/'),
@@ -102,7 +99,6 @@ exports.createPages = async ({ graphql, actions }) => {
       isPermanent: true,
     });
   });
-
 
   posts.forEach((post) => {
     const related = [...posts];

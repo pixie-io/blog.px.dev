@@ -61,8 +61,8 @@ const BlogPostCard = ({ post }) => {
 };
 BlogPostCard.propTypes = {
   post: PropTypes.shape({
-    frontmatter: PropTypes.object,
-    fields: PropTypes.object,
+    frontmatter: PropTypes.shape,
+    fields: PropTypes.shape,
     excerpt: PropTypes.string,
   }).isRequired,
 };

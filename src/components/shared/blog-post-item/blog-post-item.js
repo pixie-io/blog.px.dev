@@ -98,8 +98,8 @@ const BlogPostItem = withStyles(() => ({
 });
 BlogPostItem.propTypes = {
   post: PropTypes.shape({
-    frontmatter: PropTypes.object,
-    fields: PropTypes.object,
+    frontmatter: PropTypes.shape,
+    fields: PropTypes.shape,
     timeToRead: PropTypes.number,
     excerpt: PropTypes.string,
   }).isRequired,

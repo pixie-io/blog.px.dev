@@ -87,7 +87,6 @@ export const processClientEntry = () => {
   document.head.appendChild(styleEl);
 };
 
-
 export function runZoom() {
   const modal = document.getElementById('zoom-modal');
   const modalImg = document.getElementById('img01');

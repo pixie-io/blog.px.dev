@@ -32,7 +32,6 @@ import ListItem from './listItem';
 import HLink from './h-link';
 import Footnotes from './footnotes';
 
-
 export default {
   // There is a bug in material plugin that overwrites the H1 with the default typography,
   // so this cannot be set here. The default mui h1 has been updated to match
