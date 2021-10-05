@@ -1,43 +1,52 @@
 - id: Zain Asgar
   bio: GVP/GM @ New Relic, Co-Founder/CEO of Pixie Labs
-  twitter: 'https://twitter.com/zainasgar'
+  twitter: '@zainasgar'
   email: 'zasgar@pixielabs.ai'
 
 - id: Ishan Mukherjee
-  bio: Co-Founder/CPO of Pixie Labs
-  twitter: 'https://twitter.com/ishanmkh'
+  bio: GVP @ New Relic, Co-Founder/CPO of Pixie Labs
+  twitter: '@ishanmkh'
   email: 'ishan@pixielabs.ai'
 
 - id: John Arundel
   bio: Principal consultant at Bitfield Consulting, is a well-known writer and expert on DevOps, infrastructure, Kubernetes, Puppet, and the Go programming language.
-  twitter: 'https://twitter.com/bitfield'
+  twitter: '@bitfield'
   email: 'john@bitfieldconsulting.com'
 
 - id: Adam Hawkins
   bio: SRE at Skillshare
-  twitter: 'https://twitter.com/adman65'
+  twitter: '@adman65'
   email: 'adam@hawkins.io'
 
 - id: Michelle Nguyen
-  bio: Principal Engineer @ New Relic, Founding engineer @ Pixie Labs
-  twitter: 'https://twitter.com/michelle_aimi'
+  bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
+  twitter: '@michelle_aimi'
   email: 'michelle@pixielabs.ai'
 
 - id: Natalie Serrino
-  bio: Principal Engineer @ New Relic, Founding engineer @ Pixie Labs
-  twitter: 'https://twitter.com/nserrino'
+  bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
+  twitter: '@nserrino'
   email: 'nserrino@pixielabs.ai'
 
 - id: Phillip Kuznetsov
-  bio: Lead SWE @ New Relic, Founding engineer @ Pixie Labs
-  twitter: 'https://twitter.com/philkuznets'
+  bio: Lead SWE @ New Relic, Founding Engineer @ Pixie Labs
+  twitter: '@philkuznets'
   email: 'philkuz@pixielabs.ai'
 
 - id: Omid Azizi
-  bio: Principal Engineer @ New Relic, Founding engineer @ Pixie Labs
-  twitter: 'https://twitter.com/oazizi'
+  bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
+  twitter: '@oazizi'
   email: 'oazizi@pixielabs.ai'
 
 - id: Pete Stevenson
-  bio: Principal Engineer @ New Relic, Founding engineer @ Pixie Labs
+  bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
   email: 'jps@pixielabs.ai'
+
+- id: Vihang Mehta
+  bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
+  twitter: '@vihangmehta'
+  email: 'vihang@pixielabs.ai'
+
+- id: Nick Lanam
+  bio: Lead SWE @ New Relic, Founding Engineer @ Pixie Labs
+  email: 'nlanam@pixielabs.ai'

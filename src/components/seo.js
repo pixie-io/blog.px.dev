@@ -31,7 +31,7 @@ import favDark from '../images/favicon-dark.png';
 import favGreen from '../images/favicon-green.png';
 
 function SEO({
-  description, lang, meta, title, url, image,
+  description, lang, meta, title, url, creators, image,
 }) {
   const { site } = useStaticQuery(
     graphql`
@@ -40,7 +40,6 @@ function SEO({
           siteMetadata {
             title
             description
-            author
           }
         }
       }
@@ -78,7 +77,15 @@ function SEO({
           content: title,
         },
         {
+          name: 'twitter:title',
+          content: title,
+        },
+        {
           property: 'og:description',
+          content: metaDescription,
+        },
+        {
+          name: 'twitter:description',
           content: metaDescription,
         },
         {
@@ -90,20 +97,16 @@ function SEO({
           content: 'summary',
         },
         {
-          name: 'twitter:creator',
-          content: site.siteMetadata.author,
+          property: 'og:image',
+          content: image,
         },
         {
-          name: 'twitter:title',
-          content: title,
+          name: 'twitter:image',
+          content: image,
         },
         {
-          name: 'twitter:description',
-          content: metaDescription,
-        },
-        {
-          name: 'twitter:description',
-          content: metaDescription,
+          name: 'twitter:site',
+          content: '@pixie_run',
         },
         {
           property: 'og:locale',
@@ -118,19 +121,15 @@ function SEO({
           content: site.siteMetadata.title,
         },
         {
-          property: 'og:image',
-          content: image,
-        },
-        {
           property: 'og:image:width',
           content: image ? 1200 : null,
         },
-
         {
           property: 'og:image:height',
           content: image ? 500 : null,
         },
-      ].concat(meta)}
+      ].concat(meta)
+        .concat(creators.map((creator) => ({ name: 'twitter:creator', content: creator })))}
     />
   );
 }
@@ -141,6 +140,7 @@ SEO.defaultProps = {
   description: '',
   image: null,
   url: '',
+  creators: [],
 };
 
 SEO.propTypes = {
@@ -148,6 +148,7 @@ SEO.propTypes = {
   lang: PropTypes.string,
   image: PropTypes.string,
   url: PropTypes.string,
+  creators: PropTypes.arrayOf(PropTypes.string),
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
 };
