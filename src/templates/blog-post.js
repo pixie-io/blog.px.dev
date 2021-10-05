@@ -102,16 +102,17 @@ const MetaBarFooter = ({
               <div>
                 <Typography variant='body1' className={styles.author}>
                   {a.id}
-                  <a
-                    href={a.twitter}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className={styles.authorTwitter}
-                  >
-                    {' '}
-                    <img src={twitter} />
-                  </a>
-
+                  {a.twitter && (
+                    <a
+                      href={`https://twitter.com/${a.twitter}`}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className={styles.authorTwitter}
+                    >
+                      {' '}
+                      <img src={twitter} />
+                    </a>
+                  )}
                 </Typography>
                 <span className={styles.date}>{a.bio}</span>
               </div>
@@ -158,6 +159,7 @@ const BlogPostTemplate = ({
           title={post.frontmatter.title}
           description={post.excerpt}
           url={location.href}
+          creators={authors.map(({ twitter: twitterHandle }) => (twitterHandle)).filter((n) => n)}
           image={post.frontmatter.featured_image
             ? post.frontmatter.featured_image.childImageSharp.fluid.src
             : null}
