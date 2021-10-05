@@ -21,6 +21,7 @@ import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import styles from './blog-post-card.module.scss';
+import { urlFromSlug } from '../../utils';
 import PostPlaceholder from '../../post-placeholder';
 
 const BlogPostCard = ({ post }) => {
@@ -38,7 +39,7 @@ const BlogPostCard = ({ post }) => {
   return (
     <div className='col-4 '>
       <article className={`${styles.card} blog-post-card`}>
-        <Link to={`/${slug}`}>
+        <Link to={urlFromSlug(slug)}>
           <div className={styles.cardImage}>
             {featuredImage
               ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
