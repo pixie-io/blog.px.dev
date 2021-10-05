@@ -3,7 +3,7 @@ path: '/k8s-122-challenge'
 title: 'Unexpected Challenges Supporting Kubernetes 1.22 in Pixie'
 date: 2021-10-05T06:00:00.000+00:00
 featured_image: k8s122challenge.png
-categories: ['Pixie Team Blogs']
+categories: ['Pixie Team Blogs', 'Kubernetes']
 authors: ['Phillip Kuznetsov']
 emails: ['philkuz@pixielabs.ai']
 featured: true
@@ -45,7 +45,8 @@ If you’re looking to use StatefulSet NATS and etcd, check out our [NATS](https
 
 Let us know if you found this type of post interesting! We’re trying to not only open-source our codebase, but also openly discuss the challenges we’ve faced and lessons that we’ve learned along the way.
 
-_Find us on [Slack](https://slackin.px.dev/), [GitHub](https://github.com/pixie-io/pixie/blob/main/CONTRIBUTING.md), or Twitter at [@pixie_run](https://twitter.com/pixie_run)._
+_Find us on [Slack](https://slackin.px.dev/), [GitHub](https://github.com/pixie-io/pixie), or Twitter at [@pixie_run](https://twitter.com/pixie_run)._
 
-[^1]: the `nats-operator` code for managing CRDs has since[ been updated to the GA API ](https://github.com/nats-io/nats-operator/pull/333), but they have not released a new version.
+## Footnotes
+[^1]: The `nats-operator` code for managing CRDs has since[ been updated to the GA API ](https://github.com/nats-io/nats-operator/pull/333), but they have not released a new version.
 
