@@ -19,7 +19,14 @@
 import withStyles from '@material-ui/core/styles/withStyles';
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
-import parseMd from './parseMd';
+import MDX from '@mdx-js/runtime';
+import mdxComponents from './baseComponents';
+
+const parse = (input) => (
+  <MDX components={mdxComponents}>
+    {input}
+  </MDX>
+);
 
 const CustomTableCell = withStyles(() => ({
   td: {
@@ -33,7 +40,7 @@ const CustomTableCell = withStyles(() => ({
   }
   return (
     <TableCell className={classes.td} align={align || undefined}>
-      {parsableChildren ? parseMd(parsableChildren) : children}
+      {parsableChildren ? parse(parsableChildren) : children}
     </TableCell>
   );
 });
