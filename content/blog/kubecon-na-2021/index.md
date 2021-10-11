@@ -13,19 +13,17 @@ Pixie will be attending this year's Kubecon + Cloud NativeCon NA in Los Angeles!
 Come chat observability, eBPF, open-source, and more with Pixie’s core contributors at our booth in the [Project Pavilion](https://events.linuxfoundation.org/wp-content/uploads/2021/10/KubeCon_NA_2021_Collateral_17x11_v2.pdf) from 10:30am-4:30pm, on all event days.
 
 We will also be holding three events this year:
-- [**Pixie Happy Hour**](https://pixiehh.eventbrite.com/) (Tuesday 10/12, 8:30pm @ Spire 73)\
+- [**Pixie Happy Hour**](https://pixiehh.eventbrite.com/) (Tuesday 10/12, 8:30pm @ Spire 73)<br/>
 Discuss Pixie, eBPF, and Kubernetes over appetizers, drinks, and sweeping views of Los Angeles from Spire 73, the tallest open-air bar in the Western hemisphere.
-
-- [**Project Office Hours**](https://kccncna2021.sched.com/event/nBuh/virtual-project-office-hours-pixie) (Wednesday 10/13, 3:30pm @ Online)\
+- [**Project Office Hours**](https://kccncna2021.sched.com/event/nBuh/virtual-project-office-hours-pixie) (Wednesday 10/13, 3:30pm @ Online)<br/>
 We're excited to meet everyone at our office hours! We welcome all questions about Pixie, whether they're questions about what Pixie is, or low-level questions about Pixie's internal workings.
-
-- [**Data Science for Infrastructure: Observe, Understand, Automate**](https://kccncna2021.sched.com/event/lV4c/data-science-for-infrastructure-observe-understand-automate-zain-asgar-natalie-serrino-new-relic) (Friday 10/15, 11:00am @ Concourse Hall 152)\
+- [**Data Science for Infrastructure: Observe, Understand, Automate**](https://kccncna2021.sched.com/event/lV4c/data-science-for-infrastructure-observe-understand-automate-zain-asgar-natalie-serrino-new-relic) (Friday 10/15, 11:00am @ Concourse Hall 152)<br/>
 Learn how Pixie's data can be transformed to high-level signals that can be used in a variety of use cases from Zain Asgar and Natalie Serrino (core contributors).
 
 Here are some of the events we'll be attending. We hope to see you at them, along with the many other exciting talks at Kubecon!
 
 **Wednesday, October 13**
-- 11:00 am: [Cloud Native and Observability Panel: The State of the Union](https://kccncna2021.sched.com/event/lV1N/cloud-native-and-kubernetes-observability-panel-the-state-of-union-bartek-plotka-red-hat-liz-fong-jones-honeycomb-josh-suereth-google-frederic-branczyk-polar-signals-rags-srinivas-infoq) - Bartek Plotka, Red Hat; Liz Fong-Jones, Honeycomb; Josh Suereth, Google; Frederic Branczyk, Polar Signals; Rags Srinivas, InfoQ
+- 11:00 am: [Cloud Native and Observability Panel: The State of the Union](https://kccncna2021.sched.com/event/lV1N/cloud-native-and-kubernetes-observability-panel-the-state-of-union-bartek-plotka-red-hat-liz-fong-jones-honeycomb-josh-suereth-google-frederic-branczyk-polar-signals-rags-srinivas-infoq) - Bartek Plotka (Red Hat), Liz Fong-Jones (Honeycomb), Josh Suereth (Google), Frederic Branczyk (Polar Signals), Rags Srinivas (InfoQ)
 - 2:30 pm: [TAG Observability Update](https://kccncna2021.sched.com/event/lV6n/tag-observability-update-matt-young-everquote-alolita-sharma-amazon) - Matt Young (Evernote), Alolita Sharma (Amazon)
 - 5:25 pm: [Effortless Profiling on Kubernetes](https://kccncna2021.sched.com/event/lV1o/effortless-profiling-on-kubernetes-eden-federman-verizon) - Eden Federman (Verizon)
 
