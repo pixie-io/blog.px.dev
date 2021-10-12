@@ -8,7 +8,7 @@ authors: ['Zain Asgar', 'Michelle Nguyen']
 emails: ['zasgar@pixielabs.ai', 'michelle@pixielabs.ai']
 featured: true
 ---
-Pixie will be attending this year's Kubecon + Cloud NativeCon NA in Los Angeles! Pixie was accepted to CNCF’s Sandbox in June 2021 and we have just officially completed the [Sandbox onboarding process](https://github.com/cncf/toc/issues/674). As a newly fledged CNCF Sandbox project, we're excited to connect with the community.
+Pixie will be attending this year's Kubecon + Cloud NativeCon NA in Los Angeles and Virtually! Pixie was accepted to CNCF’s Sandbox in June 2021 and we have just officially completed the [Sandbox onboarding process](https://github.com/cncf/toc/issues/674). As a newly fledged CNCF Sandbox project, we're excited to connect with the community.
 
 Come chat observability, eBPF, open-source, and more with Pixie’s core contributors at our booth in the [Project Pavilion](https://events.linuxfoundation.org/wp-content/uploads/2021/10/KubeCon_NA_2021_Collateral_17x11_v2.pdf) from 10:30am-4:30pm, on all event days.
 
