@@ -171,7 +171,7 @@ const appThemeOptions = {
         main: '#000000',
       },
       secondary: {
-        main: '#12D6D6',
+        main: '#17AAAA',
       },
       background: {
         default: '#ffffff',
