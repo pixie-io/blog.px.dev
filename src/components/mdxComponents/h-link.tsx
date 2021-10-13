@@ -35,7 +35,7 @@
 import * as React from 'react';
 import { makeStyles, TypographyVariant } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import clipLink from '../../images/clip-link.png';
+import link from '../../images/link.svg';
 
 const useStyles = makeStyles(() => ({
   linkContainer: {
@@ -57,9 +57,7 @@ const useStyles = makeStyles(() => ({
     marginLeft: '10px',
     position: 'relative',
     '& img': {
-      height: '70%',
-      position: 'absolute',
-      bottom: '15%',
+      verticalAlign: 'middle',
     },
   },
 }));
@@ -76,7 +74,7 @@ const HLink: React.FC<Props> = ({ id, children, variant }) => {
       <span className={classes.tocAnchor} id={id} />
       <Typography variant={variant}>
         {children}
-        {children && <a href={`#${id}`} className={classes.link}><img src={clipLink} alt='' /></a>}
+        {children && <a href={`#${id}`} className={classes.link}><img src={link} alt='Permalink' /></a>}
       </Typography>
     </div>
   );
