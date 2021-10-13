@@ -73,16 +73,16 @@ const Header = ({
         <div className={styles.newsBar}>
 
           <span className='hide-not-desktop'>
-             Join us for our KubeCon Happy Hour on October 12th.
+             Pixie is at Kubecon NA!
             {' '}
-            <a href='https://pixiehh.eventbrite.com/'>
+            <a href='https://blog.px.dev/kubecon-na-2021/'>
                    Learn more
             </a>
             {' '}
-             🚀
+             ☸️
           </span>
           <span className='hide-desktop'>
-                <a href='https://pixiehh.eventbrite.com/'>Join us for our KubeCon Happy Hour on October 12th.</a>
+                <a href='https://blog.px.dev/kubecon-na-2021/'>Pixie is at Kubecon NA!</a>
           </span>
 
           <div
