@@ -50,3 +50,15 @@
 - id: Nick Lanam
   bio: Lead SWE @ New Relic, Founding Engineer @ Pixie Labs
   email: 'nlanam@pixielabs.ai'
+
+- id: Elaine Laguerta
+  bio: Security Engineer @ New Relic
+  email: 'elaguerta@newrelic.com'
+
+- id: Hannah Stepanek
+  bio: Senior Security Engineer @ New Relic
+  email: 'hstepanek@newrelic.com'
+
+- id: Robert Prast
+  bio: Security Engineer @ New Relic
+  email: 'rprast@newrelic.com'

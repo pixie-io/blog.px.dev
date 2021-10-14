@@ -1,10 +1,10 @@
 ---
-path: '/nr-detect-sqli'
-title: 'Guest Post: Detect SQL injections with Pixie'
+path: '/sql-injection'
+title: 'Detect SQL injections with Pixie'
 date: 2021-10-14T00:00:00.000+00:00
 featured_image: hero-image.png
-categories: ['Pixie Team Blogs', 'Announcements', 'Kubernetes']
-authors: ['Elaine Laguerta', 'Hannah Stepanek', 'Robert Prast - New Relic']
+categories: ['Guest Blogs', 'Security']
+authors: ['Elaine Laguerta', 'Hannah Stepanek', 'Robert Prast']
 emails: ['elaguerta@newrelic.com', 'hstepanek@newrelic.com', 'rprast@newrelic.com']
 featured: true
 ---
