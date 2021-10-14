@@ -51,7 +51,7 @@ In the short term, we’ll be contributing SQL injection detection to the open s
 
 In the mid term, we want to replace our regular expression rule set approach with machine learning detection. The Pixie team has already laid the groundwork for a machine learning approach; we’ll be able to leverage PxL’s [existing support of Tensorflow models](https://blog.tensorflow.org/2021/06/leveraging-machine-learning-pixie.html). In the long term, we are designing an observability-based security product that will run on open-source building blocks.
 
-Because that long term vision will be some time from now, we’ll leave you with the recipe for our SQL injection proof of concept. You can dig into the source code and test it on a vulernable app with this [demo repo](link to demo repo).  
+Because that long term vision will be some time from now, we’ll leave you with the recipe for our SQL injection proof of concept. You can dig into the source code and test it on a vulernable app with this [demo repo](https://github.com/pixie-io/pixie-demos/tree/main/sql-injection-demo).  
 
 So spin up your development environment and get ready to turn monsters into dandelions.   
 
