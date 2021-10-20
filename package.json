@@ -84,7 +84,6 @@
     "react-dom": "^16.8.6",
     "react-emotion": "9.2.12",
     "react-helmet": "^5.2.1",
-    "react-live": "^2.0.1",
     "react-markdown": "^4.3.1",
     "react-share": "^4.2.1",
     "rehype-react": "^5.0.1",
