@@ -190,7 +190,7 @@ hey -n 10000 http://<custom-metric-server-external-ip>/ping
 Let's see what happens to the number of pods over time in our service. In the chart below, the 10,000 requests were generated at second 0. The requests were fast -- all 10,000 completed within a few seconds.
 
 ::: div image-xl
-<svg title="The number of pods increases in response to load, then decreases." src='autoscaling-chart-light.png' />
+<svg title="The number of pods increases in response to load, then decreases." src='autoscaling-chart.png' />
 :::
 
 This is pretty cool. While all of the requests completed within 5 seconds, it took about 100 seconds for the autoscaler to max out the number of pods.
@@ -229,7 +229,7 @@ This should increase the responsiveness of the autoscaler. Note: there are other
 Let's compare the new autoscaling configuration to the old one applied with the exact same input stimulus: 10,000 pings from `hey` at second 0.
 
 ::: div image-xl
-<svg title="The number of pods increases/decreases faster when we reduce the stabilization window." src='autoscaling-chart-fast-and-slow-light.png' />
+<svg title="The number of pods increases/decreases faster when we reduce the stabilization window." src='autoscaling-chart-fast-and-slow.png' />
 :::
 
 We can see that in comparison to the original configuration, the second version of our autoscaler adds and removes pods more quickly, as intended. **The optimal values for these parameters are highly context-dependent**, so you’ll want to consider the pros and cons of faster or slower stabilization for your own use case.
