@@ -67,17 +67,17 @@ const MetaBarHeader = ({
 
         <div className={styles.socialIcons}>
           <RedditShareButton url={shareUrl}>
-            <img src={reddit} />
+            <img src={reddit} alt='reddit' />
           </RedditShareButton>
           <TwitterShareButton url={shareUrl}>
-            <img src={twitter} />
+            <img src={twitter} alt='twitter' />
           </TwitterShareButton>
           <LinkedinShareButton
             title={post.frontmatter.title}
             summary={post.frontmatter.excerpt}
             url={shareUrl}
           >
-            <img src={linkedin} />
+            <img src={linkedin} alt='linkedin' />
           </LinkedinShareButton>
         </div>
 
@@ -110,7 +110,7 @@ const MetaBarFooter = ({
                       className={styles.authorTwitter}
                     >
                       {' '}
-                      <img src={twitter} />
+                      <img src={twitter} alt='twitter' />
                     </a>
                   )}
                 </Typography>
@@ -221,18 +221,11 @@ const BlogPostTemplate = ({
             <div className='row'>
               <div className='col-12'>
                 <hr />
-                <Typography variant='h4'>Related Stories</Typography>
+                <p>Related Stories</p>
               </div>
               {related.map((p) => (
                 <BlogPostCard post={p} key={p.fields.slug} />
               ))}
-            </div>
-          </div>
-          <div className='row'>
-            <div className='col-12'>
-              <Link to='/' className={styles.viewAll}>
-                View all Blog posts
-              </Link>
             </div>
           </div>
         </section>

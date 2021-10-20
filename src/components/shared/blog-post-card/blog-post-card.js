@@ -31,7 +31,6 @@ const BlogPostCard = ({ post }) => {
       author,
       authors,
       date,
-      categories,
     },
     fields: { slug },
   } = post;
@@ -46,13 +45,9 @@ const BlogPostCard = ({ post }) => {
               : <PostPlaceholder />}
           </div>
           <div className={styles.cardBody}>
-            <h5>{title}</h5>
+            <h4>{title}</h4>
             <p className={styles.authorRow}>
               {mapAuthors.join(', ')}
-              {' '}
-              in
-              {' '}
-              {(categories || []).join(', ')}
             </p>
             <p className={styles.dateRow}>
               {date}

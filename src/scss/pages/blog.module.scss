@@ -63,7 +63,7 @@ section.latest-stories {
       }
 
       li {
-        margin-right: 65px;
+        margin-right: 24px;
         color: $color-grey1;
         display: inline;
 
@@ -81,10 +81,6 @@ section.latest-stories {
           &.active {
             color: $color-blue;
           }
-        }
-
-        &:first-child {
-          margin-right: 115px;
         }
 
         &:last-child {

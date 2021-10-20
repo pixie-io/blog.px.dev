@@ -134,7 +134,7 @@ const Header = ({
                   onThemeTypeSwitch();
                 }}
               >
-                {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
+                {theme === 'light' ? <Brightness4Icon alt='darkmode' /> : <Brightness7Icon alt='lightmode' />}
               </IconButton>
             </li>
             <li className='hide-mobile hide-tablet'>
