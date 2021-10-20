@@ -22,16 +22,26 @@ import { createMuiTheme, ThemeOptions } from '@material-ui/core';
 
 import AppThemeOptions from './theme';
 
+const canUseLocalStorage = typeof window !== 'undefined' && !!window.localStorage;
+
 function setManualPreference(mode: 'light'|'dark') {
+  if (!canUseLocalStorage) {
+    return;
+  }
+
   if (mode === 'light') {
-    localStorage.removeItem('theme');
+    window.localStorage.removeItem('theme');
   } else {
-    localStorage.setItem('theme', 'dark');
+    window.localStorage.setItem('theme', 'dark');
   }
 }
 
 function selectTheme(): 'light'|'dark' {
-  if (localStorage.getItem('theme') === 'dark') {
+  if (!canUseLocalStorage) {
+    return 'light';
+  }
+
+  if (window.localStorage.getItem('theme') === 'dark') {
     return 'dark';
   }
   return 'light';
