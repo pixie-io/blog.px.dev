@@ -43,6 +43,7 @@ const CodeRenderer = withStyles((theme) => ({
     backgroundColor: theme.palette.type === 'light' ? '#f3f3f3' : '#292929',
     borderRadius: '5px',
     boxShadow: theme.palette.type === 'light' ? '0 2px 2px rgba(0,0,0, 0.15)' : '0px 4px 16px rgba(0, 0, 0, 0.15)',
+    fontSize: theme.typography.body2.fontSize,
     marginBottom: '32px',
     marginTop: '12px',
     position: 'relative',
