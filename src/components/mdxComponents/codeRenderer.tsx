@@ -20,8 +20,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Box, Tooltip } from '@material-ui/core';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React from 'react';
-import vsLight from 'prism-react-renderer/themes/duotoneLight';
-import vsDark from 'prism-react-renderer/themes/duotoneDark';
+import vsLight from 'prism-react-renderer/themes/vsLight';
+import vsDark from 'prism-react-renderer/themes/vsDark';
 import { ThemeModeContext } from '../mainThemeProvider';
 import copyBtn from '../../images/copy-btn.svg';
 
@@ -43,7 +43,7 @@ const CodeRenderer = withStyles((theme) => ({
     backgroundColor: theme.palette.type === 'light' ? '#f3f3f3' : '#292929',
     borderRadius: '5px',
     boxShadow: theme.palette.type === 'light' ? '0 2px 2px rgba(0,0,0, 0.15)' : '0px 4px 16px rgba(0, 0, 0, 0.15)',
-    fontSize: theme.typography.body2.fontSize,
+    fontSize: '16px',
     marginBottom: '32px',
     marginTop: '12px',
     position: 'relative',
