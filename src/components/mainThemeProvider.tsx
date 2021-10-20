@@ -18,9 +18,34 @@
 
 import * as React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core';
+import { createMuiTheme, ThemeOptions } from '@material-ui/core';
 
 import AppThemeOptions from './theme';
+
+const canUseLocalStorage = typeof window !== 'undefined' && !!window.localStorage;
+
+function setManualPreference(mode: 'light'|'dark') {
+  if (!canUseLocalStorage) {
+    return;
+  }
+
+  if (mode === 'light') {
+    window.localStorage.removeItem('theme');
+  } else {
+    window.localStorage.setItem('theme', 'dark');
+  }
+}
+
+function selectTheme(): 'light'|'dark' {
+  if (!canUseLocalStorage) {
+    return 'light';
+  }
+
+  if (window.localStorage.getItem('theme') === 'dark') {
+    return 'dark';
+  }
+  return 'light';
+}
 
 export const ThemeModeContext = React.createContext(
   {
@@ -29,12 +54,14 @@ export const ThemeModeContext = React.createContext(
   },
 );
 export default function MainThemeProvider({ children }) {
-  const [theme, setTheme] = React.useState('light');
+  const [theme, setTheme] = React.useState<'light'|'dark'>(selectTheme());
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    setManualPreference(next);
   };
-  const muiTheme = createMuiTheme(AppThemeOptions[theme]);
+  const muiTheme = createMuiTheme(AppThemeOptions[theme] as unknown as ThemeOptions);
 
   return (
     <ThemeModeContext.Provider value={{ theme, toggleTheme }}>
