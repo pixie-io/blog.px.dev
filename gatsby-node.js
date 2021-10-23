@@ -135,7 +135,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type MdxFrontmatter @infer {
       title: String
       subtitle: String
-      date: Date @dateformat(formatString: "MM-DD-YYYY")
+      date: Date @dateformat(formatString: "YYYY-MM-DD")
       author: String
       categories: [String]
       featured_image:   File @fileByRelativePath,

@@ -287,7 +287,7 @@ export const pageQuery = graphql`
           subtitle
           authors
           emails
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "MMM DD, YYYY")
           categories
           featured_image {
             childImageSharp {
