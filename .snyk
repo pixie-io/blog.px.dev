@@ -7,5 +7,15 @@ ignore:
         reason: 'Replaced with a noop'
         expires: 2022-09-21T04:36:35.857Z
         created: 2021-09-21T04:36:35.859Z
+  'snyk:lic:npm:pngquant-bin:GPL-3.0':
+    - '*':
+        reason: 'Only used during build time'
+        expires: 2022-10-22T00:00:00.000Z
+        created: 2021-10-22T00:00:00.000Z
+  'snyk:lic:npm:axe-core:MPL-2.0':
+    - '*':
+        reason: 'devDependency, not directly used and only affects build time'
+        expires: 2022-10-22T00:00:00.000Z
+        created: 2021-10-22T00:00:00.000Z
 # patches apply the minimum changes required to fix a vulnerability
 patch: {}
