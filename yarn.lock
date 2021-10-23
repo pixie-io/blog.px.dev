@@ -16672,9 +16672,9 @@ xmlhttprequest-ssl@~1.6.2:
   integrity sha512-3XfeQE/wNkvrIktn2Kf0869fC0BN6UpydVasGIeSm2B1Llihf7/0UfZM+eCkOw3P7bP4+qPgqhm7ZoxuJtFU0Q==
 
 xss@^1.0.6:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/xss/-/xss-1.0.9.tgz#3ffd565571ff60d2e40db7f3b80b4677bec770d2"
-  integrity sha512-2t7FahYnGJys6DpHLhajusId7R0Pm2yTmuL0GV9+mV0ZlaLSnb2toBmppATfg5sWIhZQGlsTLoecSzya+l4EAQ==
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/xss/-/xss-1.0.10.tgz#5cd63a9b147a755a14cb0455c7db8866120eb4d2"
+  integrity sha512-qmoqrRksmzqSKvgqzN0055UFWY7OKx1/9JWeRswwEVX9fCG5jcYRxa/A2DHcmZX6VJvjzHRQ2STeeVcQkrmLSw==
   dependencies:
     commander "^2.20.3"
     cssfilter "0.0.10"
