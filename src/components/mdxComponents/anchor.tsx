@@ -17,9 +17,8 @@
  */
 
 import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
+import { Link } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles';
-// eslint-disable-next-line no-unused-vars
 import { Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -35,22 +34,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
 }));
-const AnchorTag = ({ children: link, ...props }) => {
+const AnchorTag = ({ href: to, ...props }) => {
   const classes = useStyles();
-  // This assumes that any internal link (intended for Gatsby)
-  // will start with exactly one slash, and that anything else is external.
-  const { href } = props;
-  const internal = /^\/(?!\/)/.test(href) || href.includes('#fn');
-  const target = internal ? '_self' : '_blank';
-
-  if (link) {
-    return (
-      <Typography {...props} target={target} component='a' rel='noopener noreferrer' className={classes.link}>
-        {link}
-      </Typography>
-    );
-  }
-  return null;
+  return <Link to={to} className={classes.link} {...props} />;
 };
 
 export default AnchorTag;

@@ -25,6 +25,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import styles from './blog-post-item.module.scss';
 import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
+import { urlFromSlug } from '../../utils';
 
 const BlogPostItem = withStyles(() => ({
   image: {
@@ -49,7 +50,7 @@ const BlogPostItem = withStyles(() => ({
     <article className='row'>
       <div className='col-1' />
       <div className='col-10'>
-        <Link to={`/${slug}`}>
+        <Link to={urlFromSlug(slug)}>
 
           <div className={classes.image}>
             {featuredImage
@@ -97,8 +98,8 @@ const BlogPostItem = withStyles(() => ({
 });
 BlogPostItem.propTypes = {
   post: PropTypes.shape({
-    frontmatter: PropTypes.object,
-    fields: PropTypes.object,
+    frontmatter: PropTypes.shape,
+    fields: PropTypes.shape,
     timeToRead: PropTypes.number,
     excerpt: PropTypes.string,
   }).isRequired,

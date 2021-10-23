@@ -60,7 +60,6 @@ const Blog = (props) => {
     }));
   categories = categories.sort((a, b) => (a.order >= b.order ? -1 : 1));
 
-
   const [category] = useState(urlCategory);
   const [page, setPage] = useState(0);
   const [posts, setPosts] = useState(paginate(allPosts, 0));
@@ -199,10 +198,10 @@ Blog.propTypes = {
   }).isRequired,
   data: PropTypes.shape({
     posts: PropTypes.shape({
-      nodes: PropTypes.array.isRequired,
+      nodes: PropTypes.arrayOf.isRequired,
     }),
     categories: PropTypes.shape({
-      distinct: PropTypes.array.isRequired,
+      distinct: PropTypes.arrayOf.isRequired,
     }),
   }).isRequired,
 };
@@ -232,7 +231,7 @@ export const pageQuery = graphql`
           authors
           emails
           categories
-          date(formatString: "MMM DD YYYY")
+          date(formatString: "MMM DD, YYYY")
           featured_image {
             childImageSharp {
               id

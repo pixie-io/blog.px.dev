@@ -149,7 +149,7 @@ SEO.propTypes = {
   image: PropTypes.string,
   url: PropTypes.string,
   creators: PropTypes.arrayOf(PropTypes.string),
-  meta: PropTypes.arrayOf(PropTypes.object),
+  meta: PropTypes.arrayOf(PropTypes.shape),
   title: PropTypes.string.isRequired,
 };
 

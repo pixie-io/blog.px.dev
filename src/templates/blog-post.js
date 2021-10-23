@@ -237,12 +237,12 @@ export default BlogPostTemplate;
 BlogPostTemplate.propTypes = {
   data: PropTypes.shape({
     mdx: PropTypes.shape({
-      frontmatter: PropTypes.object,
+      frontmatter: PropTypes.shape,
       body: PropTypes.string,
       excerpt: PropTypes.string,
     }),
-    featured: PropTypes.object,
-    authors: PropTypes.object,
+    featured: PropTypes.shape,
+    authors: PropTypes.shape,
   }).isRequired,
   location: PropTypes.shape({ href: PropTypes.string }).isRequired,
 
@@ -287,7 +287,7 @@ export const pageQuery = graphql`
           subtitle
           authors
           emails
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "MMM DD, YYYY")
           categories
           featured_image {
             childImageSharp {
