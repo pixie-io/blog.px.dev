@@ -38,6 +38,7 @@
     "@mdx-js/mdx": "^1.0.10",
     "@mdx-js/react": "^1.6.1",
     "@mdx-js/runtime": "^1.6.1",
+    "@netlify/plugin-lighthouse": "^2.1.2",
     "@snyk/protect": "^1.717.0",
     "babel-plugin-styled-components": "^1.10.6",
     "dotenv": "^8.2.0",
