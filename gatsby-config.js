@@ -12,6 +12,7 @@ module.exports = {
     title: 'Pixie Labs Blog',
     description: 'Pixie Blog',
     author: 'Pixie Labs',
+    siteUrl: 'https://blog.px.dev',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -139,6 +140,7 @@ module.exports = {
         shortname: 'https-blog-pixielabs-ai',
       },
     },
+    'gatsby-plugin-sitemap',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
