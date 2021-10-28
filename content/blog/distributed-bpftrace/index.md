@@ -121,7 +121,7 @@ Table ID: output
 
 Congratulations, you have successfully created and deployed your first eBPF program with Pixie!
 
-## Running your `sleepy_snoop` from the Pixie UI
+## Running `sleepy_snoop` from the Pixie UI
 
 We can also run this script [using Pixie's UI](https://docs.px.dev/using-pixie/using-live-ui/):
 
@@ -220,7 +220,7 @@ Re-run the PxL script in the UI.
 
 Now we can see exactly which pid is killed, triggered by pid and corresponding names. Cool, isn’t it?!
 
-## More `bpftrace` PxL scripts
+## More bpftrace PxL scripts
 
 To see all of the available scripts, type `bpftrace` in the `script` drop-down menu in the Pixie UI. I have contributed the following converted `bpftrace` programs:
 
