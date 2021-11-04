@@ -73,16 +73,16 @@ const Header = ({
         <div className={styles.newsBar}>
 
           <span className='hide-not-desktop'>
-             Join us for our next Pixienaut Monthly call on November 25th.
+            Pixie is now a CNCF Sandbox project!
             {' '}
-            <a href='https://px.dev/community/#events'>
+            <a href='https://www.cncf.io/projects/pixie'>
                    Learn more
             </a>
             {' '}
             🚀
           </span>
           <span className='hide-desktop'>
-                <a href='https://px.dev/community/#events'>Join us for our Pixienaut Monthly on Nov 25th.</a>
+                <a href='https://www.cncf.io/projects/pixie'>Pixie is now a CNCF Sandbox project!</a>
           </span>
 
           <div
