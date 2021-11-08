@@ -120,7 +120,7 @@ Linux has taken care of giving you a view into the mount namespace of the proces
 At this point, you’re probably thinking: why didn’t we just lead with this approach and made it a one-line blog post...but it’s all about the journey, right?
 
 ## Bonus: /proc/&lt;pid&gt;/mountinfo
-For the curious, all the information about the container’s overlay filesystem discussed in Method 3 can also be discovered directly from the Linux `/proc` filesystem. If you simply look at `/proc/<pid>/mountinfo`, you’ll see something like this:
+For the curious, all the information about the container’s overlay filesystem discussed in Method 4 can also be discovered directly from the Linux `/proc` filesystem. If you simply look at `/proc/<pid>/mountinfo`, you’ll see something like this:
 
 ```
 2363 1470 0:90 / / rw,relatime master:91 - overlay overlay rw,lowerdir=/var/lib/docker/overlay2/l/YZVAVZS6HYQHLGEPJHZSWTJ4ZU:/var/lib/docker/overlay2/l/ZYW5O24UWWKAUH6UW7K2DGV3PB,upperdir=/var/lib/docker/overlay2/63ec1a08b063c0226141a9071b5df7958880aae6be5dc9870a279a13ff7134ab/diff,workdir=/var/lib/docker/overlay2/63ec1a08b063c0226141a9071b5df7958880aae6be5dc9870a279a13ff7134ab/work
