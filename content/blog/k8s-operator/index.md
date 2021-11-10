@@ -1,6 +1,6 @@
 ---
 path: '/k8s-operator'
-title: 'Kubernetes Operators: 3 reasons to use, 2 reasons not to'
+title: '3 Reasons to use Kubernetes Operators (and 2 reasons not to)'
 date: 2021-11-10T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Kubernetes']
