@@ -96,8 +96,7 @@ export function runZoom() {
   children.forEach(
     (e) => {
       e.onclick = (event) => {
-        const picture = this.getElementsByClassName('blog-image')[0];
-        modalImg.innerHTML = picture.outerHTML;
+        modalImg.innerHTML = event.target.outerHTML;
         isModalVisible = true;
         modal.classList.add('show');
         event.stopPropagation();
