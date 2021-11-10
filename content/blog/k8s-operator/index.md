@@ -1,6 +1,6 @@
 ---
 path: '/k8s-operator'
-title: '3 Reasons to use Kubernetes Operators (and 2 reasons not to)'
+title: '3 Reasons to Use Kubernetes Operators (and 2 Reasons Not To)'
 date: 2021-11-10T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Kubernetes']
@@ -89,7 +89,7 @@ In Pixie’s case, the user deploys only the [operator’s YAMLs](https://github
 
 ### 🔴 Maintenance burden
 
-The operator is an additional piece of code that needs to be maintained and updated, alongside with the actual application itself. The more powerful the operator, the more complex its logic. The operator may be responsible for keeping the application up-to-date, but what happens when [the operator itself](https://olm.operatorframework.io/) needs to be updated?
+The operator is an additional piece of code that needs to be maintained and updated, alongside with the actual application itself. The more powerful the operator, the more complex its logic. The operator may be responsible for keeping the application up-to-date, but what happens when [the operator itself needs to be updated](https://olm.operatorframework.io/)?
 
 Although the [operator’s logic](https://github.com/pixie-io/pixie/tree/main/src/operator) is not nearly as complicated as Pixie’s actual application, it is still over 1000+ LOC.
 
