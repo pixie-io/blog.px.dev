@@ -147,7 +147,6 @@ module.exports = {
     'gatsby-plugin-netlify',
   ],
   mapping: {
-    'Mdx.frontmatter.author': 'authorYaml',
+    'Mdx.frontmatter.authors': 'authorYaml',
   },
-
 };

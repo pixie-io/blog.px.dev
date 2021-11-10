@@ -54,31 +54,29 @@ exports.onCreateNode = ({
     });
   }
 };
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createRedirect } = actions;
   const result = await graphql(`
     query {
-  blog: allMdx(
-            filter: { fileAbsolutePath: { regex: "/blog/" } }
-            sort: { fields: [frontmatter___date], order: DESC }
-            limit: 1000
-          ) {
-            edges {
-              node {
-                fields {
-                  slug
-                }
-                frontmatter {
-                  title
-                }
-              }
+      blog: allMdx(
+        filter: { fileAbsolutePath: { regex: "/blog/" } }
+        sort: { fields: [frontmatter___date], order: DESC }
+        limit: 1000
+      ) {
+        edges {
+          node {
+            fields {
+              slug
             }
           }
-   categories: allMdx {
-      group(field: frontmatter___categories) {
+        }
+      }
+      categories: allMdx {
+        group(field: frontmatter___categories) {
           fieldValue
         }
-    }
+      }
      }
   `);
   if (result.errors) {
@@ -90,28 +88,23 @@ exports.createPages = async ({ graphql, actions }) => {
   const homePage = path.resolve('./src/pages/index.js');
 
   const posts = result.data.blog.edges;
-
   posts.forEach((post) => {
+    const urlPath = (post.node.fields.slug).replace('//', '/');
     createRedirect({
       fromPath: (blogPrefix + post.node.fields.slug).replace('//', '/'),
-      toPath: (post.node.fields.slug).replace('//', '/'),
+      toPath: urlPath,
       redirectInBrowser: true,
       isPermanent: true,
     });
-  });
-
-  posts.forEach((post) => {
-    const related = [...posts];
-    const urlPath = (post.node.fields.slug).replace('//', '/');
     actions.createPage({
       path: urlPath,
       component: blogPost,
       context: {
         slug: post.node.fields.slug,
-        related,
       },
     });
   });
+
   const categories = (result.data.categories.group || []).map((c) => c.fieldValue);
   categories.forEach((category) => {
     actions.createPage({
@@ -126,6 +119,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   return null;
 };
+
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   const typeDefs = `
@@ -136,9 +130,9 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       subtitle: String
       date: Date @dateformat(formatString: "YYYY-MM-DD")
-      author: String
       categories: [String]
-      featured_image:   File @fileByRelativePath,
+      authors: [AuthorYaml] @link
+      featured_image: File @fileByRelativePath,
       featured: Boolean
       redirect_from: [String]
     }
@@ -148,6 +142,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   `;
   createTypes(typeDefs);
 };
+
 exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
@@ -170,6 +165,7 @@ exports.sourceNodes = async ({
     },
   });
 };
+
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {

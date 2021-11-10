@@ -29,13 +29,11 @@ const BlogPostCard = ({ post }) => {
     frontmatter: {
       title,
       featured_image: featuredImage,
-      author,
       authors,
       date,
     },
     fields: { slug },
   } = post;
-  const mapAuthors = authors ?? [author];
   return (
     <div className='col-4 '>
       <article className={`${styles.card} blog-post-card`}>
@@ -48,7 +46,7 @@ const BlogPostCard = ({ post }) => {
           <div className={styles.cardBody}>
             <h4>{title}</h4>
             <p className={styles.authorRow}>
-              {mapAuthors.join(', ')}
+              {authors.map((a) => (a.id)).join(', ')}
             </p>
             <p className={styles.dateRow}>
               {date}

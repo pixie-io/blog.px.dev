@@ -36,7 +36,6 @@ const BlogPostItem = withStyles(() => ({
     frontmatter: {
       title,
       featured_image: featuredImage,
-      author,
       authors,
       email,
       emails,
@@ -73,7 +72,7 @@ const BlogPostItem = withStyles(() => ({
               <Typography variant='body1' className='m-0'>
                 <div className={styles.authorDetails}>
                   <div className={styles.authorName}>
-                    {author || (authors || []).join(', ')}
+                    {authors.map((a) => (a.id)).join(', ')}
                   </div>
                   <div className={styles.dot}>•</div>
                   <div className={styles.postDetails}>

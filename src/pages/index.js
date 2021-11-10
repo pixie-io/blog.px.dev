@@ -227,8 +227,9 @@ export const pageQuery = graphql`
         excerpt(pruneLength: 200)
         frontmatter {
           title
-          author
-          authors
+          authors {
+            id
+          }
           emails
           categories
           date(formatString: "MMM DD, YYYY")

@@ -49,7 +49,6 @@ const MetaBarHeader = ({
     <div className='row'>
       <div className='col-9'>
         <div className={styles.postHeader}>
-
           {(post.frontmatter.emails || []).map((e) => (
             <div className={styles.authorAvatar}>
               <GravatarIcon email={e} />
@@ -57,7 +56,7 @@ const MetaBarHeader = ({
           ))}
           <div>
             <Typography variant='body1' className={styles.author}>
-              {post.frontmatter.author || (post.frontmatter.authors || []).join(', ')}
+              {post.frontmatter.authors.map((a) => (a.id)).join(', ')}
             </Typography>
             <span className={styles.date}>{post.frontmatter.date}</span>
           </div>
@@ -86,43 +85,39 @@ const MetaBarHeader = ({
   </div>
 );
 const MetaBarFooter = ({
-  author,
   authors,
-}) => {
-  const mapAuthors = authors ?? [author];
-  return (
-    mapAuthors.map((a) => (
-      <div className={styles.metaBar}>
-        <div className='row'>
-          <div className='col-9'>
-            <div className={styles.postHeader}>
-              <div className={styles.authorAvatar}>
-                <GravatarIcon email={a.email} />
-              </div>
-              <div>
-                <Typography variant='body1' className={styles.author}>
-                  {a.id}
-                  {a.twitter && (
-                    <a
-                      href={`https://twitter.com/${a.twitter}`}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className={styles.authorTwitter}
-                    >
-                      {' '}
-                      <img src={twitter} alt='twitter' />
-                    </a>
-                  )}
-                </Typography>
-                <span className={styles.date}>{a.bio}</span>
-              </div>
+}) => (
+  authors.map((a) => (
+    <div className={styles.metaBar}>
+      <div className='row'>
+        <div className='col-9'>
+          <div className={styles.postHeader}>
+            <div className={styles.authorAvatar}>
+              <GravatarIcon email={a.email} />
+            </div>
+            <div>
+              <Typography variant='body1' className={styles.author}>
+                {a.id}
+                {a.twitter && (
+                <a
+                  href={`https://twitter.com/${a.twitter}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className={styles.authorTwitter}
+                >
+                  {' '}
+                  <img src={twitter} alt='twitter' />
+                </a>
+                )}
+              </Typography>
+              <span className={styles.date}>{a.bio}</span>
             </div>
           </div>
         </div>
       </div>
-    ))
-  );
-};
+    </div>
+  ))
+);
 const useStyles = makeStyles((theme) => ({
   body: {
     backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
@@ -142,10 +137,6 @@ const BlogPostTemplate = ({
   const related = data.featured.nodes;
   const muiClasses = useStyles();
   const { categories } = post.frontmatter;
-  const author = data.authors.edges.map((a) => a.node)
-    .find((a) => a.id === post.frontmatter.author);
-  const authors = data.authors.edges.map((a) => a.node)
-    .filter((a) => (post.frontmatter.authors || []).find((_) => _ === a.id));
   const disqusConfig = {
     url: location.href,
     identifier: post.frontmatter.title,
@@ -159,12 +150,13 @@ const BlogPostTemplate = ({
           title={post.frontmatter.title}
           description={post.excerpt}
           url={location.href}
-          creators={authors.map(({ twitter: twitterHandle }) => (twitterHandle)).filter((n) => n)}
+          creators={post.frontmatter.authors.map(
+            ({ twitter: twitterHandle }) => (twitterHandle),
+          ).filter((n) => n)}
           image={post.frontmatter.featured_image
             ? post.frontmatter.featured_image.childImageSharp.fluid.src
             : null}
         />
-
         <div className='container'>
           <div className='row'>
             <div className='col-12'>
@@ -209,7 +201,7 @@ const BlogPostTemplate = ({
               </div>
             </div>
           </div>
-          <MetaBarFooter author={author} authors={authors} />
+          <MetaBarFooter authors={post.frontmatter.authors} />
           <div className='row'>
             <div className='col-12'>
               <Disqus config={disqusConfig} />
@@ -242,7 +234,6 @@ BlogPostTemplate.propTypes = {
       excerpt: PropTypes.string,
     }),
     featured: PropTypes.shape,
-    authors: PropTypes.shape,
   }).isRequired,
   location: PropTypes.shape({ href: PropTypes.string }).isRequired,
 
@@ -255,7 +246,12 @@ export const pageQuery = graphql`
       frontmatter {
         title
         subtitle
-        authors
+        authors {
+          id
+          bio
+          email
+          twitter
+        }
         emails
         categories
         date(formatString: "MMMM DD, YYYY")
@@ -280,18 +276,15 @@ export const pageQuery = graphql`
         fields {
           slug
         }
-        timeToRead
-        excerpt(pruneLength: 200)
         frontmatter {
           title
-          subtitle
-          authors
-          emails
+          authors {
+            id
+          }
           date(formatString: "MMM DD, YYYY")
-          categories
           featured_image {
             childImageSharp {
-              fluid(maxWidth: 1920, quality: 92) {
+              fluid(maxWidth: 320, quality: 92) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
@@ -299,15 +292,5 @@ export const pageQuery = graphql`
         }
       }
     }
-    authors:allAuthorYaml {
-    edges {
-      node {
-        id
-        bio
-        email
-        twitter
-      }
-    }
-  }
   }
 `;
