@@ -79,7 +79,7 @@ These configMaps are now represented by a [single CRD](https://github.com/pixie-
 
 The operator can monitor the overall state of the application and apply whatever changes necessary to get the application into a healthy state. This is especially beneficial for persistent systems, or applications that need to be highly available.
 
-NATS is a major dependency of Pixie, and enables most of Pixie’s pod-to-pod communication. Occasionally we have seen the NATS instance fail, and require a redeploy to recover. The operator can monitor NATS’s status and redeploy when necessary.
+NATS is a major dependency of Pixie, and enables most of Pixie’s pod-to-pod communication. Occasionally we have seen the NATS instance fail, and require a redeploy to recover. The operator can monitor NATS’s status and redeploy when necessary without any action from the user.
 
 ### 🔴 Loss of user control
 
