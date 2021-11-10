@@ -6,7 +6,6 @@ categories: []
 authors: ['John Arundel']
 emails: ['john@bitfieldconsulting.com']
 featured_image: hero-image.png
-featured: true
 redirect_from:
     - /pixie-tutorial-1/pixie-tutorial-1/
 ---

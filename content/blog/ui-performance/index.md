@@ -6,7 +6,6 @@ featured_image: ui-performance-hero.png
 categories: ['Pixie Team Blogs']
 authors: ['Nick Lanam']
 emails: ['nlanam@pixielabs.ai']
-featured: true
 ---
 
 You have a sluggish React web app on your hands. Why is it slow? How do you fix it?

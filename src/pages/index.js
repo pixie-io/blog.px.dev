@@ -215,7 +215,6 @@ export default Blog;
 export const pageQuery = graphql`
   query {
     posts: allMdx(
-      filter: { frontmatter: { featured: { eq: true } } }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       nodes {
@@ -227,20 +226,16 @@ export const pageQuery = graphql`
         excerpt(pruneLength: 200)
         frontmatter {
           title
-          author
-          authors
+          authors {
+            id
+          }
           emails
           categories
           date(formatString: "MMM DD, YYYY")
           featured_image {
             childImageSharp {
-              id
-              fluid(maxHeight: 320) {
-                base64
-                aspectRatio
-                src
-                srcSet
-                sizes
+              fluid(maxHeight: 320 quality: 92) {
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }

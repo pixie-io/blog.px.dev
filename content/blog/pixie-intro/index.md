@@ -5,7 +5,6 @@ date: 2020-05-06T06:00:00.000+00:00
 categories: []
 authors: ['John Arundel']
 emails: ['john@bitfieldconsulting.com']
-featured: true
 featured_image: hero-image.png
 redirect_from:
     - /pixie-intro/pixie-intro/

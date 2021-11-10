@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Omid Azizi']
 emails: ['oazizi@pixielabs.ai']
-featured: true
 ---
 
 This post will demonstrate how to use eBPF to trace encrypted connections that operate over TLS (or its predecessor, SSL). TLS has become the standard for securing microservice communication, so any production-ready tracing tool should be prepared to handle encrypted connections.

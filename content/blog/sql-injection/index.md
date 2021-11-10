@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Guest Blogs', 'Security']
 authors: ['Elaine Laguerta', 'Hannah Stepanek', 'Robert Prast']
 emails: ['elaguerta@newrelic.com', 'hstepanek@newrelic.com', 'rprast@newrelic.com']
-featured: true
 ---
 *FYI - The team will demo this SQL injection detection workflow at KubeCon! The demo will be live at KubeCon 2021 [Friday, October 15, 11 am PDT](https://kccncna2021.sched.com/event/lV4c). The source code for the demo is [available at the Pixie demo repo](https://github.com/pixie-io/pixie-demos/tree/main/sql-injection-demo).*   
 

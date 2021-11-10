@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Zain Asgar']
 emails: ['zasgar@pixielabs.ai']
-featured: true
 redirect_from:
     - /ebpf-function-tracing/post/
 ---

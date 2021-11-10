@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
 authors: ['Zain Asgar', 'Ishan Mukherjee', 'Pixie Founding Team']
 emails: ['zasgar@pixielabs.ai', 'ishan@pixielabs.ai']
-featured: true
 ---
 We are excited to announce that we signed a [definitive agreement](http://blog.newrelic.com/product-news/pixie-developer-first-observability) to join New Relic -- an outcome we certainly never predicted after only just two years.
 

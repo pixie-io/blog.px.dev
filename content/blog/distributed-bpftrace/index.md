@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Guest Blogs']
 authors: ['Arnold van Wijnbergen']
 emails: ['arnold.van.wijnbergen@gmail.com']
-featured: true
 ---
 
 I recently heard about Pixie: an open source debug platform for microservices-based applications. [Pixie is built using Linux eBPF](https://docs.px.dev/about-pixie/pixie-ebpf/) (enhanced Berkeley Packet Filter) technology, which promises to provide automatic monitoring. In addition to the [protocols it natively traces](https://docs.px.dev/about-pixie/data-sources/#supported-protocols), Pixie has a feature that enables us to execute `bpftrace`-like scripts on the cluster, which is great. After seeing the Pixie Launch in April 2021, I decided to investigate Pixie and its `bpftrace` feature.

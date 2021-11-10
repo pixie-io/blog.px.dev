@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Omid Azizi', 'Pete Stevenson']
 emails: ['oazizi@pixielabs.ai', 'jps@pixielabs.ai']
-featured: true
 ---
 
 In the last [blog post](/cpu-profiling/#part-1:-an-introduction-to-application-performance-profiling), we discussed the basics of CPU profilers for compiled languages like Go, C++ and Rust. We ended by saying we wanted a sampling-based profiler that met these two requirements:

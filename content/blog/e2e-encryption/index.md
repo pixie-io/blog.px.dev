@@ -6,7 +6,6 @@ featured_image: e2e-hero.png
 categories: ['Pixie Team Blogs']
 authors: ['Vihang Mehta']
 emails: ['vihang@pixielabs.ai']
-featured: true
 ---
 
 End-to-end encryption has become increasingly popular as users demand that any data they send - a file, email, or text message - is not decipherable by any unauthorized recipients. This consumer trend is evident in the recent surge in popularity of Signal, an encrypted instant messaging service.

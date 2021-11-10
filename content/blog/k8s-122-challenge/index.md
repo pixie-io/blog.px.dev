@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Kubernetes']
 authors: ['Phillip Kuznetsov']
 emails: ['philkuz@pixielabs.ai']
-featured: true
 ---
 Last year, Kubernetes [updated its feature lifecycle policy](https://kubernetes.io/blog/2020/08/21/moving-forward-from-beta/#avoiding-permanent-beta) to prevent the existence of “permanent beta” APIs. The new policy gives beta REST APIs three releases to either reach GA (and deprecate the beta) or create a new beta version (and deprecate the previous beta). Kubernetes 1.22 is the first release to remove [deprecated beta APIs](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22) since the policy was adopted.
 

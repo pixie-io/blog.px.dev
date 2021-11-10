@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Announcements']
 authors: ['Zain Asgar', 'Ishan Mukherjee']
 emails: ['zasgar@pixielabs.ai','ishan@pixielabs.ai']
-featured: true
 redirect_from:
     - /beta-launch/beta-launch/
 ---
