@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Omid Azizi']
 emails: ['oazizi@pixielabs.ai']
-featured: true
 ---
 
 If you work a lot with containers, then there’s a good chance you’ve wanted to look inside a running container’s filesystem at some point. Maybe the container is failing to run properly and you want to read some logs, maybe you want to check some configuration files inside the container...or maybe you’re like me and want to place some eBPF probes on the binaries in that container (more on this later).

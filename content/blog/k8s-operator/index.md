@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Kubernetes']
 authors: ['Michelle Nguyen']
 emails: ['michelle@pixielabs.ai']
-featured: true
 ---
 
 We recently switched Pixie to an operator-based deployment. In order to make this decision, we compiled reasons for why you should and shouldn’t build an operator for your application.

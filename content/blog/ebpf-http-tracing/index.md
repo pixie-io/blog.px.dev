@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Zain Asgar']
 emails: ['zasgar@pixielabs.ai']
-featured: true
 ---
 
 This is the second in a series of posts in which we share how you can use eBPF to debug applications without recompilation / redeployment. The [first post](/ebpf-function-tracing/) provided a short introduction to eBPF and demonstrated how to use it to write a simple function argument tracer. In this second post, we will look at how to use eBPF to capture HTTP 1.X traffic.

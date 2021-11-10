@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Pete Stevenson', 'Omid Azizi']
 emails: ['jps@pixielabs.ai', 'oazizi@pixielabs.ai']
-featured: true
 ---
 
 This is the third part in a series of posts describing how we built a [continuous (always-on) profiler](https://docs.px.dev/tutorials/pixie-101/profiler/) for identifying application performance issues in production Kubernetes clusters.

@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Announcements']
 authors: ['Zain Asgar', 'Pixie Founding Team']
 emails: ['zasgar@pixielabs.ai']
-featured: true
 ---
 
 We are thrilled to announce that Pixie has officially been open sourced by New Relic. Pixie is an in-cluster observability platform for Kubernetes. It's designed to be a low friction tool for developers to debug and monitor their applications.

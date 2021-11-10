@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
 authors: ['Omid Azizi', 'Pete Stevenson']
 emails: ['oazizi@pixielabs.ai', 'jps@pixielabs.ai']
-featured: true
 ---
 
 Application profiling tools are not new, but they are often a hassle to use. Many profilers require you to recompile your application or at the very least to rerun it, making them less than ideal for the lazy developer who would like to debug performance issues on the fly.

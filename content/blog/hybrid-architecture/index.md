@@ -6,7 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Kubernetes']
 authors: ['Michelle Nguyen']
 emails: ['michelle@pixielabs.ai']
-featured: true
 redirect_from:
     - /hybrid-architecture/hybrid-architecture/
 ---

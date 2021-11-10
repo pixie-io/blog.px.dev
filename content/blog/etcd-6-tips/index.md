@@ -6,7 +6,6 @@ featured_image: etcd-hero.png
 categories: ['Pixie Team Blogs', 'Kubernetes']
 authors: ['Michelle Nguyen']
 emails: ['michelle@pixielabs.ai']
-featured: true
 ---
 
 [etcd](https://etcd.io/) is a distributed key-value store designed to be a highly available and strongly consistent data store for distributed systems. In fact, by default Kubernetes itself uses etcd to store all of its cluster data, such as configs and metadata.

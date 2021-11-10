@@ -134,7 +134,7 @@ const BlogPostTemplate = ({
   location = { href: '' },
 }) => {
   const post = data.mdx;
-  const related = data.featured.nodes;
+  const related = data.related.nodes;
   const muiClasses = useStyles();
   const { categories } = post.frontmatter;
   const disqusConfig = {
@@ -233,7 +233,7 @@ BlogPostTemplate.propTypes = {
       body: PropTypes.string,
       excerpt: PropTypes.string,
     }),
-    featured: PropTypes.shape,
+    related: PropTypes.shape,
   }).isRequired,
   location: PropTypes.shape({ href: PropTypes.string }).isRequired,
 
@@ -245,7 +245,6 @@ export const pageQuery = graphql`
       body
       frontmatter {
         title
-        subtitle
         authors {
           id
           bio
@@ -257,17 +256,16 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         featured_image {
           childImageSharp {
-            fluid(maxWidth: 1200, quality: 92) {
+            fluid(maxHeight: 500, quality: 92) {
               ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
       }
     }
-    featured: allMdx(
+    related: allMdx(
       filter: {
         fields: { slug: { ne: $slug } }
-        frontmatter: { featured: { eq: true } }
       }
       limit: 3
       sort: { fields: [frontmatter___date], order: DESC }

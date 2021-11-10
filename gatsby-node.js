@@ -61,8 +61,6 @@ exports.createPages = async ({ graphql, actions }) => {
     query {
       blog: allMdx(
         filter: { fileAbsolutePath: { regex: "/blog/" } }
-        sort: { fields: [frontmatter___date], order: DESC }
-        limit: 1000
       ) {
         edges {
           node {
@@ -73,11 +71,9 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
       categories: allMdx {
-        group(field: frontmatter___categories) {
-          fieldValue
-        }
+        distinct(field: frontmatter___categories)
       }
-     }
+    }
   `);
   if (result.errors) {
     throw result.errors;
@@ -105,7 +101,7 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  const categories = (result.data.categories.group || []).map((c) => c.fieldValue);
+  const categories = result.data.categories.distinct;
   categories.forEach((category) => {
     actions.createPage({
       path: categoryLink.categoryLink(category),
@@ -128,12 +124,10 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
     type MdxFrontmatter @infer {
       title: String
-      subtitle: String
       date: Date @dateformat(formatString: "YYYY-MM-DD")
       categories: [String]
       authors: [AuthorYaml] @link
       featured_image: File @fileByRelativePath,
-      featured: Boolean
       redirect_from: [String]
     }
     type FeaturedImage{

@@ -6,7 +6,6 @@ featured_image: autoscaling-hero.png
 categories: ['Pixie Team Blogs']
 authors: ['Natalie Serrino']
 emails: ['nserrino@pixielabs.ai']
-featured: true
 ---
 
 **Sizing a Kubernetes deployment can be tricky**. How many pods does this deployment need? How much CPU/memory should I allocate per pod? The optimal number of pods varies over time, too, as the amount of traffic to your application changes.
