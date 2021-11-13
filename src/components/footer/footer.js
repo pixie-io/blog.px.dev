@@ -46,7 +46,7 @@ const Footer = ({ whiteFooter }) => (
       </div>
       <div className={styles.centerContent}>
         Copyright © 2018- The Pixie Authors. All Rights Reserved. |
-        Documentation Distributed under CC BY 4.0.
+        Content distributed under CC BY 4.0.
         <br />
         The Linux Foundation has registered trademarks and uses trademarks.
         For a list of trademarks of The Linux Foundation, please see our
