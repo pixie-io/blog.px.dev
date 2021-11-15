@@ -82,7 +82,6 @@ module.exports = {
     'gatsby-transformer-yaml',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-    'gatsby-plugin-styled-components',
     'gatsby-plugin-emotion',
     {
       resolve: 'gatsby-plugin-manifest',
@@ -109,10 +108,12 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sass',
       options: {
-        includePaths: ['node_modules', './src/scss'],
-        // eslint-disable-next-line global-require
-        implementation: require('sass'),
+        sassOptions: {
+          includePaths: ['node_modules', './src/scss'],
+        },
       },
+      // eslint-disable-next-line global-require
+      implementation: require('sass'),
     },
     {
       resolve: 'gatsby-plugin-google-fonts',

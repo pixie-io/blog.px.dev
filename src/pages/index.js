@@ -25,7 +25,7 @@ import Typography from '@material-ui/core/Typography';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BlogPostItem from '../components/shared/blog-post-item';
-import styles from '../scss/pages/blog.module.scss';
+import * as styles from '../scss/pages/blog.module.scss';
 import spaceGuys from '../images/homepage/space-illustration.svg';
 import Button from '../components/shared/button';
 

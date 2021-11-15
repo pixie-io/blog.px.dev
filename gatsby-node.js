@@ -5,9 +5,15 @@ const slugify = require('slugify');
 const categoryLink = require('./src/components/category-link');
 
 exports.onCreateNode = ({
-  node, actions, getNode, getNodesByType,
+  node,
+  actions,
+  getNode,
+  getNodesByType,
 }) => {
-  const { createNodeField, createParentChildLink } = actions;
+  const {
+    createNodeField,
+    createParentChildLink,
+  } = actions;
 
   if (node.internal.type === 'Directory') {
     const parentDirectory = path.normalize(`${node.dir}/`);
@@ -55,7 +61,10 @@ exports.onCreateNode = ({
   }
 };
 
-exports.createPages = async ({ graphql, actions }) => {
+exports.createPages = async ({
+  graphql,
+  actions,
+}) => {
   const { createRedirect } = actions;
   const result = await graphql(`
     query {
@@ -165,9 +174,12 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: { $components: path.resolve(__dirname, 'src/components') },
+      fallback: {
+        fs: false,
+        path: false,
+        assert: false,
+      },
     },
-    node: {
-      fs: 'empty',
-    },
+
   });
 };

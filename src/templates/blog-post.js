@@ -27,7 +27,7 @@ import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'reac
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Disqus } from 'gatsby-plugin-disqus';
-import styles from './blog-post.module.scss';
+import * as styles  from './blog-post.module.scss';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import mdxComponents from '../components/mdxComponents/index.tsx';

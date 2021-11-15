@@ -22,7 +22,7 @@ import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import styles from './blog-post-item.module.scss';
+import * as styles from './blog-post-item.module.scss';
 import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
 import { urlFromSlug } from '../../utils';
