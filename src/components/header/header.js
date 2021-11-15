@@ -26,7 +26,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
-import * as styles  from './header.module.scss';
+import * as styles from './header.module.scss';
 
 import github from '../../images/header/github-icon.svg';
 import slack from '../../images/header/slack-icon.svg';

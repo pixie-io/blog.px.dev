@@ -19,7 +19,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import * as styles  from './footer.module.scss';
+import * as styles from './footer.module.scss';
 import cncfLogo from '../../images/footer/cncf-white.svg';
 import github from '../../images/footer/github-icon.svg';
 
