@@ -45,7 +45,8 @@ const Footer = ({ whiteFooter }) => (
         <Link to='https://www.linuxfoundation.org/privacy' className={styles.mutedLink}>Privacy Policy</Link>
       </div>
       <div className={styles.centerContent}>
-        Copyright © 2018- The Pixie Authors. All Rights Reserved.
+        Copyright © 2018- The Pixie Authors. All Rights Reserved. |
+        Content distributed under CC BY 4.0.
         <br />
         The Linux Foundation has registered trademarks and uses trademarks.
         For a list of trademarks of The Linux Foundation, please see our
