@@ -169,8 +169,16 @@ exports.sourceNodes = async ({
   });
 };
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, stage, plugins }) => {
+  if (stage === 'build-javascript' || stage === 'develop') {
+    actions.setWebpackConfig({
+      plugins: [
+        plugins.provide({ process: 'process/browser' }),
+      ],
+    });
+  }
   actions.setWebpackConfig({
+
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: { $components: path.resolve(__dirname, 'src/components') },
