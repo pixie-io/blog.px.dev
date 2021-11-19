@@ -116,7 +116,7 @@ sudo ls /proc/<pid>/root
 
 Linux has taken care of giving you a view into the mount namespace of the process.
 
-At this point, you’re probably thinking: why didn’t we just lead with this approach and made it a one-line blog post...but it’s all about the journey, right?
+At this point, you’re probably thinking: why didn’t we just lead with this approach and make it a one-line blog post...but it’s all about the journey, right?
 
 ## Bonus: /proc/&lt;pid&gt;/mountinfo
 For the curious, all the information about the container’s overlay filesystem discussed in Method 4 can also be discovered directly from the Linux `/proc` filesystem. If you simply look at `/proc/<pid>/mountinfo`, you’ll see something like this:
