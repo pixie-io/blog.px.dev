@@ -1,6 +1,6 @@
 ---
 path: '/tables-are-hard-1' 
-title: 'Tables are Hard: History'
+title: 'Tables are Hard, Part 1: History'
 date: 2021-11-30T06:00:00.000+00:00
 featured_image: tables-are-hard-1-hero.png
 categories: ['Pixie Team Blogs']
