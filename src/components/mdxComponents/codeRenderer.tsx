@@ -37,48 +37,51 @@ const LineNumber = withStyles((theme) => ({
 }
 ))(({ lineNumber, classes }: any) => (<span className={classes.lineBlock}>{lineNumber}</span>));
 
-const CodeRenderer = withStyles((theme) => ({
-  code: {
-    backgroundColor: theme.palette.type === 'light' ? '#f3f3f3' : '#292929',
-    borderRadius: '5px',
-    boxShadow: theme.palette.type === 'light' ? '0 2px 2px rgba(0,0,0, 0.15)' : '0px 4px 16px rgba(0, 0, 0, 0.15)',
-    fontSize: '16px',
-    marginBottom: '32px',
-    marginTop: '12px',
-    position: 'relative',
-    padding: '4px 0 4px 12px',
-    maxWidth: '100%',
-    '&:hover': {
-      '& img': {
-        display: 'inline-flex!important' as any,
+const CodeRenderer = withStyles((theme) => {
+  console.log(theme);
+  return ({
+    code: {
+      backgroundColor: theme.palette.type === 'light' ? '#f3f3f3' : '#292929',
+      borderRadius: '5px',
+      boxShadow: theme.palette.type === 'light' ? '0 2px 2px rgba(0,0,0, 0.15)' : '0px 4px 16px rgba(0, 0, 0, 0.15)',
+      fontSize: '16px',
+      marginBottom: '32px',
+      marginTop: '12px',
+      position: 'relative',
+      padding: '4px 0 4px 12px',
+      maxWidth: '100%',
+      '&:hover': {
+        '& img': {
+          display: 'inline-flex!important' as any,
+        },
+      },
+
+    },
+    pre: {
+      maxWidth: '100px',
+    },
+    codeHighlight: {
+      display: 'block',
+      width: '100%',
+      overflowX: 'auto',
+      fontFamily: '"Roboto Mono", Monospace',
+    },
+
+    copyBtn: {
+      display: 'none',
+      position: 'absolute',
+      top: '18px',
+      transform: 'translateY(-50%)',
+      right: '16px',
+      cursor: 'pointer',
+      height: '16px',
+      '&:hover': {
+        backgroundColor: 'transparent',
       },
     },
 
-  },
-  pre: {
-    maxWidth: '100px',
-  },
-  codeHighlight: {
-    display: 'block',
-    width: '100%',
-    overflowX: 'auto',
-    fontFamily: '"Roboto Mono", Monospace',
-  },
-
-  copyBtn: {
-    display: 'none',
-    position: 'absolute',
-    top: '18px',
-    transform: 'translateY(-50%)',
-    right: '16px',
-    cursor: 'pointer',
-    height: '16px',
-    '&:hover': {
-      backgroundColor: 'transparent',
-    },
-  },
-
-}))((props: any) => {
+  });
+})((props: any) => {
   const {
     classes, code,
   } = props;

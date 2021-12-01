@@ -18,13 +18,13 @@
 
 import * as React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
-import { createTheme, ThemeOptions } from '@material-ui/core';
+import { createTheme, CssBaseline, ThemeOptions } from '@material-ui/core';
 
 import AppThemeOptions from './theme';
 
 const canUseLocalStorage = typeof window !== 'undefined' && !!window.localStorage;
 
-function setManualPreference(mode: 'light' | 'dark') {
+function setManualPreference(mode: 'light'|'dark') {
   if (!canUseLocalStorage) {
     return;
   }
@@ -36,7 +36,7 @@ function setManualPreference(mode: 'light' | 'dark') {
   }
 }
 
-function selectTheme(): 'light' | 'dark' {
+function selectTheme(): 'light'|'dark' {
   if (!canUseLocalStorage) {
     return 'light';
   }
@@ -54,7 +54,7 @@ export const ThemeModeContext = React.createContext(
   },
 );
 export default function MainThemeProvider({ children }) {
-  const [theme, setTheme] = React.useState<'light' | 'dark'>(selectTheme());
+  const [theme, setTheme] = React.useState<'light'|'dark'>(selectTheme());
 
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light';
@@ -66,6 +66,7 @@ export default function MainThemeProvider({ children }) {
   return (
     <ThemeModeContext.Provider value={{ theme, toggleTheme }}>
       <ThemeProvider theme={muiTheme}>
+        <CssBaseline />
         {children}
       </ThemeProvider>
     </ThemeModeContext.Provider>

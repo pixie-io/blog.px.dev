@@ -128,7 +128,7 @@ const common = {
       overflowWrap: 'break-word',
     },
     body1: {
-      fontFamily: ['charter', 'Georgia', 'serif'],
+      fontFamily: ['charter', 'Manrope', 'serif'],
       marginBottom: '-9px',
       marginBlockStart: '18px',
       marginBlockEnd: '30px',
@@ -150,7 +150,7 @@ const common = {
       },
     },
     body2: {
-      fontFamily: ['charter', 'Georgia', 'serif'],
+      //   fontFamily: ['charter', 'Manrope', 'serif'],
       marginBottom: '8px',
       marginTop: '10px',
       fontSize: '18px',
