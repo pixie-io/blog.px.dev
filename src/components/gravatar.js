@@ -19,7 +19,7 @@
 import React, { useMemo } from 'react';
 import { toUrl } from 'gatsby-source-gravatar';
 import GatsbyImage from 'gatsby-image';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({
   icon: {

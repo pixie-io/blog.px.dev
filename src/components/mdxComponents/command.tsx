@@ -16,12 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import withStyles from '@material-ui/core/styles/withStyles';
-import { Theme } from '@material-ui/core';
+import { withStyles } from '@mui/styles';
+import { Theme } from '@mui/material';
+
 import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Command = withStyles((theme: Theme) => ({
   input: {
@@ -94,10 +95,10 @@ const Command = withStyles((theme: Theme) => ({
         </div>
       </div>
       {!expanded && (
-      <ChevronRightIcon
-        className={classes.expandBtn}
-        onClick={() => { setExpanded(true); }}
-      />
+        <ChevronRightIcon
+          className={classes.expandBtn}
+          onClick={() => { setExpanded(true); }}
+        />
       )}
       {expanded && (
         <>

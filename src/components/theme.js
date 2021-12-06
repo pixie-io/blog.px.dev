@@ -16,10 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
+import { createTheme } from '@mui/material';
 
-const breakpoints = createBreakpoints({});
-
+const theme = createTheme();
+const { breakpoints } = theme;
 const common = {
   spacing: 4,
   shadows: ['none'],

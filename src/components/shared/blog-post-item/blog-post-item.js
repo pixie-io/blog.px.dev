@@ -20,8 +20,8 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@mui/styles';
+import { Typography } from '@mui/material';
 import * as styles from './blog-post-item.module.scss';
 import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
@@ -31,7 +31,10 @@ const BlogPostItem = withStyles(() => ({
   image: {
     marginTop: '40px',
   },
-}))(({ post, classes }) => {
+}))(({
+  post,
+  classes,
+}) => {
   const {
     frontmatter: {
       title,
@@ -72,7 +75,8 @@ const BlogPostItem = withStyles(() => ({
               <Typography variant='body1' className='m-0'>
                 <div className={styles.authorDetails}>
                   <div className={styles.authorName}>
-                    {authors.map((a) => (a.id)).join(', ')}
+                    {authors.map((a) => (a.id))
+                      .join(', ')}
                   </div>
                   <div className={styles.dot}>•</div>
                   <div className={styles.postDetails}>

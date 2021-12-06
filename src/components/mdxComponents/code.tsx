@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@mui/styles';
 // eslint-disable-next-line no-unused-vars
-import { Theme } from '@material-ui/core';
+import { Theme } from '@mui/material';
 import React from 'react';
 
 const Code = withStyles((theme: Theme) => ({

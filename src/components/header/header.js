@@ -21,11 +21,11 @@ import { Link } from 'gatsby';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import BodyClassName from 'react-body-classname';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import CloseIcon from '@material-ui/icons/Close';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 import * as styles from './header.module.scss';
 
 import github from '../../images/header/github-icon.svg';

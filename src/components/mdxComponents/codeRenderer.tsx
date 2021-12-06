@@ -15,13 +15,13 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+import { withStyles } from '@mui/styles';
 
-import withStyles from '@material-ui/core/styles/withStyles';
-import { Box, Tooltip } from '@material-ui/core';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React from 'react';
 import vsLight from 'prism-react-renderer/themes/vsLight';
 import vsDark from 'prism-react-renderer/themes/vsDark';
+import { Box, Tooltip } from '@mui/material';
 import { ThemeModeContext } from '../mainThemeProvider';
 import copyBtn from '../../images/copy-btn.svg';
 

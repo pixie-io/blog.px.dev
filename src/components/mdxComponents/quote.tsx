@@ -16,10 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@mui/styles';
+
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { Theme } from '@material-ui/core';
+import { Theme } from '@mui/material';
 
 const Quote = withStyles((theme: Theme) => ({
   quote: {

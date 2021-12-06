@@ -33,8 +33,9 @@
  */
 
 import * as React from 'react';
-import { makeStyles, TypographyVariant } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import { Typography, TypographyVariant } from '@mui/material';
+
 import link from '../../images/link.svg';
 
 const useStyles = makeStyles(() => ({

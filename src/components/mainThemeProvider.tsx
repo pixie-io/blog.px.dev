@@ -17,8 +17,8 @@
  */
 
 import * as React from 'react';
-import { ThemeProvider } from '@material-ui/styles';
-import { createTheme, CssBaseline, ThemeOptions } from '@material-ui/core';
+import { ThemeProvider } from '@mui/styles';
+import { createTheme, CssBaseline, ThemeOptions } from '@mui/material';
 
 import AppThemeOptions from './theme';
 
