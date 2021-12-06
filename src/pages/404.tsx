@@ -18,7 +18,7 @@
 
 import * as React from 'react';
 import { graphql, Link } from 'gatsby';
-import withStyles from '@mui/styles';
+import { withStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 import img404 from '../images/404.svg';
 import SEO from '../components/seo';
@@ -38,7 +38,7 @@ interface Props {
 
 const NotFoundPage = withStyles((theme: Theme) => ({
   pageContainer: {
-    backgroundColor: theme.palette.type === 'light' ? theme.palette.background.default : '#161616',
+    backgroundColor: theme.palette.mode === 'light' ? theme.palette.background.default : '#161616',
     textAlign: 'center',
     paddingTop: '200px',
     color: theme.overrides.MuiTypography.body1.color,

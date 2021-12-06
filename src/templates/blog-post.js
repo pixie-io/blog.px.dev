@@ -120,7 +120,7 @@ const MetaBarFooter = ({
 );
 const useStyles = makeStyles((theme) => ({
   body: {
-    backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
+    backgroundColor: theme.palette.mode === 'light' ? 'white' : '#161616',
     '& figcaption': {
       color: theme.palette.primary.main,
       fontSize: '16px',

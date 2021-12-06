@@ -27,7 +27,7 @@ const BlockQuote = withStyles((theme) => ({
     border: '0',
     borderLeft: '5px',
     borderColor: '#12D6D6',
-    backgroundColor: theme.palette.type === 'light' ? '#ddd' : '#353535',
+    backgroundColor: theme.palette.mode === 'light' ? '#ddd' : '#353535',
     borderRadius: '0 5px 5px 0',
     marginBottom: '32px',
     marginTop: '32px',

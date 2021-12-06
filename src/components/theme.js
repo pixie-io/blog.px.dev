@@ -21,7 +21,7 @@ import { createTheme } from '@mui/material';
 const theme = createTheme();
 const { breakpoints } = theme;
 const common = {
-  spacing: 4,
+  spacing: '4px',
   shadows: ['none'],
 
   typography: {

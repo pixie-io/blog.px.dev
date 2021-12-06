@@ -26,7 +26,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Command = withStyles((theme: Theme) => ({
   input: {
-    backgroundColor: theme.palette.type === 'light' ? '#212324' : '#292929',
+    backgroundColor: theme.palette.mode === 'light' ? '#212324' : '#292929',
     borderRadius: '5px',
     boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.15)',
     marginBottom: '16px',

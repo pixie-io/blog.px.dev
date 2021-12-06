@@ -31,7 +31,7 @@ import Button from '../components/shared/button';
 
 const useStyles = makeStyles((theme) => ({
   body: {
-    backgroundColor: theme.palette.type === 'light' ? 'white' : '#161616',
+    backgroundColor: theme.palette.mode === 'light' ? 'white' : '#161616',
   },
 }));
 const Blog = (props) => {
