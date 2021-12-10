@@ -24,6 +24,7 @@ import Command from './command';
 import Quote from './quote';
 import BlockQuote from './block-quote';
 import CustomTableCell from './custom-table-cell';
+import { CustomTabs, CustomTab } from './tabs';
 
 export default {
   ...baseComponents,
@@ -32,5 +33,6 @@ export default {
   blockquote: (props: any) => <BlockQuote {...props} />,
   command: (props: any) => <Command {...props} />,
   td: ({ align, ...props }) => <CustomTableCell {...props} align={align || undefined} />,
-
+  tabs: ({ children }) => <CustomTabs>{children}</CustomTabs>,
+  tab: ({ children, label }) => <CustomTab label={label}>{children}</CustomTab>,
 };
