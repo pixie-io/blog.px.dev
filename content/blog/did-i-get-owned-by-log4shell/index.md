@@ -46,7 +46,7 @@ df = df[['time_', 'remote_addr', 'remote_port', 'req_headers', 'req_method', 're
 px.display(df)
 ```
 
-[log4j only needs to log a string like](https://www.lunasec.io/docs/blog/log4j-zero-day/#example-vulnerable-code) `${jndi:ldap://127.0.0.1/a}` to request and eventually execute a returned payload. [Pixie traces all the HTTP requests](https://docs.px.dev/about-pixie/data-sources/) in your Kubernetes cluster, and stores them for future querying. So in our script, we simply search over the `http_events` table for requests that contain the attack signature -  the `${jndi` string.
+[log4j only needs to log a string like](https://www.lunasec.io/docs/blog/log4j-zero-day/#example-vulnerable-code) `${jndi:ldap://127.0.0.1/a}` to request and eventually execute a returned payload. [Pixie traces all the HTTP requests](https://docs.px.dev/about-pixie/data-sources/) in your Kubernetes cluster, and stores them for future querying. So in our script, we simply search over the `http_events` table for requests that contain the attack signature -  the `${jndi` string. [^1]
 
 Running the script on our cluster, we immediately noticed some `Log4Shell` traffic:
 
@@ -115,5 +115,6 @@ px live -f <path to script>/log4shell.pxl
 ```
 
 If you discover that you are being attacked, you can read about mitigation steps [here](https://www.lunasec.io/docs/blog/log4j-zero-day).
+[^1]: Unfortunately detecting exploit attempts are a moving target: [scanners are trying new means of obfuscating the exploit](https://twitter.com/sans_isc/status/1469653801581875208).
 
 Questions? Find us on [Slack](https://slackin.px.dev/) or Twitter at [@pixie_run](https://twitter.com/pixie_run).
