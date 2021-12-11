@@ -8,7 +8,10 @@ authors: ['Omid Azizi', 'James Bartlett', 'Vihang Mehta']
 emails: ['oazizi@pixielabs.ai', 'jamesbartlett@pixielabs.ai', 'vihang@pixielabs.ai']
 ---
 
-_Are your [services impacted](https://www.lunasec.io/docs/blog/log4j-zero-day/#who-is-impacted) by this exploit? If so, start with the [mitigation](https://www.lunasec.io/docs/blog/log4j-zero-day/#permanent-mitigation) first._
+<alert severity="error">
+Are your <a href="https://www.lunasec.io/docs/blog/log4j-zero-day/#who-is-impacted">services impacted</a> by this exploit? 
+If so, start with the <a href="https://www.lunasec.io/docs/blog/log4j-zero-day/#permanent-mitigation">mitigation</a> first.
+</alert>
 
 Earlier today, [news](https://www.lunasec.io/docs/blog/log4j-zero-day/) broke about a serious 0-day exploit in the popular Java logging library `log4j`. The exploit – called `Log4Shell` – allows remote code execution (RCE) by entering certain strings into the log statement. This can be a serious security vulnerability if a server logs the inputs it receives over a public endpoint.
 
@@ -36,7 +39,7 @@ df = px.DataFrame('http_events')
 df.pod = df.ctx['pod']
 
 # Check HTTP requests for the exploit signature.
-df.contains_log4j_exploit = px.contains(df.req_headers, '${jndi') or px.contains(df.req_body, '${jndi')
+df.contains_log4j_exploit = px.contains(df.req_headers, 'jndi') or px.contains(df.req_body, 'jndi')
 
 # Filter on requests that are attacking us with the exploit.
 df = df[df.contains_log4j_exploit]
@@ -46,13 +49,13 @@ df = df[['time_', 'remote_addr', 'remote_port', 'req_headers', 'req_method', 're
 px.display(df)
 ```
 
-[log4j only needs to log a string like](https://www.lunasec.io/docs/blog/log4j-zero-day/#example-vulnerable-code) `${jndi:ldap://127.0.0.1/a}` to request and eventually execute a returned payload. [Pixie traces all the HTTP requests](https://docs.px.dev/about-pixie/data-sources/) in your Kubernetes cluster, and stores them for future querying. So in our script, we simply search over the `http_events` table for requests that contain the attack signature -  the `${jndi` string. [^1]
+[log4j only needs to log a string like](https://www.lunasec.io/docs/blog/log4j-zero-day/#example-vulnerable-code) `${jndi:ldap://127.0.0.1/a}` to request and eventually execute a returned payload. [Pixie traces all the HTTP requests](https://docs.px.dev/about-pixie/data-sources/) in your Kubernetes cluster, and stores them for future querying. So in our script, we simply search over the `http_events` table for requests that contain the attack signature -  the `jndi` string. [^1]
 
 Running the script on our cluster, we immediately noticed some `Log4Shell` traffic:
 
 <svg title="Pixie automatically traces all HTTP traffic flowing through your K8s cluster. Checking the HTTP request headers for the exploit signature exposes numerous attack requests on our staging cluster." src='jndi-http-logs.png' />
 
-<svg title="The contents of one of the HTTP attack requests. Note the '${jndi' exploit signature with originating IP address." src='jndi-referrer-details.png' />
+<svg title="The contents of one of the HTTP attack requests. Note the 'jndi' exploit signature with originating IP address." src='jndi-referrer-details.png' />
 
 The exploit requests were hitting our public cloud-proxy service, where the User-Agent included the exploit string. In this case, the attacker hopes that we use log4j to log the User-Agent value. We investigated the originating IP address, `45.155.205.233` and discovered that it was based in Russia.
 
@@ -86,7 +89,7 @@ When a 0-day exploit is published, there’s a rush by attackers to take advanta
 To quickly check if your cluster is being attacked, you can:
 
 1. [Install Pixie](https://docs.px.dev/installing-pixie/install-guides/) on your Kubernetes cluster.
-2. Save the following script as `log4shell.pxl`.
+2. Save the following script as `log4shell.pxl`. [^2]
 
 ```bash
 import px
@@ -98,7 +101,7 @@ df = px.DataFrame('http_events')
 df.pod = df.ctx['pod']
 
 # Check HTTP requests for the exploit signature.
-df.contains_log4j_exploit = px.contains(df.req_headers, '${jndi') or px.contains(df.req_body, '${jndi')
+df.contains_log4j_exploit = px.contains(df.req_headers, 'jndi') or px.contains(df.req_body, 'jndi')
 
 # Filter on requests that are attacking us with the exploit.
 df = df[df.contains_log4j_exploit]
@@ -115,6 +118,9 @@ px live -f <path to script>/log4shell.pxl
 ```
 
 If you discover that you are being attacked, you can read about mitigation steps [here](https://www.lunasec.io/docs/blog/log4j-zero-day).
+
 [^1]: Unfortunately detecting exploit attempts are a moving target: [scanners are trying new means of obfuscating the exploit](https://twitter.com/sans_isc/status/1469653801581875208).
+
+[^2]: This script looks for the literal `jndi` in the request headers and body. This won't necessarily match obfuscated attacks and you probably want to tweak the script to match more patterns as need be.
 
 Questions? Find us on [Slack](https://slackin.px.dev/) or Twitter at [@pixie_run](https://twitter.com/pixie_run).
