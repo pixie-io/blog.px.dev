@@ -75,7 +75,7 @@ We can use Pixie’s existing `px/outbound_conns` script to check for this. This
 
 In this case, when we run the script, we see that we have no such connections, as expected:
 
-<svg title="Using the `px/outbound_conns` script to check for all outbound connections from our pods, filtered by the IP address of the attacker shows that no connections were returned to the attacking IP." src='checking-outbound-connections.png' />
+<svg title="Using the `px/outbound_conns` script to check for all outbound connections from our pods, filtered by the IP address of the attacker shows that no connections were returned to the attacking IP." src='outboundconns.png' />
 
 While we caught no such instances, for a user who was using Java, any outbound connections to the attacker would be recorded.
 
