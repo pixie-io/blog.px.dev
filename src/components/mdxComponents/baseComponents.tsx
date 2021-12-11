@@ -23,6 +23,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { Alert } from '@material-ui/lab';
 import { idFromSlug } from 'components/utils';
 import Code from './code';
 import Pre from './pre';
@@ -78,4 +79,5 @@ export default {
   em: (props: any) => <Typography {...props} component='em' style={{ fontStyle: 'italic' }} />,
   li: (props: any) => <ListItem {...props} />,
   img: (props: any) => <div className='blog-image-wrapper'><img {...props} className='blog-image' /></div>,
+  alert: (props: any) => <Alert {...props} />,
 };
