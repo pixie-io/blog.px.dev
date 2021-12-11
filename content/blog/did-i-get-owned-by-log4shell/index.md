@@ -39,10 +39,8 @@ df = px.DataFrame('http_events')
 df.pod = df.ctx['pod']
 
 # Check HTTP requests for the exploit signature.
-def match_log4j_exploit(column):
-    return px.regex_match('.*\$.*{.*j.*n.*d.*i.*:.*l.*d.*a.*p.*:.*', column)
-
-df.contains_log4j_exploit = match_log4j_exploit(df.req_headers) or match_log4j_exploit(df.req_body)
+re = '.*\$.*{.*j.*n.*d.*i.*:.*'
+df.contains_log4j_exploit = px.regex_match(re, df.req_headers) or px.regex_match(re, df.req_body)
 
 # Filter on requests that are attacking us with the exploit.
 df = df[df.contains_log4j_exploit]
