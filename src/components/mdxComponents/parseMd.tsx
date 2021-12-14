@@ -18,6 +18,9 @@
 
 import React from 'react';
 import MDX from '@mdx-js/runtime';
+
+// This is a circular dependency, but only at declaration time - the usages fire after definition.
+// eslint-disable-next-line import/no-cycle
 import mdxComponents from './index';
 
 const parseMd = (input) => (

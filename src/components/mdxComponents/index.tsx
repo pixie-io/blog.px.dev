@@ -24,6 +24,9 @@ import Command from './command';
 import Quote from './quote';
 import BlockQuote from './block-quote';
 import CustomTableCell from './custom-table-cell';
+
+// This is a circular dependency, but only at declaration time - the usages fire after definition.
+// eslint-disable-next-line import/no-cycle
 import { CustomTabs, CustomTab } from './tabs';
 
 export default {
