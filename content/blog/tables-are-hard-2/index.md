@@ -17,7 +17,7 @@ In the next post, we'll add new requirements and walk through handling them.
 
 This tutorial is aimed at relative beginners to web development, and will keep the set of tools as basic as possible to remain focused. Skip to the end for suggestions for a more serious project.
 
-[Final Code](https://github.com/pixie-io/pixie-demos/react-table-demo) | [Live Demo](https://pixie-io.github.io/pixie-demos/react-table-demo)
+[Final Code](https://github.com/pixie-io/pixie-demos/tree/main/react-table) | [Live Demo](https://pixie-io.github.io/pixie-demos/react-table)
 
 ::: div image-xl
 <figure>
@@ -705,7 +705,7 @@ export default function ColumnSelector({ columns }) {\n\
 
 Although column ordering also has a plugin, it doesn't provide props for easy controls like the others. As such, we'll skip it for this tutorial.
 
-Here's what it looks like so far:
+Here's what it looks like so far (click to interact):
 
 ::: div
 <iframe width="100%" height="600px" style="border-width: 1px 0 1px 0;border-color: rgba(0, 0, 0, 0.5); border-style:solid;" src="https://pixie-io.github.io/pixie-demos/react-table/4-column-controls/build/" />
@@ -802,7 +802,7 @@ Column definitions can include a `Cell` function (in fact, `Header` can be a fun
 </tab>
 </tabs>
 
-With this feature, our demo is largely complete (interactive demo):
+With this feature, our demo is largely complete (click to interact):
 
 ::: div
 <iframe width="100%" height="600px" style="border-width: 1px 0 1px 0;border-color: rgba(0, 0, 0, 0.5); border-style:solid;" src="https://pixie-io.github.io/pixie-demos/react-table/5-fancy-cells/build/" />
