@@ -1,6 +1,6 @@
 ---
 path: '/tables-are-hard-2'
-title: 'Tables are Hard, Part 2: Basics'
+title: 'Tables are Hard, Part 2: Building a Simple Data Table in React'
 date: 2021-12-14T06:00:00.000+00:00
 featured_image: tables-are-hard-2-hero.png
 categories: ['Pixie Team Blogs']
