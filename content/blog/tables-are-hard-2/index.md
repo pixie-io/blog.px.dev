@@ -33,8 +33,9 @@ This tutorial is aimed at relative beginners to web development, and will keep t
 ## Prerequisites
 
 To follow along with this tutorial, you'll need the following:
+
 * A modern browser. If you're reading this, you probably have one[^1].
-* [NodeJS](https://nodejs.org/en/), version &gte;14; npm &gte;5.2 (node 14 comes with npm 6).
+* [NodeJS](https://nodejs.org/en/), version &ge;14; npm &ge;5.2 (node 14 comes with npm 6).
 * Something to edit code with. We'll use [VS Code](https://code.visualstudio.com/) for this.
 * A basic understanding of the command line for your operating system.
 * A basic understanding of HTML, CSS, JavaScript, and [React](https://reactjs.org/).
@@ -83,14 +84,14 @@ export default App;\n\
 <tab label="App.css">
 {"```css\n\
 body {\n\
-  /* Make it look nice */\n\
+  /*Make it look nice*/\n\
   background-color: #282c34;\n\
   font-size: calc(10px + 2vmin);\n\
   color: white;\n\
 }\n\
 \n\
 .App {\n\
-  /* Super basic container to fill the page and center contents */\n\
+  /*Super basic container to fill the page and center contents*/\n\
   width: 100vw;\n\
   height: 100%;\n\
   min-height: 100vh;\n\
@@ -811,6 +812,7 @@ With this feature, our demo is largely complete (click to interact):
 ## Next Steps
 
 We now have a table that can do the following:
+
 * Render rich data in a grid
 * Sort and filter that data
 * Resize and show/hide columns
