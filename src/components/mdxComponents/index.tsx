@@ -25,6 +25,10 @@ import Quote from './quote';
 import BlockQuote from './block-quote';
 import CustomTableCell from './custom-table-cell';
 
+// This is a circular dependency, but only at declaration time - the usages fire after definition.
+// eslint-disable-next-line import/no-cycle
+import { CustomTabs, CustomTab } from './tabs';
+
 export default {
   ...baseComponents,
   svg: (props: any) => <SvgRenderer {...props} />,
@@ -32,5 +36,6 @@ export default {
   blockquote: (props: any) => <BlockQuote {...props} />,
   command: (props: any) => <Command {...props} />,
   td: ({ align, ...props }) => <CustomTableCell {...props} align={align || undefined} />,
-
+  tabs: ({ children }) => <CustomTabs>{children}</CustomTabs>,
+  tab: ({ children, label }) => <CustomTab label={label}>{children}</CustomTab>,
 };
