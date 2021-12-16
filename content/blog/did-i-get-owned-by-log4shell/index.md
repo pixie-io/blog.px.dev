@@ -84,6 +84,11 @@ While we caught no such instances, for a user who was using Java, any outbound c
 
 ## Check if your cluster is being attacked
 
+<alert severity="warning">
+Detecting these exploits is a moving target and as such the lack of any results from these scripts doesn't guarantee that your cluster isn't being attacked some other way.
+Whether or not you see any results from this script, we strongly recommend following all mitigation steps ASAP.
+</alert>
+
 When a 0-day exploit is published, there’s a rush by attackers to take advantage. At the same time, developers of cloud services are scrambling to see if they are exposed and to patch any vulnerabilities.
 
 To quickly check if your cluster is being attacked, you can:
