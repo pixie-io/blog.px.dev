@@ -92,7 +92,7 @@ To quickly check if your cluster is being attacked, you can:
 1. [Install Pixie](https://docs.px.dev/installing-pixie/install-guides/) on your Kubernetes cluster.
 2. Save the following script as `log4shell.pxl`. [^2]
 
-```bash
+```python
 import px
 
 # Get all HTTP requests automatically traced by Pixie.
@@ -102,7 +102,8 @@ df = px.DataFrame('http_events')
 df.pod = df.ctx['pod']
 
 # Check HTTP requests for the exploit signature.
-df.contains_log4j_exploit = px.contains(df.req_headers, 'jndi') or px.contains(df.req_body, 'jndi')
+re = '.*\$.*{.*j.*n.*d.*i.*:.*'
+df.contains_log4j_exploit = px.regex_match(re, df.req_headers) or px.regex_match(re, df.req_body)
 
 # Filter on requests that are attacking us with the exploit.
 df = df[df.contains_log4j_exploit]
