@@ -8,9 +8,9 @@ authors: ['Hannah Troisi']
 emails: ['htroisi@pixielabs.ai']
 ---
 
-Nothing lasts forever, including the best designed HTTP APIs.
+Nothing lasts forever, including even the best designed APIs.
 
-You are a developer who has taken over ownership of a Catalog microservice. You’ve been asked to deprecate the `/v1/catalog` endpoint in favor of the new `/v2/catalog` endpoint. How do you go about this?
+Let’s imagine you are a developer who has taken over ownership of a Catalog microservice. You’ve been asked to deprecate the `/v1/catalog` endpoint in favor of the new `/v2/catalog` endpoint. How do you go about this?
 
 Whatever the reason for removal – a new version or a planned end-of-life – the first step in a _graceful_ API deprecation is to observe:
 
@@ -34,8 +34,6 @@ Your company’s specific method for determining endpoint usage may vary. Some a
 Another option is to use [Pixie](https://github.com/pixie-io/pixie), an open source observability tool for Kubernetes applications. Pixie automatically traces request traffic of [numerous protocols](https://docs.px.dev/about-pixie/data-sources/) (HTTP, MySQL, gRPC, and more) [using eBPF](https://docs.px.dev/about-pixie/pixie-ebpf/). But no matter how you gather the data, you’ll need to answer the same questions.
 
 Let’s check for HTTP traffic to the `/v1/catalog` endpoint.
-
-To do this, you’ll simply filter all traffic for requests sent to the Catalog service:
 
 ::: div image-xl
 <svg title='Output of a PxL script showing all HTTP/2 traffic sent to a specific service.' src='service-traffic.png' />
@@ -104,11 +102,11 @@ Now that you know how your API is being used, you can create a deprecation plan.
 
 Developers don't appreciate surprise deprecations, so it’s best to notify in multiple ways, including:
 
-- Updating **documentation** to prevent new developers from using the API.
-- Sending a **Slack/email blast** to inform existing developers how to migrate and when to have the migration complete by.
-- Adding **Deprecated / Sunset Headers** for developers with HTTP middleware that automatically detects endpoints flagged as deprecated.
-- **Monitoring** for requests made to deprecated endpoints and try to determine who is responsible so that you can send an increasingly more urgent reminder about migration.
-- Implementing **Progressive Shutdowns** after the migration deadline has passed to give a last-chance warning to API clients.
+- **Documentation**: update reference docs to prevent new users from using the deprecated API.
+- **Slack/email blast**: tell existing users how and when to migrate.
+- **Deprecated / Sunset Headers**: automate detection of deprecated APIs for users with HTTP middleware.
+- **Monitor**: track endpoint traffic to remind the API client to migrate.
+- **Progressive Shutdowns**: give a last-chance warning to API clients.
 
 Once you’ve done your best to migrate remaining clients off the deprecated API, it’s time to turn off the endpoint. Tech debt eliminated!
 
