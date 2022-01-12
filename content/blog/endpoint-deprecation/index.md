@@ -23,9 +23,9 @@ Before you can deprecate the endpoint, you need to first check if the endpoint i
 
 ### Search the codebase
 
-For internal endpoints, a great way to start is to search the codebase for calls to the API. However, once you believe all calls have been removed, you will still want to use observability tooling to verify that all usage of the API has indeed stopped.
+For internal endpoints, a great way to start is to search the codebase for calls to the API. However, once you believe all calls have been removed, you will still want to use observability tooling to verify that all usage of the API has indeed stopped. It's possible that you may still be getting traffic from an older version of a service that is still running.
 
-Note that most established companies have standards for backwards compatibility of their microservice APIs (even internal ones). For example, a company might have a policy requiring 3 releases to pass between deprecation of an API and removal, in the event that there’s a rollback.
+Note that after you remove all API calls from the codebase, company protocol may dictate that you wait several releases before turning off the endpoint. Most established companies have standards for backwards compatibility of their microservice APIs (even internal ones). For example, a company might have a policy requiring 3 releases to pass between deprecation of an API and removal, in the event that there’s a rollback.
 
 ### Verify with observability tooling
 
@@ -33,7 +33,7 @@ Your company’s specific method for determining endpoint usage may vary. Some a
 
 Another option is to use [Pixie](https://github.com/pixie-io/pixie), an open source observability tool for Kubernetes applications. Pixie automatically traces request traffic of [numerous protocols](https://docs.px.dev/about-pixie/data-sources/) (HTTP, MySQL, gRPC, and more) [using eBPF](https://docs.px.dev/about-pixie/pixie-ebpf/). But no matter how you gather the data, you’ll need to answer the same questions.
 
-Let’s check for HTTP traffic to the `/v1/catalog` endpoint.
+Let’s check for HTTP traffic to the `/v1/catalog` endpoint to see if there are any clients of this endpoint.
 
 ::: div image-xl
 <svg title='Output of a PxL script showing all HTTP/2 traffic sent to a specific service.' src='service-traffic.png' />
