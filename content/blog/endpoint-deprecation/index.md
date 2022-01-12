@@ -110,6 +110,6 @@ Developers don't appreciate surprise deprecations, so it’s best to notify in m
 
 Once you’ve done your best to migrate remaining clients off the deprecated API, it’s time to turn off the endpoint. Tech debt eliminated!
 
-**Interested in a Tutorial?** [Learn](https://github.com/pixie-io/pixie-demos/endpoint-deprecation) how to run the scripts included in this post.
+**Interested in a Tutorial?** [Learn](https://github.com/pixie-io/pixie-demos/tree/main/endpoint-deprecation) how to run the scripts included in this post.
 
 **Questions?** Find us on [Slack](https://slackin.px.dev/) or Twitter at [@pixie_run](https://twitter.com/pixie_run).
