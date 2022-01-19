@@ -11,13 +11,14 @@ emails: ['yzhao@pixielabs.ai']
 In today's world full of microservices, gaining observability into the messages sent between services is critical to understanding and troubleshooting issues.
 
 Unfortunately, tracing HTTP/2 is complicated by HPACK, HTTP/2’s dedicated header compression algorithm. While HPACK helps increase the efficiency of HTTP/2 over HTTP/1, its stateful algorithm sometimes renders typical network tracers ineffective. This means tools like Wireshark can't always decode the clear text HTTP/2 headers from the network traffic.
-Fortunately, by using eBPF uprobes, it’s possible to trace the traffic before it gets compressed, so that you can actually debug your HTTP/2 (or gRPC) applications.
+
+Fortunately, by using eBPF uprobes, it’s possible to trace the traffic _before_ it gets compressed, so that you can actually debug your HTTP/2 (or gRPC) applications.
 
 This post will answer the following questions
 
-- [When will Wireshark fail to decode HTTP/2 headers?]()
-- [Why does HPACK complicate header decoding?]()
-- [How can eBPF uprobes solve the HPACK issue?]()
+- [When will Wireshark fail to decode HTTP/2 headers?](/ebpf-http2-tracing/#when-does-wireshark-fail-to-decode-http2-headers)
+- [Why does HPACK complicate header decoding?](/ebpf-http2-tracing/#hpack:-the-bane-of-the-wireshark)
+- [How can eBPF uprobes solve the HPACK issue?](/ebpf-http2-tracing/#uprobe-based-http2-tracing)
 
 as well as share a demo project showing how to trace HTTP/2 messages with eBPF uprobes.
 
@@ -37,7 +38,7 @@ Let’s focus on the [HEADERS frame](https://datatracker.ietf.org/doc/html/rfc75
 <svg title='Wireshark is able to decode HTTP/2 HEADERS if launched before the message stream starts.' src='wireshark-http2-headers-captured.png' />
 :::
 
-Next, let’s launch Wireshark _after_ launching gRPC client & server, the same messages are captured, but the raw bytes can no longer be decoded by Wireshark.
+Next, let’s launch Wireshark _after_ launching gRPC client & server. The same messages are captured, but the raw bytes can no longer be decoded by Wireshark:
 
 ::: div image-l
 <svg title='Wireshark cannot decode HTTP/2 HEADERS if launched after the message stream starts.' src='wireshark-http2-headers-not-captured.png' />
@@ -90,11 +91,12 @@ func (l *loopyWriter) writeHeader(streamID uint32, endStream bool, hf []hpack.He
 The task is to read the content of the 3rd argument `hf`, which is a slice of `HeaderField`. We use the `dlv` debugger to figure out the offset of nested data elements, and the results are shown in [`simple-gotracing/http2_trace_uprobe/bpf_program.go`](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go).
 
 This code performs 3 tasks:
-[probe_loopy_writer_write_header()]() obtains a pointer to the HeaderField objects held in the slice. A slice resides in memory as a 3-tuple of {pointer, size, capacity}, where the BPF code reads the pointer and size of certain offsets from the SP pointer.
 
-[submit_headers()]() navigates the list of HeaderField objects through the pointer, by incrementing the pointer with the size of the HeaderField object.
+- [probe_loopy_writer_write_header()]() obtains a pointer to the HeaderField objects held in the slice. A slice resides in memory as a 3-tuple of {pointer, size, capacity}, where the BPF code reads the pointer and size of certain offsets from the SP pointer.
 
-For each HeaderField object, [copy_header_field()]() copies its content to the output perf buffer. HeaderField is a struct of 2 string objects. Moreover, each string object resides in memory as a 2-tuple of {pointer, size}, where the BPF code copies the corresponding number of bytes from the pointer.
+- [submit_headers()]() navigates the list of HeaderField objects through the pointer, by incrementing the pointer with the size of the HeaderField object.
+
+- For each HeaderField object, [copy_header_field()]() copies its content to the output perf buffer. HeaderField is a struct of 2 string objects. Moreover, each string object resides in memory as a 2-tuple of {pointer, size}, where the BPF code copies the corresponding number of bytes from the pointer.
 
 Let’s run the uprobe HTTP/2 tracer, then start up the gRPC client and server. Note that this tracer works even if the tracer was launched after the connection between the gRPC client and server are established.
 
@@ -122,7 +124,7 @@ This allows us to see the headers of the requests received by the gRPC server fr
 [name='grpc-timeout' value='9933133n']
 ```
 
-Productionizing this uprobe-based tracer requires further consideration, which you can read about in the [footnotes](). To try out this demo, check out the instructions [here](https://github.com/pixie-io/pixie-demos/tree/main/http2-tracing).
+Productionizing this uprobe-based tracer requires further consideration, which you can read about in the [footnotes](/ebpf-http2-tracing/#footnotes). To try out this demo, check out the instructions [here](https://github.com/pixie-io/pixie-demos/tree/main/http2-tracing).
 
 ## Conclusion
 
