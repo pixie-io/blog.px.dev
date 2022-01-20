@@ -88,7 +88,7 @@ Let’s take a look at the the signature of the function:
 func (l *loopyWriter) writeHeader(streamID uint32, endStream bool, hf []hpack.HeaderField, onWrite func())
 ```
 
-The task is to read the content of the 3rd argument `hf`, which is a slice of `HeaderField`. We use the `dlv` debugger to figure out the offset of nested data elements, and the results are shown in [`simple-gotracing/http2_trace_uprobe/bpf_program.go`](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go).
+The task is to read the content of the 3rd argument `hf`, which is a slice of `HeaderField`. We use the `dlv` debugger to figure out the offset of nested data elements, and the results are shown in [`http2-tracing/uprobe_trace/bpf_program.go`](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go).
 
 This code performs 3 tasks:
 
