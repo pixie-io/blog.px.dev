@@ -46,7 +46,7 @@ Next, let’s launch Wireshark _after_ launching gRPC client & server. The same 
 
 Here, we can see that the `Header Block Fragment` still shows the same raw bytes, but the clear-text headers cannot be decoded.
 
-To replicate the experiment for yourself, follow the directions [here](https://github.com/pixie-io/pixie-demos/tree/main/http2-tracing).
+To replicate the experiment for yourself, follow the directions [here](https://github.com/pixie-io/pixie-demos/tree/main/http2-tracing#trace-http2-headers-with-wireshark).
 
 ## HPACK: the bane of the Wireshark
 
@@ -92,11 +92,11 @@ The task is to read the content of the 3rd argument `hf`, which is a slice of `H
 
 This code performs 3 tasks:
 
-- [probe_loopy_writer_write_header()]() obtains a pointer to the HeaderField objects held in the slice. A slice resides in memory as a 3-tuple of {pointer, size, capacity}, where the BPF code reads the pointer and size of certain offsets from the SP pointer.
+- [probe_loopy_writer_write_header()](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go#L79) obtains a pointer to the HeaderField objects held in the slice. A slice resides in memory as a 3-tuple of {pointer, size, capacity}, where the BPF code reads the pointer and size of certain offsets from the SP pointer.
 
-- [submit_headers()]() navigates the list of HeaderField objects through the pointer, by incrementing the pointer with the size of the HeaderField object.
+- [submit_headers()](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go#L63) navigates the list of HeaderField objects through the pointer, by incrementing the pointer with the size of the HeaderField object.
 
-- For each HeaderField object, [copy_header_field()]() copies its content to the output perf buffer. HeaderField is a struct of 2 string objects. Moreover, each string object resides in memory as a 2-tuple of {pointer, size}, where the BPF code copies the corresponding number of bytes from the pointer.
+- For each HeaderField object, [copy_header_field()](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go#L51) copies its content to the output perf buffer. HeaderField is a struct of 2 string objects. Moreover, each string object resides in memory as a 2-tuple of {pointer, size}, where the BPF code copies the corresponding number of bytes from the pointer.
 
 Let’s run the uprobe HTTP/2 tracer, then start up the gRPC client and server. Note that this tracer works even if the tracer was launched after the connection between the gRPC client and server are established.
 
@@ -109,7 +109,7 @@ Now we see the headers of the response sent from the gRPC server to client:
 [name='grpc-message' value='']
 ```
 
-We also implemented a probe on `google.golang.org/grpc/internal/transport.(*http2Server).operateHeaders()` in `probe_http2_server_operate_headers()`; which traces the incoming headers received at the gRPC server.
+We also implemented a probe on `google.golang.org/grpc/internal/transport.(*http2Server).operateHeaders()` in [`probe_http2_server_operate_headers()`](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go#L96); which traces the incoming headers received at the gRPC server.
 
 This allows us to see the headers of the requests received by the gRPC server from client:
 
@@ -124,7 +124,7 @@ This allows us to see the headers of the requests received by the gRPC server fr
 [name='grpc-timeout' value='9933133n']
 ```
 
-Productionizing this uprobe-based tracer requires further consideration, which you can read about in the [footnotes](/ebpf-http2-tracing/#footnotes). To try out this demo, check out the instructions [here](https://github.com/pixie-io/pixie-demos/tree/main/http2-tracing).
+Productionizing this uprobe-based tracer requires further consideration, which you can read about in the [footnotes](/ebpf-http2-tracing/#footnotes). To try out this demo, check out the instructions [here](https://github.com/pixie-io/pixie-demos/tree/main/http2-tracing#trace-http2-headers-with-uprobe-tracer).
 
 ## Conclusion
 
