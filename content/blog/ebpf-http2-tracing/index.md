@@ -92,7 +92,7 @@ The task is to read the content of the 3rd argument `hf`, which is a slice of `H
 
 This code performs 3 tasks:
 
-- [probe_loopy_writer_write_header()](https://github.com/pixie-io/pixie-demos/blob/34e0b14116a88aa89534dcc1ab8f269a6d520bdd/http2-tracing/uprobe_trace/bpf_program.go#L79) obtains a pointer to the HeaderField objects held in the slice. A slice resides in memory as a 3-tuple of {pointer, size, capacity}, where the BPF code reads the pointer and size of certain offsets from the SP pointer.
+- [probe_loopy_writer_write_header()](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go#L79) obtains a pointer to the HeaderField objects held in the slice. A slice resides in memory as a 3-tuple of {pointer, size, capacity}, where the BPF code reads the pointer and size of certain offsets from the SP pointer.
 
 - [submit_headers()](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go#L63) navigates the list of HeaderField objects through the pointer, by incrementing the pointer with the size of the HeaderField object.
 
