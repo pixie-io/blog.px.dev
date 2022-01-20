@@ -56,10 +56,10 @@ It turns out that HTTP/2 uses [HPACK](https://httpwg.org/specs/rfc7541.html) to 
 
 HPACK works by maintaining identical lookup tables at the server and client. Headers and/or their values are replaced with their indices in these lookup tables. Because most of the headers are repetitively transmitted, they are replaced by indices that use much less bytes than clear-text headers. HPACK therefore uses significantly less network bandwidth. This effect is amplified by the fact that multiple HTTP/2 sessions can multiplex over the same connection.
 
-The figure below illustrates the table maintained by the client and server for response headers. New header name and value pairs are appended into the table, displacing the old entries if the size of the lookup tables reaches its limit. When encoding, the clear text headers are replaced by their indices in the table. For more info, take a look at [the official RFC](http://http2.github.io/compression-spec/compression-spec.html).
+The figure below illustrates the table maintained by the client and server for response headers. New header name and value pairs are appended into the table, displacing the old entries if the size of the lookup tables reaches its limit. When encoding, the clear text headers are replaced by their indices in the table. For more info, take a look at [the official RFC](https://httpwg.org/specs/rfc7541.html).
 
-::: div image-l
-<svg title='HTTP/2’s HPACK compression algorithm requires that the client and server maintain identical dictionaries to decode the headers. This makes decoding HTTP/2 headers difficult for tracers that don’t have access to this state.' src='hpack-diagram.png' />
+::: div image-xl
+<svg title='HTTP/2’s HPACK compression algorithm requires that the client and server maintain identical lookup tables to decode the headers. This makes decoding HTTP/2 headers difficult for tracers that don’t have access to this state.' src='hpack-diagram.png' />
 :::
 
 With this knowledge, the results of the Wireshark experiment above can be explained clearly. When Wireshark is launched _before_ starting the application, the entire history of the headers are recorded, such that Wireshark can reproduce the exact same header tables.
@@ -92,7 +92,7 @@ The task is to read the content of the 3rd argument `hf`, which is a slice of `H
 
 This code performs 3 tasks:
 
-- [probe_loopy_writer_write_header()](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go#L79) obtains a pointer to the HeaderField objects held in the slice. A slice resides in memory as a 3-tuple of {pointer, size, capacity}, where the BPF code reads the pointer and size of certain offsets from the SP pointer.
+- [probe_loopy_writer_write_header()](https://github.com/pixie-io/pixie-demos/blob/34e0b14116a88aa89534dcc1ab8f269a6d520bdd/http2-tracing/uprobe_trace/bpf_program.go#L79) obtains a pointer to the HeaderField objects held in the slice. A slice resides in memory as a 3-tuple of {pointer, size, capacity}, where the BPF code reads the pointer and size of certain offsets from the SP pointer.
 
 - [submit_headers()](https://github.com/pixie-io/pixie-demos/blob/main/http2-tracing/uprobe_trace/bpf_program.go#L63) navigates the list of HeaderField objects through the pointer, by incrementing the pointer with the size of the HeaderField object.
 
