@@ -253,7 +253,7 @@ This “assist” system adds latency to the allocation and therefore helps to b
 We can trace [gcAssistAlloc1](https://github.com/golang/go/blob/go1.16/src/runtime/mgcmark.go#L504) to see this process in action. `gcAssistAlloc1` takes in an argument called `scanWork`, which is the amount of assist work requested. 
 
 ::: div image-xl
-<svg title="Assist work performed by gcAllocAssist1 over time" src='sweep2.png'/>
+<svg title="Assist work performed by gcAllocAssist1 over time" src='assistwork.png'/>
 :::
 
 We can see that `gcAssistAlloc1` is the source of the mark and sweep work. It receives a request to fulfill about `300,000` units of work. In the previous mark phase diagram, we can see that `gcDrainN` performs about 300,000 units of mark work at that same time (just spread out a bit).
