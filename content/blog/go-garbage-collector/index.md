@@ -33,7 +33,7 @@ Before diving in, let's get some quick context on uprobes, the garbage collector
 
 [uprobes](https://jvns.ca/blog/2017/07/05/linux-tracing-systems/#uprobes) are cool because they let us dynamically collect new information without modifying our code. This is useful when you can’t or don’t want to redeploy your app - maybe because it’s in production, or the interesting behavior is hard to reproduce.
 
-Function arguments, return values, latency, and timestamps can all be collected via uprobe. In this post, I'll deploy uprobes onto key functions from the Go garbage collector. This will allow me to see how it behaves in practice in my running application.
+Function arguments, return values, latency, and timestamps can all be collected via uprobes. In this post, I'll deploy uprobes onto key functions from the Go garbage collector. This will allow me to see how it behaves in practice in my running application.
 
 ::: div image-xl
 <svg title="uprobes can trace latency, timestamp, arguments, and return values of functions." src='uprobes.png' />
@@ -89,7 +89,7 @@ First, I decided to add uprobes to following functions in Go's `runtime` library
 
 (If you’re interested in seeing how the uprobes were generated, here's the [code](https://github.com/pixie-io/pixie-demos/tree/main/go-garbage-collector).)
 
-After deploying the uprobes, I hit the endpoint and generate an array containing 10 strings that are each 20 bytes.
+After deploying the uprobes, I hit the endpoint and generated an array containing 10 strings that are each 20 bytes.
 
 ```bash
 $ curl '127.0.0.1/allocate-memory-and-run-gc?arrayLength=10&bytesPerElement=20'
