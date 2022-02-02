@@ -19,7 +19,7 @@ In order to better understand how the garbage collector works, I decided to trac
 	- [The phases of garbage collection](/go-garbage-collector/#the-phases-of-garbage-collection)
 - [Tracing the garbage collector](/go-garbage-collector/#tracing-the-major-phases-of-garbage-collection)
 	- [runtime.GC](/go-garbage-collector/#tracing-runtime.gc())
-	- [Mark and sweep phases](/#tracing-the-mark-and-sweep-phases)
+	- [Mark and sweep phases](/go-garbage-collector/#mark-and-sweep-assists)
 	- [Stop The World events](/go-garbage-collector/#tracing-stop-the-world-events)
 - [How does the garbage collector pace itself?](/go-garbage-collector/#how-does-the-garbage-collector-pace-itself)
 	- [Trigger ratio](/go-garbage-collector/#trigger-ratio)
