@@ -64,7 +64,7 @@ export default {
   th: ({ align, ...props }) => <TableCell {...props} align={align || undefined} />,
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
-  ul: (props: any) => <Typography {...props} component='ul' />,
+  ul: (props: any) => <Typography {...props} component='ul' className='blog-ul' />,
   wrapper: ({ children }) => {
     // eslint-disable-next-line no-prototype-builtins
     const updatedChildren = children.map ? children.map((child) => {

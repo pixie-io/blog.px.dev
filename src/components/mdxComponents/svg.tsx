@@ -62,7 +62,7 @@ const SvgRenderer = ({ src, title }) => (
           {({ theme }) => (
             <figure className='gatsby-resp-image-figure'>
               <img src={getImageSrc(theme)} className='blog-image' />
-              <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1'>{title}</figcaption>
+              <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1 blog-image-caption'>{title}</figcaption>
             </figure>
           )}
         </ThemeModeContext.Consumer>
