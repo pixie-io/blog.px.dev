@@ -1,7 +1,7 @@
 ---
 path: '/go-garbage-collector'
 title: 'Dumpster diving the Go garbage collector'
-date: 2022-02-08T06:00:00.000+00:00
+date: 2022-02-02T06:00:00.000+00:00
 featured_image: go-garbage-collector-hero.png
 categories: ['Pixie Team Blogs']
 authors: ['Natalie Serrino']
