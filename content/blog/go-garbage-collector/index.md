@@ -1,7 +1,7 @@
 ---
 path: '/go-garbage-collector'
 title: 'Dumpster diving the Go garbage collector'
-date: 2022-02-08T06:00:00.000+00:00
+date: 2022-02-02T06:00:00.000+00:00
 featured_image: go-garbage-collector-hero.png
 categories: ['Pixie Team Blogs']
 authors: ['Natalie Serrino']
@@ -15,19 +15,19 @@ Memory management is definitely easier in Go than it is in, say, C++. But it’s
 In order to better understand how the garbage collector works, I decided to trace its low-level behavior on a live application. In this investigation, I'll instrument the Go garbage collector with eBPF uprobes. The source code for this post lives [here](https://github.com/pixie-io/pixie-demos/tree/main/go-garbage-collector).
 
 - [Background](/go-garbage-collector/#a-few-things-before-diving-in)
-	- [Why uprobes?](/go-garbage-collector/#why-uprobes)
-	- [The phases of garbage collection](/go-garbage-collector/#the-phases-of-garbage-collection)
+  - [Why uprobes?](/go-garbage-collector/#why-uprobes)
+  - [The phases of garbage collection](/go-garbage-collector/#the-phases-of-garbage-collection)
 - [Tracing the garbage collector](/go-garbage-collector/#tracing-the-major-phases-of-garbage-collection)
-	- [runtime.GC](/go-garbage-collector/#tracing-runtime.gc())
-	- [Mark and sweep phases](/go-garbage-collector/#mark-and-sweep-assists)
-	- [Stop The World events](/go-garbage-collector/#tracing-stop-the-world-events)
+  - [runtime.GC](/go-garbage-collector/#tracing-runtime.gc())
+  - [Mark and sweep phases](/go-garbage-collector/#mark-and-sweep-assists)
+  - [Stop The World events](/go-garbage-collector/#tracing-stop-the-world-events)
 - [How does the garbage collector pace itself?](/go-garbage-collector/#how-does-the-garbage-collector-pace-itself)
-	- [Trigger ratio](/go-garbage-collector/#trigger-ratio)
-	- [Mark and sweep assists](/go-garbage-collector/#mark-and-sweep-assists)
+  - [Trigger ratio](/go-garbage-collector/#trigger-ratio)
+  - [Mark and sweep assists](/go-garbage-collector/#mark-and-sweep-assists)
 
 ## A few things before diving in
 
-Before diving in, let's get some quick context on uprobes, the garbage collector's design, and the demo application we'll be using. 
+Before diving in, let's get some quick context on uprobes, the garbage collector's design, and the demo application we'll be using.
 
 ### Why uprobes?
 
@@ -155,13 +155,14 @@ They’re easier to interpret when plotted as a timeseries:
 :::
 
 Now we can see what happened:
+
 - **Go allocated a few thousand pages**, which makes sense since we directly added ~80MB of strings to the heap.
 - **The mark work kicked off** (note that its units are not pages, but mark work units)
 - **The marked pages were swept by the sweeper**. (This should be all of the pages, since we don’t reuse the string array after the call completes).
 
 ### Tracing Stop The World events
 
-“Stopping the world” refers to the garbage collector temporarily halting everything but itself in order to safely modify the state. We generally prefer to minimize STW phases, because they slow our programs down (usually when it’s most inconvenient…). 
+“Stopping the world” refers to the garbage collector temporarily halting everything but itself in order to safely modify the state. We generally prefer to minimize STW phases, because they slow our programs down (usually when it’s most inconvenient…).
 
 Some garbage collectors stop the world the entire time garbage collection is running. These are “non concurrent” garbage collectors. While Go’s garbage collector is largely concurrent, we can see from the code that it does technically stop the world in two places.
 
@@ -193,7 +194,6 @@ Why does the Go garbage collector need to stop the world?
 **1st Stop The World (before mark phase)**: Set up state and turn on the write barrier. The write barrier ensures that new writes are correctly tracked when GC is running (so that they are not accidentally freed or kept around).
 
 **2nd Stop The World (after mark phase)**: Clean up mark state and turn off the write barrier.
-
 
 ## How does the garbage collector pace itself?
 
@@ -250,7 +250,7 @@ It turns out, the garbage collector has another trick up its sleeve to prevent o
 
 This “assist” system adds latency to the allocation and therefore helps to backpressure the system. It’s really important, because it solves a problem that can arise from concurrent garbage collectors. In a concurrent garbage collector, memory allocation is still being allocated while garbage collection runs. If the program is allocating memory faster than the garbage collector is freeing it, then memory growth will be unbounded. **Assists address this issue by slowing down (backpressuring) the net allocation of new memory.**
 
-We can trace [gcAssistAlloc1](https://github.com/golang/go/blob/go1.16/src/runtime/mgcmark.go#L504) to see this process in action. `gcAssistAlloc1` takes in an argument called `scanWork`, which is the amount of assist work requested. 
+We can trace [gcAssistAlloc1](https://github.com/golang/go/blob/go1.16/src/runtime/mgcmark.go#L504) to see this process in action. `gcAssistAlloc1` takes in an argument called `scanWork`, which is the amount of assist work requested.
 
 ::: div image-xl
 <svg title="Assist work performed by gcAllocAssist1 over time" src='assistwork.png'/>
@@ -258,16 +258,16 @@ We can trace [gcAssistAlloc1](https://github.com/golang/go/blob/go1.16/src/runti
 
 We can see that `gcAssistAlloc1` is the source of the mark and sweep work. It receives a request to fulfill about `300,000` units of work. In the previous mark phase diagram, we can see that `gcDrainN` performs about 300,000 units of mark work at that same time (just spread out a bit).
 
-
 ## Wrapping up
 
 There’s a lot more to learn about memory allocation and garbage collection in Go! Here’s some other resources to check out:
+
 - Go’s [special sweeping](https://github.com/golang/go/blob/master/src/runtime/mgc.go#L93) of small objects
 - How to run [escape analysis](https://medium.com/a-journey-with-go/go-introduction-to-the-escape-analysis-f7610174e890) on your code to see if objects will be allocated to the stack or the heap
 - [sync.Pool](https://pkg.go.dev/sync#Pool), a concurrent data structure that [reduces allocations](https://medium.com/swlh/go-the-idea-behind-sync-pool-32da5089df72) by pooling shared objects
 
 Creating uprobes, like we did in this example, is usually best done in a higher level BPF framework. For this post, I used Pixie’s [Dynamic Go logging](https://docs.px.dev/tutorials/custom-data/dynamic-go-logging/) feature (which is still in alpha). [bpftrace](https://github.com/iovisor/bpftrace) is another great tool for creating uprobes. You can try out the entire example from this post [here](https://github.com/pixie-io/pixie-demos/tree/main/go-garbage-collector).
 
-Another good option for inspecting the behavior of the Go garbage collector is the gc tracer. Just pass in `GODEBUG=gctrace=1` when you start your program. It requires a restart, but will tell you all kinds of cool information about what the garbage collector is doing. 
+Another good option for inspecting the behavior of the Go garbage collector is the gc tracer. Just pass in `GODEBUG=gctrace=1` when you start your program. It requires a restart, but will tell you all kinds of cool information about what the garbage collector is doing.
 
 Questions? Find the Pixie contributors on [Slack](https://slackin.px.dev/) or Twitter at [@pixie_run](https://twitter.com/pixie_run).
