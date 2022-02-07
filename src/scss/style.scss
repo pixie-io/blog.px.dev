@@ -25,7 +25,10 @@ body {
   font-family: Manrope, sans-serif;
   padding: 0;
   margin: 0;
-  background-color: $color-dark;
+  background-color: white;
+  &:global(.theme-dark){
+    background-color: $color-dark;
+  }
 
   &.menu-open {
     @media (max-width: 768px) {
