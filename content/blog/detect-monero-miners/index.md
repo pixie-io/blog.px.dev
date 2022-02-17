@@ -102,9 +102,9 @@ We want to detect traces of RandomX (the CPU-intensive mining function for Moner
 
 ### What is bpftrace?
 
-[bpftrace](https://github.com/iovisor/bpftrace) makes it easy to collect data about running Linux processes. bpftrace is a simple interface on top of [eBPF](https://ebpf.io/), a Linux kernel technology that allows you to add operating system capabilities safely at runtime. We want to leverage bpftrace to collect data from running programs at any level of the execution stack.
+[bpftrace](https://github.com/iovisor/bpftrace) makes it easy to collect data about running Linux processes. bpftrace is a simple interface on top of [eBPF](https://ebpf.io/), a Linux kernel technology that allows you to add operating system capabilities safely at runtime. We want to leverage bpftrace to collect data from running programs.
 
-We specifically want a script that grabs information about the floating-point unit (FPU) configuration which will contain the floating-point rounding mode and help us detect Monero miners. 
+We specifically want a script that grabs information about the floating-point unit (FPU) configuration. The FPU configuration contains the rounding mode setting that Monero miners change often.
 
 
 ### The Environment
