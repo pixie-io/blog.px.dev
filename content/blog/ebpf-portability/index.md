@@ -20,12 +20,12 @@ In this blog post, we examine this question, and share some of our learnings fro
 
 ## What's the Problem?
 
-_Note: The problem of BPF portability is covered in detail by Andrii Nakryiko in his blog on [BPF portability](https://nakryiko.com/posts/bpf-portability-and-co-re/). In this section, we rehash the problem briefly._
+_Note: The problem of BPF portability is covered in detail by Andrii Nakryiko in his [blog post](https://nakryiko.com/posts/bpf-portability-and-co-re/) on the subject. In this section, we rehash the problem briefly._
 
 To understand why it can be problematic to deploy eBPF programs across different target environments, it’s important to first review the eBPF build pipeline. We’ll start with the basic flow used by frameworks like BCC. There are newer approaches with libbpf + CO-RE, but we’ll cover that later.
 
 ::: div image-xl
-<svg title='The BCC eBPF deployment flow: The eBPF code is compiled on the target host to make sure that the program is compatible.' src='bcc-ebpf-deployment-diagram.png' />
+<svg title='The BCC eBPF deployment flow: The eBPF code is compiled on the target host to make sure that the program is compatible.' src='bcc-ebpf-diagram.png' />
 :::
 
 In the basic flow, the eBPF code is compiled into BPF byte code, and then deployed into the kernel. Assuming that the BPF verifier doesn’t reject the code, the eBPF program is then run by the kernel whenever triggered by the appropriate event.
@@ -170,18 +170,20 @@ The key to CO-RE is something called BTF (BPF Type Format) which encodes the str
 
 The information in BTF enables the BPF program loader to make adjustments to your pre-compiled eBPF code so that it looks for the desired information at the right offsets in memory.
 
-Once again, Andrii Nakryiko, has an excellent [blog post](https://nakryiko.com/posts/bpf-portability-and-co-re/) with more details on this topic.
+Once again, Andrii Nakryiko's [blog post](https://nakryiko.com/posts/bpf-portability-and-co-re/) has more details on this topic.
 
 With CO-RE, instead of requiring Linux headers on the target machine, you need the BTF information.
 
 ::: div image-xl
-<svg title='The BCC eBPF deployment flow: The eBPF code is compiled on the target host to make sure that the program is compatible.' src='libbpf-CO-RE-compilation-diagram.png' />
+<svg title='The libbpf + CO-RE compilation flow: The eBPF code is pre-compiled on your local dev machine. BTF information is used to modify the compiled bytecode for the host kernel.' src='core-diagram.png' />
 :::
 
 In terms of compile-time resources (time and space), CO-RE is a huge win. But what about portability? One could argue that in either case, we need information about the host. In one case we need headers, while in the other we need the kernel’s BTF.
 
-So how do you get the BTF for your host machine? If your kernel was compiled with `CONFIG_DEBUG_INFO_BTF=y`, you’re in luck. But if there’s no BTF, have we just replaced one problem with another? For example, for Pixie, we support kernels as old as 4.14, which won’t have BTF built-in. So, what can you do?
+So how do you get the BTF for your host machine? If your kernel was compiled with `CONFIG_DEBUG_INFO_BTF=y`, you’re in luck. But if there’s no BTF, have we just replaced one problem with another?
 
-Fortunately, there are cool new projects on the horizon. In the follow-up to this blog, my collaborator Guy, will go into more detail on how to use CO-RE and BTF information to enable deployments across a wide range of machines. Stay tuned for Part 2!
+For example, for Pixie, we support kernels as old as 4.14, which won’t have BTF built-in; to make sure we have the widest possible support across kernel versions, we have found ourselves in a spot where we have had to stick with BCC. What else can one do?
 
-Questions? Comments? Find us on Slack or Twitter.
+Fortunately, there are cool new projects on the horizon. In the follow-up to this blog, my collaborator [Guy](https://twitter.com/arbitmanguy), will go into more detail on how to use CO-RE with a BTF repository called [BTFHub](https://github.com/aquasecurity/btfhub) to enable deployments across a wide range of machines. Stay tuned for Part 2!
+
+Questions? Comments? Find us on [Slack](https://slackin.px.dev/) or [Twitter](https://twitter.com/pixie_run).
