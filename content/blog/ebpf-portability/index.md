@@ -37,7 +37,7 @@ Why? Because each host may have a different kernel, and so kernel struct layouts
 Let’s make this more concrete with a couple of examples. First, let’s look at a very simple eBPF program that doesn’t have any portability issues:
 
 ```cpp
-// Map that stores counts of recv calls by PID
+// Map that stores counts of times triggered, by PID.
 BPF_HASH(counts_by_pid, uint32_t, int64_t);
 
 // Probe that counts every time it is triggered.
@@ -79,7 +79,7 @@ static inline __attribute__((__always_inline__)) uint64_t get_tgid_start_time() 
   return div_u64(start_time, NSEC_PER_SEC / USER_HZ);
 }
 
-// Map that stores counts of recv calls by PID
+// Map that stores counts of times triggered, by PID.
 BPF_HASH(counts_by_pid, struct tgid_ts_t, int64_t);
 
 // Probe that counts every time it is triggered.
