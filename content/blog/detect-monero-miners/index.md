@@ -35,7 +35,7 @@ What happens during cryptomining and why is it important? [This blog post by Ant
 Miners race to create the next block for the blockchain. The network rewards them with cryptocurrency when they submit a valid block. Each block contains the hash of the previous block (hence the “chain”), the list of transactions, and a Proof of Work (PoW) [^1]. A miner wins when it successfully finds a valid Proof of Work for that list of transactions. [The Bitcoin Proof of Work](https://youtu.be/9V1bipPkCTU?t=183) is a string that causes the entire block to hash to a bit-string with a “target” number of leading 0s. 
 
 ::: div image-m
-<svg title="" src='btc-pow.png' />
+<svg title="Bitcoin Proof of Work" src='btc-pow.png' />
 :::
 
 
@@ -51,18 +51,18 @@ Now that we know how cryptomining works, we can evaluate ways to detect cryptoja
 
 Many cryptojackers opt to use open-source mining software without modification. Scanning binaries running on the operating system for common mining software names and signatures of mining software is a simple yet effective barrier.
 
-**Pros:** simple to implement, large surface area. 
+🟢 **Pros:** simple to implement, large surface area. 
 
-**Cons:** easy to bypass with obfuscation of code. Can also be hidden from  tools like `ps` or `top` using [libprocesshider](https://github.com/gianlucaborello/libprocesshider).
+🔴 **Cons:** easy to bypass with obfuscation of code. Can also be hidden from  tools like `ps` or `top` using [libprocesshider](https://github.com/gianlucaborello/libprocesshider).
 
 
 ### Block connections to known IPs
 
 Many cryptominers choose to [contribute to a mining pool](https://www.investopedia.com/tech/how-choose-cryptocurrency-mining-pool/), which will require some outgoing network connection to a central location. You can make a blocklist of the top 100 cryptomining pools and block a large portion of miners. 
 
-**Pros:** simple to implement, large surface area
+🟢 **Pros:** simple to implement, large surface area
 
-**Cons:** easy to bypass with proxies or by searching for allowed pools
+🔴 **Cons:** easy to bypass with proxies or by searching for allowed pools
 
 
 ### Model common network patterns of miners
@@ -71,18 +71,18 @@ Most miners opt for SSL which means reading the body of messages is impossible, 
 
 Because the miners must receive block updates from the rest of the network as well as updates from mining pools, they must rely on the network. 
 
-**Pros:** robust to proxies, miners are guaranteed to leave a trace due to dependence on the network. 
+🟢 **Pros:** robust to proxies, miners are guaranteed to leave a trace due to dependence on the network. 
 
-**Cons:** large upfront investment to collect data and train models. Operational investment to update models with new data after discovery of new attacks. Risk of [steganographic obfuscation](https://www.sciencedirect.com/science/article/pii/S1389128621001249) or [adversarial examples](https://en.wikipedia.org/wiki/Adversarial_machine_learning).
+🔴 **Cons:** large upfront investment to collect data and train models. Operational investment to update models with new data after discovery of new attacks. Risk of [steganographic obfuscation](https://www.sciencedirect.com/science/article/pii/S1389128621001249) or [adversarial examples](https://en.wikipedia.org/wiki/Adversarial_machine_learning).
 
 
 ### Model hardware usage patterns of miners
 
 Similarly, you can collect data from hardware counters and train a model that discriminates between mining and not-mining using of CPU, GPU, etc., as discussed in [Gangwal et al.](https://arxiv.org/abs/1909.00268) and [Tahir et al.](http://caesar.web.engr.illinois.edu/papers/dime-raid17.pdf) 
 
-**Pros:** robust to binary obfuscation
+🟢 **Pros:** robust to binary obfuscation
 
-**Cons:** large upfront investment to collect data and train models. Operational investment to update models with new data after discovery of new attacks. Risk of [steganographic obfuscation](https://www.sciencedirect.com/science/article/pii/S1389128621001249) or [adversarial examples](https://en.wikipedia.org/wiki/Adversarial_machine_learning).
+🔴 **Cons:** large upfront investment to collect data and train models. Operational investment to update models with new data after discovery of new attacks. Risk of [steganographic obfuscation](https://www.sciencedirect.com/science/article/pii/S1389128621001249) or [adversarial examples](https://en.wikipedia.org/wiki/Adversarial_machine_learning).
 
 
 ## Detecting Monero miners
@@ -115,11 +115,11 @@ We specifically want a script that grabs information about the floating-point un
 
 The scripts and environment setup instructions [are available here](https://github.com/pixie-io/pixie-demos/tree/main/detect-monero-demo).
 
-**My cluster:** I deployed a Kubernetes cluster on a few machines running Linux Kernel 5.13, using x86 processors [^2].
+**The cluster:** I deployed a Kubernetes cluster on a few machines running Linux Kernel 5.13, using x86 processors [^2].
 
-**My target:** I deployed [xmrig, a popular open source Monero miner](https://github.com/xmrig/xmrig) to my cluster.
+**The target:** I deployed [xmrig, a popular open source Monero miner](https://github.com/xmrig/xmrig) to my cluster.
 
-**My bpftrace environment:** You can use the [bpftrace CLI](https://github.com/iovisor/bpftrace/blob/master/INSTALL.md) directly on nodes. I chose to use Pixie instead because I wanted to [deploy bpftrace to all the nodes](https://blog.px.dev/distributed-bpftrace/) on my cluster and leverage Pixie's data engine.
+**The bpftrace environment:** You can use the [bpftrace CLI](https://github.com/iovisor/bpftrace/blob/master/INSTALL.md) directly on nodes. I chose to use Pixie instead because I wanted to [deploy bpftrace to all the nodes](https://blog.px.dev/distributed-bpftrace/) on my cluster and leverage Pixie's data engine.
 
 
 ### Where can we find the data?
