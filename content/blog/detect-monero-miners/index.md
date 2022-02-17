@@ -2,7 +2,7 @@
 path: '/detect-monero-miners'
 title: 'Detecting Monero miners with bpftrace'
 date: 2022-02-12T06:00:00.000+00:00
-featured_image: inspector-hero.png
+featured_image: hero.png
 categories: ['Pixie Team Blogs']
 authors: ['Phillip Kuznetsov']
 emails: ['philkuz@pixielabs.ai']
@@ -26,8 +26,8 @@ Miners race to create the next block for the blockchain. The network awards them
 
 
 
-::: div image-xl
-<svg title="The Bitcoin Proof of Work." src='btc-pow.png' />
+::: div image-m
+<svg title="" src='btc-pow.png' />
 :::
 
 
