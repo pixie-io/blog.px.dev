@@ -58,7 +58,7 @@ Many cryptominers choose to [contribute to a mining pool](https://www.investoped
 
 **Pros:** simple to implement, large surface area
 
-**Cons:** easy to bypass with proxies, pooling across private mining pools
+**Cons:** easy to bypass with proxies or by searching for allowed pools
 
 
 ### Model common network patterns of miners
@@ -83,25 +83,20 @@ Similarly, you can collect data from hardware counters and train a model that di
 
 ## Detecting Monero Miners
 
-We mentioned earlier that cryptojackers opt to mine Monero because of [the privacy guarantees](https://www.getmonero.org/resources/about/). It turns out that Monero’s Proof of Work algorithm, [RandomX](https://github.com/tevador/RandomX), actually leaves behind a detectable trace when it runs. Let me first explain how RandomX works.
+We mentioned earlier that cryptojackers opt to mine Monero because of [the privacy guarantees](https://www.getmonero.org/resources/about/). It turns out that Monero’s Proof of Work algorithm, [RandomX](https://github.com/tevador/RandomX), actually leaves behind a detectable trace.
 
-RandomX adds a layer on top of the Bitcoin PoW. Instead of guessing the “proof string” directly, you need to find a “proof program” in the [RandomX instruction set](https://github.com/tevador/RandomX/blob/master/doc/design.md#21-instruction-set) that outputs the “proof string” when run in the RandomX VM. That means mining Monero requires you to generate many of these programs and evaluate each one in the RandomX VM to find a Proof of Work.
-
+RandomX adds a layer on top of the Bitcoin PoW. Instead of guessing the “proof string” directly, you need to find a “proof program” in the [RandomX instruction set](https://github.com/tevador/RandomX/blob/master/doc/design.md#21-instruction-set) that outputs the “proof string” when run in the RandomX VM. Because every correct length bitstring is a valid program, Monero miners randomly generate "proof programs" and evaluate each in the RandomX VM. 
 
 ::: div image-xl
 <svg title="Monero miner Proof of Work" src='xmr-pow.png'/>
 :::
 
+These RandomX programs are easy to spot. They leverage a large set of CPU features, some of which are rarely used by other programs. The instruction set [attempts to hit many features available on](https://github.com/tevador/RandomX/blob/master/doc/design.md#23-registers) commodity CPUs. The RandomX developers attempted to explicitly [curtail the effectiveness of specialized hardware](https://github.com/tevador/RandomX/blob/master/doc/design.md#1-design-considerations) like GPUs and ASICs. The side benefit is now we only have to care about Monero miners leveraging CPUs.
 
-The RandomX instruction set[ attempts to hit many features available on](https://github.com/tevador/RandomX/blob/master/doc/design.md#23-registers) commodity CPUs. This design decision attempts to explicitly [curtail the effectiveness of specialized hardware](https://github.com/tevador/RandomX/blob/master/doc/design.md#1-design-considerations) like GPUs and ASICs. The hardware would need to recreate the general features of a CPU, negating typical benefits from specialized hardware. And because all bit strings of a certain length are valid programs, miners opt to create random bit strings to generate programs. 
-
-All this combined means Monero miners need to run on CPUs to be efficient (limiting the surface area we need to observe) and the diverse operations run during mining gives us many signal opportunities to discriminate between normal programs and Monero miners.
-
-The most prominent signal opportunity is this unusual RandomX instruction:[ CFROUND](https://github.com/tevador/RandomX/blob/master/doc/specs.md#541-cfround). `CFROUND` changes the rounding mode for floating point operations - which is something that other programs rarely change. The main RandomX contributor, [tevador](https://github.com/tevador), created [randomx-sniffer](https://github.com/tevador/randomx-sniffer) which detects this unique trace on Windows machines. Nothing exists for Linux yet - but we can build this with bpftrace.
+One signal opportunity is the RandomX instruction: [CFROUND](https://github.com/tevador/RandomX/blob/master/doc/specs.md#541-cfround). `CFROUND` changes the rounding mode for floating point operations. Other programs rarely set this mode. When they do, they rarely toggle this value as much as RandomX programs would. The main RandomX contributor, [tevador](https://github.com/tevador), created [randomx-sniffer](https://github.com/tevador/randomx-sniffer) which looks for programs that change the rounding-mode often on Windows machines. Nothing exists for Linux yet - but we can build this with bpftrace.
 
 
 ## Building our bpftrace script
-
 We want to detect traces of RandomX (the CPU-intensive mining function for Monero) running on a cluster. Specifically, we want to find the forensic trace of RandomX changing the [floating-point rounding mode](https://developer.arm.com/documentation/dui0475/k/floating-point-support/ieee-754-arithmetic-and-rounding). We can do this with [bpftrace](https://github.com/iovisor/bpftrace).
 
 ### What is bpftrace?
