@@ -17,9 +17,11 @@ In this article we’ll discuss the following:
 - Existing methods for detecting cryptojackers
 - How to leverage [bpftrace](https://github.com/iovisor/bpftrace) to detect Monero miners
 
+_Detection scripts and test environment can be [found in this repo](https://github.com/pixie-io/pixie-demos/tree/main/detect-monero-demo)_.
+
 ## Contents
 
-- [What happens during cryptomining?](#what-is-cryptomining)
+- [What happens during cryptomining?](#what-happens-during-cryptomining)
 - [What signals can we detect?](#what-can-we-detect)
 - [Monero mining signals](#detecting-monero-miners)
 - [Building our bpftrace script](#building-our-bpftrace-script)
@@ -78,7 +80,7 @@ Because the miners must receive block updates from the rest of the network as we
 
 ### Model hardware usage patterns of miners
 
-Similarly, you can collect data from hardware counters and train a model that discriminates between mining and not-mining using of CPU, GPU, etc., as discussed in [Gangwal et al.](https://arxiv.org/abs/1909.00268) and [Tahir et al.](http://caesar.web.engr.illinois.edu/papers/dime-raid17.pdf) 
+Similarly, you can collect data from hardware counters and train a model that discriminates between mining and not-mining use of CPU, GPU, etc., as discussed in [Gangwal et al.](https://arxiv.org/abs/1909.00268) and [Tahir et al.](http://caesar.web.engr.illinois.edu/papers/dime-raid17.pdf) 
 
 🟢 **Pros:** robust to binary obfuscation
 
@@ -93,9 +95,9 @@ RandomX adds a layer on top of the Bitcoin PoW. Instead of guessing the “proof
 
 ::: div image-xl
 <svg title="Monero miner Proof of Work" src='xmr-pow.png'/>
-:::
+::: 
 
-These RandomX programs are easy to spot. They leverage a large set of CPU features, some of which are rarely used by other programs. The instruction set [attempts to hit many features available on](https://github.com/tevador/RandomX/blob/master/doc/design.md#23-registers) commodity CPUs. 
+**These RandomX programs are easy to spot.** They leverage a large set of CPU features, some of which are rarely used by other programs. The instruction set [attempts to hit many features available on](https://github.com/tevador/RandomX/blob/master/doc/design.md#23-registers) commodity CPUs. 
 This design decision [curtails the effectiveness of GPUS and ASICs](https://github.com/tevador/RandomX/blob/master/doc/design.md#1-design-considerations), forcing miners to use CPUs.
 
 One RandomX instruction in particular leaves behind a strong signal in the CPU. [CFROUND](https://github.com/tevador/RandomX/blob/master/doc/specs.md#541-cfround) changes the rounding mode for floating point operations. Other programs rarely set this mode. When they do, they rarely toggle this value as much as RandomX does. The main RandomX contributor, [tevador](https://github.com/tevador), created [randomx-sniffer](https://github.com/tevador/randomx-sniffer) which looks for programs that change the rounding-mode often on Windows machines. Nothing exists for Linux yet - but we can build this with bpftrace.
@@ -216,7 +218,7 @@ tracepoint:x86_fpu:x86_fpu_regs_deactivated
 
 _[Source](https://github.com/pixie-io/pixie-demos/tree/main/detect-monero-demo)_
 
-And now we only see xmrig!
+And now we only see xmrig! **Our detector successfully isolates the Monero miner running in the cluster.**
 
 
 ::: div image-xl
