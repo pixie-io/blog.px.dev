@@ -8,23 +8,27 @@ authors: ['Phillip Kuznetsov']
 emails: ['philkuz@pixielabs.ai']
 ---
 
-Cryptomining is expensive if you have to pay for the equipment and energy. But if you “borrow” those resources, cryptomining switches from marginal returns to entirely profit. This asymmetry is why [cybercrime groups](https://www.tigera.io/blog/teamtnt-latest-ttps-targeting-kubernetes/) increasingly focus on cryptojacking  – stealing compute time for the purpose of cryptomining – as part of malware deployments.
+Cryptomining is expensive if you have to pay for the equipment and energy. But if you “borrow” those resources, cryptomining switches from marginal returns to entirely profit. This asymmetry is why [cybercrime groups](https://www.tigera.io/blog/teamtnt-latest-ttps-targeting-kubernetes/) increasingly focus on
+[cryptojacking](https://www.interpol.int/en/Crimes/Cybercrime/Cryptojacking)  – stealing compute time for the purpose of cryptomining – as part of malware deployments.
 
 Despite a common misconception, [most cryptocurrencies are not actually anonymous](https://bitcoin.org/en/you-need-to-know#:~:text=Bitcoin%20is%20not%20anonymous&text=All%20Bitcoin%20transactions%20are%20stored,transactions%20of%20any%20Bitcoin%20address.&text=This%20is%20one%20reason%20why%20Bitcoin%20addresses%20should%20only%20be%20used%20once.). If these cryptojackers were to mine Bitcoin or Ethereum, their transaction details would be open to the public, making it possible for law enforcement to track them down. Because of this, many cybercriminals opt to mine [Monero: a privacy focused cryptocurrency](https://www.getmonero.org/get-started/what-is-monero/) that makes transactions confidential and untraceable.
 
-In this article we demonstrate how you can detect Monero cryptojackers using [bpftrace](https://github.com/iovisor/bpftrace). We provide a review of other methods for detecting cryptojackers, then detail a process to leverage bpftrace. 
+In this article we’ll discuss the following:
+- Existing methods for detecting cryptojackers
+- How to leverage [bpftrace](https://github.com/iovisor/bpftrace) to detect Monero miners
 
+## Contents
 
-- [What is Cryptomining?](#what-is-cryptomining)
+- [What happens during cryptomining?](#what-is-cryptomining)
 - [What signals can we detect?](#what-can-we-detect)
 - [Monero mining signals](#detecting-monero-miners)
 - [Building our bpftrace script](#building-our-bpftrace-script)
   - [What is bpftrace?](#what-is-bpftrace)
-  - [bpftrace Development Environment](#the-environment)
+  - [Test environment](#test-environment)
   - [Where should we trace?](#where-can-we-find-the-data)
   - [What data do we need?](#what-data-do-we-need)
 
-## What is Cryptomining?
+## What happens during cryptomining?
 
 What happens during cryptomining and why is it important? [This blog post by Anthony Albertorio](https://medium.com/coinmonks/simply-explained-why-is-proof-of-work-required-in-bitcoin-611b143fc3e0) provides more detail, but here's what's relevant:
 
@@ -43,7 +47,7 @@ Verifying the proof is computationally easy: you hash the block and verify that 
 Now that we know how cryptomining works, we can evaluate ways to detect cryptojackers. Note that no matter what we propose below, the landscape will shift and new techniques will be necessary. Attackers adapt to defenses and detections as they confront them in the field.
 
 
-### Analyzing Binaries
+### Analyzing binaries
 
 Many cryptojackers opt to use open-source mining software without modification. Scanning binaries running on the operating system for common mining software names and signatures of mining software is a simple yet effective barrier.
 
@@ -52,7 +56,7 @@ Many cryptojackers opt to use open-source mining software without modification. 
 **Cons:** easy to bypass with obfuscation of code. Can also be hidden from  tools like `ps` or `top` using [libprocesshider](https://github.com/gianlucaborello/libprocesshider).
 
 
-### Block Connections to Known IPs
+### Block connections to known IPs
 
 Many cryptominers choose to [contribute to a mining pool](https://www.investopedia.com/tech/how-choose-cryptocurrency-mining-pool/), which will require some outgoing network connection to a central location. You can make a blocklist of the top 100 cryptomining pools and block a large portion of miners. 
 
@@ -81,7 +85,7 @@ Similarly, you can collect data from hardware counters and train a model that di
 **Cons:** large upfront investment to collect data and train models. Operational investment to update models with new data after discovery of new attacks. Risk of [steganographic obfuscation](https://www.sciencedirect.com/science/article/pii/S1389128621001249) or [adversarial examples](https://en.wikipedia.org/wiki/Adversarial_machine_learning).
 
 
-## Detecting Monero Miners
+## Detecting Monero miners
 
 We mentioned earlier that cryptojackers opt to mine Monero because of [the privacy guarantees](https://www.getmonero.org/resources/about/). It turns out that Monero’s Proof of Work algorithm, [RandomX](https://github.com/tevador/RandomX), actually leaves behind a detectable trace.
 
@@ -107,7 +111,7 @@ We want to detect traces of RandomX (the CPU-intensive mining function for Moner
 We specifically want a script that grabs information about the floating-point unit (FPU) configuration. The FPU configuration contains the rounding mode setting that Monero miners change often.
 
 
-### The Environment
+### Test environment
 
 The scripts and environment setup instructions [are available here](https://github.com/pixie-io/pixie-demos/tree/main/detect-monero-demo).
 
@@ -226,9 +230,9 @@ We can then [connect the process to the hosting Kubernetes pod using Pixie](http
 <svg title="Pods that are suspected to run RandomX" src='pods.png'/>
 :::
 
-## Wrapping Up
+## Wrapping up
 
-And there you have it - easily detect all Monero mining on your cluster! _If only it could be so simple._ Like any other security tool, this mining detector is only one turn of the security cat and mouse game. For example, an illicit miner might be able to avoid running programs that contain `CFROUND` instructions and evade detection entirely.
+And there you have it - easily detect Monero mining on your cluster! _If only it could be so simple._ Like any other security tool, this mining detector is only one turn of the security cat and mouse game. For example, an illicit miner might be able to avoid running RandomX programs that contain `CFROUND` instructions and evade detection entirely.
 
 The best anti-cryptojacking solution will be a combination of defenses and detections using different modalities. That might mean combining this approach with the approaches listed earlier in the article or with other detectors written in bpftrace.
 
