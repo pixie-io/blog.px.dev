@@ -21,7 +21,7 @@ In this article we demonstrate how you can detect Monero cryptojackers using [bp
 - [Building our bpftrace script](#building-our-bpftrace-script)
   - [What is bpftrace?](#what-is-bpftrace)
   - [bpftrace Development Environment](#the-environment)
-  - [Where can we find the data?](#where-can-we-find-the-data)
+  - [Where should we trace?](#where-can-we-find-the-data)
   - [What data do we need?](#what-data-do-we-need)
 
 ## What is Cryptomining?
@@ -91,9 +91,10 @@ RandomX adds a layer on top of the Bitcoin PoW. Instead of guessing the “proof
 <svg title="Monero miner Proof of Work" src='xmr-pow.png'/>
 :::
 
-These RandomX programs are easy to spot. They leverage a large set of CPU features, some of which are rarely used by other programs. The instruction set [attempts to hit many features available on](https://github.com/tevador/RandomX/blob/master/doc/design.md#23-registers) commodity CPUs. The RandomX developers attempted to explicitly [curtail the effectiveness of specialized hardware](https://github.com/tevador/RandomX/blob/master/doc/design.md#1-design-considerations) like GPUs and ASICs. The side benefit is now we only have to care about Monero miners leveraging CPUs.
+These RandomX programs are easy to spot. They leverage a large set of CPU features, some of which are rarely used by other programs. The instruction set [attempts to hit many features available on](https://github.com/tevador/RandomX/blob/master/doc/design.md#23-registers) commodity CPUs. 
+This design decision [curtails the effectiveness of GPUS and ASICs](https://github.com/tevador/RandomX/blob/master/doc/design.md#1-design-considerations), forcing miners to use CPUs.
 
-One signal opportunity is the RandomX instruction: [CFROUND](https://github.com/tevador/RandomX/blob/master/doc/specs.md#541-cfround). `CFROUND` changes the rounding mode for floating point operations. Other programs rarely set this mode. When they do, they rarely toggle this value as much as RandomX does. The main RandomX contributor, [tevador](https://github.com/tevador), created [randomx-sniffer](https://github.com/tevador/randomx-sniffer) which looks for programs that change the rounding-mode often on Windows machines. Nothing exists for Linux yet - but we can build this with bpftrace.
+One RandomX instruction in particular leaves behind a strong signal in the CPU. [CFROUND](https://github.com/tevador/RandomX/blob/master/doc/specs.md#541-cfround) changes the rounding mode for floating point operations. Other programs rarely set this mode. When they do, they rarely toggle this value as much as RandomX does. The main RandomX contributor, [tevador](https://github.com/tevador), created [randomx-sniffer](https://github.com/tevador/randomx-sniffer) which looks for programs that change the rounding-mode often on Windows machines. Nothing exists for Linux yet - but we can build this with bpftrace.
 
 
 ## Building our bpftrace script
@@ -164,7 +165,7 @@ This sets the [MXCSR](https://help.totalview.io/previous_releases/2019/html/Refe
 
 Let’s try to find the MXCSR register in the `fpu` struct exposed by `x86_fpu_regs_deactivated`. What fields are available inside the `fpu` struct? First, I searched for the [tracepoint definition](https://sourcegraph.com/github.com/torvalds/linux@v5.13/-/blob/arch/x86/include/asm/trace/fpu.h), which led me to the x86/include/fpu namespace. Then I searched for the struct definition inside the namespace, which surfaced: [asm/fpu/types.h](https://sourcegraph.com/github.com/torvalds/linux@v5.13/-/blob/arch/x86/include/asm/fpu/types.h?L317:1). We’ll include this header in our bpftrace script. Finally, I searched in that file for `mxcsr` and found it's available via `fpu->state.xsave.i387.mxcsr`
 
-Let's access this register value in bpftrace [^3]
+Let's access this register value in bpftrace [^3].
 
 
 ```c
@@ -182,7 +183,7 @@ tracepoint:x86_fpu:x86_fpu_regs_deactivated
 
 _[Source](https://github.com/pixie-io/pixie-demos/tree/main/detect-monero-demo)_
 
-Running this, we can already tell that `xmrig` stands out from the rest based on the register value alone. We’re on the right track.
+Running this, `xmrig` stands out from the rest based on the register value alone. We’re on the right track.
 
 
 ::: div image-xl
@@ -227,11 +228,11 @@ We can then [connect the process to the hosting Kubernetes pod using Pixie](http
 
 ## Wrapping Up
 
-And there you have it - easily detect all Monero mining on your cluster! - If only it could be so simple. Like any other security tool, this mining detector is only one turn of the cat and mouse game and there exists some clever work-arounds for miners. For example, an illicit miner might explicitly avoid running programs that contain `CFROUND` instructions by filtering those programs out.
+And there you have it - easily detect all Monero mining on your cluster! _If only it could be so simple._ Like any other security tool, this mining detector is only one turn of the security cat and mouse game. For example, an illicit miner might be able to avoid running programs that contain `CFROUND` instructions and evade detection entirely.
 
 The best anti-cryptojacking solution will be a combination of defenses and detections using different modalities. That might mean combining this approach with the approaches listed earlier in the article or with other detectors written in bpftrace.
 
-All the above code is available [on Github](https://github.com/pixie-io/pixie-demos/tree/main/detect-monero-demo). If you come up with some new Monero detection techniques or clever ways to use bpftrace, let us know on [our Slack](https://slackin.px.dev/) or tweet at us [@pixie_run](https://twitter.com/pixie_run). 
+All the above code is available [on Github](https://github.com/pixie-io/pixie-demos/tree/main/detect-monero-demo). If you come up with some new Monero detectors or clever ways to use bpftrace, let us know on [our Slack](https://slackin.px.dev/) or tag us on Twitter [@pixie_run](https://twitter.com/pixie_run). 
 
 
 [^1]: Some cryptocurrencies use other consensus mechanisms than Proof of Work such as Proof of Stake. We don’t cover these in this article.
