@@ -1,7 +1,7 @@
 ---
 path: '/detect-monero-miners'
 title: 'Detecting Monero miners with bpftrace'
-date: 2022-02-12T06:00:00.000+00:00
+date: 2022-02-17T06:00:00.000+00:00
 featured_image: hero.png
 categories: ['Pixie Team Blogs']
 authors: ['Phillip Kuznetsov']
