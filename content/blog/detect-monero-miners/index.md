@@ -10,7 +10,7 @@ emails: ['philkuz@pixielabs.ai']
 
 Cryptomining is expensive if you have to pay for the equipment and energy. But if you “borrow” those resources, cryptomining revenue becomes entirely profit. This asymmetry is why [cybercrime groups](https://www.tigera.io/blog/teamtnt-latest-ttps-targeting-kubernetes/) increasingly focus on cryptojacking  – stealing compute time for the purpose of cryptomining – as part of malware deployments.
 
-Despite a common misconception, [most cryptocurrencies are not actually anonymous](https://bitcoin.org/en/you-need-to-know#:~:text=Bitcoin%20is%20not%20anonymous&text=All%20Bitcoin%20transactions%20are%20stored,transactions%20of%20any%20Bitcoin%20address.&text=This%20is%20one%20reason%20why%20Bitcoin%20addresses%20should%20only%20be%20used%20once.). If these cryptojackers were to mine Bitcoin or Ethereum, their transaction details would be open to the public, making it possible for law enforcement to track them down. Because of this, many Cybercriminals opt to mine[ Monero: a privacy focused cryptocurrency](https://www.getmonero.org/get-started/what-is-monero/) that makes transactions confidential and untraceable.
+Despite a common misconception, [most cryptocurrencies are not actually anonymous](https://bitcoin.org/en/you-need-to-know#:~:text=Bitcoin%20is%20not%20anonymous&text=All%20Bitcoin%20transactions%20are%20stored,transactions%20of%20any%20Bitcoin%20address.&text=This%20is%20one%20reason%20why%20Bitcoin%20addresses%20should%20only%20be%20used%20once.). If these cryptojackers were to mine Bitcoin or Ethereum, their transaction details would be open to the public, making it possible for law enforcement to track them down. Because of this, many Cybercriminals opt to mine [Monero: a privacy focused cryptocurrency](https://www.getmonero.org/get-started/what-is-monero/) that makes transactions confidential and untraceable.
 
 In this article we demonstrate how you can detect Monero cryptojackers using [bpftrace](https://github.com/iovisor/bpftrace). We provide a review of other methods for detecting cryptojackers, then detail a process to leverage bpftrace. 
 
@@ -63,7 +63,7 @@ Many cryptominers choose to [contribute to a mining pool](https://www.investoped
 
 ### Model common network patterns of miners
 
-Most miners opt for SSL which means reading the body of messages is impossible, but there are still signatures that exist for the network patterns.[ Michele Russo et al. collect network data](https://jis-eurasipjournals.springeropen.com/articles/10.1186/s13635-021-00126-1) on these traces and trained an ML classifier to discriminate between normal network patterns and cryptominer network patterns.
+Most miners opt for SSL which means reading the body of messages is impossible, but there are still signatures that exist for the network patterns. [Michele Russo et al. collect network data](https://jis-eurasipjournals.springeropen.com/articles/10.1186/s13635-021-00126-1) on these traces and trained an ML classifier to discriminate between normal network patterns and cryptominer network patterns.
 
 Because the miners must receive block updates from the rest of the network as well as updates from mining pools, they must rely on the network. 
 
@@ -74,7 +74,7 @@ Because the miners must receive block updates from the rest of the network as we
 
 ### Model hardware usage patterns of miners
 
-Similarly, you can collect data from hardware counters and train a model that discriminates between mining and not-mining using of CPU, GPU, etc., as discussed in[ Gangwal et al.](https://arxiv.org/abs/1909.00268) and[ Tahir et al.](http://caesar.web.engr.illinois.edu/papers/dime-raid17.pdf) 
+Similarly, you can collect data from hardware counters and train a model that discriminates between mining and not-mining using of CPU, GPU, etc., as discussed in [Gangwal et al.](https://arxiv.org/abs/1909.00268) and [Tahir et al.](http://caesar.web.engr.illinois.edu/papers/dime-raid17.pdf) 
 
 **Pros:** robust to binary obfuscation
 
@@ -93,7 +93,7 @@ RandomX adds a layer on top of the Bitcoin PoW. Instead of guessing the “proof
 
 These RandomX programs are easy to spot. They leverage a large set of CPU features, some of which are rarely used by other programs. The instruction set [attempts to hit many features available on](https://github.com/tevador/RandomX/blob/master/doc/design.md#23-registers) commodity CPUs. The RandomX developers attempted to explicitly [curtail the effectiveness of specialized hardware](https://github.com/tevador/RandomX/blob/master/doc/design.md#1-design-considerations) like GPUs and ASICs. The side benefit is now we only have to care about Monero miners leveraging CPUs.
 
-One signal opportunity is the RandomX instruction: [CFROUND](https://github.com/tevador/RandomX/blob/master/doc/specs.md#541-cfround). `CFROUND` changes the rounding mode for floating point operations. Other programs rarely set this mode. When they do, they rarely toggle this value as much as RandomX programs would. The main RandomX contributor, [tevador](https://github.com/tevador), created [randomx-sniffer](https://github.com/tevador/randomx-sniffer) which looks for programs that change the rounding-mode often on Windows machines. Nothing exists for Linux yet - but we can build this with bpftrace.
+One signal opportunity is the RandomX instruction: [CFROUND](https://github.com/tevador/RandomX/blob/master/doc/specs.md#541-cfround). `CFROUND` changes the rounding mode for floating point operations. Other programs rarely set this mode. When they do, they rarely toggle this value as much as RandomX does. The main RandomX contributor, [tevador](https://github.com/tevador), created [randomx-sniffer](https://github.com/tevador/randomx-sniffer) which looks for programs that change the rounding-mode often on Windows machines. Nothing exists for Linux yet - but we can build this with bpftrace.
 
 
 ## Building our bpftrace script
@@ -112,9 +112,9 @@ The scripts and environment setup instructions [are available here](https://gith
 
 **My cluster:** I deployed a Kubernetes cluster on a few machines running Linux Kernel 5.13, using x86 processors [^2].
 
-**My target:** I deployed[ xmrig, a popular open source Monero miner](https://github.com/xmrig/xmrig) to my cluster.
+**My target:** I deployed [xmrig, a popular open source Monero miner](https://github.com/xmrig/xmrig) to my cluster.
 
-**My bpftrace environment:** You can use the[ bpftrace CLI](https://github.com/iovisor/bpftrace/blob/master/INSTALL.md) directly on nodes. I chose to use Pixie instead because I wanted to [deploy bpftrace to all the nodes](https://blog.px.dev/distributed-bpftrace/) on my cluster and leverage Pixie's data engine.
+**My bpftrace environment:** You can use the [bpftrace CLI](https://github.com/iovisor/bpftrace/blob/master/INSTALL.md) directly on nodes. I chose to use Pixie instead because I wanted to [deploy bpftrace to all the nodes](https://blog.px.dev/distributed-bpftrace/) on my cluster and leverage Pixie's data engine.
 
 
 ### Where can we find the data?
@@ -135,7 +135,7 @@ tracepoint:x86_fpu:x86_fpu_regs_deactivated
 ```
 
 
-It runs whenever the x86_fpu_regs_deactivated event triggers. For each event, the script outputs the time of the event, the pid of the triggering process and the name of the triggering process (aka comm). 
+It runs whenever the `x86_fpu_regs_deactivated` event triggers. For each event, the script outputs the time of the event, the pid of the triggering process and the name of the triggering process (aka `comm`). 
 
 We see a bunch of events, some of which come from the miner, xmrig. 
 
@@ -156,13 +156,13 @@ Aggregating, we see that `xmrig` shows up near the top of the list, but it doesn
 
 ### What data do we need?
 
-We're trying to detect a signature of the[ CFROUND](https://github.com/tevador/RandomX/blob/master/doc/specs.md#541-cfround) instruction from RandomX. `CFROUND` changes the [floating-point rounding mode](https://developer.arm.com/documentation/dui0475/k/floating-point-support/ieee-754-arithmetic-and-rounding) for future floating-point operations. Most programs do not change this value so it gives us a strong signal of something fishy.
+We're trying to detect a signature of the [CFROUND](https://github.com/tevador/RandomX/blob/master/doc/specs.md#541-cfround) instruction from RandomX. `CFROUND` changes the [floating-point rounding mode](https://developer.arm.com/documentation/dui0475/k/floating-point-support/ieee-754-arithmetic-and-rounding) for future floating-point operations. Most programs do not change this value so it gives us a strong signal of something fishy.
 
-**What happens when RandomX executes `CFROUND`?** If you inspect the RandomX [x86 implementation of CFROUND](https://github.com/tevador/RandomX/blob/f9ae3f235183c452962edd2a15384bdc67f7a11e/src/jit_compiler_x86.cpp#L766), you'll find the last instruction calls[ LDMXCSR](https://www.felixcloutier.com/x86/ldmxcsr).
+**What happens when RandomX executes `CFROUND`?** If you inspect the RandomX [x86 implementation of CFROUND](https://github.com/tevador/RandomX/blob/f9ae3f235183c452962edd2a15384bdc67f7a11e/src/jit_compiler_x86.cpp#L766), you'll find the last instruction calls [LDMXCSR](https://www.felixcloutier.com/x86/ldmxcsr).
 
 This sets the [MXCSR](https://help.totalview.io/previous_releases/2019/html/Reference_Guide/Intelx86MXSCRRegister.html) register in the FPU; the register is responsible for control and status values for [Streaming SIMD Extensions](https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions). `CFROUND` sets the two rounding bits ([with mask 0x6000](https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions)) of MXCSR to the argument value. (See the [x86 assembly for CFROUND](https://github.com/tevador/RandomX/blob/a44d07c89fb83ae748b9966b50848092afadde6b/doc/program.asm#L351)).
 
-Let’s try to find the MXCSR register in the `fpu` struct exposed by `x86_fpu_regs_deactivated`. What fields are available inside the `fpu` struct? First, I searched for the[ tracepoint definition](https://sourcegraph.com/github.com/torvalds/linux@v5.13/-/blob/arch/x86/include/asm/trace/fpu.h), which led me to the x86/include/fpu namespace. Then I searched for the struct definition inside the namespace, which surfaced:[ asm/fpu/types.h](https://sourcegraph.com/github.com/torvalds/linux@v5.13/-/blob/arch/x86/include/asm/fpu/types.h?L317:1). We’ll include this header in our bpftrace script. Finally, I searched in that file for `mxcsr` and found it's available via `fpu->state.xsave.i387.mxcsr`
+Let’s try to find the MXCSR register in the `fpu` struct exposed by `x86_fpu_regs_deactivated`. What fields are available inside the `fpu` struct? First, I searched for the [tracepoint definition](https://sourcegraph.com/github.com/torvalds/linux@v5.13/-/blob/arch/x86/include/asm/trace/fpu.h), which led me to the x86/include/fpu namespace. Then I searched for the struct definition inside the namespace, which surfaced: [asm/fpu/types.h](https://sourcegraph.com/github.com/torvalds/linux@v5.13/-/blob/arch/x86/include/asm/fpu/types.h?L317:1). We’ll include this header in our bpftrace script. Finally, I searched in that file for `mxcsr` and found it's available via `fpu->state.xsave.i387.mxcsr`
 
 Let's access this register value in bpftrace [^3]
 
@@ -190,7 +190,7 @@ Running this, we can already tell that `xmrig` stands out from the rest based on
 :::
 
 
-Now for the sinker: filtering by the rounding-bits from `$mxcsr`. We can find the rounding bits of the register by[ masking 0x6000](https://help.totalview.io/previous_releases/2019/html/index.html#page/Reference_Guide/Intelx86MXSCRRegister.html) and shifting the bits towards the least significant bits. Then we filter out all non-zero values.
+Now for the sinker: filtering by the rounding-bits from `$mxcsr`. We can find the rounding bits of the register by [masking 0x6000](https://help.totalview.io/previous_releases/2019/html/index.html#page/Reference_Guide/Intelx86MXSCRRegister.html) and shifting the bits towards the least significant bits. Then we filter out all non-zero values.
 
 
 ```c
