@@ -56,7 +56,7 @@ int syscall__probe_counter(struct pt_regs* ctx) {
 }
 ```
 
-The code above is for a kprobe on the `recv()` syscall. Every time a `recv()` call is made and the probe is triggered, a count is incremented. The count is stored in a BPF map, which also means the current count can be read from user-space at any time to get the latest value.
+The code above can be attached on a syscall (for example, the `recv()` syscall). Then, every time the syscall is made, the probe is triggered and the count for that PID is incremented. The counts are stored in a BPF map, which means the current counts for each PID can be read from user-space at any time to get the latest value.
 
 This code is actually pretty robust to different kernel versions because it doesn’t rely on any kernel-specific structs. So if you manage to compile it with the wrong Linux headers, it will still work.
 
@@ -100,7 +100,7 @@ int syscall__probe_counter(struct pt_regs* ctx) {
 }
 ```
 
-This code is similar to the original, but the counts map is now indexed by the PID plus the timestamp of when the process was started. To get the start time of a PID, however, we needed to read the internal kernel struct called the `task_struct`
+This code is similar to the original, but the counts map is now indexed by the PID plus the timestamp of when the process was started. To get the start time of a PID, however, we needed to read the internal kernel struct called the `task_struct`.
 
 When the program above is compiled, it uses `linux/sched.h` to know where in the `task_struct` the `group_leader` and `real_start_time` fields are located. These offsets are hard-coded into the bytecode.
 
@@ -134,7 +134,7 @@ There are two gotchas with this approach:
 
 2. You are relying on the target machine having the Linux headers installed. If the Linux headers are missing, you won’t be able to compile your eBPF code.
 
-We’re going to ignore problem #1 for the moment, since–though not efficient–the cost is only incurred when initially deploying bpf programs. Problem #2, however, could prevent your application from deploying, and your users will be frustrated.
+We’re going to ignore problem #1 for the moment, since–though not efficient–the cost is only incurred when initially deploying eBPF programs. Problem #2, however, could prevent your application from deploying, and your users will be frustrated.
 
 ## Getting Linux Headers
 
@@ -154,13 +154,13 @@ The above approach is a bit risky, but can work in practice if you’re not usin
 
 Given that it is risky to use mismatched headers if you’re poking at Linux structs, what else can you do? Ultimately, you’ll want to move to libbpf + CO-RE (discussed in the next section), but there are other tricks you can sometimes use. For example, Pixie does actually access the TGID `real_start_time` from the `task_struct`, but to avoid reading the wrong value we take a dynamic approach for locating these members that might move.
 
-Instead of relying on the Linux headers, we actually use a test probe to find the offsets of certain struct fields dynamically. Specifically, to find the location of the `real_start_time` within `task_struct`, we fork() a process and then probe it. We know the expected `real_start_time` of the process from `/proc/<pid>/stat` so then we just have to find the same value in memory in the probe. Once we find it, we have dynamically figured out where the information is located, and we are robust to different kernel versions.
+Instead of relying on the Linux headers, we actually use a test probe to find the offsets of certain struct fields dynamically. Specifically, to find the location of the `real_start_time` within `task_struct`, we `fork()` a process and then probe it. We know the expected `real_start_time` of the process from `/proc/<pid>/stat` so then we just have to find the same value in memory in the probe. Once we find it, we have dynamically figured out where the information is located, and we are robust to different kernel versions.
 
 You can see an example of this approach in the Pixie code base [here](https://github.com/pixie-io/pixie/blob/c08aaa2c53ce95ee40817acae3f662a95994f6fb/src/stirling/bpf_tools/task_struct_resolver.cc).
 
 This approach won’t work for all the fields that you may be interested in, but if you have some degree of control over the population of the struct, you can use these sorts of tricks to make your eBPF more robust.
 
-These tricks will only get you so far. The better solution is to move to libbpf and CO-RE.
+Admittedly, these tricks will only get you so far. The better solution is to move to libbpf and CO-RE.
 
 ## The Future is Now: libbpf + CO-RE
 
