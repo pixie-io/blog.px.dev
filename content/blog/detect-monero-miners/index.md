@@ -39,7 +39,7 @@ Verifying the proof is computationally easy: you hash the block and verify that 
 Now that we know how cryptomining works, we can evaluate ways to detect cryptojackers. Note that no matter what we propose below, the landscape will shift and new techniques will be necessary. Attackers adapt to defenses and detections as they confront them in the field.
 
 
-#### Analyzing Binaries
+### Analyzing Binaries
 
 Many cryptojackers opt to use open-source mining software without modification. Scanning binaries running on the operating system for common mining software names and signatures of mining software is a simple yet effective barrier.
 
@@ -48,7 +48,7 @@ Many cryptojackers opt to use open-source mining software without modification. 
 **Cons: **easy to bypass with obfuscation of code. Can also be hidden from  tools like `ps` or `top` using [libprocesshider](https://github.com/gianlucaborello/libprocesshider).
 
 
-#### Block Connections to Known IPs
+### Block Connections to Known IPs
 
 Many cryptominers choose to [contribute to a mining pool](https://www.investopedia.com/tech/how-choose-cryptocurrency-mining-pool/), which will require some outgoing network connection to a central location. You can make a blocklist of the top 100 cryptomining pools and block a large portion of miners. 
 
@@ -57,7 +57,7 @@ Many cryptominers choose to [contribute to a mining pool](https://www.investoped
 **Cons: **easy to bypass with proxies, pooling across private mining pools
 
 
-#### Model common network patterns of miners
+### Model common network patterns of miners
 
 Most miners opt for SSL which means reading the body of messages is impossible, but there are still signatures that exist for the network patterns.[ Michele Russo et al. collect network data](https://jis-eurasipjournals.springeropen.com/articles/10.1186/s13635-021-00126-1) on these traces and trained an ML classifier to discriminate between normal network patterns and cryptominer network patterns.
 
@@ -68,7 +68,7 @@ Because the miners must receive block updates from the rest of the network as we
 **Cons: **large upfront investment to collect data and train models. Operational investment to update models with new data after discovery of new attacks. Risk of [steganographic obfuscation](https://www.sciencedirect.com/science/article/pii/S1389128621001249) or [adversarial examples](https://en.wikipedia.org/wiki/Adversarial_machine_learning).
 
 
-#### Model hardware usage patterns of miners
+### Model hardware usage patterns of miners
 
 Similarly, you can collect data from hardware counters and train a model that discriminates between mining and not-mining using of CPU, GPU, etc., as discussed in[ Gangwal et al.](https://arxiv.org/abs/1909.00268) and[ Tahir et al.](http://caesar.web.engr.illinois.edu/papers/dime-raid17.pdf) 
 
