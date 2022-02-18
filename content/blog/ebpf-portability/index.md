@@ -4,8 +4,8 @@ title: 'The Challenge with Deploying eBPF Into the Wild'
 date: 2022-02-16T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
-authors: ['Omid Azizi']
-emails: ['oazizi@pixielabs.ai']
+authors: ['Omid Azizi', 'Guy Arbitman']
+emails: ['oazizi@pixielabs.ai', 'guya@seekret.com']
 ---
 
 [eBPF](http://ebpf.io) technology has been a game-changer for applications that want to interact with the Linux kernel in a safe way. The use of eBPF probes has led to efficiency improvements and new capabilities in fields like observability, networking, and security.
@@ -184,6 +184,6 @@ So how do you get the BTF for your host machine? If your kernel was compiled wit
 
 For example, for Pixie, we support kernels as old as 4.14, which won’t have BTF built-in; to make sure we have the widest possible support across kernel versions, we have found ourselves in a spot where we have had to stick with BCC. What else can one do?
 
-Fortunately, there are cool new projects on the horizon. In the follow-up to this blog, my collaborator [Guy](https://twitter.com/arbitmanguy), will go into more detail on how to use CO-RE with a BTF repository called [BTFHub](https://github.com/aquasecurity/btfhub) to enable deployments across a wide range of machines. Stay tuned for Part 2!
+Fortunately, there are cool new projects on the horizon. In Part 2 we will discuss how to use CO-RE with a BTF repository called [BTFHub](https://github.com/aquasecurity/btfhub) to enable deployments across a wide range of machines. Stay tuned!
 
 Questions? Comments? Find us on [Slack](https://slackin.px.dev/) or [Twitter](https://twitter.com/pixie_run).
