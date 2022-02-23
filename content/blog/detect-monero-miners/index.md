@@ -3,7 +3,7 @@ path: '/detect-monero-miners'
 title: 'Detecting Monero miners with bpftrace'
 date: 2022-02-17T06:00:00.000+00:00
 featured_image: hero.png
-categories: ['Pixie Team Blogs']
+categories: ['Pixie Team Blogs', 'eBPF', 'Security']
 authors: ['Phillip Kuznetsov']
 emails: ['philkuz@pixielabs.ai']
 ---
@@ -234,7 +234,7 @@ We can then [connect the process to the hosting Kubernetes pod using Pixie](http
 
 ## Wrapping up
 
-And there you have it - easily detect Monero mining on your cluster! _If only it could be so simple._ Like any other security tool, this mining detector is only one turn of the security cat and mouse game. For example, an illicit miner might be able to avoid running RandomX programs that contain `CFROUND` instructions and evade detection entirely.
+And there you have it - easily detect Monero mining on your cluster! _If only it could be so simple._ Like any other security tool, this mining detector is only one turn of the security cat and mouse game. [^4]
 
 The best anti-cryptojacking solution will be a combination of defenses and detections using different modalities. That might mean combining this approach with the approaches listed earlier in the article or with other detectors written in bpftrace.
 
@@ -244,4 +244,5 @@ All the above code is available [on Github](https://github.com/pixie-io/pixie-de
 [^1]: Some cryptocurrencies use other consensus mechanisms than Proof of Work such as Proof of Stake. We don’t cover these in this article.
 [^2]: The scripts in this article are x86 specific. You’ll have to modify the script for other CPU architectures. However, bpftrace scripts are not necessarily architecture specific.
 [^3]: Why did I include this other random header? I received: `include/asm/fpu/types.h:309:15: error: use of undeclared identifier 'PAGE_SIZE'` When I only included `types.h`. I looked for a file in the same directory that defined this variable and included it first.
-
+[^4]: A previous version of the article claimed a miner could avoid generating programs with `CFROUND`. [Howard Chu](https://twitter.com/hyc_symas), a maintainer of the project, [pointed out](https://twitter.com/hyc_symas/status/1496388316291346435) that a valid hash requires running 8 programs in series, guaranteeing `CFROUND` shows up. On top of that, RandomX expects a specific random number generator with a specific seed as a [part of the
+  algorithm](https://github.com/tevador/RandomX/blob/master/doc/specs.md#2-algorithm-description), so miners must sample programs randomly.
