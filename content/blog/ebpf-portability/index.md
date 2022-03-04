@@ -43,7 +43,6 @@ BPF_HASH(counts_by_pid, uint32_t, int64_t);
 // Probe that counts every time it is triggered.
 // Can be used to count things like syscalls or particular functions.
 int syscall__probe_counter(struct pt_regs* ctx) {
-  bpf_trace_printk("triggered");
   uint32_t tgid = bpf_get_current_pid_tgid() >> 32;
 
   int64_t kInitVal = 0;
