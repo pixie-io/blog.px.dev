@@ -62,58 +62,26 @@ This means removing most of what's already on the page. We won't be using the sp
 3. Remove `logo.svg` as we aren't using it anymore.
 
 <tabs>
-
-<tab label="App.js">
-{"```javascript\n\
-import './App.css';\n\
+  <tab label="App.js">
+    <code-block language='jsx' code={`
+import './App.css';
 \n\
-function App() {\n\
-  return (\n\
-    <div className=\"App\">\n\
-      <main>\n\
-        Hello, World!\n\
-      </main>\n\
-    </div>\n\
-  );\n\
-}\n\
+function App() {
+  return (
+    <div className='App'>
+      <main>
+        Hello, World!
+      </main>
+    </div>
+  );
+}
 \n\
-export default App;\n\
-```"}
-</tab>
-
-<tab label="App.css">
-{"```css\n\
-body {\n\
-  /*Make it look nice*/\n\
-  background-color: #282c34;\n\
-  font-size: calc(10px + 2vmin);\n\
-  color: white;\n\
-}\n\
-\n\
-.App {\n\
-  /*Super basic container to fill the page and center contents*/\n\
-  width: 100vw;\n\
-  height: 100%;\n\
-  min-height: 100vh;\n\
-  display: flex;\n\
-  flex-flow: column nowrap;\n\
-  justify-content: center;\n\
-  align-items: center;\n\
-}\n\
-\n\
-a {\n\
-  color: #61dafb;\n\
-}\n\
-\n\
-main {\n\
-  padding: 2rem;\n\
-  text-align: center;\n\
-  box-sizing: border-box;\n\
-  width: 100%;\n\
-}\n\
-```"}
-</tab>
-
+export default App;
+    `}/>
+  </tab>
+  <tab label='App.css'>
+    <github-embed language='css' repo='pixie-io/pixie-demos' srcPath='react-table/1-basics/src/App.css' />
+  </tab>
 </tabs>
 
 Next, we'll put a basic table in place just to get the ball rolling:
@@ -124,120 +92,37 @@ Next, we'll put a basic table in place just to get the ball rolling:
 4. Use the new `Table` component from `Table.js` in `App.js`
 
 <tabs>
-
-<tab label="useData.js">
-{"```javascript\n\
-function randomFrom(array) {\n\
-  return array[Math.floor(Math.random() * array.length)];\n\
-}\n\
+  <tab label='useData.js'>
+    <github-embed language='js' repo='pixie-io/pixie-demos' srcPath='react-table/1-basics/src/utils/useData.js' />
+  </tab>
+  <tab label='Table.js'>
+    <github-embed language='js' repo='pixie-io/pixie-demos' srcPath='react-table/1-basics/src/Table.js' />
+  </tab>
+  <tab label='Table.module.css'>
+    <github-embed language='css' repo='pixie-io/pixie-demos' srcPath='react-table/1-basics/src/Table.module.css' />
+  </tab>
+  <tab label='App.js'>
+    <code-block language='diff' code={`
++ import useData from './utils/useData.js';
++ import Table from './Table.js';
 \n\
-/** Make a silly word that rhymes with Goomba (the Mario mushroom enemies) */\n\
-function sillyWord() {\n\
-  const leadConsonants = ['B', 'D', 'F', 'G', 'L', 'T', 'V', 'Z'];\n\
-  const middles = ['oom', 'oon', 'um', 'un'];\n\
-  const midConsonants = ['b', 'd']\n\
-  const ends = ['a', 'ah', 'u', 'uh', 'o'];\n\
+import './App.css';
 \n\
-  const word = randomFrom(leadConsonants) + randomFrom(middles) + randomFrom(midConsonants) + randomFrom(ends);\n\
+function App() {
+  const data = useData();
+  return (
+    <div className=\"App\">
+      <main>
+-       Hello, World!
++       <Table data={data} />
+      </main>
+    </div>
+  );
+}
 \n\
-  // Try again if we accidentally picked something offensive\n\
-  if (['Goombah'].includes(word)) return sillyWord();\n\
-  else return word;\n\
-}\n\
-\n\
-function sillyName() {\n\
-  return `${sillyWord()} ${sillyWord().substring(0, 3)}`;\n\
-}\n\
-\n\
-export default function useData(numRows = 20, numCols = 5) {\n\
-  const headers = ['ID', 'Name', 'Friend', 'Score', 'Temperament'];\n\
-  const genFuncs = [\n\
-    () => Math.ceil(Math.random() * 100),\n\
-    sillyName,\n\
-    sillyWord,\n\
-    () => Math.floor(Math.random() * 10_000) / 100,\n\
-    () => randomFrom(['Goofy', 'Wacky', 'Silly', 'Funny', 'Serious']),\n\
-  ];\n\
-  return {\n\
-    headers: Array(numCols).fill(0).map((_, h) => headers[h % headers.length]),\n\
-    rows: Array(numRows).fill(0).map(\n\
-      () => Array(numCols).fill(0).map(\n\
-        (_, c) => genFuncs[c % genFuncs.length]()\n\
-      )\n\
-    ),\n\
-  };\n\
-} \n\
-```"}
-</tab>
-
-<tab label="Table.js">
-{"```javascript\n\
-import styles from './Table.module.css'\n\
-\n\
-export default function Table({ data: { headers, rows } }) {\n\
-  return (\n\
-    <table className={styles.Table}>\n\
-      <thead>\n\
-        {headers.map(h => <th>{h}</th>)}\n\
-      </thead>\n\
-      <tbody>\n\
-        {rows.map((row) => (\n\
-          <tr>\n\
-            {row.map(cell => <td>{cell}</td>)}\n\
-          </tr>\n\
-        ))}\n\
-      </tbody>\n\
-    </table>\n\
-  );\n\
-} \n\
-```"}
-</tab>
-
-<tab label="Table.module.css">
-{"```css\n\
-.Table {\n\
-  font-size: 1rem;\n\
-  text-align: left;\n\
-  border-collapse: collapse;\n\
-  width: 100%;\n\
-}\n\
-\n\
-.Table td, .Table th {\n\
-  line-height: 2em;\n\
-  padding: 0 0.75em;\n\
-  border: 1px rgba(255, 255, 255, 0.75) solid;\n\
-}\n\
-\n\
-.Table th {\n\
-  padding: 0.75em 0.75em;\n\
-  border-bottom-width: 2px;\n\
-}\n\
-```"}
-</tab>
-
-<tab label="App.js">
-{"```diff\n\
-+ import useData from './utils/useData.js';\n\
-+ import Table from './Table.js';\n\
-\n\
-import './App.css';\n\
-\n\
-function App() {\n\
-  const data = useData();\n\
-  return (\n\
-    <div className=\"App\">\n\
-      <main>\n\
--       Hello, World!\n\
-+       <Table data={data} />\n\
-      </main>\n\
-    </div>\n\
-  );\n\
-}\n\
-\n\
-export default App;\n\
-```"}
-</tab>
-
+export default App;
+    `}/>
+  </tab>
 </tabs>
 
 Now that we're showing tabular data, let's start adding features to make it more useful.
@@ -261,127 +146,64 @@ To summarize:
 6. Despair not, because this makes the next parts easier.
 
 <tabs>
-
-<tab label="useData.js">
-{"```javascript\n\
-import * as React from 'react';\n\
+  <tab label='useData.js'>
+    <github-embed language='js' repo='pixie-io/pixie-demos' srcPath='react-table/2-react-table/src/utils/useData.js' />
+  </tab>
+  <tab label='Table.js'>
+    <code-block language='diff' code={`
+ import styles from './Table.module.css'
++import { useTable } from 'react-table';
++
++export default function Table({ data: { columns, data } }) {
++  const reactTable = useTable({ columns, data });
++
++  const {
++    getTableProps,
++    getTableBodyProps,
++    headerGroups,
++    rows,
++    prepareRow
++  } = reactTable;
 \n\
-function randomFrom(array) {\n\
-  return array[Math.floor(Math.random() * array.length)];\n\
-}\n\
-\n\
-/** Make a silly word that rhymes with Goomba (the Mario mushroom enemies) */\n\
-function sillyWord() {\n\
-  const leadConsonants = ['B', 'D', 'F', 'G', 'L', 'T', 'V', 'Z'];\n\
-  const middles = ['oom', 'oon', 'um', 'un'];\n\
-  const midConsonants = ['b', 'd']\n\
-  const ends = ['a', 'ah', 'u', 'uh', 'o'];\n\
-\n\
-  const word = randomFrom(leadConsonants) + randomFrom(middles) + randomFrom(midConsonants) + randomFrom(ends);\n\
-\n\
-  // Try again if we accidentally picked something offensive\n\
-  if (['Goombah'].includes(word)) return sillyWord();\n\
-  else return word;\n\
-}\n\
-\n\
-function sillyName() {\n\
-  return `${sillyWord()} ${sillyWord().substring(0, 3)}`;\n\
-}\n\
-\n\
-const genericHeaders = ['ID', 'Name', 'Friend', 'Score', 'Temperament'];\n\
-const genericDataFuncs = [\n\
-  () => Math.ceil(Math.random() * 100),\n\
-  sillyName,\n\
-  sillyWord,\n\
-  () => Math.floor(Math.random() * 10_000) / 100,\n\
-  () => randomFrom(['Goofy', 'Wacky', 'Silly', 'Funny', 'Serious']),\n\
-];\n\
-\n\
-// react-table expects memoized columns and data, so we export a React hook to permit doing that.\n\
-export default function useData(numRows = 20, numCols = 5) {\n\
-  const columns = React.useMemo(() => (\n\
-    Array(numCols).fill(0).map((_, h) => {\n\
-      const name = genericHeaders[h % genericHeaders.length];\n\
-      const id = `col${h}`;\n\
-      return {\n\
-        Header: name,\n\
-        accessor: id\n\
-      };\n\
-    })\n\
-  ), [numCols]);\n\
-\n\
-  const data = React.useMemo(() => (\n\
-    Array(numRows).fill(0).map(() => {\n\
-      const row = {};\n\
-      for (let c = 0; c < numCols; c++) {\n\
-        row[`col${c}`] = genericDataFuncs[c % genericDataFuncs.length]();\n\
-      }\n\
-      return row;\n\
-    })\n\
-  ), [numRows, numCols]);\n\
-\n\
-  return { columns, data };\n\
-}\n\
-```"}
-</tab>
-
-<tab label="Table.js">
-{"```diff\n\
- import styles from './Table.module.css'\n\
-+import { useTable } from 'react-table';\n\
-+\n\
-+export default function Table({ data: { columns, data } }) {\n\
-+  const reactTable = useTable({ columns, data });\n\
-+\n\
-+  const {\n\
-+    getTableProps,\n\
-+    getTableBodyProps,\n\
-+    headerGroups,\n\
-+    rows,\n\
-+    prepareRow\n\
-+  } = reactTable;\n\
-\n\
--export default function Table({ data: { headers, rows } }) {\n\
-   return (\n\
--    <table className={styles.Table}>\n\
-+    <table {...getTableProps()} className={styles.Table}>\n\
-       <thead>\n\
--        {headers.map(h => <th>{h}</th>)}\n\
--      </thead>\n\
--      <tbody>\n\
--        {rows.map((row) => (\n\
--          <tr>\n\
--            {row.map(cell => <td>{cell}</td>)}\n\
-+        {headerGroups.map(group => (\n\
-+          <tr {...group.getHeaderGroupProps()}>\n\
-+            {group.headers.map(column => (\n\
-+              <th {...column.getHeaderProps()}>\n\
-+                {column.render('Header')}\n\
-+              </th>\n\
-+            ))}\n\
-           </tr>\n\
-         ))}\n\
-+      </thead>\n\
-+      <tbody {...getTableBodyProps()}>\n\
-+        {rows.map((row) => {\n\
-+          prepareRow(row);\n\
-+          return (\n\
-+            <tr {...row.getRowProps()}>\n\
-+              {row.cells.map(cell => (\n\
-+                <td {...cell.getCellProps()}>\n\
-+                  {cell.render('Cell')}\n\
-+                </td>\n\
-+              ))}\n\
-+            </tr>\n\
-+          );\n\
-+        })}\n\
-       </tbody>\n\
-     </table>\n\
-   );\n\
-\n\
-```"}
-</tab>
-
+-export default function Table({ data: { headers, rows } }) {
+   return (
+-    <table className={styles.Table}>
++    <table {...getTableProps()} className={styles.Table}>
+       <thead>
+-        {headers.map(h => <th>{h}</th>)}
+-      </thead>
+-      <tbody>
+-        {rows.map((row) => (
+-          <tr>
+-            {row.map(cell => <td>{cell}</td>)}
++        {headerGroups.map(group => (
++          <tr {...group.getHeaderGroupProps()}>
++            {group.headers.map(column => (
++              <th {...column.getHeaderProps()}>
++                {column.render('Header')}
++              </th>
++            ))}
+           </tr>
+         ))}
++      </thead>
++      <tbody {...getTableBodyProps()}>
++        {rows.map((row) => {
++          prepareRow(row);
++          return (
++            <tr {...row.getRowProps()}>
++              {row.cells.map(cell => (
++                <td {...cell.getCellProps()}>
++                  {cell.render('Cell')}
++                </td>
++              ))}
++            </tr>
++          );
++        })}
+       </tbody>
+     </table>
+   );
+    `}/>
+  </tab>
 </tabs>
 
 It looks like this now:
@@ -409,101 +231,69 @@ Like with filtering, `useSortBy` is [highly configurable](https://react-table.ta
 You can set a default sort state, allow sorting by multiple columns, reset sorting whenever you need to, customize the sorting method, and more.
 
 <tabs>
-
-<tab label="Table.js">
-{"```diff\n\
-+import * as React from 'react';\n\
-+\n\
- import styles from './Table.module.css'\n\
--import { useTable } from 'react-table';\n\
-+import Filter from './Filter.js';\n\
-+import { useTable, useGlobalFilter, useSortBy } from 'react-table';\n\
- \n\
- export default function Table({ data: { columns, data } }) {\n\
--  const reactTable = useTable({ columns, data });\n\
-+  const reactTable = useTable({\n\
-+      columns,\n\
-+      data\n\
-+    },\n\
-+    useGlobalFilter,\n\
-+    useSortBy\n\
-+  );\n\
- \n\
-   const {\n\
-     getTableProps,\n\
-     getTableBodyProps,\n\
-     headerGroups,\n\
-     rows,\n\
--    prepareRow\n\
-+    prepareRow,\n\
-+    setGlobalFilter\n\
-   } = reactTable;\n\
- \n\
-   return (\n\
-+    <>\n\
-+      <Filter onChange={setGlobalFilter} />\n\
-     <table {...getTableProps()} className={styles.Table}>\n\
-       <thead>\n\
-         {headerGroups.map(group => (\n\
-           <tr {...group.getHeaderGroupProps()}>\n\
-             {group.headers.map(column => (\n\
--              <th {...column.getHeaderProps()}>\n\
-+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>\n\
-                 {column.render('Header')}\n\
-+                  <span>\n\
-+                    {column.isSorted ? (\n\
-+                      column.isSortedDesc ? ' 🔽' : ' 🔼'\n\
-+                    ): ''}\n\
-+                  </span>\n\
-               </th>\n\
-             ))}\n\
-           </tr>\n\
-          );\n\
-         })}\n\
-       </tbody>\n\
-     </table>\n\
-+    </>\n\
-   );\n\
- }\n\
+  <tab label='Table.js'>
+    <code-block language='diff' code={`
++import * as React from 'react';
++
+ import styles from './Table.module.css'
+-import { useTable } from 'react-table';
++import Filter from './Filter.js';
++import { useTable, useGlobalFilter, useSortBy } from 'react-table';
 \n\
-```"}
-</tab>
-
-<tab label="Filter.js">
-{"```javascript\n\
-import * as React from 'react';\n\
+ export default function Table({ data: { columns, data } }) {
+-  const reactTable = useTable({ columns, data });
++  const reactTable = useTable({
++      columns,
++      data
++    },
++    useGlobalFilter,
++    useSortBy
++  );
 \n\
-import styles from './Filter.module.css';\n\
+   const {
+     getTableProps,
+     getTableBodyProps,
+     headerGroups,
+     rows,
+-    prepareRow
++    prepareRow,
++    setGlobalFilter
+   } = reactTable;
 \n\
-export default function Filter({ onChange }) {\n\
-  const [value, setValue] = React.useState('');\n\
-\n\
-  const onChangeWrapper = React.useCallback((event) => {\n\
-    const v = event.target.value.trim();\n\
-    setValue(v);\n\
-    onChange(v);\n\
-  }, [onChange]);\n\
-\n\
-  return (\n\
-    <div className={styles.Filter}>\n\
-      <input type=\"text\" value={value} placeholder='Search rows...' onChange={onChangeWrapper} />\n\
-    </div>\n\
-  );\n\
-}\n\
-```"}
-</tab>
-
-<tab label="Filter.module.css">
-{"```css\n\
-.Filter {\n\
-  width: 100%;\n\
-  display: flex;\n\
-  justify-content: flex-start;\n\
-  margin-bottom: 1rem;\n\
-}\n\
-```"}
-</tab>
-
+   return (
++    <>
++      <Filter onChange={setGlobalFilter} />
+      <table {...getTableProps()} className={styles.Table}>
+        <thead>
+          {headerGroups.map(group => (
+            <tr {...group.getHeaderGroupProps()}>
+              {group.headers.map(column => (
+-                <th {...column.getHeaderProps()}>
++                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
++                    <span>
++                      {column.isSorted ? (
++                        column.isSortedDesc ? ' 🔽' : ' 🔼'
++                      ): ''}
++                    </span>
+                </th>
+              ))}
+            </tr>
+            );
+          })}
+        </tbody>
+      </table>
++    </>
+   );
+ }
+    `}/>
+  </tab>
+  <tab label='Filter.js'>
+    <github-embed language='js' repo='pixie-io/pixie-demos' srcPath='react-table/3-sort-and-filter/src/Filter.js' />
+  </tab>
+  <tab label='Filter.module.css'>
+    <github-embed language='css' repo='pixie-io/pixie-demos' srcPath='react-table/3-sort-and-filter/src/Filter.module.css' />
+  </tab>
 </tabs>
 
 ## Column Controls
@@ -523,185 +313,144 @@ Now for column hiding: this one doesn't need a plugin; `useTable` already sets i
 2. The checkbox uses `column.getToggleHiddenProps()` to handle this logic for us.
 
 <tabs>
-
-<tab label="Table.js">
-{"```diff\n\
- import * as React from 'react';\n\
+  <tab label='Table.js'>
+    <code-block language='diff' code={`
+ import * as React from 'react';
  \n\
- import styles from './Table.module.css'\n\
- import Filter from './Filter.js';\n\
--import { useTable, useGlobalFilter, useSortBy } from 'react-table';\n\
-+import ColumnSelector from './ColumnSelector.js';\n\
-+import {\n\
-+  useTable,\n\
-+  useFlexLayout,\n\
-+  useGlobalFilter,\n\
-+  useSortBy,\n\
-+  useResizeColumns,\n\
-+} from 'react-table';\n\
+ import styles from './Table.module.css'
+ import Filter from './Filter.js';
+-import { useTable, useGlobalFilter, useSortBy } from 'react-table';
++import ColumnSelector from './ColumnSelector.js';
++import {
++  useTable,
++  useFlexLayout,
++  useGlobalFilter,
++  useSortBy,
++  useResizeColumns,
++} from 'react-table';
  \n\
- export default function Table({ data: { columns, data } }) {\n\
-   const reactTable = useTable({\n\
-       columns,\n\
-       data\n\
-     },\n\
-+    useFlexLayout,\n\
-     useGlobalFilter,\n\
--    useSortBy\n\
-+    useSortBy,\n\
-+    useResizeColumns\n\
-   );\n\
- \n\
-   const {\n\
-     getTableProps,\n\
-     getTableBodyProps,\n\
-     headerGroups,\n\
-     rows,\n\
-+    allColumns,\n\
-     prepareRow,\n\
-     setGlobalFilter\n\
-   } = reactTable;\n\
- \n\
-   return (\n\
-     <>\n\
-+      <ColumnSelector columns={allColumns} />\n\
-       <Filter onChange={setGlobalFilter} />\n\
-       <table {...getTableProps()} className={styles.Table}>\n\
-         <thead>\n\
-           {headerGroups.map(group => (\n\
-             <tr {...group.getHeaderGroupProps()}>\n\
-               {group.headers.map(column => (\n\
--                <th {...column.getHeaderProps(column.getSortByToggleProps())}>\n\
--                  {column.render('Header')}\n\
--                  <span>\n\
--                    {column.isSorted ? (\n\
--                      column.isSortedDesc ? ' 🔽' : ' 🔼'\n\
--                    ): ''}\n\
--                  </span>\n\
-+                <th {...column.getHeaderProps()}>\n\
-+                  <div {...column.getSortByToggleProps()}>\n\
-+                    {column.render('Header')}\n\
-+                    <span>\n\
-+                      {column.isSorted ? (\n\
-+                        column.isSortedDesc ? ' 🔽' : ' 🔼'\n\
-+                      ): ''}\n\
-+                    </span>\n\
-+                  </div>\n\
-+                  <div {...column.getResizerProps()} className={[styles.ResizeHandle, column.isResizing && styles.ResizeHandleActive].filter(x=>x).join(' ')}>\n\
-+                    &#x22EE;\n\
-+                  </div>\n\
-                 </th>\n\
-               ))}\n\
-             </tr>\n\
-           ))}\n\
-         </thead>\n\
-         <tbody {...getTableBodyProps()}>\n\
-           {rows.map((row) => {\n\
-             prepareRow(row);\n\
-             return (\n\
-               <tr {...row.getRowProps()}>\n\
-                 {row.cells.map(cell => (\n\
-                   <td {...cell.getCellProps()}>\n\
-                     {cell.render('Cell')}\n\
-                   </td>\n\
-                 ))}\n\
-               </tr>\n\
-             );\n\
-           })}\n\
-         </tbody>\n\
-       </table>\n\
-     </>\n\
-   );\n\
- }\n\
+ export default function Table({ data: { columns, data } }) {
+   const reactTable = useTable({
+       columns,
+       data
+     },
++    useFlexLayout,
+     useGlobalFilter,
+-    useSortBy
++    useSortBy,
++    useResizeColumns
+   );
 \n\
-```"}
-</tab>
-
-<tab label="Table.module.css">
-{"```diff\n\
-.Table {\n\
-   font-size: 1rem;\n\
-   text-align: left;\n\
-   border-collapse: collapse;\n\
-   width: 100%;\n\
- }\n\
- \n\
- .Table td, .Table th {\n\
-   line-height: 2em;\n\
-   padding: 0 0.75em;\n\
-   border: 1px rgba(255, 255, 255, 0.75) solid;\n\
-+  text-overflow: ellipsis;\n\
-+  white-space: nowrap;\n\
-+  overflow: hidden;\n\
-+  min-width: 2rem;\n\
- }\n\
- \n\
- .Table th {\n\
-+  max-height: 3.5em;\n\
-   padding: 0.75em 0.75em;\n\
-   border-bottom-width: 2px;\n\
-+  position: relative;\n\
-+}\n\
-+\n\
-+.ResizeHandle {\n\
-+  user-select: none;\n\
-+  display: inline-block;\n\
-+  position: absolute;\n\
-+  top: 50%;\n\
-+  right: 0;\n\
-+  transform: translate(0, -50%);\n\
-+  opacity: 0.8;\n\
-+}\n\
-+\n\
-+.ResizeHandleActive {\n\
-+  opacity: 1;\n\
- }\n\
+   const {
+     getTableProps,
+     getTableBodyProps,
+     headerGroups,
+     rows,
++    allColumns,
+     prepareRow,
+     setGlobalFilter
+   } = reactTable;
 \n\
-```"}</tab>
-
-<tab label="ColumnSelector.js">
-{"```javascript\n\
-import styles from './ColumnSelector.module.css';\n\
+   return (
+     <>
++      <ColumnSelector columns={allColumns} />
+       <Filter onChange={setGlobalFilter} />
+       <table {...getTableProps()} className={styles.Table}>
+         <thead>
+           {headerGroups.map(group => (
+             <tr {...group.getHeaderGroupProps()}>
+               {group.headers.map(column => (
+-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+-                  {column.render('Header')}
+-                  <span>
+-                    {column.isSorted ? (
+-                      column.isSortedDesc ? ' 🔽' : ' 🔼'
+-                    ): ''}
+-                  </span>
++                <th {...column.getHeaderProps()}>
++                  <div {...column.getSortByToggleProps()}>
++                    {column.render('Header')}
++                    <span>
++                      {column.isSorted ? (
++                        column.isSortedDesc ? ' 🔽' : ' 🔼'
++                      ): ''}
++                    </span>
++                  </div>
++                  <div {...column.getResizerProps()} className={[styles.ResizeHandle, column.isResizing && styles.ResizeHandleActive].filter(x=>x).join(' ')}>
++                    &#x22EE;
++                  </div>
+                 </th>
+               ))}
+             </tr>
+           ))}
+         </thead>
+         <tbody {...getTableBodyProps()}>
+           {rows.map((row) => {
+             prepareRow(row);
+             return (
+               <tr {...row.getRowProps()}>
+                 {row.cells.map(cell => (
+                   <td {...cell.getCellProps()}>
+                     {cell.render('Cell')}
+                   </td>
+                 ))}
+               </tr>
+             );
+           })}
+         </tbody>
+       </table>
+     </>
+   );
+ }
+    `}/>
+  </tab>
+  <tab label='Table.module.css'>
+    <code-block language='diff' code={`
+.Table {
+   font-size: 1rem;
+   text-align: left;
+   border-collapse: collapse;
+   width: 100%;
+ }
 \n\
-export default function ColumnSelector({ columns }) {\n\
-  return (\n\
-    <div className={styles.ColumnSelector}>\n\
-      <div className={styles.Label}>Show Columns:</div>\n\
-      <div className={styles.Checkboxes}>\n\
-        {columns.map(column => (\n\
-          <div key={column.id} className={styles.Checkbox}>\n\
-            <label>\n\
-              <input type='checkbox' {...column.getToggleHiddenProps()} />\n\
-              {` ${column.Header}`}\n\
-            </label>\n\
-          </div>\n\
-        ))}\n\
-      </div>\n\
-    </div>\n\
-  );\n\
-}\n\
+ .Table td, .Table th {
+   line-height: 2em;
+   padding: 0 0.75em;
+   border: 1px rgba(255, 255, 255, 0.75) solid;
++  text-overflow: ellipsis;
++  white-space: nowrap;
++  overflow: hidden;
++  min-width: 2rem;
+ }
 \n\
-```"}
-</tab>
-
-<tab label="ColumnSelector.module.css">
-{"```css\n\
-.ColumnSelector {\n\
-  font-size: 1rem;\n\
-  margin-bottom: 1rem;\n\
-}\n\
-\n\
-.Label {\n\
-  text-align: left;\n\
-}\n\
-\n\
-.Checkbox {\n\
-  text-align: left;\n\
-}\n\
-\n\
-```"}
-</tab>
-
+ .Table th {
++  max-height: 3.5em;
+   padding: 0.75em 0.75em;
+   border-bottom-width: 2px;
++  position: relative;
++}
++
++.ResizeHandle {
++  user-select: none;
++  display: inline-block;
++  position: absolute;
++  top: 50%;
++  right: 0;
++  transform: translate(0, -50%);
++  opacity: 0.8;
++}
++
++.ResizeHandleActive {
++  opacity: 1;
+ }
+    `}/>
+  </tab>
+  <tab label='ColumnSelector.js'>
+    <github-embed language='js' repo='pixie-io/pixie-demos' srcPath='react-table/4-column-controls/src/ColumnSelector.js' />
+  </tab>
+  <tab label='ColumnSelector.module.css'>
+    <github-embed language='css' repo='pixie-io/pixie-demos' srcPath='react-table/4-column-controls/src/ColumnSelector.module.css' />
+  </tab>
 </tabs>
 
 Although column ordering also has a plugin, it doesn't provide props for easy controls like the others. As such, we'll skip it for this tutorial.
@@ -719,88 +468,87 @@ What if we want to color scores by their value, or right-align IDs? Well, `react
 Column definitions can include a `Cell` function (in fact, `Header` can be a function too) which returns anything that's valid JSX. That is, these can be React components.
 
 <tabs>
-<tab label="useData.js">
-{"```diff\n\
- import * as React from 'react';\n\
+  <tab label='useData.js'>
+    <code-block language='diff' code={`
+ import * as React from 'react';
  \n\
- function randomFrom(array) {\n\
-   return array[Math.floor(Math.random() * array.length)];\n\
- }\n\
+ function randomFrom(array) {
+   return array[Math.floor(Math.random() * array.length)];
+ }
  \n\
- /** Make a silly word that rhymes with Goomba (the Mario mushroom enemies) */\n\
- function sillyWord() {\n\
-   const leadConsonants = ['B', 'D', 'F', 'G', 'L', 'T', 'V', 'Z'];\n\
-   const middles = ['oom', 'oon', 'um', 'un'];\n\
-   const midConsonants = ['b', 'd']\n\
-   const ends = ['a', 'ah', 'u', 'uh', 'o'];\n\
- \n\
-   const word = randomFrom(leadConsonants) + randomFrom(middles) + randomFrom(midConsonants) + randomFrom(ends);\n\
- \n\
-   // Try again if we accidentally picked something offensive\n\
-   if (['Goombah'].includes(word)) return sillyWord();\n\
-   else return word;\n\
- }\n\
- \n\
- function sillyName() {\n\
-   return `${sillyWord()} ${sillyWord().substring(0, 3)}`;\n\
- }\n\
- \n\
- const genericHeaders = ['ID', 'Name', 'Friend', 'Score', 'Temperament'];\n\
- const genericDataFuncs = [\n\
-   () => Math.ceil(Math.random() * 100),\n\
-   sillyName,\n\
-   sillyWord,\n\
-   () => Math.floor(Math.random() * 10_000) / 100,\n\
-   () => randomFrom(['Goofy', 'Wacky', 'Silly', 'Funny', 'Serious']),\n\
- ];\n\
-+const fancyCellRenderers = [\n\
-+  function IdCell({ value }) {\n\
-+    return <>{value}</>;\n\
-+  },\n\
-+  function NameCell({ value }) {\n\
-+    return <strong>{value}</strong>;\n\
-+  },\n\
-+  function WordCell({ value }) {\n\
-+    return <span style={{ fontStyle: 'italic' }}>{value}</span>\n\
-+  },\n\
-+  function ScoreCell({ value }) {\n\
-+    const color = value < 50 ? 'pink' : 'aquamarine';\n\
-+    return <span style={{ color }}>{value}</span>;\n\
-+  },\n\
-+  function TemperamentCell({value}) {\n\
-+    return <>{value}</>;\n\
-+  },\n\
-+];\n\
- \n\
- // react-table expects memoized columns and data, so we export a React hook to permit doing that.\n\
- export default function useData(numRows = 20, numCols = 5) {\n\
-   const columns = React.useMemo(() => (\n\
-     Array(numCols).fill(0).map((_, h) => {\n\
-       const name = genericHeaders[h % genericHeaders.length];\n\
-       const id = `col${h}`;\n\
-       return {\n\
-         Header: name,\n\
-+        Cell: fancyCellRenderers[h % fancyCellRenderers.length],\n\
-         accessor: id\n\
-       };\n\
-     })\n\
-   ), [numCols]);\n\
- \n\
-   const data = React.useMemo(() => (\n\
-     Array(numRows).fill(0).map(() => {\n\
-       const row = {};\n\
-       for (let c = 0; c < numCols; c++) {\n\
-         row[`col${c}`] = genericDataFuncs[c % genericDataFuncs.length]();\n\
-       }\n\
-       return row;\n\
-     })\n\
-   ), [numRows, numCols]);\n\
- \n\
-   return { columns, data };\n\
- }\n\
+ /** Make a silly word that rhymes with Goomba (the Mario mushroom enemies) */
+ function sillyWord() {
+   const leadConsonants = ['B', 'D', 'F', 'G', 'L', 'T', 'V', 'Z'];
+   const middles = ['oom', 'oon', 'um', 'un'];
+   const midConsonants = ['b', 'd']
+   const ends = ['a', 'ah', 'u', 'uh', 'o'];
 \n\
-```"}
-</tab>
+   const word = randomFrom(leadConsonants) + randomFrom(middles) + randomFrom(midConsonants) + randomFrom(ends);
+\n\
+   // Try again if we accidentally picked something offensive
+   if (['Goombah'].includes(word)) return sillyWord();
+   else return word;
+ }
+\n\
+ function sillyName() {
+   return \`\${sillyWord()} \${sillyWord().substring(0, 3)}\`;
+ }
+\n\
+ const genericHeaders = ['ID', 'Name', 'Friend', 'Score', 'Temperament'];
+ const genericDataFuncs = [
+   () => Math.ceil(Math.random() * 100),
+   sillyName,
+   sillyWord,
+   () => Math.floor(Math.random() * 10_000) / 100,
+   () => randomFrom(['Goofy', 'Wacky', 'Silly', 'Funny', 'Serious']),
+ ];
++const fancyCellRenderers = [
++  function IdCell({ value }) {
++    return <>{value}</>;
++  },
++  function NameCell({ value }) {
++    return <strong>{value}</strong>;
++  },
++  function WordCell({ value }) {
++    return <span style={{ fontStyle: 'italic' }}>{value}</span>
++  },
++  function ScoreCell({ value }) {
++    const color = value < 50 ? 'pink' : 'aquamarine';
++    return <span style={{ color }}>{value}</span>;
++  },
++  function TemperamentCell({value}) {
++    return <>{value}</>;
++  },
++];
+\n\
+ // react-table expects memoized columns and data, so we export a React hook to permit doing that.
+ export default function useData(numRows = 20, numCols = 5) {
+   const columns = React.useMemo(() => (
+     Array(numCols).fill(0).map((_, h) => {
+       const name = genericHeaders[h % genericHeaders.length];
+       const id = \`col\${h}\`;
+       return {
+         Header: name,
++        Cell: fancyCellRenderers[h % fancyCellRenderers.length],
+         accessor: id
+       };
+     })
+   ), [numCols]);
+\n\
+   const data = React.useMemo(() => (
+     Array(numRows).fill(0).map(() => {
+       const row = {};
+       for (let c = 0; c < numCols; c++) {
+         row[\`col\${c}\`] = genericDataFuncs[c % genericDataFuncs.length]();
+       }
+       return row;
+     })
+   ), [numRows, numCols]);
+\n\
+   return { columns, data };
+ }
+    `}/>
+  </tab>
 </tabs>
 
 With this feature, our demo is largely complete (click to interact):

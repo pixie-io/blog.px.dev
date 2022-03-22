@@ -25,9 +25,12 @@ import Quote from './quote';
 import BlockQuote from './block-quote';
 import CustomTableCell from './custom-table-cell';
 
-// This is a circular dependency, but only at declaration time - the usages fire after definition.
-// eslint-disable-next-line import/no-cycle
+// These are circular dependencies, but only at declaration time - the usages fire after definition.
+/* eslint-disable import/no-cycle */
 import { CustomTabs, CustomTab } from './tabs';
+import CodeRenderer from './codeRenderer';
+import GhEmbed from './github-embed';
+/* eslint-enable import/no-cycle */
 
 export default {
   ...baseComponents,
@@ -38,4 +41,7 @@ export default {
   td: ({ align, ...props }) => <CustomTableCell {...props} align={align || undefined} />,
   tabs: ({ children }) => <CustomTabs>{children}</CustomTabs>,
   tab: ({ children, label }) => <CustomTab label={label}>{children}</CustomTab>,
+  'github-embed': (props: any) => <GhEmbed {...props} />,
+  'code-block': ({ language, code }: { language: string; code: string }) => (
+    <CodeRenderer className={`language-${language}`} code={code} />),
 };
