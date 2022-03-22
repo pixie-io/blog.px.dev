@@ -15,6 +15,11 @@ Yet modern software packs a surprising amount of functionality into them, accumu
 In this post, we'll take a high altitude pass over that history.
 In later installments, we'll dive into how today's software handles the complex requirements of modern tables.
 
+_This article is part of a series_:
+- **Part 1: History**
+- [Part 2: Building a Simple Data Table in React](https://blog.px.dev/tables-are-hard-2)
+- [Part 3: Streaming Data](https://blog.px.dev/tables-are-hard-3)
+
 ## Modern Expectations
 
 In a data-heavy web interface, a typical table might be expected to do all of this:
