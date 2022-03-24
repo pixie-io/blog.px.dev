@@ -3,7 +3,7 @@ path: '/distributed-bpftrace'
 title: 'Distributed bpftrace with Pixie'
 date: 2021-10-27T06:00:00.000+00:00
 featured_image: hero-image.png
-categories: ['Guest Blogs']
+categories: ['Guest Blogs', 'eBPF']
 authors: ['Arnold van Wijnbergen']
 emails: ['arnold.van.wijnbergen@gmail.com']
 ---
