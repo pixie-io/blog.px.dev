@@ -13,7 +13,7 @@ Are you dreading upgrading your cluster to a newer Kubernetes version? There are
 
 - Use a new beta API
 - Install an application that requires a more recent Kubernetes version
-- Follow the best practice of keeping your software up-to-date
+- Follow the best practice of keeping your software up to date
 
 Whatever the reason, it’s worth reviewing your upgrade process to make sure you are minimizing downtime (and anxiety) during upgrades.
 
@@ -41,7 +41,7 @@ There are two strategies for upgrading the Kubernetes version on worker nodes:
 
 For an **in-place upgrade**, one by one the nodes are drained and cordoned off so that no new pods will be scheduled on that node. The node is then deleted and recreated with the updated Kubernetes version. Once the new node is up and running, the next node is updated. This strategy is visualized in the animation below:
 
-::: div image-l
+::: div image-m
 <svg title='Animation showing an in-place upgrade for the nodes in a Kubernetes cluster [2].' src='in-place-upgrade.gif' />
 :::
 
@@ -50,7 +50,7 @@ The advantage of an in-place upgrade is that it requires minimal additional comp
 For an **out-of-place upgrade**, a fresh node pool is created with the new Kubernetes version. Once the new nodes are all running, you can cordon the old node pool, drain the old nodes one by one, and then delete the old node pool. This strategy is visualized in the animation below:
 
 ::: div image-l
-<svg title='Animation showing an out-of-place upgrade for the nodes in a Kubernetes cluster (diagram from Fairwinds).' src='out-of-place-upgrade.gif' />
+<svg title='Animation showing an out-of-place upgrade for the nodes in a Kubernetes cluster [3].' src='out-of-place-upgrade.gif' />
 :::
 
 An out-of-place upgrade requires a temporary doubling of compute resources in exchange for a shorter upgrade window. The decrease in upgrade duration results from the parallelization of the startup time of the new upgraded nodes, as well as the minimization of the movement of the pods. In this strategy, pods make a single move from the old node to the new upgraded node.
