@@ -1,6 +1,6 @@
 ---
 path: '/nodepool-upgrades'
-title: 'Safer Node Pool Upgrades'
+title: 'Safer Kubernetes Node Pool Upgrades'
 date: 2022-03-28T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Kubernetes']
@@ -67,10 +67,6 @@ A pod is the smallest deployable object in Kubernetes. It represents a single in
 
 To minimize downtime, ensure that all your pods are managed by a ReplicaSet, Deployment, StatefulSet or something similar. Standalone pods might need to be manually rescheduled after an upgrade.
 
-### Daemonsets
-
-A [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) ensures that all (or some) nodes run a copy of a pod. Daemonsets are often used for node monitoring or log collection and do not typically serve traffic. For these use cases, it’s usually acceptable to have a small gap in data during the worker node upgrade.
-
 ### Deployments
 
 Most of the pods in your cluster are likely controlled by a [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/). A Deployment represents a set of identical pods with no unique identities. A Deployment increases availability by managing multiple replicas of your application and deploying replacements if any instance fails.
@@ -93,27 +89,28 @@ spec:
 
 Note that you’ll need to ensure that there are more than one replica (at least temporarily, during the upgrade) in order for the nodes to be able to be upgraded.
 
+### Daemonsets
+
+A [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) ensures that all (or some) nodes run a copy of a pod. Daemonsets are often used for node monitoring or log collection and do not typically serve traffic. For these use cases, it’s usually acceptable to have a small gap in data during the worker node upgrade.
+
 ### StatefulSets
 
 A [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset) is the Kubernetes controller type used to manage stateful applications, such as databases or messaging queues. Upgrading StatefulSets requires more consideration than upgrading Deployments.
 
 To eliminate downtime, ensure that you have configured the following:
 
-1. Add a PodDisruptionBudget (see the explanation in the previous section). For quorum-based applications, ensure that the number of replicas running is never brought below the number needed for quorum (e.g, `minAvailable: 51%`).
-
+1. Add a PodDisruptionBudget (see the explanation in the "Deployments" section). For quorum-based applications, ensure that the number of replicas running is never brought below the number needed for quorum (e.g, `minAvailable: 51%`).
 2. Make sure you have more than one replica (at least temporarily, during the upgrade).
-
 3. Ensure that any PersistentVolumes are [retained](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention).
-
 4. For quorum-based applications, make sure you’ve configured a [Readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes).
 
 #### StatefulSet Potential Incident #1
 
-To illustrate the importance of PDBs when upgrading StatefulSets, let’s consider an example cluster that uses [STAN](https://docs.nats.io/legacy/stan/intro), a distributed messaging system.
+To illustrate the importance of a PodDisruptionBudget (PDB) when upgrading a StatefulSet, let’s consider an example cluster that uses [STAN](https://docs.nats.io/legacy/stan/intro), a distributed messaging system.
 
-STAN relies on a [raft](https://raft.github.io/) consensus for quorum, meaning that a majority (> 50%) of servers need to be available to agree upon decisions. This cluster’s STAN StatefulSet has 5 replicas. If 2 of these replicas fail, the STAN can still operate. However, if more than 2 replicas fail, STAN will not be able to reach quorum and will stop working.
+STAN relies on a [Raft](https://raft.github.io/) consensus for quorum, meaning that a majority (> 50%) of servers need to be available to agree upon decisions. This cluster’s STAN StatefulSet has 5 replicas. If 2 of these replicas fail, the STAN can still operate. However, if more than 2 replicas fail, STAN will not be able to reach quorum and will stop working.
 
-Our example cluster's STAN StatefulSet does not have a PodDisruptionBudget (PDB). With this configuration, it is possible to lose quorum during an upgrade in the following way:
+Our example cluster's STAN StatefulSet does not have a PDB. With this configuration, it is possible to lose quorum during an upgrade in the following way:
 
 - Given the lack of a PDB, the control plan indicates that any number of STAN pods can be disrupted.
 - This means that the node pool upgrade is able to disrupt more than 50% of the STAN pods at the same time. In this case, 3 of the 5 STAN pods get evicted at once when the first node is drained.
@@ -122,7 +119,7 @@ Our example cluster's STAN StatefulSet does not have a PodDisruptionBudget (PDB)
 This failure mode is visualized in the animation below. The 5 squares represent the 5 STAN pods.
 
 ::: div image-s
-<svg title='Animation of a loss of quorum for a RAFT application during an upgrade. The StatefulSet is missing a PDB.' src='statefulset-issue-1.gif' />
+<svg title='Animation of a loss of quorum for a Raft application during an upgrade. The StatefulSet is missing a PDB.' src='statefulset-issue-1.gif' />
 :::
 
 In this situation, a PDB configured with `minAvailable: 51%` would have prevented loss of quorum by ensuring that no fewer than 51% of pods are evicted at once from the node that is draining.
@@ -135,15 +132,15 @@ Our example cluster's STAN StatefulSet configures a PDB (with `minAvailable: 51%
 
 - The controller follows the PDB and ensures that less than half the STAN nodes are disrupted at a given time. Only 2 STAN pods are initially evicted from the draining node.
 - However, given the lack of readiness probes, as soon as the disrupted STAN pods are scheduled and then lively, the controller is allowed to disrupt more pods.
-- Since liveliness checks are designed to indicate a running container, STAN marks itself as lively before it starts (or finishes) reading the RAFT logs.
-- However, given that the 2 STAN pods haven't finished reading the RAFT logs, it is not ready to accept traffic.
-- If the controller now disrupts more STAN pods, then it’s possible that while we have > 50% lively STAN pods, there are < 50% ready STAN pods (i.e. some of the pods are busy recovering state from the RAFT logs).
+- Since liveliness checks are designed to indicate a running container, STAN marks itself as lively before it starts (or finishes) reading the Raft logs.
+- However, given that the 2 STAN pods haven't finished reading the Raft logs, it is not ready to accept traffic.
+- If the controller now disrupts more STAN pods, then it’s possible that while we have > 50% lively STAN pods, there are < 50% ready STAN pods (i.e. some of the pods are busy recovering state from the Raft logs).
 - The 2 remaining STAN pods cannot maintain quorum and this causes irrecoverable loss of data.
 
 This failure mode is visualized in the animation below. The 5 squares represent the 5 STAN pods. Red squares indicate the pod is not yet lively. Yellow squares indicate the pod is not yet ready.
 
 ::: div image-s
-<svg title='Animation of a loss of quorum for a RAFT application during an upgrade. The StatefulSet is missing a Readiness probe.' src='statefulset-issue-2.gif' />
+<svg title='Animation of a loss of quorum for a Raft application during an upgrade. The StatefulSet is missing a Readiness probe.' src='statefulset-issue-2.gif' />
 :::
 
 In this situation, a readiness probe that sends an HTTP GET request to the STAN server would have prevented further STAN pods from being disrupted before the newly created STAN pods were ready.
