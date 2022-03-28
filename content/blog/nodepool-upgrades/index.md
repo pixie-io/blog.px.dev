@@ -42,7 +42,7 @@ There are two strategies for upgrading the Kubernetes version on worker nodes:
 For an **in-place upgrade**, one by one the nodes are drained and cordoned off so that no new pods will be scheduled on that node. The node is then deleted and recreated with the updated Kubernetes version. Once the new node is up and running, the next node is updated. This strategy is visualized in the animation below:
 
 ::: div image-l
-<svg title='Animation of an in-place upgrade for the nodes in a Kubernetes cluster [2].' src='in-place-upgrade.gif' />
+<svg title='Animation showing an in-place upgrade for the nodes in a Kubernetes cluster [2].' src='in-place-upgrade.gif' />
 :::
 
 The advantage of an in-place upgrade is that it requires minimal additional compute resources (a single additional node). The downside to this strategy is that it can take quite a bit of time as nodes are drained and upgraded one at a time in series. Additionally, pods may need to make more than 1 move as they are shuffled around during the draining of nodes.
@@ -50,7 +50,7 @@ The advantage of an in-place upgrade is that it requires minimal additional comp
 For an **out-of-place upgrade**, a fresh node pool is created with the new Kubernetes version. Once the new nodes are all running, you can cordon the old node pool, drain the old nodes one by one, and then delete the old node pool. This strategy is visualized in the animation below:
 
 ::: div image-l
-<svg title='Animation of an out-of-place upgrade for the nodes in a Kubernetes cluster (diagram from Fairwinds).' src='out-of-place-upgrade.gif' />
+<svg title='Animation showing an out-of-place upgrade for the nodes in a Kubernetes cluster (diagram from Fairwinds).' src='out-of-place-upgrade.gif' />
 :::
 
 An out-of-place upgrade requires a temporary doubling of compute resources in exchange for a shorter upgrade window. The decrease in upgrade duration results from the parallelization of the startup time of the new upgraded nodes, as well as the minimization of the movement of the pods. In this strategy, pods make a single move from the old node to the new upgraded node.
@@ -122,7 +122,7 @@ Our example cluster's STAN StatefulSet does not have a PodDisruptionBudget (PDB)
 This failure mode is visualized in the animation below. The 5 squares represent the 5 STAN pods.
 
 ::: div image-s
-<svg title='' src='statefulset-issue-1.gif' />
+<svg title='Animation of a loss of quorum for a RAFT application during an upgrade. The StatefulSet is missing a PDB.' src='statefulset-issue-1.gif' />
 :::
 
 In this situation, a PDB configured with `minAvailable: 51%` would have prevented loss of quorum by ensuring that no fewer than 51% of pods are evicted at once from the node that is draining.
@@ -143,7 +143,7 @@ Our example cluster's STAN StatefulSet configures a PDB (with `minAvailable: 51%
 This failure mode is visualized in the animation below. The 5 squares represent the 5 STAN pods. Red squares indicate the pod is not yet lively. Yellow squares indicate the pod is not yet ready.
 
 ::: div image-s
-<svg title='' src='statefulset-issue-2.gif' />
+<svg title='Animation of a loss of quorum for a RAFT application during an upgrade. The StatefulSet is missing a Readiness probe.' src='statefulset-issue-2.gif' />
 :::
 
 In this situation, a readiness probe that sends an HTTP GET request to the STAN server would have prevented further STAN pods from being disrupted before the newly created STAN pods were ready.
