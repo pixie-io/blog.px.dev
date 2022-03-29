@@ -234,29 +234,26 @@ i {
 
 
 .image-xs {
-  max-width: 15%;
+  max-width: 70%;
   margin: 32px auto;
-  figcaption.blog-image-caption {
-    margin-left: -200%;
-    width: 500%;
+  .blog-image {
+    max-width: 15% !important;
   }
 }
 
 .image-s {
-  max-width: 30%;
+  max-width: 70%;
   margin: 32px auto;
-  figcaption.blog-image-caption {
-    margin-left: -50%;
-    width: 220%;
+  .blog-image {
+    max-width: 30%;
   }
 }
 
 .image-m {
-  max-width: 50%;
+  max-width: 70%;
   margin: 32px auto;
-  figcaption.blog-image-caption {
-    margin-left: -10%;
-    width: 120%;
+  .blog-image {
+    max-width: 50%;
   }
 }
 
