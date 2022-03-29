@@ -102,7 +102,7 @@ To eliminate downtime, ensure that you have configured the following:
 1. Add a PodDisruptionBudget (see the explanation in the "Deployments" section). For quorum-based applications, ensure that the number of replicas running is never brought below the number needed for quorum (e.g, `minAvailable: 51%`).
 2. Make sure you have more than one replica (at least temporarily, during the upgrade).
 3. Ensure that any PersistentVolumes are [retained](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention).
-4. For quorum-based applications, make sure you’ve configured a [Readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes).
+4. For quorum-based applications, make sure you’ve configured a [Readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes) probe.
 
 #### StatefulSet Potential Incident #1
 
