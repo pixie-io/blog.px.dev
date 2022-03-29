@@ -55,7 +55,7 @@ For an **out-of-place upgrade**, a fresh node pool is created with the new Kuber
 
 An out-of-place upgrade requires a temporary doubling of compute resources in exchange for a shorter upgrade window. The decrease in upgrade duration results from the parallelization of the startup time of the new upgraded nodes, as well as the minimization of the movement of the pods. In this strategy, pods make a single move from the old node to the new upgraded node.
 
-Assuming you’re okay with the temporary increase in compute resource utilization, we recommend utilizing the out-of-place upgrade strategy to decrease the amount of time you’ll need to be available to babysit the upgrade process.
+Assuming you’re okay with the temporary increase in compute resource utilization, we recommend utilizing the out-of-place upgrade strategy to speed things up.
 
 ## Configuring K8s Resources
 
@@ -143,7 +143,7 @@ This failure mode is visualized in the animation below. The 5 squares represent 
 <svg title='Animation of a loss of quorum for a Raft application during an upgrade. The StatefulSet is missing a Readiness probe.' src='statefulset-issue-2.gif' />
 :::
 
-In this situation, a readiness probe that sends an HTTP GET request to the STAN server would have prevented further STAN pods from being disrupted before the newly created STAN pods were ready.
+In this situation, a readiness probe would have prevented further STAN pods from being disrupted before the newly created STAN pods were ready. The readiness probe could be configured to send an HTTP GET request to the `/streaming/serverz` monitoring endpoint; this endpoint won't respond to requests until the STAN server is ready.
 
 ## Conclusion
 
