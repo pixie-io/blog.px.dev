@@ -236,16 +236,28 @@ i {
 .image-xs {
   max-width: 15%;
   margin: 32px auto;
+  figcaption.blog-image-caption {
+    margin-left: -200%;
+    width: 500%;
+  }
 }
 
 .image-s {
   max-width: 30%;
   margin: 32px auto;
+  figcaption.blog-image-caption {
+    margin-left: -50%;
+    width: 220%;
+  }
 }
 
 .image-m {
   max-width: 50%;
   margin: 32px auto;
+  figcaption.blog-image-caption {
+    margin-left: -10%;
+    width: 120%;
+  }
 }
 
 .image-l {
@@ -272,9 +284,9 @@ figure {
 }
 
 .blog-image {
-  margin-top: 8px;
-  margin-bottom: 8px;
   max-width: 100%;
+  margin: 8px auto;
+  display: block;
 }
 
 figcaption.blog-image-caption {
