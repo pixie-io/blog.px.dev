@@ -19,6 +19,7 @@
 import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { ThemeModeContext } from '../mainThemeProvider';
+// eslint-disable-next-line import/no-cycle
 import parseMd from './parseMd';
 
 const SvgRenderer = ({ src, title }) => (
