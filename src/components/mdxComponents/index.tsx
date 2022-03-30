@@ -19,6 +19,7 @@
 import React from 'react';
 
 import baseComponents from './baseComponents';
+/* eslint-disable import/no-cycle */
 import SvgRenderer from './svg';
 import Command from './command';
 import Quote from './quote';

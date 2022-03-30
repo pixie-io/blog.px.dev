@@ -19,6 +19,8 @@
 import * as React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { ThemeModeContext } from '../mainThemeProvider';
+// eslint-disable-next-line import/no-cycle
+import parseMd from './parseMd';
 
 const SvgRenderer = ({ src, title }) => (
   <StaticQuery
@@ -62,7 +64,7 @@ const SvgRenderer = ({ src, title }) => (
           {({ theme }) => (
             <figure className='gatsby-resp-image-figure'>
               <img src={getImageSrc(theme)} className='blog-image' />
-              <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1 blog-image-caption'>{title}</figcaption>
+              <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1 blog-image-caption'>{parseMd(title)}</figcaption>
             </figure>
           )}
         </ThemeModeContext.Consumer>
