@@ -22,7 +22,7 @@ Whatever the reason, it’s worth reviewing your upgrade process to make sure yo
 A Kubernetes cluster consists of a set of **nodes** and a **control plane**. The worker nodes host pods which run your containerized applications. The control plane manages the worker nodes and pods in the cluster.
 
 ::: div image-xl
-<svg title='The components of a Kubernetes cluster [1].' src='k8s-arch.png' />
+<svg title='The components of a Kubernetes cluster (from <a href="https://kubernetes.io/docs/concepts/overview/components/">kubernetes.io</a>).' src='k8s-arch.png' />
 :::
 
 To upgrade a Kubernetes cluster, you’ll upgrade both of these components in the following order:
@@ -42,7 +42,7 @@ There are two strategies for upgrading the Kubernetes version on worker nodes:
 For an **in-place upgrade**, one by one the nodes are drained and cordoned off so that no new pods will be scheduled on that node. The node is then deleted and recreated with the updated Kubernetes version. Once the new node is up and running, the next node is updated. This strategy is visualized in the animation below:
 
 ::: div image-m
-<svg title='Animation showing an in-place upgrade for the nodes in a Kubernetes cluster [2].' src='in-place-upgrade.gif' />
+<svg title='Animation showing an in-place upgrade for the nodes in a Kubernetes cluster (from <a href="https://www.fairwinds.com/blog/how-we-learned-to-stop-worrying-and-love-cluster-upgrades">Fairwinds.com</a>).' src='in-place-upgrade.gif' />
 :::
 
 The advantage of an in-place upgrade is that it requires minimal additional compute resources (a single additional node). The downside to this strategy is that it can take quite a bit of time as nodes are drained and upgraded one at a time in series. Additionally, pods may need to make more than 1 move as they are shuffled around during the draining of nodes.
@@ -50,7 +50,7 @@ The advantage of an in-place upgrade is that it requires minimal additional comp
 For an **out-of-place upgrade**, a fresh node pool is created with the new Kubernetes version. Once the new nodes are all running, you can cordon the old node pool, drain the old nodes one by one, and then delete the old node pool. This strategy is visualized in the animation below:
 
 ::: div image-l
-<svg title='Animation showing an out-of-place upgrade for the nodes in a Kubernetes cluster [3].' src='out-of-place-upgrade.gif' />
+<svg title='Animation showing an out-of-place upgrade for the nodes in a Kubernetes cluster (from <a href="https://www.fairwinds.com/blog/how-we-learned-to-stop-worrying-and-love-cluster-upgrades">Fairwinds.com</a>).' src='out-of-place-upgrade.gif' />
 :::
 
 An out-of-place upgrade requires a temporary doubling of compute resources in exchange for a shorter upgrade window. The decrease in upgrade duration results from the parallelization of the startup time of the new upgraded nodes, as well as the minimization of the movement of the pods. In this strategy, pods make a single move from the old node to the new upgraded node.
@@ -150,9 +150,3 @@ In this situation, a readiness probe would have prevented further STAN pods from
 Upgrading your Kubernetes cluster can be nerve wracking. However, with a basic understanding of the upgrade process and a brief consideration of your various Kubernetes resources, you should be able to minimize downtime during your next upgrade.
 
 Have questions? Need help? Find us on [Slack](https://slackin.px.dev/) or [Twitter](https://twitter.com/pixie_run).
-
-## Footnotes
-
-[1] Kubernetes components diagram from [kubernetes.io](https://kubernetes.io/docs/concepts/overview/components/).
-
-[2], [3] Node pool upgrade animations from "[How We Learned to Stop Worrying and Love Cluster Upgrades](https://www.fairwinds.com/blog/how-we-learned-to-stop-worrying-and-love-cluster-upgrades)" on Fairwinds.com
