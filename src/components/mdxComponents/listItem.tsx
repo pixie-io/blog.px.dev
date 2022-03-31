@@ -17,20 +17,21 @@
  */
 
 import * as React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material';
 
-const useStyles = makeStyles(() => ({
-  listItem: {
-    color: 'inherit',
-    fontFamily: 'inherit',
-    fontStyle: 'inherit',
-    fontSize: 'inherit',
-    lineHeight: 'inherit',
-    paddingBottom: '12px',
-    paddingLeft: '12px',
-  },
-}));
+const StyledLi = styled('li')(
+  () => `
+      color: inherit;
+      fontFamily: inherit;
+      fontStyle: inherit;
+      fontSize: inherit;
+      lineHeight: inherit;
+      paddingBottom: 12px;
+      paddingLeft: 12px;
+`,
+);
+
 const ListItem = ({ children, id }) => (
-  <li className={useStyles().listItem} id={id}>{children}</li>
+  <StyledLi id={id}>{children}</StyledLi>
 );
 export default ListItem;

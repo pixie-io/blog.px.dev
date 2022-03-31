@@ -16,10 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import withStyles from '@material-ui/core/styles/withStyles';
 import React from 'react';
-import TableCell from '@material-ui/core/TableCell';
 import MDX from '@mdx-js/runtime';
+import { TableCell } from '@mui/material';
+import { withStyles } from '@mui/styles';
 import mdxComponents from './baseComponents';
 
 const parse = (input) => (

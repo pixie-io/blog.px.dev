@@ -1,55 +1,54 @@
-# [blog.px.dev](http://blog.px.dev/) &middot; [![Netlify Status](https://api.netlify.com/api/v1/badges/0e00be9c-373b-43b5-9b31-f4ce40b9fea9/deploy-status)](https://app.netlify.com/sites/blog-px-dev/deploys) [![CC BY 4.0 license](https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/) <a href="https://twitter.com/intent/follow?screen_name=pixie_run"><img src="https://img.shields.io/twitter/follow/pixie_run.svg?label=Follow%20@pixie_run" alt="Follow @pixie_run" /></a>
+<p align="center">
+  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts">
+    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
+  </a>
+</p>
+<h1 align="center">
+  Gatsby minimal TypeScript starter
+</h1>
 
-This repo contains the source code and content for the [Pixie Blog](http://blog.px.dev/) website.
+## 🚀 Quick start
 
-## Reporting Issues
+1.  **Create a Gatsby site.**
 
-Submit any issues or enhancement requests by [filing an issue](https://github.com/pixie-io/blog.px.dev/issues/new). Please search for and review the existing open issues before submitting a new issue.
+    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
 
-## Contributing
+    ```shell
+    # create a new Gatsby site using the minimal TypeScript starter
+    npm init gatsby
+    ```
 
-We are excited to have you contribute to Pixie's blog!
+2.  **Start developing.**
 
-Before contributing blog content, please [file an issue](https://github.com/pixie-io/blog.px.dev/issues/new) outlining your intended additions.
+    Navigate into your new site’s directory and start it up.
 
-### Dev Setup
+    ```shell
+    cd my-gatsby-site/
+    npm run develop
+    ```
 
-1. Fork this repo.
-2. Create a directory in `content/blogs`.
-3. Add markdown files and media assets.
-4. To run in development mode, run the following commands:
+3.  **Open the code and start customizing!**
 
-```shell
-yarn install
-yarn develop
-```
+    Your site is now running at http://localhost:8000!
 
-5. Visit `http://localhost:8000/` to view the local build of the blog.
-6. To generate a production build, run:
+    Edit `src/pages/index.tsx` to see your site update in real-time!
 
-```shell
-yarn install
-yarn build
-```
+4.  **Learn more**
 
-7. Submit a PR against the upstream  [repo](https://github.com/pixie-io/blog.px.dev).
+    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
 
-### Markdown Guidelines
+    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
 
-- Update `Author` , `Path`, `Title` and `Date`
-- Update `category` as Guest Blogs, Pixie Team Blogs, Pixienaut Blogs
-- Try to keep your images to be less than 1MB and gifs less than 2MB
+    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
 
-### Deploy Previews
+    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
 
-Once you submit a pull request to this repo, Netlify creates a [deploy preview](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for the changes in the specific PR. You can view the deploy preview in the Netlify panel that appears under the PR description.
+    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
 
-### Publishing the Site
+    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
 
-The Pixie website is published automatically by [Netlify](https://www.netlify.com/). Whenever changes are merged into the `prod` branch, Netlify re-builds and re-deploys the site.
+## 🚀 Quick start (Gatsby Cloud)
 
-## Blog License
+Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-
-Please note the Creative Commons Attribution 4.0 license applies to the creative work of this site (documentation, blog content, visual assets, etc.) and not to the underlying code and does not supersede any licenses of the source code, its dependencies, etc.
+[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)

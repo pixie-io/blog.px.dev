@@ -16,12 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import withStyles from '@material-ui/core/styles/withStyles';
-import { Theme } from '@material-ui/core';
 import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Theme } from '@mui/material';
+import { ChevronRight, ExpandMore } from '@mui/icons-material';
+import { withStyles } from '@mui/styles';
 
 const Command = withStyles((theme: Theme) => ({
   input: {
@@ -94,14 +93,14 @@ const Command = withStyles((theme: Theme) => ({
         </div>
       </div>
       {!expanded && (
-      <ChevronRightIcon
+      <ChevronRight
         className={classes.expandBtn}
         onClick={() => { setExpanded(true); }}
       />
       )}
       {expanded && (
         <>
-          <ExpandMoreIcon className={classes.expandBtn} onClick={() => { setExpanded(false); }} />
+          <ExpandMore className={classes.expandBtn} onClick={() => { setExpanded(false); }} />
           <div className={classes.expandTitle}>Sample Output</div>
 
           <div className='small-scroll'>

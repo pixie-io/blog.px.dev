@@ -16,14 +16,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import withStyles from '@material-ui/core/styles/withStyles';
-import { Box, Tooltip } from '@material-ui/core';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import React from 'react';
+import React, { useContext } from 'react';
 import vsLight from 'prism-react-renderer/themes/vsLight';
 import vsDark from 'prism-react-renderer/themes/vsDark';
-import { ThemeModeContext } from '../mainThemeProvider';
+import { Box, Tooltip } from '@mui/material';
+import { withStyles } from '@mui/styles';
 import copyBtn from '../../images/copy-btn.svg';
+import { ColorThemeContext } from '../color-theme.provider';
 
 const LineNumber = withStyles((theme) => ({
   lineBlock: {
@@ -31,7 +31,7 @@ const LineNumber = withStyles((theme) => ({
     width: '20px',
     textAlign: 'right',
     paddingRight: '20px',
-    color: theme.palette.type === 'light' ? '#ccc' : '#e0ebf7',
+    color: theme.palette.primary.main,
     fontFamily: '"Roboto Mono", Monospace',
   },
 }
@@ -39,9 +39,8 @@ const LineNumber = withStyles((theme) => ({
 
 const CodeRenderer = withStyles((theme) => ({
   code: {
-    backgroundColor: theme.palette.type === 'light' ? '#f3f3f3' : '#292929',
+    backgroundColor: theme.palette.background.paper,
     borderRadius: '5px',
-    boxShadow: theme.palette.type === 'light' ? '0 2px 2px rgba(0,0,0, 0.15)' : '0px 4px 16px rgba(0, 0, 0, 0.15)',
     fontSize: '16px',
     marginBottom: '32px',
     marginTop: '12px',
@@ -83,46 +82,51 @@ const CodeRenderer = withStyles((theme) => ({
     classes, code,
   } = props;
   const optionsArr = props.className ? props.className.split(':') : [''];
+  const colorContext = useContext(ColorThemeContext);
+  const theme = colorContext.colorMode;
   const options = {
-    hasNumbers: optionsArr.some((o) => o === 'numbers' || o === 'language-numbers'),
-    height: +((optionsArr.find((o) => o.startsWith('H') || o.startsWith('language-H')) || '').substring(1)),
+    hasNumbers: optionsArr.some((o: any) => o === 'numbers' || o === 'language-numbers'),
+    height: +((optionsArr.find((o: any) => o.startsWith('H') || o.startsWith('language-H')) || '').substring(1)),
   };
   const language = (props.className ? (props.className.split(':')[0] || 'bash').replace('language-', '') : 'bash');
 
   return (
     <div className={classes.code}>
-      <ThemeModeContext.Consumer>
-        {({ theme }) => (
-          <Box className={`${classes.codeHighlight} small-scroll`} style={{ height: options.height ? options.height : 'auto' }}>
-            <Highlight
-              {...defaultProps}
-              code={code.trim()}
-              language={language}
-              theme={theme === 'light' ? vsLight : vsDark}
+      <Box className={`${classes.codeHighlight} small-scroll`} style={{ height: options.height ? options.height : 'auto' }}>
+        <Highlight
+          {...defaultProps}
+          code={code.trim()}
+          language={language}
+          theme={theme === 'light' ? vsLight : vsDark}
+        >
+          {({
+            className, style, tokens, getLineProps, getTokenProps,
+          }: any) => (
+            <pre
+              className={`${className} ${classes.pre}`}
+              style={{ ...style, backgroundColor: 'transparent' }}
             >
-              {({
-                className, style, tokens, getLineProps, getTokenProps,
-              }: any) => (
-                <pre
-                  className={`${className} ${classes.pre}`}
-                  style={{ ...style, backgroundColor: 'transparent' }}
-                >
-                  {tokens.map((line, i) => (
-                    <div {...getLineProps({ line, key: i })}>
-                      {options.hasNumbers && <LineNumber lineNumber={i + 1} />}
-                      {line.map((token, key) => (
-                        <span {...getTokenProps({ token, key })} />
-                      ))}
-                    </div>
+              {tokens.map((line: any[], i: number) => (
+                <div {...getLineProps({ line, key: i })}>
+                  {options.hasNumbers && <LineNumber lineNumber={i + 1} />}
+                  {line.map((token, key) => (
+                    <span {...getTokenProps({ token, key })} />
                   ))}
-                </pre>
-              )}
-            </Highlight>
-          </Box>
-        )}
-      </ThemeModeContext.Consumer>
+                </div>
+              ))}
+            </pre>
+          )}
+        </Highlight>
+      </Box>
       <Tooltip title='Copy to clipboard' aria-label='copy' placement='top'>
-        <img src={copyBtn} alt='' className={classes.copyBtn} onClick={() => { navigator.clipboard.writeText(code); }} />
+        <img
+          src={copyBtn}
+          alt=''
+          className={classes.copyBtn}
+          onClick={() => {
+            navigator.clipboard.writeText(code);
+          }}
+        />
       </Tooltip>
     </div>
   );

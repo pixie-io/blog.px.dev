@@ -33,51 +33,51 @@
  */
 
 import * as React from 'react';
-import { makeStyles, TypographyVariant } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { styled, Typography, TypographyVariant } from '@mui/material';
 import link from '../../images/link.svg';
 
-const useStyles = makeStyles(() => ({
-  linkContainer: {
-    '&:hover': {
-      '& a': {
-        opacity: 1,
+const LinkContainer = styled('div')(
+  () => `
+  &:hover {
+      a {
+        opacity: 1;
       },
     },
-  },
-  tocAnchor: {
-    display: 'block',
-    position: 'relative',
-    top: '-100px',
-  },
-  link: {
-    color: 'inherit',
-    display: 'inline',
-    opacity: 0,
-    marginLeft: '10px',
-    position: 'relative',
-    '& img': {
-      verticalAlign: 'middle',
-    },
-  },
-}));
+`,
+);
+const HeaderAnchor = styled('div')(
+  () => `
+        display: block;
+        position: relative;
+        top: -100px;
+`,
+);
+const HeaderLink = styled('a')(
+  () => `
+        color: inherit;
+        display: inline;
+        opacity: 0;
+        margin-left: 10px;
+        position: relative;
+        img: {
+            vertical-align: middle;
+        },
+`,
+);
 
 interface Props {
   id: string;
   variant: TypographyVariant;
 }
 
-const HLink: React.FC<Props> = ({ id, children, variant }) => {
-  const classes = useStyles();
-  return (
-    <div className={classes.linkContainer}>
-      <span className={classes.tocAnchor} id={id} />
-      <Typography variant={variant}>
-        {children}
-        {children && <a href={`#${id}`} className={classes.link}><img src={link} alt='Permalink' /></a>}
-      </Typography>
-    </div>
-  );
-};
+const HLink: React.FC<Props> = ({ id, children, variant }) => (
+  <LinkContainer>
+    <HeaderAnchor id={id} />
+    <Typography variant={variant}>
+      {children}
+      {children && <HeaderLink href={`#${id}`}><img src={link} alt='Permalink' /></HeaderLink>}
+    </Typography>
+  </LinkContainer>
+);
 
 export default HLink;

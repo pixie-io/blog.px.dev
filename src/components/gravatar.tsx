@@ -16,27 +16,34 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import * as React from 'react';
-import { Link } from 'gatsby';
-import { Theme } from '@mui/material';
+import React, { useMemo } from 'react';
+import { toUrl } from 'gatsby-source-gravatar';
+import GatsbyImage from 'gatsby-image';
 import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  link: {
-    color: theme.palette.secondary.main,
-    fontFamily: 'inherit',
-    fontStyle: 'inherit',
-    fontSize: 'inherit',
-    textDecoration: 'none',
-    '&:hover': {
-      color: theme.palette.secondary.main,
-      textDecoration: 'underline',
-    },
+const useStyles = makeStyles(() => ({
+  icon: {
+    width: '45px',
+    height: '45px',
+    overflow: 'hidden',
+    borderRadius: '50%',
   },
 }));
-const AnchorTag = ({ href: to, ...props }) => {
-  const classes = useStyles();
-  return <Link to={to} className={classes.link} {...props} />;
-};
 
-export default AnchorTag;
+const GravatarIcon = (({ email }) => {
+  const url = useMemo(() => toUrl(email || ''), []);
+  const classes = useStyles();
+  return (
+    <GatsbyImage
+      className={classes.icon}
+      fluid={{
+        aspectRatio: 1 / 1,
+        src: `${url}?size=45`,
+        srcSet: `${url}?size=90 90w, ${url}?size=180 180w`,
+        sizes: '(max-width: 45px) 90px, 180px',
+      }}
+    />
+  );
+});
+
+export default GravatarIcon;

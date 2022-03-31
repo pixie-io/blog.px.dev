@@ -1,13 +1,19 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
-const fetch = require('node-fetch');
+
 const slugify = require('slugify');
 const categoryLink = require('./src/components/category-link');
 
 exports.onCreateNode = ({
-  node, actions, getNode, getNodesByType,
+  node,
+  actions,
+  getNode,
+  getNodesByType,
 }) => {
-  const { createNodeField, createParentChildLink } = actions;
+  const {
+    createNodeField,
+    createParentChildLink,
+  } = actions;
 
   if (node.internal.type === 'Directory') {
     const parentDirectory = path.normalize(`${node.dir}/`);
@@ -55,7 +61,10 @@ exports.onCreateNode = ({
   }
 };
 
-exports.createPages = async ({ graphql, actions }) => {
+exports.createPages = async ({
+  graphql,
+  actions,
+}) => {
   const { createRedirect } = actions;
   const result = await graphql(`
     query {
@@ -80,8 +89,8 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const blogPrefix = 'blog/';
-  const blogPost = path.resolve('./src/templates/blog-post.js');
-  const homePage = path.resolve('./src/pages/index.js');
+  const blogPost = path.resolve('./src/templates/blog-post.tsx');
+  const homePage = path.resolve('./src/pages/index.tsx');
 
   const posts = result.data.blog.edges;
   posts.forEach((post) => {
@@ -141,23 +150,24 @@ exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
 }) => {
-  const slackReq = await fetch('https://slackin.px.dev/data');
-  const slack = await slackReq.json();
-
-  const gitReq = await fetch('https://api.github.com/repos/pixie-io/pixie');
-  const github = await gitReq.json();
-
-  createNode({
-    slack: slack.total,
-    github: github.watchers,
-    id: 'header-counters-data',
-    parent: null,
-    children: [],
-    internal: {
-      type: 'HeaderCountersData',
-      contentDigest: createContentDigest({}),
-    },
-  });
+  // const fetch = await import('node-fetch');
+  // const slackReq = await fetch('https://slackin.px.dev/data');
+  // const slack = await slackReq.json();
+  //
+  // const gitReq = await fetch('https://api.github.com/repos/pixie-io/pixie');
+  // const github = await gitReq.json();
+  //
+  // createNode({
+  //   slack: slack.total,
+  //   github: github.watchers,
+  //   id: 'header-counters-data',
+  //   parent: null,
+  //   children: [],
+  //   internal: {
+  //     type: 'HeaderCountersData',
+  //     contentDigest: createContentDigest({}),
+  //   },
+  // });
 };
 
 exports.onCreateWebpackConfig = ({ actions }) => {
@@ -165,6 +175,10 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: { $components: path.resolve(__dirname, 'src/components') },
+      fallback: {
+        fs: false,
+        path: false,
+      },
     },
     node: {
       fs: 'empty',

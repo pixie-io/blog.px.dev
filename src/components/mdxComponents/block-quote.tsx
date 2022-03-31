@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import withStyles from '@material-ui/core/styles/withStyles';
 // eslint-disable-next-line no-unused-vars
+import { withStyles } from '@mui/styles';
 import React from 'react';
 
 const BlockQuote = withStyles((theme) => ({
@@ -26,8 +26,8 @@ const BlockQuote = withStyles((theme) => ({
     borderStyle: 'solid',
     border: '0',
     borderLeft: '5px',
-    borderColor: '#12D6D6',
-    backgroundColor: theme.palette.type === 'light' ? '#ddd' : '#353535',
+    borderColor: 'rgba(var(--color-primary-pre-background))',
+    backgroundColor: theme.palette.background.paper,
     borderRadius: '0 5px 5px 0',
     marginBottom: '32px',
     marginTop: '32px',
@@ -36,6 +36,7 @@ const BlockQuote = withStyles((theme) => ({
   },
 
 }))((props) => {
+  // @ts-ignore
   const { children, classes } = props;
   return (<div className={classes.blockQuote}>{children}</div>);
 });

@@ -17,14 +17,14 @@
  */
 
 import * as React from 'react';
+import { Tab, Tabs } from '@mui/material';
 
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@mui/styles';
+// eslint-disable-next-line import/no-cycle
+import parseMd from './parseMd';
 
 // This is a circular dependency, but only at declaration time - the usages fire after definition.
 // eslint-disable-next-line import/no-cycle
-import parseMd from 'components/mdxComponents/parseMd';
 
 // Doesn't get used directly; only its props are
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -41,7 +41,7 @@ const TabPanel = ({ show, contents }) => {
 
 export const CustomTabs = withStyles(({ palette }) => ({
   tabHeader: {
-    color: palette.type === 'light' ? palette.common.black : palette.common.white,
+    color: palette.primary.main,
     letterSpacing: 'initial',
   },
 }))((props) => {
@@ -51,8 +51,8 @@ export const CustomTabs = withStyles(({ palette }) => ({
   const tabs = React.useMemo(() => (
     React.Children.map(children, (child) => {
       if (!React.isValidElement(child)) return null;
-      const label = child.props?.['label'];
-      const contents = child.props?.['children'];
+      const label = child.props?.label;
+      const contents = child.props?.children;
       return label && contents ? { label, contents } : null;
     }).filter((v) => v)
   ), [children]);
