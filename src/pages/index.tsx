@@ -129,6 +129,7 @@ export const pageQuery = graphql`
           title
           authors {
             id
+            email
           }
           emails
           categories

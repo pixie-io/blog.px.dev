@@ -48,8 +48,6 @@ module.exports = {
     },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
-    'gatsby-transformer-yaml',
-
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -87,6 +85,7 @@ module.exports = {
       },
     },
     'gatsby-plugin-mui-emotion',
+    'gatsby-transformer-yaml',
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {

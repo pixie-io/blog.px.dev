@@ -19,14 +19,15 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
-import PropTypes from 'prop-types';
 import { urlFromSlug } from '../../utils';
 import PostPlaceholder from '../../post-placeholder';
+import GravatarIcon from '../../gravatar';
 
 // @ts-ignore
 function BlogPostCard({ post }) {
   const {
     excerpt,
+    timeToRead,
     frontmatter: {
       title,
       featured_image: featuredImage,
@@ -35,7 +36,6 @@ function BlogPostCard({ post }) {
     },
     fields: { slug },
   } = post;
-  console.log(post);
   return (
     <div className='col-4 '>
       <article>
@@ -49,8 +49,15 @@ function BlogPostCard({ post }) {
             <h4>{title}</h4>
             <p>{excerpt}</p>
             <p>
-              {authors.map((a) => (a.id))
+
+              {(authors || []).map((a: { email: any }) => (
+                <GravatarIcon email={a.email} />
+              ))}
+              {authors.map((a: { id: any }) => (a.id))
                 .join(', ')}
+              {timeToRead}
+              {' '}
+              minutes red
             </p>
             <p>
               {date}
@@ -61,12 +68,5 @@ function BlogPostCard({ post }) {
     </div>
   );
 }
-BlogPostCard.propTypes = {
-  post: PropTypes.shape({
-    frontmatter: PropTypes.shape,
-    fields: PropTypes.shape,
-    excerpt: PropTypes.string,
-  }).isRequired,
-};
 
 export default BlogPostCard;

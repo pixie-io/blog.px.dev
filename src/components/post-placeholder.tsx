@@ -20,7 +20,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 
-const PostPlaceholder = ({ imgStyle, style }) => (
+const PostPlaceholder = () => (
   <StaticQuery
     query={graphql`
       query {
@@ -52,8 +52,6 @@ const PostPlaceholder = ({ imgStyle, style }) => (
           loading='lazy'
           fluid={fluid}
           fadeIn={false}
-          imgStyle={imgStyle}
-          style={style}
         />
       );
     }}

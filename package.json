@@ -49,7 +49,7 @@
     "gatsby-source-filesystem": "^4.9.1",
     "gatsby-source-gravatar": "^1.0.2",
     "gatsby-transformer-sharp": "^4.9.0",
-    "gatsby-transformer-yaml": "^4.6.0",
+    "gatsby-transformer-yaml": "^2.4.11",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
