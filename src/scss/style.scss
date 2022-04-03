@@ -120,13 +120,17 @@ figcaption {
 }
 
 .blog-post-card {
-  .gatsby-image-wrapper {
-    height: 120px;
+  .blog-post-card-image {
+    .gatsby-image-wrapper {
+      height: 120px;
+      border-radius: 10px;
 
-    img {
-      object-fit: contain !important;
+      img {
+        object-fit: cover !important;
+      }
     }
   }
+
 }
 
 iframe {

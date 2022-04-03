@@ -30,15 +30,22 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const GravatarIcon = (({ email }) => {
+const GravatarIcon = (({
+  email,
+  size,
+}) => {
   const url = useMemo(() => toUrl(email || ''), []);
   const classes = useStyles();
   return (
     <GatsbyImage
       className={classes.icon}
+      style={{
+        width: size,
+        height: size,
+      }}
       fluid={{
         aspectRatio: 1 / 1,
-        src: `${url}?size=45`,
+        src: `${url}?size=${size}`,
         srcSet: `${url}?size=90 90w, ${url}?size=180 180w`,
         sizes: '(max-width: 45px) 90px, 180px',
       }}

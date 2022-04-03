@@ -96,7 +96,7 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
             </Grid>
             <Grid container spacing={3}>
               {posts.map((post: any) => (
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                   <BlogPostCard key={post.id} post={post} />
                 </Grid>
               ))}

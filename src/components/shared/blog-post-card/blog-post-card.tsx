@@ -19,6 +19,9 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
+
+import { Box } from '@mui/system';
+import { Stack, Typography } from '@mui/material';
 import { urlFromSlug } from '../../utils';
 import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
@@ -37,35 +40,51 @@ function BlogPostCard({ post }) {
     fields: { slug },
   } = post;
   return (
-    <div className='col-4 '>
-      <article>
-        <Link to={urlFromSlug(slug)}>
-          <div>
-            {featuredImage
-              ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
-              : <PostPlaceholder />}
-          </div>
-          <div>
-            <h4>{title}</h4>
-            <p>{excerpt}</p>
-            <p>
-
+    <article className='blog-post-card'>
+      <Link to={urlFromSlug(slug)}>
+        <Box borderRadius='10px' className='blog-post-card-image'>
+          {featuredImage
+            ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
+            : <PostPlaceholder />}
+        </Box>
+        <Box mb={1}>
+          <Typography variant='h5' sx={{ mt: 1 }}>{title}</Typography>
+          <Typography variant='body1' sx={{ my: 1 }}>{excerpt}</Typography>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: authors.length > 2
+              ? 'column' : 'row',
+          }}
+          >
+            <Stack direction='row' spacing={0.5} mb={1} mr={1}>
               {(authors || []).map((a: { email: any }) => (
-                <GravatarIcon email={a.email} />
+                <GravatarIcon email={a.email} size={32} />
               ))}
-              {authors.map((a: { id: any }) => (a.id))
-                .join(', ')}
+            </Stack>
+            <Box sx={{
+              fontSize: '12px',
+              lineHeight: '14px',
+            }}
+            >
+              <Box
+                component='span'
+                sx={{
+                  color: (t) => t?.components?.MuiTypography.styleOverrides.h1.color,
+                }}
+              >
+                {authors.map((a: { id: any }) => (a.id)).join(', ')}
+              </Box>
+              {' • '}
+              {date}
+              {' • '}
               {timeToRead}
               {' '}
-              minutes red
-            </p>
-            <p>
-              {date}
-            </p>
-          </div>
-        </Link>
-      </article>
-    </div>
+              minutes read
+            </Box>
+          </Box>
+        </Box>
+      </Link>
+    </article>
   );
 }
 

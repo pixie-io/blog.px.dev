@@ -120,6 +120,7 @@ const themeOptions: ThemeOptions = {
           fontWeight: 700,
           fontSize: '22px',
           lineHeight: '30px',
+          fontStyle: 'normal',
         },
       },
     },
