@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import React, { createContext, useState } from 'react';
+import React, { createContext, useLayoutEffect, useState } from 'react';
 
 const getInitialColorMode = () => (typeof window !== 'undefined' && !!window.localStorage && document.body.classList.contains('dark') ? 'dark' : 'light');
 
@@ -26,7 +26,13 @@ export const ColorThemeContext = createContext({
 });
 // @ts-ignore
 export const ColorThemeProvider = ({ children }) => {
-  const [colorMode, rawSetColorMode] = useState(getInitialColorMode);
+  const [colorMode, rawSetColorMode] = useState(getInitialColorMode());
+
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      rawSetColorMode(getInitialColorMode());
+    }
+  });
   const setColorMode = (mode: string) => {
     rawSetColorMode(mode);
 

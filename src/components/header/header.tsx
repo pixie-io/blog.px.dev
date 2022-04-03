@@ -19,7 +19,13 @@
 /* eslint-disable react/jsx-indent */
 import React, { useContext } from 'react';
 import {
-  AppBar, IconButton, Toolbar, useScrollTrigger,
+  AppBar,
+  Button,
+  Container,
+  IconButton,
+  Stack,
+  Toolbar,
+  useScrollTrigger,
 } from '@mui/material';
 import { Brightness4, Brightness7 } from '@mui/icons-material';
 import { ColorThemeContext } from '../color-theme.provider';
@@ -51,13 +57,27 @@ function Header() {
             <ElevationScroll>
                 <AppBar>
                     <Toolbar>
-                        <Link to='/'>
-                            <img src={pixieLogo} alt='pixie logo' className='block' />
-                        </Link>
+                        <Container>
+                            <Stack
+                              direction='row'
+                              justifyContent='space-between'
+                              alignItems='center'
+                            >
+                                <Link to='/'>
+                                    <img src={pixieLogo} alt='pixie logo' className='block' />
+                                </Link>
+                                <div>
 
-                        <IconButton size='small' onClick={onThemeTypeSwitch}>
-                            {colorContext.colorMode === 'light' ? <Brightness4 style={{ color: '#B2B5BB' }} /> : <Brightness7 style={{ color: '#B2B5BB' }} />}
-                        </IconButton>
+                                    <IconButton size='small' onClick={onThemeTypeSwitch}>
+                                        {colorContext.colorMode === 'light'
+                                          ? <Brightness4 style={{ color: '#B2B5BB' }} />
+                                          : <Brightness7 style={{ color: '#B2B5BB' }} />}
+                                    </IconButton>
+                                    <Button sx={{ mx: 4 }}>Docs</Button>
+                                    <Button variant='contained'>GET STARTED</Button>
+                                </div>
+                            </Stack>
+                        </Container>
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>

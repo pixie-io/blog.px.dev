@@ -126,6 +126,12 @@ const themeOptions: ThemeOptions = {
     MuiButton: {
       styleOverrides: {
         root: {
+          color: 'rgba(var(--color-primary))',
+        },
+        text: {
+          color: 'inherit',
+        },
+        contained: {
           backgroundColor: 'rgba(var(--color-button-background))',
           color: 'black',
           letterSpacing: '3px',

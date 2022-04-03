@@ -106,8 +106,6 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
                 >
                   {cat.label}
                   {' '}
-                  {' '}
-                  {' '}
                   (
                   {cat.count}
                   )
