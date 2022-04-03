@@ -25,6 +25,7 @@ import { Stack, Typography } from '@mui/material';
 import { urlFromSlug } from '../../utils';
 import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
+import BlogAuthorsHeader from '../blog-authors-header';
 
 // @ts-ignore
 function BlogPostCard({ post }) {
@@ -50,38 +51,7 @@ function BlogPostCard({ post }) {
         <Box mb={1}>
           <Typography variant='h5' sx={{ mt: 1 }}>{title}</Typography>
           <Typography variant='body1' sx={{ my: 1 }}>{excerpt}</Typography>
-          <Box sx={{
-            display: 'flex',
-            flexDirection: authors.length > 2
-              ? 'column' : 'row',
-          }}
-          >
-            <Stack direction='row' spacing={0.5} mb={1} mr={1}>
-              {(authors || []).map((a: { email: any }) => (
-                <GravatarIcon email={a.email} size={32} />
-              ))}
-            </Stack>
-            <Box sx={{
-              fontSize: '12px',
-              lineHeight: '14px',
-            }}
-            >
-              <Box
-                component='span'
-                sx={{
-                  color: (t) => t?.components?.MuiTypography.styleOverrides.h1.color,
-                }}
-              >
-                {authors.map((a: { id: any }) => (a.id)).join(', ')}
-              </Box>
-              {' • '}
-              {date}
-              {' • '}
-              {timeToRead}
-              {' '}
-              minutes read
-            </Box>
-          </Box>
+          <BlogAuthorsHeader authors={authors} timeToRead={timeToRead} date={date} />
         </Box>
       </Link>
     </article>

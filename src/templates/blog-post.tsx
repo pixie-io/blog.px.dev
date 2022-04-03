@@ -17,22 +17,39 @@
  */
 
 import React from 'react';
-
-import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
-import { Container, Grid } from '@mui/material';
+import {
+  Box, Container, Grid, Stack,
+} from '@mui/material';
 import mdxComponents from '../components/mdxComponents';
 import Header from '../components/header';
 import HLink from '../components/mdxComponents/h-link';
+import ShareAside from '../components/share-aside';
+import GravatarIcon from '../components/gravatar';
 
 // eslint-disable-next-line react/prop-types,@typescript-eslint/ban-ts-comment
 // @ts-ignore
-function BlogPostTemplate({ data, location = { href: '' } }) {
+function BlogPostTemplate({
+  data,
+  location = { href: '' },
+}) {
   const post = data.mdx;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const related = data.related.nodes;
-
+  console.log(data);
+  const {
+    frontmatter: {
+      title,
+      featured_image: featuredImage,
+      authors,
+      email,
+      emails,
+      date,
+    },
+    excerpt,
+    timeToRead,
+  } = data.mdx;
   const { categories } = post.frontmatter;
   const disqusConfig = {
     url: location.href,
@@ -43,16 +60,71 @@ function BlogPostTemplate({ data, location = { href: '' } }) {
   return (
     <>
       <Header />
-
       <Container>
-        <Grid container>
+        <Grid container spacing={2}>
           <Grid item xs={1} />
           <Grid item xs={8}>
             <HLink id='title' variant='h1'>{post.frontmatter.title}</HLink>
+            <Box sx={(theme) => ({
+              display: 'flex',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              my: 2,
+              [theme.breakpoints.down('md')]: {
+                flexDirection: 'column-reverse',
+              },
+            })}
+            >
+              <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+              >
+                <Stack direction='row' spacing={0.5} mb={1} mr={1}>
+                  {(authors || []).map((a: { email: any }) => (
+                    <GravatarIcon email={a.email} size={40} />
+                  ))}
+                </Stack>
+                <Box sx={{
+                  fontSize: '12px',
+                  lineHeight: '14px',
+                }}
+                >
+                  <Box
+                    sx={{
+                      color: (t) => t?.components?.MuiTypography?.styleOverrides?.h1?.color,
+                    }}
+                  >
+                    {authors.map((a: { id: any }) => (a.id))
+                      .join(', ')}
+                  </Box>
+
+                  {date}
+                  {' • '}
+                  {timeToRead}
+                  {' '}
+                  minutes read
+                </Box>
+              </Box>
+              <Stack direction='column' mb={1} mr={1}>
+                {(authors || []).map((a: { bio: any }) => (
+                  <Box sx={{
+                    fontSize: '12px',
+                    lineHeight: '14px',
+                  }}
+                  >
+                    {a.bio}
+                  </Box>
+                ))}
+              </Stack>
+            </Box>
+            <hr />
             <MDXProvider components={mdxComponents}>
               <MDXRenderer>{post.body}</MDXRenderer>
             </MDXProvider>
-            <Grid item xs={3} />
+          </Grid>
+          <Grid item xs={3}>
+            <ShareAside />
           </Grid>
         </Grid>
       </Container>
@@ -67,6 +139,7 @@ export const pageQuery = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       excerpt(pruneLength: 160)
       body
+      timeToRead
       frontmatter {
         title
         authors {
