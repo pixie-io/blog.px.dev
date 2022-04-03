@@ -13,8 +13,10 @@ require('dotenv')
 
 module.exports = {
   siteMetadata: {
-    title: ``,
-    siteUrl: `https://blog.px.dev`
+    title: 'Pixie Labs Blog',
+    description: 'Pixie Blog',
+    author: 'Pixie Labs',
+    siteUrl: 'https://blog.px.dev',
   },
   plugins: [
     'gatsby-plugin-top-layout',

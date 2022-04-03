@@ -20,13 +20,13 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
-import * as styles from './blog-post-card.module.scss';
 import { urlFromSlug } from '../../utils';
 import PostPlaceholder from '../../post-placeholder';
 
 // @ts-ignore
 function BlogPostCard({ post }) {
   const {
+    excerpt,
     frontmatter: {
       title,
       featured_image: featuredImage,
@@ -35,21 +35,24 @@ function BlogPostCard({ post }) {
     },
     fields: { slug },
   } = post;
+  console.log(post);
   return (
     <div className='col-4 '>
-      <article className={`${styles.card} blog-post-card`}>
+      <article>
         <Link to={urlFromSlug(slug)}>
-          <div className={styles.cardImage}>
+          <div>
             {featuredImage
               ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
               : <PostPlaceholder />}
           </div>
-          <div className={styles.cardBody}>
+          <div>
             <h4>{title}</h4>
-            <p className={styles.authorRow}>
-              {authors.map((a) => (a.id)).join(', ')}
+            <p>{excerpt}</p>
+            <p>
+              {authors.map((a) => (a.id))
+                .join(', ')}
             </p>
-            <p className={styles.dateRow}>
+            <p>
               {date}
             </p>
           </div>
