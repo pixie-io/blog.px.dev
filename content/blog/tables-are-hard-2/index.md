@@ -19,11 +19,6 @@ This tutorial is aimed at relative beginners to web development, and will keep t
 
 [Final Code](https://github.com/pixie-io/pixie-demos/tree/main/react-table) | [Live Demo](https://pixie-io.github.io/pixie-demos/react-table)
 
-_This article is part of a series_:
-- [Part 1: History](https://blog.px.dev/tables-are-hard-3)
-- **Part 2: Building a Simple Data Table in React**
-- [Part 3: Streaming Data](https://blog.px.dev/tables-are-hard-3)
-
 ::: div image-xl
 <figure>
   <video controls muted loop playsinline width="670">
@@ -34,6 +29,11 @@ _This article is part of a series_:
   </figcaption>
 </figure>
 :::
+
+_This article is part of a series_:
+- [Part 1: History](https://blog.px.dev/tables-are-hard-3)
+- **Part 2: Building a Simple Data Table in React**
+- [Part 3: Streaming Data](https://blog.px.dev/tables-are-hard-3)
 
 ## Prerequisites
 
