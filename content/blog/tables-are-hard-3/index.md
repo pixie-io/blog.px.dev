@@ -504,7 +504,7 @@ While we're here, let's default to sorting by timestamp too.
   </tab>
 </tabs>
 
-At last, we have a fully working demo:
+At last, we have a fully working demo (click to interact):
 
 ::: div
 <div style="margin-top:2em;width:100%;height:600px;padding:0;overflow:hidden;">
@@ -521,7 +521,10 @@ With our [final code](https://github.com/pixie-io/pixie-demos/tree/main/react-ta
 * Columns can be selectively resized and hidden.
 * The table continues to perform smoothly indefinitely.
 
-While this doesn't cover nearly what a real log viewer does, it can be used as a starting point for similar use cases.
+While this doesn't cover nearly everything that a real log viewer does, it does introduce one of the harder topics.
+
+There's a great deal more to explore in this space, especially in terms of browser performance and complex data.
+Tables are hard, but we hope these articles have provided a foundation to learn and build something awesome yourself.
 
 [^1]: React 18 [can help a little bit](https://reactjs.org/blog/2022/03/29/react-v18.html) with this if you're clever, but you're better off fixing the root cause(s) first.
 [^2]: JavaScript's event loop, web workers, DOM repaints, and more are out of scope for this tutorial. [This primer](https://web.dev/rendering-performance/) on the pixel pipeline is a good start if you wish to learn the basics. Performance is complicated!
