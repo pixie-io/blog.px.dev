@@ -17,8 +17,8 @@ In later installments, we'll dive into how today's software handles the complex 
 
 _This article is part of a series_:
 - **Part 1: History**
-- [Part 2: Building a Simple Data Table in React](https://blog.px.dev/tables-are-hard-2)
-- [Part 3: Streaming Data](https://blog.px.dev/tables-are-hard-3)
+- [Part 2: Building a Simple Data Table in React](/tables-are-hard-2)
+- [Part 3: Streaming Data](/tables-are-hard-3)
 
 ## Modern Expectations
 
@@ -80,7 +80,7 @@ Year | Product | Significant Contributions
 2006 | [Google Sheets](https://en.wikipedia.org/wiki/Google_Sheets) | Cloud save; collaborative editing; ran in browsers
 Later | Bootstrap, flexbox, countless JS grid and table libraries | Mostly reinventing the wheel, but now it's _web scale_.
 
-As you can see, modern tables support a variety of features. In the next installment, we'll dive into the technical end: how tables on the web handle these requirements.
+As you can see, modern tables support a variety of features. In the [next installment](/tables-are-hard-2), we'll dive into the technical end: how tables on the web handle these requirements.
 
 [^1]: Dan Bricklin, one of VisiCalc's creators, has [written about this status](http://danbricklin.com/firstspreadsheetquestion.htm). It depends on how you split hairs.
 [^2]: Bob talks about his time at White-Weld, among other things, in his 2017 piece [The Stories of Software](https://rmf.vc/ieeeaboutsoftware?pdf=t).

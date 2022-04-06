@@ -10,7 +10,7 @@ emails: ['nlanam@pixielabs.ai']
 
 Let's build a tailing log viewer in React. Or at least, a facsimile of one.
 
-In our [previous post](https://blog.px.dev/tables-are-hard-2/), we made a table with sorting, filtering, and column controls.
+In our [previous post](/tables-are-hard-2/), we made a table with sorting, filtering, and column controls.
 
 This time, we'll upgrade it to handle a constant barrage of data a bit like a log viewer would.
 
@@ -30,13 +30,13 @@ This tutorial is aimed at relative beginners to web development; we'll keep the 
 :::
 
 _This article is part of a series_:
-- [Part 1: History](https://blog.px.dev/tables-are-hard-1)
-- [Part 2: Building a Simple Data Table in React](https://blog.px.dev/tables-are-hard-2)
+- [Part 1: History](/tables-are-hard-1)
+- [Part 2: Building a Simple Data Table in React](/tables-are-hard-2)
 - **Part 3: Streaming Data**
 
 ## Setting Up
 
-To begin, you'll need the [same basic setup](https://blog.px.dev/tables-are-hard-2/#prerequisites) as the previous article in this series:
+To begin, you'll need the [same basic setup](/tables-are-hard-2/#prerequisites) as the previous article in this series:
 * A modern browser.
 * NodeJS &ge; 14, NPM &ge; 5.2 (NodeJS 14 comes with NPM 6).
 * Something to edit code with.
@@ -529,4 +529,4 @@ Tables are hard, but we hope these articles have provided a foundation to learn 
 [^1]: React 18 [can help a little bit](https://reactjs.org/blog/2022/03/29/react-v18.html) with this if you're clever, but you're better off fixing the root cause(s) first.
 [^2]: JavaScript's event loop, web workers, DOM repaints, and more are out of scope for this tutorial. [This primer](https://web.dev/rendering-performance/) on the pixel pipeline is a good start if you wish to learn the basics. Performance is complicated!
 [^3]: By default, scrollbars in Firefox take up space and affect layout. This used to be normal in all browsers. These days, most browsers overlay scrollbars as if they had a width of zero. You can detect this with `element.offsetWidth - element.clientWidth` (`element.offsetHeight - element.clientHeight` for horizontal scrollbars). If the element isn't scrolling or if scrollbars are set to overlay, these values will be 0; if not, they'll tell you how much space the scrollbars take up.
-[^4]: We wrote [a blog post on memoization](https://blog.px.dev/ui-performance). For this code, it's to retain state and not for performance.
+[^4]: We wrote [a blog post on memoization](/ui-performance). For this code, it's to retain state and not for performance.
