@@ -17,12 +17,19 @@
  */
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Chip, Container, Grid } from '@mui/material';
+import {
+  Chip, Container, Grid, Typography,
+} from '@mui/material';
 import slugify from 'slugify';
-import { graphql, Link as GatsbyLink } from 'gatsby';
+import { graphql, Link, Link as GatsbyLink } from 'gatsby';
+import { Box } from '@mui/system';
+import Img from 'gatsby-image';
 import Header from '../components/header';
 import BlogPostCard from '../components/shared/blog-post-card';
 import ShareAside from '../components/share-aside';
+import { urlFromSlug } from '../components/utils';
+import PostPlaceholder from '../components/post-placeholder';
+import BlogAuthorsHeader from '../components/shared/blog-authors-header';
 
 // markup
 // eslint-disable-next-line max-len,react/require-default-props
@@ -38,7 +45,8 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
 
   const {
     posts: { nodes: allPosts },
-  }: { posts: { nodes: any[] } } = data;
+    heroPost: { nodes: heroPosts },
+  }: { posts: { nodes: any[] }; heroPost: { nodes: any[] } } = data;
   const {
     categories: { distinct: allCategories },
   } = data;
@@ -53,7 +61,7 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
 
   const [category] = useState(urlCategory);
   const [posts, setPosts] = useState(allPosts);
-  const [heroPost, setHeroPost] = useState(allPosts[0]);
+  const [heroPost, setHeroPost] = useState(heroPosts[0]);
   const [featuredPosts, setFeaturedPosts] = useState(allPosts.slice(1, 3));
 
   const filterPosts = (c: any) => {
@@ -73,12 +81,25 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={9}>
-            <Grid container spacing={3}>
-              <Grid item md={4} xs={12}>
-                image
+            <Grid container spacing={3} my={4}>
+              <Grid item md={6} xs={12}>
+                <Link to={urlFromSlug(heroPost.fields.slug)}>
+                  <Box borderRadius='10px' overflow='hidden' className='blog-post-card-image'>
+                    {heroPost.frontmatter.featured_image
+                      ? (
+                        <Img
+                          fluid={heroPost.frontmatter.featured_image.childImageSharp.fluid}
+                          alt='hero'
+                        />
+                      )
+                      : <PostPlaceholder />}
+                  </Box>
+                </Link>
               </Grid>
-              <Grid item md={8} xs={12}>
-                details
+              <Grid item md={6} xs={12}>
+                <Typography variant='h2' sx={{ mt: 1 }}>{heroPost.frontmatter.title}</Typography>
+                <Typography variant='body1' sx={{ my: 1 }}>{heroPost.excerpt}</Typography>
+                <BlogAuthorsHeader authors={heroPost.frontmatter.authors} timeToRead={heroPost.timeToRead} date={heroPost.frontmatter.date} />
               </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -104,8 +125,38 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
               ))}
 
             </Grid>
+
             <Grid item xs={12}>
-              featured posts
+              <Typography variant='h5'>Latest posts</Typography>
+              <hr />
+            </Grid>
+            {featuredPosts.map((post) => (
+              <Grid container spacing={3} mb={4} mt={2} key={post.id}>
+
+                <Grid item md={6} xs={12}>
+                  <Link to={urlFromSlug(heroPost.fields.slug)}>
+                    <Box borderRadius='10px' overflow='hidden' className='blog-post-card-image'>
+                      {heroPost.frontmatter.featured_image
+                        ? (
+                          <Img
+                            fluid={heroPost.frontmatter.featured_image.childImageSharp.fluid}
+                            alt='hero'
+                          />
+                        )
+                        : <PostPlaceholder />}
+                    </Box>
+                  </Link>
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <Typography variant='h2' sx={{ mt: 1 }}>{heroPost.frontmatter.title}</Typography>
+                  <Typography variant='body1' sx={{ my: 1 }}>{heroPost.excerpt}</Typography>
+                  <BlogAuthorsHeader authors={heroPost.frontmatter.authors} timeToRead={heroPost.timeToRead} date={heroPost.frontmatter.date} />
+                </Grid>
+              </Grid>
+            ))}
+            <Grid item xs={12} mb={2}>
+              <Typography variant='h5'>Latest posts</Typography>
+              <hr />
             </Grid>
             <Grid container spacing={3}>
               {posts.map((post: any) => (
@@ -157,7 +208,36 @@ export const pageQuery = graphql`
         }
       }
     }
-
+ heroPost: allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 1
+    ) {
+      nodes {
+        fields {
+          slug
+        }
+        id
+        timeToRead
+        excerpt(pruneLength: 100)
+        frontmatter {
+          title
+          authors {
+            id
+            email
+          }
+          emails
+          categories
+          date(formatString: "MMM DD, YYYY")
+          featured_image {
+            childImageSharp {
+              fluid(maxHeight: 226 quality: 92) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
+      }
+    }
    categories: allMdx(sort: {fields: fields___slug, order: ASC}) {
       distinct(field: frontmatter___categories)
     }
