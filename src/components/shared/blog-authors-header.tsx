@@ -34,7 +34,7 @@ const BlogAuthorsHeader = ({
   >
     <Stack direction='row' spacing={0.5} mb={1} mr={1}>
       {(authors || []).map((a: { email: any }) => (
-        <GravatarIcon email={a.email} size={32} />
+        <GravatarIcon email={a.email} size={32} key={a.email} />
       ))}
     </Stack>
     <Box sx={{

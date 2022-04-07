@@ -20,13 +20,15 @@ import React from 'react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import {
-  Box, Container, Grid, Stack,
+  Box, Container, Grid, Stack, Typography,
 } from '@mui/material';
+import { graphql } from 'gatsby';
 import mdxComponents from '../components/mdxComponents';
 import Header from '../components/header';
 import HLink from '../components/mdxComponents/h-link';
 import ShareAside from '../components/share-aside';
 import GravatarIcon from '../components/gravatar';
+import BlogPostCard from '../components/shared/blog-post-card';
 
 // eslint-disable-next-line react/prop-types,@typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -37,7 +39,6 @@ function BlogPostTemplate({
   const post = data.mdx;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const related = data.related.nodes;
-  console.log(data);
   const {
     frontmatter: {
       title,
@@ -82,7 +83,7 @@ function BlogPostTemplate({
               >
                 <Stack direction='row' spacing={0.5} mb={1} mr={1}>
                   {(authors || []).map((a: { email: any }) => (
-                    <GravatarIcon email={a.email} size={40} />
+                    <GravatarIcon email={a.email} size={40} key={a.email} />
                   ))}
                 </Stack>
                 <Box sx={{
@@ -107,11 +108,14 @@ function BlogPostTemplate({
                 </Box>
               </Box>
               <Stack direction='column' mb={1} mr={1}>
-                {(authors || []).map((a: { bio: any }) => (
-                  <Box sx={{
-                    fontSize: '12px',
-                    lineHeight: '14px',
-                  }}
+                {(authors || []).map((a: { bio: any; email: string }) => (
+                  <Box
+                    sx={{
+                      fontSize: '12px',
+                      lineHeight: '14px',
+
+                    }}
+                    key={a.email}
                   >
                     {a.bio}
                   </Box>
@@ -122,6 +126,15 @@ function BlogPostTemplate({
             <MDXProvider components={mdxComponents}>
               <MDXRenderer>{post.body}</MDXRenderer>
             </MDXProvider>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <hr />
+                <Typography variant='h5'> Related posts</Typography>
+              </Grid>
+              {related.map((p: { fields: { slug: React.Key | null | undefined } }) => (
+                <Grid item xs={4} key={p.fields.slug}><BlogPostCard post={p} /></Grid>
+              ))}
+            </Grid>
           </Grid>
           <Grid item xs={3}>
             <ShareAside />
@@ -137,7 +150,6 @@ export default BlogPostTemplate;
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
-      excerpt(pruneLength: 160)
       body
       timeToRead
       frontmatter {
@@ -171,10 +183,13 @@ export const pageQuery = graphql`
         fields {
           slug
         }
+       excerpt(pruneLength: 80)
+       timeToRead
         frontmatter {
           title
           authors {
             id
+            email
           }
           date(formatString: "MMM DD, YYYY")
           featured_image {
