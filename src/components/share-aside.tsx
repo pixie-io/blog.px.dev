@@ -53,7 +53,8 @@ const ShareAside = () => {
       icon: twitter,
       name: 'Twitter',
       width: 20,
-    }, {
+    },
+    {
       href: 'https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured',
       icon: youtube,
       name: 'YouTube',
