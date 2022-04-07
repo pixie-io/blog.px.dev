@@ -10,7 +10,7 @@ emails: ['nlanam@pixielabs.ai']
 
 Let's build a "simple" data table in a web app, starting with the basics.
 
-In the [previous post](https://blog.px.dev/tables-are-hard-1/), we summarized the features expected in a modern data table.
+In the [previous post](/tables-are-hard-1/), we summarized the features expected in a modern data table.
 
 By the end of this tutorial, we'll build a table with filtering, sorting, and basic column controls.
 In the next post, we'll add new requirements and walk through handling them.
@@ -29,6 +29,11 @@ This tutorial is aimed at relative beginners to web development, and will keep t
   </figcaption>
 </figure>
 :::
+
+_This article is part of a series_:
+- [Part 1: History](/tables-are-hard-1)
+- **Part 2: Building a Simple Data Table in React**
+- [Part 3: Streaming Data](/tables-are-hard-3)
 
 ## Prerequisites
 
@@ -569,7 +574,7 @@ We now have a table that can do the following:
 There's an elephant in the room that we didn't address: dynamic data.
 When there are too many rows to render at once, and when the rows change rapidly, how do you sort correctly?
 How do you filter correctly? How do you prevent CPU and memory usage from exploding (spoiler: `react-table` wasn't designed for this)?
-We'll explore this and more in the next post.
+We'll explore this and more in the [next post](/tables-are-hard-3/).
 
 [^1]: Chrome, Firefox, Edge, Safari, Opera, Brave, etc. [Lynx](https://en.wikipedia.org/wiki/Lynx_(web_browser)) gets nerd cred, but it isn't what we mean here.
 [^2]: In a real project, we'd be using Yarn to manage packages; something like Material or styled-components to make editing styles more pleasant; TypeScript for its many benefits, and more. But this is a simple tutorial, so we're adding as few layers of complexity as we can.
