@@ -38,7 +38,7 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
 
   const {
     posts: { nodes: allPosts },
-  } = data;
+  }: { posts: { nodes: any[] } } = data;
   const {
     categories: { distinct: allCategories },
   } = data;
@@ -53,6 +53,8 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
 
   const [category] = useState(urlCategory);
   const [posts, setPosts] = useState(allPosts);
+  const [heroPost, setHeroPost] = useState(allPosts[0]);
+  const [featuredPosts, setFeaturedPosts] = useState(allPosts.slice(1, 3));
 
   const filterPosts = (c: any) => {
     const filteredPosts = c
@@ -70,7 +72,15 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
       <Header />
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs={9}>
+          <Grid item xs={12} sm={9}>
+            <Grid container spacing={3}>
+              <Grid item md={4} xs={12}>
+                image
+              </Grid>
+              <Grid item md={8} xs={12}>
+                details
+              </Grid>
+            </Grid>
             <Grid item xs={12}>
               {categories.map((cat: { label: any; count: any }) => (
                 <Chip
@@ -94,15 +104,18 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
               ))}
 
             </Grid>
+            <Grid item xs={12}>
+              featured posts
+            </Grid>
             <Grid container spacing={3}>
               {posts.map((post: any) => (
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <BlogPostCard key={post.id} post={post} />
                 </Grid>
               ))}
             </Grid>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={3}>
             <ShareAside />
           </Grid>
         </Grid>

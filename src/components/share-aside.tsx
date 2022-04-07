@@ -21,6 +21,7 @@ import React from 'react';
 import {
   Box,
   Button,
+  Grid,
   List,
   ListItem,
   ListItemButton,
@@ -34,75 +35,115 @@ import twitter from '../images/header/twitter-icon.svg';
 import youtube from '../images/header/youtube-icon.svg';
 
 const ShareAside = () => (
-  <Box sx={{ position: 'fixed' }}>
+  <Box sx={{
+    position: {
+      xs: 'relative',
+      sm: 'fixed',
+    },
+  }}
+  >
     <Typography variant='h5'>Connect with us</Typography>
     <List>
-      <ListItem disablePadding>
-        <ListItemButton component='a' href='https://slackin.px.dev' target='_blank'>
-          <ListItemIcon sx={{
-            minWidth: 0,
-            pr: 1,
+      <Grid container>
+        <ListItem
+          sx={{
+            width: {
+              xs: '50%',
+              sm: '100%',
+            },
           }}
-          >
-            {' '}
-            <img width={18} src={slack} alt='slack' />
-            {' '}
-          </ListItemIcon>
-          <ListItemText primary='Slack' />
-        </ListItemButton>
-      </ListItem>
-      <ListItem disablePadding>
-        <ListItemButton
-          component='a'
-          href='https://github.com/pixie-io/pixie'
-          target='_blank'
+          disablePadding
         >
-          <ListItemIcon sx={{
-            minWidth: 0,
-            pr: 1,
+          <ListItemButton component='a' href='https://slackin.px.dev' target='_blank'>
+            <ListItemIcon sx={{
+              minWidth: 0,
+              pr: 1,
+            }}
+            >
+              {' '}
+              <img width={18} src={slack} alt='slack' />
+              {' '}
+            </ListItemIcon>
+            <ListItemText primary='Slack' />
+          </ListItemButton>
+        </ListItem>
+        <ListItem
+          sx={{
+            width: {
+              xs: '50%',
+              sm: '100%',
+            },
           }}
-          >
-            {' '}
-            <img width={20} src={github} alt='github' />
-            {' '}
-          </ListItemIcon>
-          <ListItemText primary='Github' />
-        </ListItemButton>
-      </ListItem>
-      <ListItem disablePadding>
-        <ListItemButton
-          component='a'
-          href='https://twitter.com/pixie_run'
-          target='_blank'
+          disablePadding
         >
-          <ListItemIcon sx={{
-            minWidth: 0,
-            pr: 1,
-          }}
+          <ListItemButton
+            component='a'
+            href='https://github.com/pixie-io/pixie'
+            target='_blank'
           >
-            {' '}
-            <img width={20} src={twitter} alt='twitter' />
-          </ListItemIcon>
-          <ListItemText primary='Twitter' />
-        </ListItemButton>
-      </ListItem>
-      <ListItem disablePadding>
-        <ListItemButton
-          component='a'
-          href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'
-          target='_blank'
+            <ListItemIcon sx={{
+              minWidth: 0,
+              pr: 1,
+            }}
+            >
+              {' '}
+              <img width={20} src={github} alt='github' />
+              {' '}
+            </ListItemIcon>
+            <ListItemText primary='Github' />
+          </ListItemButton>
+        </ListItem>
+        <ListItem
+          sx={{
+            width: {
+              xs: '50%',
+              sm: '100%',
+            },
+          }}
+          disablePadding
         >
-          <ListItemIcon sx={{
-            minWidth: 0,
-            pr: 1,
-          }}
+          <ListItemButton
+            component='a'
+            href='https://twitter.com/pixie_run'
+            target='_blank'
           >
-            {' '}
-            <img width={22} src={youtube} alt='youtube' />
-          </ListItemIcon>
-          <ListItemText primary='Youtube' />
-        </ListItemButton>
-      </ListItem>
+            <ListItemIcon sx={{
+              minWidth: 0,
+              pr: 1,
+            }}
+            >
+              {' '}
+              <img width={20} src={twitter} alt='twitter' />
+            </ListItemIcon>
+            <ListItemText primary='Twitter' />
+          </ListItemButton>
+        </ListItem>
+        <ListItem
+          sx={{
+            width: {
+              xs: '50%',
+              sm: '100%',
+            },
+          }}
+          disablePadding
+        >
+          <ListItemButton
+            component='a'
+            href='https://www.youtube.com/channel/UCOMCDRvBVNIS0lCyOmst7eg/featured'
+            target='_blank'
+          >
+            <ListItemIcon sx={{
+              minWidth: 0,
+              pr: 1,
+            }}
+            >
+              {' '}
+              <img width={22} src={youtube} alt='youtube' />
+            </ListItemIcon>
+            <ListItemText primary='Youtube' />
+          </ListItemButton>
+        </ListItem>
+      </Grid>
     </List>
     <Button variant='contained'>FOLLOW US</Button>
   </Box>
