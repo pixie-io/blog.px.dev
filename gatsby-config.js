@@ -86,6 +86,8 @@ module.exports = {
     },
     'gatsby-plugin-mui-emotion',
     'gatsby-transformer-yaml',
+    'gatsby-plugin-netlify',
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
