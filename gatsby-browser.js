@@ -1,6 +1,13 @@
 import { processClientEntry, runZoom } from './src/components/image-zoom-modal.plugin';
+import * as ReactDOM from 'react-dom';
 
-const React = require('react');
+
+
+export const  replaceHydrateFunction = () => {
+    return (element, container, callback) => {
+        ReactDOM.render(element, container, callback);
+    };
+};
 
 
 export const onClientEntry = () => {
