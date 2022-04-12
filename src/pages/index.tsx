@@ -40,8 +40,6 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
     pageContext: { category: urlCategory },
     location = { href: '' },
   } = props;
-  const pageSize = 9;
-  const paginate = (posts: any[], pageNumber: number) => posts.slice(0, (pageNumber + 1) * pageSize);
 
   const {
     posts: { nodes: allPosts },
@@ -50,7 +48,6 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
   const {
     categories: { distinct: allCategories },
   } = data;
-
   let categories = allCategories
     .map((c: string | any[]) => ({
       label: c,
@@ -62,12 +59,11 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
   const [category] = useState(urlCategory);
   const [posts, setPosts] = useState(allPosts);
   const [heroPost, setHeroPost] = useState(heroPosts[0]);
-  const [featuredPosts, setFeaturedPosts] = useState(allPosts.slice(1, 3));
-
   const filterPosts = (c: any) => {
+    const postsWithoutHero = allPosts.filter((p) => p.id !== heroPosts[0].id);
     const filteredPosts = c
-      ? allPosts.filter((pos: { frontmatter: { categories: any[] } }) => pos.frontmatter.categories.some((pc) => pc === c))
-      : allPosts;
+      ? postsWithoutHero.filter((pos: { frontmatter: { categories: any[] } }) => pos.frontmatter.categories.some((pc) => pc === c))
+      : postsWithoutHero;
     setPosts(filteredPosts);
   };
 
@@ -104,24 +100,20 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
             </Grid>
             <Grid item xs={12}>
               {categories.map((cat: { label: any; count: any }) => (
-                <Chip
-                  sx={{
-                    mr: 2,
-                    mb: 2,
-                  }}
-                  variant='outlined'
-                  className={category === cat.label ? 'active' : ''}
-                  label={(
-                    <GatsbyLink to={`/${slugify(cat.label).toLowerCase()}`}>
-                      {cat.label}
-                      {' '}
-                      (
-                      {cat.count}
-                      )
-                    </GatsbyLink>
-                      )}
-                  clickable
-                />
+                <GatsbyLink to={`/${slugify(cat.label)
+                  .toLowerCase()}`}
+                >
+                  <Chip
+                    sx={{
+                      mr: 2,
+                      mb: 2,
+                    }}
+                    variant='outlined'
+                    className={category === cat.label ? 'active' : ''}
+                    label={`${cat.label} (${cat.count})`}
+                    clickable
+                  />
+                </GatsbyLink>
               ))}
 
             </Grid>
@@ -130,41 +122,59 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
               <Typography variant='h5'>Latest posts</Typography>
               <hr />
             </Grid>
-            {featuredPosts.map((post) => (
-              <Grid container spacing={3} mb={4} mt={2} key={post.id}>
-
-                <Grid item md={6} xs={12}>
-                  <Link to={urlFromSlug(heroPost.fields.slug)}>
-                    <Box borderRadius='10px' overflow='hidden' className='blog-post-card-image'>
-                      {heroPost.frontmatter.featured_image
-                        ? (
-                          <Img
-                            fluid={heroPost.frontmatter.featured_image.childImageSharp.fluid}
-                            alt='hero'
-                          />
-                        )
-                        : <PostPlaceholder />}
-                    </Box>
-                  </Link>
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <Typography variant='h2' sx={{ mt: 1 }}>{heroPost.frontmatter.title}</Typography>
-                  <Typography variant='body1' sx={{ my: 1 }}>{heroPost.excerpt}</Typography>
-                  <BlogAuthorsHeader authors={heroPost.frontmatter.authors} timeToRead={heroPost.timeToRead} date={heroPost.frontmatter.date} />
-                </Grid>
-              </Grid>
-            ))}
-            <Grid item xs={12} mb={2}>
-              <Typography variant='h5'>Latest posts</Typography>
-              <hr />
-            </Grid>
-            <Grid container spacing={3}>
-              {posts.map((post: any) => (
-                <Grid item xs={12} sm={6} md={4}>
-                  <BlogPostCard key={post.id} post={post} />
+            {posts.slice(0, 2)
+              .map((post: any) => (
+                <Grid container spacing={3} mb={4} mt={2} key={post.id}>
+                  <Grid item md={6} xs={12}>
+                    <Link to={urlFromSlug(post.fields.slug)}>
+                      <Box
+                        borderRadius='10px'
+                        overflow='hidden'
+                        className='blog-post-card-image'
+                      >
+                        {post.frontmatter.featured_image
+                          ? (
+                            <Img
+                              fluid={post.frontmatter.featured_image.childImageSharp.fluid}
+                              alt='hero'
+                            />
+                          )
+                          : <PostPlaceholder />}
+                      </Box>
+                    </Link>
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <Typography
+                      variant='h2'
+                      sx={{ mt: 1 }}
+                    >
+                      {post.frontmatter.title}
+                    </Typography>
+                    <Typography variant='body1' sx={{ my: 1 }}>{post.excerpt}</Typography>
+                    <BlogAuthorsHeader
+                      authors={post.frontmatter.authors}
+                      timeToRead={post.timeToRead}
+                      date={post.frontmatter.date}
+                    />
+                  </Grid>
                 </Grid>
               ))}
-            </Grid>
+            {posts.slice(2, posts.length).length ? (
+              <>
+                <Grid item xs={12} mb={2}>
+                  <Typography variant='h5'>Latest posts</Typography>
+                  <hr />
+                </Grid>
+                <Grid container spacing={3}>
+                  {posts.slice(2, posts.length)
+                    .map((post: any) => (
+                      <Grid item xs={12} sm={6} md={4}>
+                        <BlogPostCard key={post.id} post={post} />
+                      </Grid>
+                    ))}
+                </Grid>
+              </>
+            ) : ''}
           </Grid>
           <Grid item xs={12} sm={3}>
             <ShareAside />

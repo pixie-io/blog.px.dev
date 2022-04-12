@@ -20,6 +20,7 @@
 import React, { useContext } from 'react';
 import {
   AppBar,
+  Box,
   Button,
   Container,
   IconButton,
@@ -64,7 +65,16 @@ function Header() {
                               alignItems='center'
                             >
                                 <Link to='/'>
-                                    <img src={pixieLogo} alt='pixie logo' className='block' />
+                                    <Box sx={{
+                                      width: {
+                                        xs: 108,
+                                        sm: 132,
+                                      },
+                                    }}
+                                    >
+                                        <img src={pixieLogo} alt='pixie logo' className='block w-100' />
+                                    </Box>
+
                                 </Link>
                                 <div>
 
@@ -73,8 +83,27 @@ function Header() {
                                           ? <Brightness4 style={{ color: '#B2B5BB' }} />
                                           : <Brightness7 style={{ color: '#B2B5BB' }} />}
                                     </IconButton>
-                                    <Button sx={{ mx: 4 }}>Docs</Button>
-                                    <Button variant='contained'>GET STARTED</Button>
+                                    <Button sx={{
+                                      mx: {
+                                        xs: 0,
+                                        sm: 4,
+                                      },
+                                    }}
+                                    >
+Docs
+                                    </Button>
+                                    <Button
+                                      variant='contained'
+                                      sx={{
+                                        display: {
+                                          xs: 'none',
+                                          sm: 'inline',
+                                        },
+                                      }}
+                                    >
+                                        GET
+                                        STARTED
+                                    </Button>
                                 </div>
                             </Stack>
                         </Container>
