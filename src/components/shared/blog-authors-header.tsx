@@ -28,11 +28,12 @@ const BlogAuthorsHeader = ({
 }) => (
   <Box sx={{
     display: 'flex',
+    alignItems: authors.length > 2 ? 'start' : 'center',
     flexDirection: authors.length > 2
       ? 'column' : 'row',
   }}
   >
-    <Stack direction='row' spacing={0.5} mb={1} mr={1}>
+    <Stack direction='row' spacing={0.5} mr={1}>
       {(authors || []).map((a: { email: any }) => (
         <GravatarIcon email={a.email} size={32} key={a.email} />
       ))}
