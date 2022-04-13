@@ -93,7 +93,9 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
                 </Link>
               </Grid>
               <Grid item md={6} xs={12}>
-                <Typography variant='h2' sx={{ mt: 1 }}>{heroPost.frontmatter.title}</Typography>
+                <Link to={urlFromSlug(heroPost.fields.slug)}>
+                  <Typography variant='h2' sx={{ mt: 1 }}>{heroPost.frontmatter.title}</Typography>
+                </Link>
                 <Typography variant='body1' sx={{ my: 1 }}>{heroPost.excerpt}</Typography>
                 <BlogAuthorsHeader authors={heroPost.frontmatter.authors} timeToRead={heroPost.timeToRead} date={heroPost.frontmatter.date} />
               </Grid>
@@ -144,12 +146,14 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
                     </Link>
                   </Grid>
                   <Grid item md={6} xs={12}>
-                    <Typography
-                      variant='h3'
-                      sx={{ mt: 1 }}
-                    >
-                      {post.frontmatter.title}
-                    </Typography>
+                    <Link to={urlFromSlug(post.fields.slug)}>
+                      <Typography
+                        variant='h3'
+                        sx={{ mt: 1 }}
+                      >
+                        {post.frontmatter.title}
+                      </Typography>
+                    </Link>
                     <Typography variant='body1' sx={{ my: 1 }}>{post.excerpt}</Typography>
                     <BlogAuthorsHeader
                       authors={post.frontmatter.authors}
