@@ -101,7 +101,14 @@ const ShareAside = () => {
           ))}
         </Grid>
       </List>
-      <Button variant='contained'>FOLLOW US</Button>
+      <Button
+        variant='contained'
+        component='a'
+        href='https://px.dev/community/'
+        target='_bank'
+      >
+        FOLLOW US
+      </Button>
     </Box>
   );
 };

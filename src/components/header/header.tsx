@@ -93,6 +93,9 @@ function Header() {
 Docs
                                     </Button>
                                     <Button
+                                      component='a'
+                                      href='https://docs.px.dev/installing-pixie/'
+                                      target='_bank'
                                       variant='contained'
                                       sx={{
                                         display: {
