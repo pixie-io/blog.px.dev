@@ -23,13 +23,13 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
   link: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.success.main,
     fontFamily: 'inherit',
     fontStyle: 'inherit',
     fontSize: 'inherit',
     textDecoration: 'none',
     '&:hover': {
-      color: theme.palette.secondary.main,
+      color: theme.palette.success.main,
       textDecoration: 'underline',
     },
   },

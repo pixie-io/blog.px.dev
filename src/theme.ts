@@ -31,7 +31,12 @@ const themeOptions: ThemeOptions = {
     },
     secondary: {
       main: 'rgba(var(--color-secondary))',
+      contrastText: 'rgba(var(--color-primary-contrast))',
     },
+    success: {
+      main: 'rgba(var(--color-pixie-green))',
+    },
+
   },
   typography: {
     body1: {
@@ -141,7 +146,7 @@ const themeOptions: ThemeOptions = {
           color: 'inherit',
         },
         contained: {
-          backgroundColor: 'rgba(var(--color-button-background))',
+          backgroundColor: 'rgba(var(--color-pixie-green))',
           color: 'black',
           letterSpacing: '3px',
         },
