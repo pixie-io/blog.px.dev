@@ -23,6 +23,7 @@ import {
   Box, Container, Divider, Grid, Stack, Typography,
 } from '@mui/material';
 import { graphql } from 'gatsby';
+import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
 import mdxComponents from '../components/mdxComponents';
 import Header from '../components/header';
 import HLink from '../components/mdxComponents/h-link';
@@ -30,7 +31,9 @@ import ShareAside from '../components/share-aside';
 import GravatarIcon from '../components/gravatar';
 import BlogPostCard from '../components/shared/blog-post-card';
 import Footer from '../components/footer';
-
+import reddit from '../images/icons/reddit-icon.svg';
+import twitter from '../images/icons/twitter-icon.svg';
+import linkedin from '../images/icons/linkedin-icon.svg';
 // eslint-disable-next-line react/prop-types,@typescript-eslint/ban-ts-comment
 // @ts-ignore
 function BlogPostTemplate({
@@ -38,6 +41,7 @@ function BlogPostTemplate({
   location = { href: '' },
 }: any) {
   const post = data.mdx;
+  const shareUrl = location.href;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const related = data.related.nodes;
   const {
@@ -65,7 +69,35 @@ function BlogPostTemplate({
       <Header />
       <Container>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={1} />
+          <Grid item xs={12} sm={1}>
+            <Box sx={{ mt: 20 }} />
+            <Box sx={(theme) => ({
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              position: 'sticky',
+              top: 70,
+              my: 2,
+              [theme.breakpoints.down('md')]: {
+                display: 'none',
+              },
+            })}
+            >
+              <RedditShareButton url={shareUrl}>
+                <img src={reddit} alt='reddit' />
+              </RedditShareButton>
+              <TwitterShareButton url={shareUrl}>
+                <img src={twitter} alt='twitter' />
+              </TwitterShareButton>
+              <LinkedinShareButton
+                title={post.frontmatter.title}
+                summary={post.frontmatter.excerpt}
+                url={shareUrl}
+              >
+                <img src={linkedin} alt='linkedin' />
+              </LinkedinShareButton>
+            </Box>
+          </Grid>
           <Grid item xs={12} sm={8}>
             <HLink id='title' variant='h1'>{post.frontmatter.title}</HLink>
             <Box sx={(theme) => ({
@@ -86,7 +118,13 @@ function BlogPostTemplate({
               >
                 <Stack direction='row' spacing={0.5} mr={1}>
                   {(allAuthors || []).map((a: { email: any }) => (a
-                    ? <GravatarIcon email={a.email} size={40} key={a.email} /> : ''))}
+                    ? (
+                      <GravatarIcon
+                        email={a.email}
+                        size={40}
+                        key={a.email}
+                      />
+                    ) : ''))}
                 </Stack>
                 <Box sx={{
                   fontSize: '12px',
@@ -96,9 +134,9 @@ function BlogPostTemplate({
                   <Box
                     sx={{
                       color: (t) =>
-                            // @ts-ignore
-                            // eslint-disable-next-line implicit-arrow-linebreak
-                            t?.components?.MuiTypography?.styleOverrides?.h1?.color,
+                                                // @ts-ignore
+                                                // eslint-disable-next-line implicit-arrow-linebreak
+                                                t?.components?.MuiTypography?.styleOverrides?.h1?.color,
                     }}
                   >
                     {allAuthors.map((a: { name: any }) => (a ? a.name : ''))
@@ -137,7 +175,11 @@ function BlogPostTemplate({
                 <Typography variant='h5'> Related posts</Typography>
               </Grid>
               {related.map((p: { fields: { slug: React.Key | null | undefined } }) => (
-                <Grid item sm={6} md={4} xs={12} key={p.fields.slug}><BlogPostCard post={p} /></Grid>
+                <Grid item sm={6} md={4} xs={12} key={p.fields.slug}>
+                  <BlogPostCard
+                    post={p}
+                  />
+                </Grid>
               ))}
             </Grid>
           </Grid>

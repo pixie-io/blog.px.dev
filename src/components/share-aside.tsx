@@ -70,7 +70,7 @@ const ShareAside = () => {
       },
     }}
     >
-      <Typography variant='h5'>Connect with us</Typography>
+      <Typography variant='h5' sx={{ mt: 8 }}>Connect with us</Typography>
       <List component='div'>
         <Grid container>
           {listItems.map((item) => (
