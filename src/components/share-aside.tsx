@@ -75,6 +75,7 @@ const ShareAside = () => {
         <Grid container>
           {listItems.map((item) => (
             <ListItem
+              key={item.href}
               component='div'
               sx={{
                 width: {
