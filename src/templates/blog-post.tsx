@@ -20,7 +20,7 @@ import React from 'react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import {
-  Box, Container, Grid, Stack, Typography,
+  Box, Container, Divider, Grid, Stack, Typography,
 } from '@mui/material';
 import { graphql } from 'gatsby';
 import mdxComponents from '../components/mdxComponents';
@@ -131,7 +131,7 @@ function BlogPostTemplate({
             </MDXProvider>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <hr />
+                <Divider />
                 <Typography variant='h5'> Related posts</Typography>
               </Grid>
               {related.map((p: { fields: { slug: React.Key | null | undefined } }) => (

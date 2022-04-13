@@ -43,11 +43,11 @@ export default {
   h1: ({ children }: any) => (
     <HLink id={idFromSlug(children)} variant='h1' />
   ),
-  h2: ({ children }) => <HLink id={idFromSlug(children)} variant='h2'>{children}</HLink>,
-  h3: ({ children }) => <HLink id={idFromSlug(children)} variant='h3'>{children}</HLink>,
-  h4: ({ children }) => <HLink id={idFromSlug(children)} variant='h4'>{children}</HLink>,
-  h5: ({ children }) => <HLink id={idFromSlug(children)} variant='h5'>{children}</HLink>,
-  h6: ({ children }) => <HLink id={idFromSlug(children)} variant='h6'>{children}</HLink>,
+  h2: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h2'>{children}</HLink>,
+  h3: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h3'>{children}</HLink>,
+  h4: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h4'>{children}</HLink>,
+  h5: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h5'>{children}</HLink>,
+  h6: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h6'>{children}</HLink>,
   p: (props: any) => <Typography {...props} variant='body1' />,
   // pre: Pre,
   code: (props: any) => {
@@ -66,7 +66,7 @@ export default {
   th: ({
     align,
     ...props
-  }) => <TableCell {...props} align={align || undefined} />,
+  }: any) => <TableCell {...props} align={align || undefined} />,
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
   ul: (props: any) => <Typography {...props} component='ul' />,
@@ -84,13 +84,16 @@ export default {
   ol: (props: any) => <Typography {...props} component='ol' />,
   em: (props: any) => <Typography {...props} component='em' style={{ fontStyle: 'italic' }} />,
   li: (props: any) => <ListItem {...props} />,
-  img: (props: any) => (
-    <div className='blog-image-wrapper'>
-      <img
-        {...props}
-        className='blog-image'
-      />
-    </div>
-  ),
+  // img: (props: any) => {
+  //   console.log(props);
+  //   return (
+  //     <div className='blog-image-wrapper'>
+  //       <img
+  //         {...props}
+  //         className='blog-image'
+  //       />
+  //     </div>
+  //   );
+  // },
   alert: (props: any) => <Alert {...props} />,
 };
