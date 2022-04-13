@@ -57,6 +57,7 @@ function BlogPostTemplate({
     identifier: post.frontmatter.title,
     title: post.frontmatter.title,
   };
+  const allAuthors = authors.filter((a: any) => a);
 
   return (
     <>
@@ -82,9 +83,8 @@ function BlogPostTemplate({
               }}
               >
                 <Stack direction='row' spacing={0.5} mb={1} mr={1}>
-                  {(authors || []).map((a: { email: any }) => (
-                    <GravatarIcon email={a.email} size={40} key={a.email} />
-                  ))}
+                  {(allAuthors || []).map((a: { email: any }) => (a
+                    ? <GravatarIcon email={a.email} size={40} key={a.email} /> : ''))}
                 </Stack>
                 <Box sx={{
                   fontSize: '12px',
@@ -99,7 +99,7 @@ function BlogPostTemplate({
                             t?.components?.MuiTypography?.styleOverrides?.h1?.color,
                     }}
                   >
-                    {authors.map((a: { name: any }) => (a.name))
+                    {allAuthors.map((a: { name: any }) => (a ? a.name : ''))
                       .join(', ')}
                   </Box>
 
@@ -111,7 +111,7 @@ function BlogPostTemplate({
                 </Box>
               </Box>
               <Stack direction='column' mb={1} mr={1}>
-                {(authors || []).map((a: { bio: any; email: string }) => (
+                {(allAuthors || []).map((a: { bio: any; email: string }) => (
                   <Box
                     sx={{
                       fontSize: '12px',
