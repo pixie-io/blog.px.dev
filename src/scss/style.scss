@@ -164,7 +164,7 @@ li {
 
 
 a {
-  color: var(--color-secondary);
+  color: rgba(var(--color-secondary));
   text-decoration: none;
 
 }
@@ -172,11 +172,25 @@ a {
 .block{
   display: block;
 }
+
 .w-100 {
   width: 100%;
 }
 
 
-video{
+video {
   width: 100%;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.pixie-green {
+  color: rgba(var(--color-pixie-green))
+}
+.flex-row-center{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

@@ -29,6 +29,7 @@ import HLink from '../components/mdxComponents/h-link';
 import ShareAside from '../components/share-aside';
 import GravatarIcon from '../components/gravatar';
 import BlogPostCard from '../components/shared/blog-post-card';
+import Footer from '../components/footer';
 
 // eslint-disable-next-line react/prop-types,@typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -145,6 +146,7 @@ function BlogPostTemplate({
           </Grid>
         </Grid>
       </Container>
+      <Footer />
     </>
   );
 }

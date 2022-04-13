@@ -30,6 +30,7 @@ import ShareAside from '../components/share-aside';
 import { urlFromSlug } from '../components/utils';
 import PostPlaceholder from '../components/post-placeholder';
 import BlogAuthorsHeader from '../components/shared/blog-authors-header';
+import Footer from '../components/footer';
 
 // markup
 // eslint-disable-next-line max-len,react/require-default-props
@@ -185,6 +186,7 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
           </Grid>
         </Grid>
       </Container>
+      <Footer />
     </>
   );
 };

@@ -72,25 +72,31 @@ function Header() {
                                       },
                                     }}
                                     >
-                                        <img src={pixieLogo} alt='pixie logo' className='block w-100' />
+                                        <img
+                                          src={pixieLogo}
+                                          alt='pixie logo'
+                                          className='block w-100'
+                                        />
                                     </Box>
-
                                 </Link>
                                 <div>
-
                                     <IconButton size='small' onClick={onThemeTypeSwitch}>
                                         {colorContext.colorMode === 'light'
                                           ? <Brightness4 style={{ color: '#B2B5BB' }} />
                                           : <Brightness7 style={{ color: '#B2B5BB' }} />}
                                     </IconButton>
-                                    <Button sx={{
-                                      mx: {
-                                        xs: 0,
-                                        sm: 4,
-                                      },
-                                    }}
+                                    <Button
+                                      sx={{
+                                        mx: {
+                                          xs: 0,
+                                          sm: 4,
+                                        },
+                                      }}
+                                      component='a'
+                                      href='https://docs.px.dev'
+                                      target='_bank'
                                     >
-Docs
+                                        Docs
                                     </Button>
                                     <Button
                                       component='a'
@@ -104,8 +110,7 @@ Docs
                                         },
                                       }}
                                     >
-                                        GET
-                                        STARTED
+                                        GET STARTED
                                     </Button>
                                 </div>
                             </Stack>
