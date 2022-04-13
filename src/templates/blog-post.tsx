@@ -80,9 +80,10 @@ function BlogPostTemplate({
               <Box sx={{
                 display: 'flex',
                 flexDirection: 'row',
+                alignItems: 'center',
               }}
               >
-                <Stack direction='row' spacing={0.5} mb={1} mr={1}>
+                <Stack direction='row' spacing={0.5} mr={1}>
                   {(allAuthors || []).map((a: { email: any }) => (a
                     ? <GravatarIcon email={a.email} size={40} key={a.email} /> : ''))}
                 </Stack>
@@ -135,7 +136,7 @@ function BlogPostTemplate({
                 <Typography variant='h5'> Related posts</Typography>
               </Grid>
               {related.map((p: { fields: { slug: React.Key | null | undefined } }) => (
-                <Grid item xs={4} key={p.fields.slug}><BlogPostCard post={p} /></Grid>
+                <Grid item sm={6} md={4} xs={12} key={p.fields.slug}><BlogPostCard post={p} /></Grid>
               ))}
             </Grid>
           </Grid>
