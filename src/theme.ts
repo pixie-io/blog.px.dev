@@ -107,9 +107,16 @@ const themeOptions: ThemeOptions = {
           fontWeight: 400,
           fontSize: '64px',
           lineHeight: '87px',
+
+          [breakpoints.down('md')]: {
+            fontFamily: 'Roboto',
+            fontSize: '42px',
+            lineHeight: '52px',
+          },
           [breakpoints.down('sm')]: {
-            fontSize: '44px',
-            lineHeight: '60px',
+            fontFamily: 'Roboto',
+            fontSize: '32px',
+            lineHeight: '42px',
           },
         },
         h2: {
@@ -118,6 +125,11 @@ const themeOptions: ThemeOptions = {
           fontWeight: 700,
           fontSize: '42px',
           lineHeight: '52px',
+          padding: '20px 0',
+          [breakpoints.down('sm')]: {
+            fontSize: '32px',
+            lineHeight: '42px',
+          },
         },
         h3: {
           color: 'rgba(var(--color-headings))',
@@ -125,6 +137,11 @@ const themeOptions: ThemeOptions = {
           fontWeight: 700,
           fontSize: '30px',
           lineHeight: '41px',
+          padding: '20px 0',
+          [breakpoints.down('sm')]: {
+            fontSize: '22px',
+            lineHeight: '32px',
+          },
         },
         h5: {
           color: 'rgba(var(--color-headings))',

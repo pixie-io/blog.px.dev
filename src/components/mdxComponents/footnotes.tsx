@@ -18,9 +18,12 @@
 
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
+import { Typography } from '@mui/material';
 
 const useStyles = makeStyles(() => ({
   footnotes: {
+    paddingLeft: '40px',
+    marginBottom: '20px',
     '& hr': {
       display: 'none',
     },
@@ -37,6 +40,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const Footnotes = ({ children, id }) => (
-  <div className={useStyles().footnotes} id={id}>{children}</div>
+  <>
+    <Typography variant='h3'>Footnotes</Typography>
+    <div className={useStyles().footnotes} id={id}>{children}</div>
+  </>
 );
 export default Footnotes;
