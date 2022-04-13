@@ -203,6 +203,7 @@ export const pageQuery = graphql`
           title
           authors {
             id
+            name
             email
           }
           emails
@@ -233,6 +234,7 @@ export const pageQuery = graphql`
           title
           authors {
             id
+            name
             email
           }
           emails

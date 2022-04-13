@@ -35,7 +35,7 @@ import BlogPostCard from '../components/shared/blog-post-card';
 function BlogPostTemplate({
   data,
   location = { href: '' },
-}) {
+}: any) {
   const post = data.mdx;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const related = data.related.nodes;
@@ -93,10 +93,13 @@ function BlogPostTemplate({
                 >
                   <Box
                     sx={{
-                      color: (t) => t?.components?.MuiTypography?.styleOverrides?.h1?.color,
+                      color: (t) =>
+                            // @ts-ignore
+                            // eslint-disable-next-line implicit-arrow-linebreak
+                            t?.components?.MuiTypography?.styleOverrides?.h1?.color,
                     }}
                   >
-                    {authors.map((a: { id: any }) => (a.id))
+                    {authors.map((a: { name: any }) => (a.name))
                       .join(', ')}
                   </Box>
 
@@ -157,6 +160,7 @@ export const pageQuery = graphql`
         authors {
           id
           bio
+          name
           email
           twitter
         }
@@ -189,6 +193,7 @@ export const pageQuery = graphql`
           title
           authors {
             id
+            name
             email
           }
           date(formatString: "MMM DD, YYYY")

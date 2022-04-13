@@ -126,7 +126,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       date: Date @dateformat(formatString: "YYYY-MM-DD")
       categories: [String]
-      authors: [AuthorYaml] @link
+      authors: [AuthorYaml] @link(by: "name")
       featured_image: File @fileByRelativePath,
       redirect_from: [String]
     }

@@ -25,7 +25,7 @@ const BlogAuthorsHeader = ({
   authors,
   date,
   timeToRead,
-}) => (
+}: any) => (
   <Box sx={{
     display: 'flex',
     alignItems: authors.length > 2 ? 'start' : 'center',
@@ -34,9 +34,8 @@ const BlogAuthorsHeader = ({
   }}
   >
     <Stack direction='row' spacing={0.5} mr={1}>
-      {(authors || []).map((a: { email: any }) => (
-        <GravatarIcon email={a.email} size={32} key={a.email} />
-      ))}
+      {(authors || []).map((a: { email: any }) => (a
+        ? <GravatarIcon email={a.email} size={32} key={a.email} /> : ''))}
     </Stack>
     <Box sx={{
       fontSize: '12px',
@@ -46,10 +45,13 @@ const BlogAuthorsHeader = ({
       <Box
         component='span'
         sx={{
-          color: (t) => t?.components?.MuiTypography?.styleOverrides?.h1?.color,
+          color: (t) =>
+                  // @ts-ignore
+                  // eslint-disable-next-line implicit-arrow-linebreak
+                  t?.components?.MuiTypography?.styleOverrides?.h1?.color,
         }}
       >
-        {authors.map((a: { id: any }) => (a.id))
+        {authors.map((a: { name: any }) => (a ? a.name : ''))
           .join(', ')}
       </Box>
       {' • '}
@@ -61,5 +63,4 @@ const BlogAuthorsHeader = ({
     </Box>
   </Box>
 );
-
 export default BlogAuthorsHeader;

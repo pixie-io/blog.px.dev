@@ -21,33 +21,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-top-layout',
     "gatsby-plugin-sass",
-    "gatsby-plugin-image",
-    {
-      resolve: 'gatsby-plugin-mdx',
-      options: {
-        gatsbyRemarkPlugins: [
-          {
-            resolve: 'gatsby-remark-relative-images',
-          },
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 1035,
-              showCaptions: true,
-              markdownCaptions: false,
-              linkImagesToOriginal: false,
-            },
-          },
-          {
-            resolve: 'gatsby-remark-copy-linked-files',
-          },
-        ],
-        remarkPlugins: [containers],
-        extensions: ['.mdx', '.md'],
-      },
-    },
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
+    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -55,7 +29,8 @@ module.exports = {
         "path": "./src/images/"
       },
       __key: "images"
-    }, {
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "pages",
@@ -84,6 +59,41 @@ module.exports = {
         name: 'data',
       },
     },
+    {
+      resolve: 'gatsby-plugin-react-helmet-canonical-urls',
+      options: {
+        siteUrl: 'https://blog.px.dev',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-relative-images',
+          },
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 1035,
+              showCaptions: true,
+              markdownCaptions: false,
+              linkImagesToOriginal: false,
+            },
+          },
+          {
+            resolve: 'gatsby-remark-copy-linked-files',
+          },
+        ],
+        remarkPlugins: [containers],
+        extensions: ['.mdx', '.md'],
+      },
+    },
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    {
+      resolve: "gatsby-remark-unwrap-images",
+    },
     'gatsby-plugin-mui-emotion',
     'gatsby-transformer-yaml',
     'gatsby-plugin-netlify',
@@ -96,6 +106,19 @@ module.exports = {
           'roboto:400,700',
         ],
         display: 'block',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'gatsby-starter-default',
+        short_name: 'starter',
+        start_url: '/',
+        background_color: '#132E38',
+        theme_color: '#132E38',
+        display: 'minimal-ui',
+        icon: 'src/images/p_circle_big.png', // This path is relative to the root of the site.
+        include_favicon: false,
       },
     },
   ],
