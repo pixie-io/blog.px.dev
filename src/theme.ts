@@ -157,6 +157,7 @@ const themeOptions: ThemeOptions = {
         root: {
           backgroundColor: 'rgba(var(--color-primary))',
           opacity: 0.5,
+          marginBottom: 8,
         },
       },
     },

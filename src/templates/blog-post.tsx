@@ -63,8 +63,8 @@ function BlogPostTemplate({
       <Header />
       <Container>
         <Grid container spacing={2}>
-          <Grid item xs={1} />
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={1} />
+          <Grid item xs={12} sm={8}>
             <HLink id='title' variant='h1'>{post.frontmatter.title}</HLink>
             <Box sx={(theme) => ({
               display: 'flex',
@@ -125,7 +125,7 @@ function BlogPostTemplate({
                 ))}
               </Stack>
             </Box>
-            <hr />
+            <Divider />
             <MDXProvider components={mdxComponents}>
               <MDXRenderer>{post.body}</MDXRenderer>
             </MDXProvider>
@@ -139,7 +139,7 @@ function BlogPostTemplate({
               ))}
             </Grid>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={3}>
             <ShareAside />
           </Grid>
         </Grid>
