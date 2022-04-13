@@ -29,6 +29,7 @@ import CustomTableCell from './custom-table-cell';
 // eslint-disable-next-line import/no-cycle
 import { CustomTabs, CustomTab } from './tabs';
 import CodeRenderer from './codeRenderer';
+import GhEmbed from './github-embed';
 
 export default {
   ...baseComponents,
