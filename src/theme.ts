@@ -111,6 +111,13 @@ const themeOptions: ThemeOptions = {
           color: 'rgba(var(--color-headings))',
           fontFamily: 'Manrope',
           fontWeight: 700,
+          fontSize: '42px',
+          lineHeight: '52px',
+        },
+        h3: {
+          color: 'rgba(var(--color-headings))',
+          fontFamily: 'Manrope',
+          fontWeight: 700,
           fontSize: '30px',
           lineHeight: '41px',
         },
@@ -121,6 +128,7 @@ const themeOptions: ThemeOptions = {
           fontSize: '22px',
           lineHeight: '30px',
           fontStyle: 'normal',
+          marginBottom: 8,
         },
       },
     },
@@ -136,6 +144,14 @@ const themeOptions: ThemeOptions = {
           backgroundColor: 'rgba(var(--color-button-background))',
           color: 'black',
           letterSpacing: '3px',
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgba(var(--color-primary))',
+          opacity: 0.5,
         },
       },
     },

@@ -18,7 +18,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import {
-  Chip, Container, Grid, Typography,
+  Chip, Container, Divider, Grid, Typography,
 } from '@mui/material';
 import slugify from 'slugify';
 import { graphql, Link, Link as GatsbyLink } from 'gatsby';
@@ -120,7 +120,7 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
 
             <Grid item xs={12}>
               <Typography variant='h5'>Latest posts</Typography>
-              <hr />
+              <Divider />
             </Grid>
             {posts.slice(0, 2)
               .map((post: any) => (
@@ -145,7 +145,7 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
                   </Grid>
                   <Grid item md={6} xs={12}>
                     <Typography
-                      variant='h2'
+                      variant='h3'
                       sx={{ mt: 1 }}
                     >
                       {post.frontmatter.title}
@@ -163,7 +163,7 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
               <>
                 <Grid item xs={12} mb={2}>
                   <Typography variant='h5'>Latest posts</Typography>
-                  <hr />
+                  <Divider />
                 </Grid>
                 <Grid container spacing={3}>
                   {posts.slice(2, posts.length)
