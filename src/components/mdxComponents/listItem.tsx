@@ -31,7 +31,7 @@ const StyledLi = styled('li')(
 `,
 );
 
-const ListItem = ({ children, id }) => (
-  <StyledLi id={id}>{children}</StyledLi>
-);
+function ListItem({ children, id }) {
+  return <StyledLi id={id}>{children}</StyledLi>;
+}
 export default ListItem;

@@ -134,9 +134,9 @@ function BlogPostTemplate({
                   <Box
                     sx={{
                       color: (t) =>
-                                                // @ts-ignore
-                                                // eslint-disable-next-line implicit-arrow-linebreak
-                                                t?.components?.MuiTypography?.styleOverrides?.h1?.color,
+                      // @ts-ignore
+                      // eslint-disable-next-line implicit-arrow-linebreak
+                        t?.components?.MuiTypography?.styleOverrides?.h1?.color,
                     }}
                   >
                     {allAuthors.map((a: { name: any }) => (a ? a.name : ''))

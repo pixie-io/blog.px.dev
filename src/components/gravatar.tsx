@@ -30,10 +30,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const GravatarIcon = (({
+function GravatarIcon({
   email,
   size,
-}) => {
+}) {
   const url = useMemo(() => toUrl(email || ''), []);
   const classes = useStyles();
   return (
@@ -51,6 +51,6 @@ const GravatarIcon = (({
       }}
     />
   );
-});
+}
 
 export default GravatarIcon;

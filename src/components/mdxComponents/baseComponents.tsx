@@ -79,6 +79,7 @@ export default {
       }
       return child;
     }) : children;
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     return <>{updatedChildren}</>;
   },
   ol: (props: any) => <Typography {...props} component='ol' />,

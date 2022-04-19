@@ -21,46 +21,48 @@ import React from 'react';
 import { Box, Stack } from '@mui/material';
 import GravatarIcon from '../gravatar';
 
-const BlogAuthorsHeader = ({
+function BlogAuthorsHeader({
   authors,
   date,
   timeToRead,
-}: any) => (
-  <Box sx={{
-    display: 'flex',
-    alignItems: authors.length > 2 ? 'start' : 'center',
-    flexDirection: authors.length > 2
-      ? 'column' : 'row',
-  }}
-  >
-    <Stack direction='row' spacing={0.5} mr={1}>
-      {(authors || []).map((a: { email: any }) => (a
-        ? <GravatarIcon email={a.email} size={32} key={a.email} /> : ''))}
-    </Stack>
+}: any) {
+  return (
     <Box sx={{
-      fontSize: '12px',
-      lineHeight: '14px',
+      display: 'flex',
+      alignItems: authors.length > 2 ? 'start' : 'center',
+      flexDirection: authors.length > 2
+        ? 'column' : 'row',
     }}
     >
-      <Box
-        component='span'
-        sx={{
-          color: (t) =>
-                  // @ts-ignore
-                  // eslint-disable-next-line implicit-arrow-linebreak
-                  t?.components?.MuiTypography?.styleOverrides?.h1?.color,
-        }}
+      <Stack direction='row' spacing={0.5} mr={1}>
+        {(authors || []).map((a: { email: any }) => (a
+          ? <GravatarIcon email={a.email} size={32} key={a.email} /> : ''))}
+      </Stack>
+      <Box sx={{
+        fontSize: '12px',
+        lineHeight: '14px',
+      }}
       >
-        {authors.map((a: { name: any }) => (a ? a.name : ''))
-          .join(', ')}
+        <Box
+          component='span'
+          sx={{
+            color: (t) =>
+            // @ts-ignore
+            // eslint-disable-next-line implicit-arrow-linebreak
+              t?.components?.MuiTypography?.styleOverrides?.h1?.color,
+          }}
+        >
+          {authors.map((a: { name: any }) => (a ? a.name : ''))
+            .join(', ')}
+        </Box>
+        {' • '}
+        {date}
+        {' • '}
+        {timeToRead}
+        {' '}
+        minutes read
       </Box>
-      {' • '}
-      {date}
-      {' • '}
-      {timeToRead}
-      {' '}
-      minutes read
     </Box>
-  </Box>
-);
+  );
+}
 export default BlogAuthorsHeader;

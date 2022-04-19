@@ -35,9 +35,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 // @ts-ignore
-const AnchorTag = ({ href: to, ...props }) => {
+function AnchorTag({ href: to, ...props }) {
   const classes = useStyles();
   return <Link to={to} className={classes.link} {...props} />;
-};
+}
 
 export default AnchorTag;

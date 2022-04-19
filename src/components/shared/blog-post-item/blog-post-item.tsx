@@ -27,7 +27,7 @@ import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
 import { urlFromSlug } from '../../utils';
 
-const BlogPostItem = ({ post, classes }: { post: any; classes: any }) => {
+function BlogPostItem({ post, classes }: { post: any; classes: any }) {
   const {
     frontmatter: {
       title,
@@ -90,6 +90,6 @@ const BlogPostItem = ({ post, classes }: { post: any; classes: any }) => {
       <div className='col-1' />
     </article>
   );
-};
+}
 
 export default BlogPostItem;

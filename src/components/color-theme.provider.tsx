@@ -15,7 +15,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import React, { createContext, useLayoutEffect, useState } from 'react';
+import React, {
+  createContext, useLayoutEffect, useMemo, useState,
+} from 'react';
 
 const getInitialColorMode = () => (typeof window !== 'undefined' && !!window.localStorage && document.body.classList.contains('dark') ? 'dark' : 'light');
 
@@ -24,8 +26,8 @@ export const ColorThemeContext = createContext({
   setColorMode: (_: string) => {
   },
 });
-// @ts-ignore
-export const ColorThemeProvider = ({ children }) => {
+
+export function ColorThemeProvider({ children }: any) {
   const [colorMode, rawSetColorMode] = useState(getInitialColorMode());
 
   useLayoutEffect(() => {
@@ -44,9 +46,13 @@ export const ColorThemeProvider = ({ children }) => {
       document.body.classList.add('dark');
     }
   };
+  const themeValue = useMemo(() => ({
+    colorMode,
+    setColorMode,
+  }), [colorMode]);
   return (
-    <ColorThemeContext.Provider value={{ colorMode, setColorMode }}>
+    <ColorThemeContext.Provider value={themeValue}>
       {children}
     </ColorThemeContext.Provider>
   );
-};
+}

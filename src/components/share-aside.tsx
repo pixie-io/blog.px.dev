@@ -34,7 +34,7 @@ import github from '../images/header/github-icon.svg';
 import twitter from '../images/header/twitter-icon.svg';
 import youtube from '../images/header/youtube-icon.svg';
 
-const ShareAside = () => {
+function ShareAside() {
   const listItems = [
     {
       href: 'https://slackin.px.dev',
@@ -111,6 +111,6 @@ const ShareAside = () => {
       </Button>
     </Box>
   );
-};
+}
 
 export default ShareAside;

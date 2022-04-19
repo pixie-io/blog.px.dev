@@ -21,9 +21,10 @@ import { useContext } from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { ColorThemeContext } from '../color-theme.provider';
 
-const SvgRenderer = ({ src, title }) => (
-  <StaticQuery
-    query={graphql`
+function SvgRenderer({ src, title }) {
+  return (
+    <StaticQuery
+      query={graphql`
       query {
         images: allFile {
           edges {
@@ -36,40 +37,41 @@ const SvgRenderer = ({ src, title }) => (
         }
       }
     `}
-    render={(data) => {
-      const lastDot = src.lastIndexOf('.');
-      const colorContext = useContext(ColorThemeContext);
-      const theme = colorContext.colorMode;
+      render={(data) => {
+        const lastDot = src.lastIndexOf('.');
+        const colorContext = useContext(ColorThemeContext);
+        const theme = colorContext.colorMode;
 
-      const fileName = src.substring(0, lastDot);
-      const ext = src.substring(lastDot + 1);
+        const fileName = src.substring(0, lastDot);
+        const ext = src.substring(lastDot + 1);
 
-      const image = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${src}`));
-      const lightImage = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${fileName}-light.${ext}`));
-      const darkImage = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${fileName}-dark.${ext}`));
+        const image = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${src}`));
+        const lightImage = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${fileName}-light.${ext}`));
+        const darkImage = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${fileName}-dark.${ext}`));
 
-      const getImageSrc = (th: string) => {
-        if (th === 'light' && lightImage) {
-          return lightImage.node.publicURL;
+        const getImageSrc = (th: string) => {
+          if (th === 'light' && lightImage) {
+            return lightImage.node.publicURL;
+          }
+          if (th === 'dark' && darkImage) {
+            return darkImage.node.publicURL;
+          }
+          return image.node.publicURL;
+        };
+        if (!image) {
+          return null;
         }
-        if (th === 'dark' && darkImage) {
-          return darkImage.node.publicURL;
-        }
-        return image.node.publicURL;
-      };
-      if (!image) {
-        return null;
-      }
-      return (
+        return (
 
-        <figure className='gatsby-resp-image-figure'>
-          <img src={getImageSrc(theme)} className='blog-image' />
-          <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1'>{title}</figcaption>
-        </figure>
+          <figure className='gatsby-resp-image-figure'>
+            <img src={getImageSrc(theme)} className='blog-image' />
+            <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1'>{title}</figcaption>
+          </figure>
 
-      );
-    }}
-  />
-);
+        );
+      }}
+    />
+  );
+}
 
 export default SvgRenderer;

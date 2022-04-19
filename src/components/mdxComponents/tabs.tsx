@@ -28,16 +28,18 @@ import parseMd from './parseMd';
 
 // Doesn't get used directly; only its props are
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const CustomTab = ({ label, children }) => null;
+export function CustomTab({ label, children }) {
+  return null;
+}
 
-const TabPanel = ({ show, contents }) => {
+function TabPanel({ show, contents }) {
   const children = React.useMemo(() => (
     typeof contents === 'string' ? parseMd(contents) : contents
   ), [contents]);
 
   if (!show) return null;
   return <div>{children}</div>;
-};
+}
 
 export const CustomTabs = withStyles(({ palette }) => ({
   tabHeader: {

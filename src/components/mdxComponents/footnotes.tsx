@@ -39,10 +39,12 @@ const useStyles = makeStyles(() => ({
     },
   },
 }));
-const Footnotes = ({ children, id }) => (
-  <>
-    <Typography variant='h3'>Footnotes</Typography>
-    <div className={useStyles().footnotes} id={id}>{children}</div>
-  </>
-);
+function Footnotes({ children, id }) {
+  return (
+    <>
+      <Typography variant='h3'>Footnotes</Typography>
+      <div className={useStyles().footnotes} id={id}>{children}</div>
+    </>
+  );
+}
 export default Footnotes;

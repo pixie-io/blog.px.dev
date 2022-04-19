@@ -34,7 +34,7 @@ import Footer from '../components/footer';
 
 // markup
 // eslint-disable-next-line max-len,react/require-default-props
-const IndexPage = (props: { data: any; pageContext: { category: any }; location?: { href: string } | undefined }) => {
+function IndexPage(props: { data: any; pageContext: { category: any }; location?: { href: string } | undefined }) {
   const PIXIE_TEAM_BLOGS = 'Pixie Team Blogs';
   const {
     data,
@@ -189,7 +189,7 @@ const IndexPage = (props: { data: any; pageContext: { category: any }; location?
       <Footer />
     </>
   );
-};
+}
 
 export default IndexPage;
 
