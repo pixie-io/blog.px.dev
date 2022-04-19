@@ -4,5 +4,5 @@ public
 .cache
 .idea
 .DS_Store
-.env.dev
+.env.development
 .env.production

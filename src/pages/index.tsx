@@ -87,13 +87,13 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                     className='blog-post-card-image'
                   >
                     {heroPost.frontmatter.featured_image
-                      ? (
-                        <GatsbyImage
-                          image={heroPost.frontmatter.featured_image.childImageSharp.gatsbyImageData}
-                          alt='hero'
-                        />
-                      )
-                      : <PostPlaceholder />}
+                        ? (
+                            <GatsbyImage
+                                image={heroPost.frontmatter.featured_image.childImageSharp.gatsbyImageData}
+                                alt='hero'
+                              />
+                        )
+                        : <PostPlaceholder />}
                   </Box>
                 </Link>
               </Grid>
@@ -126,9 +126,9 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                 >
                   <Chip
                     sx={{
-                      mr: 2,
-                      mb: 2,
-                    }}
+                        mr: 2,
+                        mb: 2,
+                      }}
                     variant='outlined'
                     className={category === cat.label ? 'active' : ''}
                     label={`${cat.label} (${cat.count})`}
@@ -148,42 +148,42 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                 <Grid container spacing={3} mb={4} mt={2} key={post.id}>
                   <Grid item md={6} xs={12}>
                     <Link to={urlFromSlug(post.fields.slug)}>
-                      <Box
-                        borderRadius='10px'
-                        overflow='hidden'
-                        className='blog-post-card-image'
-                      >
-                        {post.frontmatter.featured_image
-                          ? (
-                            <GatsbyImage
-                              image={post.frontmatter.featured_image.childImageSharp.gatsbyImageData}
-                              alt='hero'
-                            />
-                          )
-                          : <PostPlaceholder />}
-                      </Box>
-                    </Link>
+                        <Box
+                            borderRadius='10px'
+                            overflow='hidden'
+                            className='blog-post-card-image'
+                          >
+                            {post.frontmatter.featured_image
+                                ? (
+                                    <GatsbyImage
+                                        image={post.frontmatter.featured_image.childImageSharp.gatsbyImageData}
+                                        alt='hero'
+                                      />
+                                )
+                                : <PostPlaceholder />}
+                          </Box>
+                      </Link>
                   </Grid>
                   <Grid item md={6} xs={12}>
                     <Link to={urlFromSlug(post.fields.slug)}>
-                      <Typography
-                        variant='h3'
-                        sx={{ mt: 1 }}
-                      >
-                        {post.frontmatter.title}
-                      </Typography>
-                    </Link>
+                        <Typography
+                            variant='h3'
+                            sx={{ mt: 1 }}
+                          >
+                            {post.frontmatter.title}
+                          </Typography>
+                      </Link>
                     <Typography
-                      variant='body1'
-                      sx={{ my: 1 }}
-                    >
-                      {post.excerpt}
-                    </Typography>
+                        variant='body1'
+                        sx={{ my: 1 }}
+                      >
+                        {post.excerpt}
+                      </Typography>
                     <BlogAuthorsHeader
-                      authors={post.frontmatter.authors}
-                      timeToRead={post.timeToRead}
-                      date={post.frontmatter.date}
-                    />
+                        authors={post.frontmatter.authors}
+                        timeToRead={post.timeToRead}
+                        date={post.frontmatter.date}
+                      />
                   </Grid>
                 </Grid>
               ))}
@@ -196,9 +196,9 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                 <Grid container spacing={3}>
                   {posts.slice(2, posts.length)
                     .map((post: any) => (
-                      <Grid item xs={12} sm={6} md={4}>
-                        <BlogPostCard key={post.id} post={post} />
-                      </Grid>
+                        <Grid item xs={12} sm={6} md={4}>
+                            <BlogPostCard key={post.id} post={post} />
+                          </Grid>
                     ))}
                 </Grid>
               </>
@@ -242,11 +242,10 @@ export const pageQuery = graphql`
               childImageSharp {
                   gatsbyImageData(layout: CONSTRAINED)
                 }
-        
+              }
           }
-        }
-      }
-    }
+       }
+     }
  heroPost: allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 1
