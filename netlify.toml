@@ -1,3 +1,4 @@
 [build]
   publish ="public/"
+  environment = { GATSBY_CONCURRENT_DOWNLOAD = "10" }
   command = "yarn install && yarn lint && gatsby build"
