@@ -185,7 +185,14 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
-
+    MuiFilledInput: {
+      styleOverrides: {
+        input: {
+          padding: 4,
+          color: 'rgba(var(--color-primary))',
+        },
+      },
+    },
   },
 
 };

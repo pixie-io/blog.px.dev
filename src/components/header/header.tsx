@@ -32,6 +32,7 @@ import { Brightness4, Brightness7 } from '@mui/icons-material';
 import { ColorThemeContext } from '../color-theme.provider';
 import Link from '../link';
 import pixieLogo from '../../images/pixie-logo-header.svg';
+import SearchModal from './search/search-modal';
 
 function ElevationScroll(props: { children: any }) {
   const { children } = props;
@@ -80,6 +81,7 @@ function Header() {
                                     </Box>
                                 </Link>
                                 <div>
+                                    <SearchModal />
                                     <IconButton size='small' onClick={onThemeTypeSwitch}>
                                         {colorContext.colorMode === 'light'
                                           ? <Brightness4 style={{ color: '#B2B5BB' }} />
