@@ -4,3 +4,4 @@ public
 .cache
 .idea
 .DS_Store
+.env
