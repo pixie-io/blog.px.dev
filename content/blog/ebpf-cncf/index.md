@@ -8,7 +8,7 @@ authors: ['Hannah Troisi']
 emails: ['htroisi@pixielabs.ai']
 ---
 
-eBPF has been steadily gaining traction in the past few years. The foundation for the idea sounds a bit esoteric on the surface - running user-defined programs in the Linux kernel. However, eBPF has made a huge splash because of the major applications it has in fields like observability, networking, and security.
+eBPF has been steadily gaining traction in the past few years. The foundation for the idea sounds a bit esoteric on the surface - running user-defined programs in the Linux kernel. However, **eBPF has made a huge splash because of the major applications it has in fields like observability, networking, and security**.
 
 In particular, eBPF made a large impact in the cloud native community. This is because the move to Kubernetes and microservices has introduced new challenges in deploying, monitoring, and securing applications - challenges that eBPF can help address.
 
@@ -20,7 +20,7 @@ With a lot of buzz and excitement, it can be hard to understand the adoption and
 
 The operating system is the ideal location to implement observability, networking, and security functionality as it can oversee the entire system. However, before eBPF came onto the scene, writing code for the kernel was fraught with stability and compatibility issues: there was no guarantee that your code wouldn’t crash the kernel and changing kernel versions and architecture could easily break code.
 
-eBPF is game changing, because it provides a safe and efficient way to run code in the kernel. As shown in the overview below, eBPF allows the kernel to run BPF bytecode. While the front-end language used can vary, it is often a restricted subset of C. Typically the C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. These strict verifications guarantee that the machine code will not intentionally or accidentally compromise the Linux kernel, and that the BPF probe will execute in a bounded number of instructions every time it is triggered.
+**eBPF is game changing, because it provides a safe and efficient way to run code in the kernel.** As shown in the overview below, eBPF allows the kernel to run BPF bytecode. While the front-end language used can vary, it is often a restricted subset of C. Typically the C code is first compiled to the BPF bytecode using Clang, then the bytecode is verified to make sure it's safe to execute. These strict verifications guarantee that the machine code will not intentionally or accidentally compromise the Linux kernel, and that the BPF probe will execute in a bounded number of instructions every time it is triggered.
 
 ::: div image-xl
 <svg title='Example eBPF observability application (from <a href="https://www.brendangregg.com/ebpf.html#ebpf">brendangregg.com</a>).' src='linux_ebpf_internals.png' />
@@ -40,7 +40,7 @@ Let’s examine how three different CNCF projects have applied eBPF to solve pro
 
 Securing software applications is already a difficult task, but when you break your applications into many small, scalable and distributed microservices, it can get even harder.
 
-[Falco](https://falco.org/) is an open source runtime security tool. Runtime security is the last layer of defense when securing your Kubernetes cluster and is designed to alert you to threats that sneak past other defense protections.
+**[Falco](https://falco.org/) is an open source runtime security tool.** Runtime security is the last layer of defense when securing your Kubernetes cluster and is designed to alert you to threats that sneak past other defense protections.
 
 Falco monitors system calls to check for [a variety of unusual behavior](https://falco.org/docs/#what-does-falco-check-for), such as:
 
@@ -63,7 +63,7 @@ To get started with Falco, check out the guide [here](https://falco.org/docs/get
 
 Kubernetes makes it easier to decouple application logic from infrastructure and scale up independent microservices. However, this introduces new complexity in observing the system's behavior.
 
-[Pixie](https://px.dev/) is an open source observability tool for Kubernetes applications. Observability is a rather vague term, but in Pixie’s case this includes [full-body application requests](https://docs.px.dev/tutorials/pixie-101/request-tracing/), [application profiles](https://docs.px.dev/tutorials/pixie-101/profiler/) and [network](https://docs.px.dev/tutorials/pixie-101/network-monitoring/) and [infra](https://docs.px.dev/tutorials/pixie-101/infra-health/) health metrics.
+**[Pixie](https://px.dev/) is an open source observability tool for Kubernetes applications.** Observability is a rather vague term, but in Pixie’s case this includes [full-body application requests](https://docs.px.dev/tutorials/pixie-101/request-tracing/), [application profiles](https://docs.px.dev/tutorials/pixie-101/profiler/) and [network](https://docs.px.dev/tutorials/pixie-101/network-monitoring/) and [infra](https://docs.px.dev/tutorials/pixie-101/infra-health/) health metrics.
 
 All of the telemetry data provided by the Pixie platform is [automatically captured using eBPF](https://docs.px.dev/about-pixie/pixie-ebpf/). By using eBPF, Pixie eliminates the need for traditional manual instrumentation. Let’s take a look at how this works for application request tracing.
 
@@ -81,7 +81,7 @@ To get started with Pixie, check out the guide [here](https://docs.px.dev/instal
 
 Kubernetes can be highly dynamic with large numbers of containers getting created and destroyed in just seconds as applications scale to adapt to load changes or during rolling updates. For large clusters, this ephemeral nature of Kubernetes stresses the traditional network security approaches that operate using IP addresses and ports.
 
-[Cilium](https://cilium.io) is an open source Kubernetes container networking interface (CNI) for providing and transparently securing network connectivity and load balancing between application workloads.
+**[Cilium](https://cilium.io) is an open source Kubernetes container networking interface (CNI) plugin** for providing and transparently securing network connectivity and load balancing between application workloads.
 
 Cilium also uses eBPF to observe and interact with traffic at the Linux syscall level. The use of eBPF allows Cilium to transparently insert security visibility + enforcement in a way that uses service / pod / container identity. By doing so, Cilium solves the aforementioned networking security problem by [decoupling security from IP addresses](https://docs.cilium.io/en/stable/intro/#why-cilium-hubble) and ports and instead using service / pod / container for identity. Because Cilium has visibility into the application layer, it can provide stronger API security with security policies applied at different layers.
 
@@ -89,7 +89,7 @@ Cilium also uses eBPF to observe and interact with traffic at the Linux syscall 
 <svg title='eBPF is the foundation of Cilium. Diagram from (from <a href="https://cilium.io/get-started">cilium.io</a>).' src='cilium.png' />
 :::
 
-[Hubble](https://github.com/cilium/hubble) is Cilium's solution for network observability. Hubble provides [service maps](https://github.com/cilium/hubble#service-dependency-graph), [network](https://github.com/cilium/hubble#networking-behavior) health and [application request](https://github.com/cilium/hubble#http-requestresponse-rate--latency) monitoring. Hubble relies on Cilium for data collection.
+**[Hubble](https://github.com/cilium/hubble) is Cilium's solution for network observability.** Hubble provides [service maps](https://github.com/cilium/hubble#service-dependency-graph), [network](https://github.com/cilium/hubble#networking-behavior) health and [application request](https://github.com/cilium/hubble#http-requestresponse-rate--latency) monitoring. Hubble relies on Cilium for data collection.
 
 To get started with Cilium and Hubble, check out the guide [here](https://docs.cilium.io/en/stable/gettingstarted/).
 
