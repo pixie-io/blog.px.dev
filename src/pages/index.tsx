@@ -23,7 +23,7 @@ import {
 import slugify from 'slugify';
 import { graphql, Link, Link as GatsbyLink } from 'gatsby';
 import { Box } from '@mui/system';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import Header from '../components/header';
 import BlogPostCard from '../components/shared/blog-post-card';
 import ShareAside from '../components/share-aside';
@@ -81,11 +81,15 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
             <Grid container spacing={3} my={4}>
               <Grid item md={6} xs={12}>
                 <Link to={urlFromSlug(heroPost.fields.slug)}>
-                  <Box borderRadius='10px' overflow='hidden' className='blog-post-card-image'>
+                  <Box
+                    borderRadius='10px'
+                    overflow='hidden'
+                    className='blog-post-card-image'
+                  >
                     {heroPost.frontmatter.featured_image
                       ? (
-                        <Img
-                          fluid={heroPost.frontmatter.featured_image.childImageSharp.fluid}
+                        <GatsbyImage
+                          image={heroPost.frontmatter.featured_image.childImageSharp.gatsbyImageData}
                           alt='hero'
                         />
                       )
@@ -95,10 +99,24 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
               </Grid>
               <Grid item md={6} xs={12}>
                 <Link to={urlFromSlug(heroPost.fields.slug)}>
-                  <Typography variant='h2' sx={{ mt: 1 }}>{heroPost.frontmatter.title}</Typography>
+                  <Typography
+                    variant='h2'
+                    sx={{ mt: 1 }}
+                  >
+                    {heroPost.frontmatter.title}
+                  </Typography>
                 </Link>
-                <Typography variant='body1' sx={{ my: 1 }}>{heroPost.excerpt}</Typography>
-                <BlogAuthorsHeader authors={heroPost.frontmatter.authors} timeToRead={heroPost.timeToRead} date={heroPost.frontmatter.date} />
+                <Typography
+                  variant='body1'
+                  sx={{ my: 1 }}
+                >
+                  {heroPost.excerpt}
+                </Typography>
+                <BlogAuthorsHeader
+                  authors={heroPost.frontmatter.authors}
+                  timeToRead={heroPost.timeToRead}
+                  date={heroPost.frontmatter.date}
+                />
               </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -137,8 +155,8 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                       >
                         {post.frontmatter.featured_image
                           ? (
-                            <Img
-                              fluid={post.frontmatter.featured_image.childImageSharp.fluid}
+                            <GatsbyImage
+                              image={post.frontmatter.featured_image.childImageSharp.gatsbyImageData}
                               alt='hero'
                             />
                           )
@@ -155,7 +173,12 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                         {post.frontmatter.title}
                       </Typography>
                     </Link>
-                    <Typography variant='body1' sx={{ my: 1 }}>{post.excerpt}</Typography>
+                    <Typography
+                      variant='body1'
+                      sx={{ my: 1 }}
+                    >
+                      {post.excerpt}
+                    </Typography>
                     <BlogAuthorsHeader
                       authors={post.frontmatter.authors}
                       timeToRead={post.timeToRead}
@@ -216,11 +239,10 @@ export const pageQuery = graphql`
           categories
           date(formatString: "MMM DD, YYYY")
           featured_image {
-            childImageSharp {
-              fluid(maxHeight: 320 quality: 92) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+              childImageSharp {
+                  gatsbyImageData(layout: CONSTRAINED)
+                }
+        
           }
         }
       }
@@ -248,10 +270,8 @@ export const pageQuery = graphql`
           date(formatString: "MMM DD, YYYY")
           featured_image {
             childImageSharp {
-              fluid(maxHeight: 226 quality: 92) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+                  gatsbyImageData(layout: CONSTRAINED)
+                }
           }
         }
       }

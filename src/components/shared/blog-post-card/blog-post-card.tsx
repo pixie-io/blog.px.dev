@@ -18,10 +18,10 @@
 
 import React from 'react';
 import { Link } from 'gatsby';
-import Img from 'gatsby-image';
 
 import { Box } from '@mui/system';
-import { Stack, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { urlFromSlug } from '../../utils';
 import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
@@ -45,7 +45,7 @@ function BlogPostCard({ post }) {
       <Link to={urlFromSlug(slug)}>
         <Box borderRadius='10px' className='blog-post-card-image'>
           {featuredImage
-            ? <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
+            ? <GatsbyImage image={featuredImage.childImageSharp.gatsbyImageData} alt={title} />
             : <PostPlaceholder />}
         </Box>
         <Box mb={1}>

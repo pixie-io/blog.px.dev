@@ -18,7 +18,7 @@
 
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 function PostPlaceholder() {
   return (
@@ -35,27 +35,21 @@ function PostPlaceholder() {
             node {
               relativePath
               name
-              childImageSharp {
-                fluid(maxWidth: 1920, quality: 70) {
-                  ...GatsbyImageSharpFluid_withWebp
+               childImageSharp {
+                  gatsbyImageData(layout: CONSTRAINED)
                 }
-              }
             }
           }
         }
       }
     `}
-      render={(data) => {
-        const { fluid } = data.images.edges[0].node.childImageSharp;
-
-        return (
-          <Img
-            loading='lazy'
-            fluid={fluid}
-            fadeIn={false}
-          />
-        );
-      }}
+      render={(data) => (
+        <GatsbyImage
+          alt='Blog post'
+          loading='lazy'
+          image={data.images.edges[0].node.childImageSharp.gatsbyImageData}
+        />
+      )}
     />
   );
 }

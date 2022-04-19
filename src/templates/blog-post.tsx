@@ -214,9 +214,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         featured_image {
           childImageSharp {
-            fluid(maxHeight: 500, quality: 92) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+           gatsbyImageData(layout: CONSTRAINED)
           }
         }
       }
@@ -244,9 +242,7 @@ export const pageQuery = graphql`
           date(formatString: "MMM DD, YYYY")
           featured_image {
             childImageSharp {
-              fluid(maxWidth: 320, quality: 92) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
+              gatsbyImageData(layout: CONSTRAINED)
             }
           }
         }

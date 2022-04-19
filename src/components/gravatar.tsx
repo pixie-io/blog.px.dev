@@ -18,7 +18,6 @@
 
 import React, { useMemo } from 'react';
 import { toUrl } from 'gatsby-source-gravatar';
-import GatsbyImage from 'gatsby-image';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({
@@ -33,22 +32,17 @@ const useStyles = makeStyles(() => ({
 function GravatarIcon({
   email,
   size,
-}) {
+}: { email: string, size: any }) {
   const url = useMemo(() => toUrl(email || ''), []);
   const classes = useStyles();
   return (
-    <GatsbyImage
+    <img
       className={classes.icon}
       style={{
         width: size,
         height: size,
       }}
-      fluid={{
-        aspectRatio: 1 / 1,
-        src: `${url}?size=${size}`,
-        srcSet: `${url}?size=90 90w, ${url}?size=180 180w`,
-        sizes: '(max-width: 45px) 90px, 180px',
-      }}
+      src={url}
     />
   );
 }
