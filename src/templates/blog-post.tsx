@@ -20,7 +20,7 @@ import React from 'react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import {
-  Box, Container, Divider, Grid, Stack, Typography,
+  Box, Container, Divider, Grid, Stack, Tooltip, Typography,
 } from '@mui/material';
 import { graphql } from 'gatsby';
 import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
@@ -83,19 +83,25 @@ function BlogPostTemplate({
               },
             })}
             >
-              <RedditShareButton url={shareUrl}>
-                <img src={reddit} alt='reddit' />
-              </RedditShareButton>
-              <TwitterShareButton url={shareUrl}>
-                <img src={twitter} alt='twitter' />
-              </TwitterShareButton>
-              <LinkedinShareButton
-                title={post.frontmatter.title}
-                summary={post.frontmatter.excerpt}
-                url={shareUrl}
-              >
-                <img src={linkedin} alt='linkedin' />
-              </LinkedinShareButton>
+              <Tooltip title='Share on reddit' placement='left'>
+                <RedditShareButton url={shareUrl}>
+                  <img src={reddit} alt='reddit' />
+                </RedditShareButton>
+              </Tooltip>
+              <Tooltip title='Share on Twitter' placement='left'>
+                <TwitterShareButton url={shareUrl}>
+                  <img src={twitter} alt='twitter' />
+                </TwitterShareButton>
+              </Tooltip>
+              <Tooltip title='Share on linkedIn' placement='left'>
+                <LinkedinShareButton
+                  title={post.frontmatter.title}
+                  summary={post.frontmatter.excerpt}
+                  url={shareUrl}
+                >
+                  <img src={linkedin} alt='linkedin' />
+                </LinkedinShareButton>
+              </Tooltip>
             </Box>
           </Grid>
           <Grid item xs={12} sm={8}>

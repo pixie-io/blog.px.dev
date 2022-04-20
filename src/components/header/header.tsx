@@ -19,16 +19,19 @@
 /* eslint-disable react/jsx-indent */
 import React, { useContext } from 'react';
 import {
+  Alert,
   AppBar,
   Box,
-  Button,
+  Button, Collapse,
   Container,
   IconButton,
   Stack,
   Toolbar,
   useScrollTrigger,
 } from '@mui/material';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
+import { Brightness4, Brightness7, Close } from '@mui/icons-material';
+import { Link as GatsbyLink } from 'gatsby';
+import MuiLink from '@mui/material/Link';
 import { ColorThemeContext } from '../color-theme.provider';
 import Link from '../link';
 import pixieLogo from '../../images/pixie-logo-header.svg';
@@ -48,6 +51,7 @@ function ElevationScroll(props: { children: any }) {
 
 function Header() {
   const colorContext = useContext(ColorThemeContext);
+  const [open, setOpen] = React.useState(true);
 
   const onThemeTypeSwitch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -58,6 +62,43 @@ function Header() {
         <>
             <ElevationScroll>
                 <AppBar>
+                    <Collapse in={open}>
+                        <Box
+                          sx={{
+                            backgroundColor: '#212324',
+                            color: 'white',
+                            textAlign: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                            <Box sx={{
+                              textAlign: 'center',
+                              flexGrow: '1',
+                              fontSize: 13,
+                            }}
+                            >
+                                Pixie is now a CNCF Sandbox project!
+                                <MuiLink href='https://www.cncf.io/projects/pixie/' target='_blank' sx={{ color: 'success.main', textDecoration: 'none', mx: 1 }}>Learn more</MuiLink>
+                                🚀
+                            </Box>
+                            <IconButton
+                              aria-label='close'
+                              color='inherit'
+                              size='small'
+                              onClick={() => {
+                                setOpen(false);
+                              }}
+                            >
+                                <Close
+                                  fontSize='inherit'
+                                  sx={{ color: 'rgba(150, 150, 165, 1)' }}
+                                />
+                            </IconButton>
+                        </Box>
+
+                    </Collapse>
                     <Toolbar>
                         <Container>
                             <Stack
