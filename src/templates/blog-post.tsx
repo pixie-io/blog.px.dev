@@ -76,7 +76,7 @@ function BlogPostTemplate({
               flexDirection: 'column',
               alignItems: 'flex-end',
               position: 'sticky',
-              top: 70,
+              top: 100,
               my: 2,
               [theme.breakpoints.down('md')]: {
                 display: 'none',

@@ -161,7 +161,7 @@ function Header() {
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
-            <Toolbar />
+            <Collapse sx={{ height: open ? 92 : 64 }} />
         </>
   );
 }
