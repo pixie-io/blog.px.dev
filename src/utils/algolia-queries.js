@@ -41,7 +41,7 @@ const queries = [
   {
     query: pageQuery,
     transformer: ({ data }) => data.pages.edges.map(pageToAlgoliaRecord),
-    indexName: 'blog',
+    indexName: process.env.GATSBY_ALGOLIA_DEV_INDEX_NAME,
     settings: { attributesToSnippet: ['excerpt:20'] },
   },
 ];
