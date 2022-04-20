@@ -270,7 +270,7 @@ export const pageQuery = graphql`
           featured_image {
             childImageSharp {
                   gatsbyImageData(layout: CONSTRAINED)
-                }
+            }
           }
         }
       }
