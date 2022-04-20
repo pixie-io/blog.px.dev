@@ -17,38 +17,18 @@
  */
 import * as React from 'react';
 import { Link } from 'gatsby';
+import { Container, Typography } from '@mui/material';
+import { Box, width } from '@mui/system';
 import SEO from '../components/seo';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import img404 from '../images/404.svg';
 
-// styles
-const pageStyles = {
-  color: '#232129',
-  padding: '96px',
-  fontFamily: '-apple-system, Roboto, sans-serif, serif',
-};
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-};
-
-const paragraphStyles = {
-  marginBottom: 48,
-};
-const codeStyles = {
-  color: '#8A6534',
-  padding: 4,
-  backgroundColor: '#FFF4DB',
-  fontSize: '1.25rem',
-  borderRadius: 4,
-};
-
-// markup
 function NotFoundPage() {
   return (
-    <main style={pageStyles}>
-      <title>Not found</title>
+    <>
       <SEO
-        title='404: Not found'
+        title='404'
         description={undefined}
         lang={undefined}
         meta={undefined}
@@ -56,31 +36,36 @@ function NotFoundPage() {
         creators={undefined}
         image={undefined}
       />
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry
-        {' '}
-        <span role='img' aria-label='Pensive emoji'>
-          😔
-        </span>
-        {' '}
-        we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === 'development' ? (
-          <>
-            <br />
-            Try creating a page in
-            {' '}
-            <code style={codeStyles}>src/pages/</code>
-            .
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to='/'>Go home</Link>
-        .
-      </p>
-    </main>
+      <Header />
+      <Container>
+        <Box sx={{
+          width: {
+            xs: '80%',
+            sm: 'fit-content',
+          },
+          margin: {
+            xs: '0 auto',
+            sm: '100px auto',
+          },
+        }}
+        >
+          <img src={img404} alt='' className='w-100' />
+        </Box>
+
+        <Typography
+          variant='body1'
+          sx={{ textAlign: 'center' }}
+        >
+          Oops! Looks like you are lost in space.
+          <br />
+          Let&apos;s head back
+          {' '}
+          <Link to='/'> home</Link>
+          .
+        </Typography>
+        <Footer />
+      </Container>
+    </>
   );
 }
 

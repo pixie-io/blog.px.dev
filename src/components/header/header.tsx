@@ -19,7 +19,6 @@
 /* eslint-disable react/jsx-indent */
 import React, { useContext } from 'react';
 import {
-  Alert,
   AppBar,
   Box,
   Button, Collapse,
@@ -30,7 +29,6 @@ import {
   useScrollTrigger,
 } from '@mui/material';
 import { Brightness4, Brightness7, Close } from '@mui/icons-material';
-import { Link as GatsbyLink } from 'gatsby';
 import MuiLink from '@mui/material/Link';
 import { ColorThemeContext } from '../color-theme.provider';
 import Link from '../link';
@@ -48,6 +46,53 @@ function ElevationScroll(props: { children: any }) {
     elevation: trigger ? 4 : 0,
   });
 }
+
+const MobileAlertBar = () => (
+    <MuiLink
+      href='https://www.cncf.io/projects/pixie/'
+      target='_blank'
+      sx={{
+        color: 'success.main',
+        textDecoration: 'none',
+        textAlign: 'center',
+        width: '100%',
+        mx: 1,
+        fontSize: 13,
+        display: {
+          xs: 'block',
+          sm: 'none',
+        },
+      }}
+    >
+        Pixie is now a CNCF Sandbox project!
+    </MuiLink>
+);
+const DesktopAlertBar = () => (
+    <Box sx={{
+      textAlign: 'center',
+      flexGrow: '1',
+      fontSize: 13,
+      display: {
+        xs: 'none',
+        sm: 'block',
+      },
+    }}
+    >
+        Pixie is now a CNCF Sandbox project!
+        <MuiLink
+          href='https://www.cncf.io/projects/pixie/'
+          target='_blank'
+          sx={{
+            color: 'success.main',
+            textDecoration: 'none',
+            mx: 1,
+          }}
+        >
+Learn more
+        </MuiLink>
+        🚀
+    </Box>
+);
 
 function Header() {
   const colorContext = useContext(ColorThemeContext);
@@ -73,16 +118,8 @@ function Header() {
                             justifyContent: 'space-between',
                           }}
                         >
-                            <Box sx={{
-                              textAlign: 'center',
-                              flexGrow: '1',
-                              fontSize: 13,
-                            }}
-                            >
-                                Pixie is now a CNCF Sandbox project!
-                                <MuiLink href='https://www.cncf.io/projects/pixie/' target='_blank' sx={{ color: 'success.main', textDecoration: 'none', mx: 1 }}>Learn more</MuiLink>
-                                🚀
-                            </Box>
+                            <DesktopAlertBar />
+                            <MobileAlertBar />
                             <IconButton
                               aria-label='close'
                               color='inherit'
@@ -134,6 +171,7 @@ function Header() {
                                           xs: 0,
                                           sm: 4,
                                         },
+                                        p: 0,
                                       }}
                                       component='a'
                                       href='https://docs.px.dev'
