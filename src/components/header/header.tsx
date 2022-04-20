@@ -187,7 +187,7 @@ function Header() {
                                       sx={{
                                         display: {
                                           xs: 'none',
-                                          sm: 'inline',
+                                          sm: 'inline-block',
                                         },
                                       }}
                                     >
