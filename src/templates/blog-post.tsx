@@ -34,6 +34,7 @@ import Footer from '../components/footer';
 import reddit from '../images/icons/reddit-icon.svg';
 import twitter from '../images/icons/twitter-icon.svg';
 import linkedin from '../images/icons/linkedin-icon.svg';
+import SEO from '../components/seo';
 // eslint-disable-next-line react/prop-types,@typescript-eslint/ban-ts-comment
 // @ts-ignore
 function BlogPostTemplate({
@@ -63,9 +64,22 @@ function BlogPostTemplate({
     title: post.frontmatter.title,
   };
   const allAuthors = authors.filter((a: any) => a);
-
   return (
     <>
+      <SEO
+        title={post.frontmatter.title}
+        description={post.excerpt}
+        url={location.href}
+        creators={post.frontmatter.authors ? (post.frontmatter.authors || []).map(
+          (a:{ twitterHandle:string }) => (a?.twitterHandle),
+        )
+          .filter((n:string) => n) : []}
+        image={post.frontmatter.featured_image
+          ? post.frontmatter.featured_image.childImageSharp.gatsbyImageData.images.fallback.src
+          : null}
+        lang='EN'
+        meta={undefined}
+      />
       <Header />
       <Container>
         <Grid container spacing={2}>

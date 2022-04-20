@@ -31,6 +31,7 @@ import { urlFromSlug } from '../components/utils';
 import PostPlaceholder from '../components/post-placeholder';
 import BlogAuthorsHeader from '../components/shared/blog-authors-header';
 import Footer from '../components/footer';
+import SEO from '../components/seo';
 
 // markup
 // eslint-disable-next-line max-len,react/require-default-props
@@ -74,6 +75,10 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
 
   return (
     <>
+      <SEO
+        title='Blog'
+        url={location.href}
+      />
       <Header />
       <Container>
         <Grid container spacing={3}>

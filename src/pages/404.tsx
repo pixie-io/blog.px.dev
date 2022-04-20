@@ -17,6 +17,7 @@
  */
 import * as React from 'react';
 import { Link } from 'gatsby';
+import SEO from '../components/seo';
 
 // styles
 const pageStyles = {
@@ -46,6 +47,15 @@ function NotFoundPage() {
   return (
     <main style={pageStyles}>
       <title>Not found</title>
+      <SEO
+        title='404: Not found'
+        description={undefined}
+        lang={undefined}
+        meta={undefined}
+        url={undefined}
+        creators={undefined}
+        image={undefined}
+      />
       <h1 style={headingStyles}>Page not found</h1>
       <p style={paragraphStyles}>
         Sorry
