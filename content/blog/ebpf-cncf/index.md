@@ -77,19 +77,21 @@ Got encrypted traffic? eBPF probes can be used to [trace TLS connections](https:
 
 To get started with Pixie, check out the guide [here](https://docs.px.dev/installing-pixie/install-guides/).
 
-### Cilium and Hubble (Networking, Security, Observability)
+### Cilium (Networking)
+
+Kubernetes can be highly dynamic with large numbers of containers getting created and destroyed in just seconds as applications scale to adapt to load changes or during rolling updates. This ephemeral nature of Kubernetes [stresses the traditional networking approach](https://docs.cilium.io/en/stable/intro/#why-cilium-hubble) that operates using IP addresses and ports - as these methods of identification can frequently change.
 
 Kubernetes can be highly dynamic with large numbers of containers getting created and destroyed in just seconds as applications scale to adapt to load changes or during rolling updates. For large clusters, this ephemeral nature of Kubernetes stresses the traditional network security approaches that operate using IP addresses and ports.
 
 **[Cilium](https://cilium.io) is an open source Kubernetes container networking interface (CNI) plugin** for providing and transparently securing network connectivity and load balancing between application workloads.
 
-Cilium also uses eBPF to observe and interact with traffic at the Linux syscall level. The use of eBPF allows Cilium to transparently insert security visibility + enforcement in a way that uses service / pod / container identity. By doing so, Cilium solves the aforementioned networking security problem by [decoupling security from IP addresses](https://docs.cilium.io/en/stable/intro/#why-cilium-hubble) and ports and instead using service / pod / container for identity. Because Cilium has visibility into the application layer, it can provide stronger API security with security policies applied at different layers.
+Similarly to Pixie, Cilium uses eBPF to observe network traffic at the Linux syscall level. However, Cilium also uses eBPF at the XDP/tc layer to influence the routing of packets. By being able to observe and interact with network traffic, eBPF allows Cilium to transparently insert security visibility + enforcement in a way that incorporates service / pod / container context. This solves the aforementioned networking problem by decoupling security from IP addresses and ports and instead using Kubernetes context for identity.
 
 ::: div image-xl
 <svg title='eBPF is the foundation of Cilium. Diagram from (from <a href="https://cilium.io/get-started">cilium.io</a>).' src='cilium.png' />
 :::
 
-**[Hubble](https://github.com/cilium/hubble) is Cilium's solution for network observability.** Hubble provides [service maps](https://github.com/cilium/hubble#service-dependency-graph), [network](https://github.com/cilium/hubble#networking-behavior) health and [application request](https://github.com/cilium/hubble#http-requestresponse-rate--latency) monitoring. Hubble relies on Cilium for data collection.
+[Hubble](https://github.com/cilium/hubble) is part of the Cilium project which **provides network and security observability for cloud native workloads.** Hubble provides [service maps](https://github.com/cilium/hubble#service-dependency-graph), [network](https://github.com/cilium/hubble#networking-behavior) health and [application request](https://github.com/cilium/hubble#http-requestresponse-rate--latency) monitoring. Hubble uses Cilium for data collection and Envoy for protocol parsing and filtering.
 
 To get started with Cilium and Hubble, check out the guide [here](https://docs.cilium.io/en/stable/gettingstarted/).
 
