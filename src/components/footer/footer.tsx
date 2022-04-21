@@ -22,6 +22,7 @@ import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import cncfLogo from '../../images/footer/cncf-white.svg';
 import github from '../../images/footer/github-icon.svg';
+import CookiesConsentBanner from '../cookies-consent-banner';
 
 function Footer() {
   return (
@@ -147,6 +148,7 @@ function Footer() {
                     Inc.
                 </a>
             </Typography>
+            <CookiesConsentBanner />
         </Box>
   );
 }

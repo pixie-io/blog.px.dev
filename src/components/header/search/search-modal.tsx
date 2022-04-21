@@ -155,8 +155,8 @@ export default function SearchModal() {
                 {results.map((r) => (
                   <ListItem disablePadding key={r.objectID} sx={{ mb: 1 }}>
                     <ListItemButton sx={{ p: 0 }} component={Link} to={r.slug}>
-                        <ListItemText primary={r.title} />
-                      </ListItemButton>
+                      <ListItemText primary={r.title} />
+                    </ListItemButton>
                   </ListItem>
                 ))}
               </List>
