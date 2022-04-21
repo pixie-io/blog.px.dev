@@ -83,7 +83,16 @@ function BlogPostTemplate({
       <Header />
       <Container>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={1}>
+          <Grid
+            item
+            xs={12}
+            sm={1}
+            sx={(theme) => ({
+              [theme.breakpoints.down('md')]: {
+                display: 'none',
+              },
+            })}
+          >
             <Box sx={{ mt: 20 }} />
             <Box sx={(theme) => ({
               display: 'flex',
@@ -92,9 +101,7 @@ function BlogPostTemplate({
               position: 'sticky',
               top: 100,
               my: 2,
-              [theme.breakpoints.down('md')]: {
-                display: 'none',
-              },
+
             })}
             >
               <Tooltip title='Share on reddit' placement='left'>
@@ -189,7 +196,7 @@ function BlogPostTemplate({
             <MDXProvider components={mdxComponents}>
               <MDXRenderer>{post.body}</MDXRenderer>
             </MDXProvider>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{ mt: 6 }}>
               <Grid item xs={12}>
                 <Divider />
                 <Typography variant='h5'> Related posts</Typography>
@@ -259,6 +266,7 @@ export const pageQuery = graphql`
             name
             email
           }
+          categories
           date(formatString: "MMM DD, YYYY")
           featured_image {
             childImageSharp {

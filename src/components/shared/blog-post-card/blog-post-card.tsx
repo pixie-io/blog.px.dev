@@ -22,6 +22,7 @@ import { Link } from 'gatsby';
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import slugify from 'slugify';
 import { urlFromSlug } from '../../utils';
 import PostPlaceholder from '../../post-placeholder';
 import GravatarIcon from '../../gravatar';
@@ -34,6 +35,7 @@ function BlogPostCard({ post }) {
     timeToRead,
     frontmatter: {
       title,
+      categories,
       featured_image: featuredImage,
       authors,
       date,
@@ -48,10 +50,20 @@ function BlogPostCard({ post }) {
             ? <GatsbyImage image={featuredImage.childImageSharp.gatsbyImageData} alt={title} />
             : <PostPlaceholder />}
         </Box>
-        <Box mb={1}>
-          <Typography variant='h5' sx={{ mt: 1 }}>{title}</Typography>
-          <Typography variant='body1' sx={{ my: 1 }}>{excerpt}</Typography>
+        <Box mb={4}>
+          <Typography variant='h5' sx={{ mt: 3 }}>{title}</Typography>
+          <Typography variant='body1' sx={{ my: 2 }}>{excerpt}</Typography>
           <BlogAuthorsHeader authors={authors} timeToRead={timeToRead} date={date} />
+          {(categories || []).map((c:string) => (
+            <Box
+              component={Link}
+              to={`/${slugify(c)
+                .toLowerCase()}`}
+              sx={{ mr: 1, fontSize: 14 }}
+            >
+              {c}
+            </Box>
+          ))}
         </Box>
       </Link>
     </article>

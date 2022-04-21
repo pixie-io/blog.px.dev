@@ -96,5 +96,5 @@ export default {
   //     </div>
   //   );
   // },
-  alert: (props: any) => <Alert {...props} />,
+  alert: (props: any) => <Alert {...props} variant='outlined' />,
 };

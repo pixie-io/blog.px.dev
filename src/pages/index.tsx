@@ -18,6 +18,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import {
+  Button,
   Chip, Container, Divider, Grid, Typography,
 } from '@mui/material';
 import slugify from 'slugify';
@@ -57,8 +58,8 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
       order: c === PIXIE_TEAM_BLOGS ? 99 : c.length,
     }));
   categories = categories.sort((a: { order: number }, b: { order: number }) => (a.order >= b.order ? -1 : 1));
-  const pageSize = 9;
-  const paginate = (posts: any[], pageNumber: number) => posts.slice(0, (pageNumber + 1) * pageSize);
+  const pageSize = 6;
+  const paginate = (posts: any[], pageNumber: number) => (pageNumber === 0 ? posts.slice(0, 8) : posts.slice(0, 8 + (pageNumber) * pageSize));
 
   const [category] = useState(urlCategory);
   const [posts, setPosts] = useState(paginate(allPosts, 0));
@@ -116,7 +117,6 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                 <Link to={urlFromSlug(heroPost.fields.slug)}>
                   <Typography
                     variant='h2'
-                    sx={{ mt: 1 }}
                   >
                     {heroPost.frontmatter.title}
                   </Typography>
@@ -183,7 +183,6 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                     <Link to={urlFromSlug(post.fields.slug)}>
                       <Typography
                         variant='h3'
-                        sx={{ mt: 1 }}
                       >
                         {post.frontmatter.title}
                       </Typography>
@@ -208,7 +207,7 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                   <Typography variant='h5'>Latest posts</Typography>
                   <Divider />
                 </Grid>
-                <Grid container spacing={3}>
+                <Grid container spacing={4}>
                   {posts.slice(2, posts.length)
                     .map((post: any) => (
                       <Grid item xs={12} sm={6} md={4}>
@@ -216,10 +215,15 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                       </Grid>
                     ))}
                   {hasMore ? (
-                    <button type='button' onClick={() => loadMore()}>
-                      View all Blog posts
-                      {' '}
-                    </button>
+                    <Grid item xs={12} justifyContent='center' container>
+                      <Button
+                        variant='contained'
+                        onClick={() => loadMore()}
+                      >
+                        View more
+                        {' '}
+                      </Button>
+                    </Grid>
                   ) : (
                     ''
                   )}

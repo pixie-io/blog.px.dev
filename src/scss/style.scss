@@ -30,7 +30,9 @@ body {
   --color-pixie-green: 18, 214, 214, 1;
   --color-primary-pre-border: 248, 249, 250, 1;
 }
-
+html{
+  font-size: 18px;
+}
 body.dark {
   --theme-type: dark;
 
@@ -122,7 +124,7 @@ figcaption {
 .blog-post-card {
   .blog-post-card-image {
     .gatsby-image-wrapper {
-      height: 120px;
+      height: 200px;
       border-radius: 10px;
 
       img {

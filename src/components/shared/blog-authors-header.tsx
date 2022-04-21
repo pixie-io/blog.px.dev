@@ -39,7 +39,7 @@ function BlogAuthorsHeader({
           ? <GravatarIcon email={a.email} size={32} key={a.email} /> : ''))}
       </Stack>
       <Box sx={{
-        fontSize: '12px',
+        fontSize: '14px',
         lineHeight: '14px',
       }}
       >

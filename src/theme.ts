@@ -101,17 +101,18 @@ const themeOptions: ThemeOptions = {
     },
     MuiTypography: {
       styleOverrides: {
+
         h1: {
           color: 'rgba(var(--color-headings))',
           fontFamily: 'Manrope',
           fontWeight: 400,
-          fontSize: '64px',
-          lineHeight: '87px',
+          fontSize: '48px',
+          lineHeight: '64px',
 
           [breakpoints.down('md')]: {
             fontFamily: 'Roboto',
-            fontSize: '42px',
-            lineHeight: '52px',
+            fontSize: '38px',
+            lineHeight: '46px',
           },
           [breakpoints.down('sm')]: {
             fontFamily: 'Roboto',
@@ -123,12 +124,13 @@ const themeOptions: ThemeOptions = {
           color: 'rgba(var(--color-headings))',
           fontFamily: 'Manrope',
           fontWeight: 700,
-          fontSize: '42px',
-          lineHeight: '52px',
-          padding: '20px 0',
+          fontSize: '36px',
+          lineHeight: '42px',
+          padding: '0 0 20px 0',
+          margin: 0,
           [breakpoints.down('sm')]: {
-            fontSize: '32px',
-            lineHeight: '42px',
+            fontSize: '28px',
+            lineHeight: '32px',
           },
         },
         h3: {
@@ -137,7 +139,8 @@ const themeOptions: ThemeOptions = {
           fontWeight: 700,
           fontSize: '30px',
           lineHeight: '41px',
-          padding: '20px 0',
+          padding: '0 0 20px 0',
+          margin: 0,
           [breakpoints.down('sm')]: {
             fontSize: '22px',
             lineHeight: '32px',
@@ -151,6 +154,14 @@ const themeOptions: ThemeOptions = {
           lineHeight: '30px',
           fontStyle: 'normal',
           marginBottom: 8,
+        },
+      },
+    },
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          margin: '20px 0',
+          color: 'inherit',
         },
       },
     },
