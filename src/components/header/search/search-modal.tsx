@@ -68,8 +68,8 @@ export default function SearchModal() {
     setSearchQuery('');
   };
 
-  const keydownHandler = (e) => {
-    if (e.keyCode === 75 && (e.ctrlKey || e.metaKey)) {
+  const keydownHandler = (e: KeyboardEvent) => {
+    if (e.code === 'KeyK' && (e.ctrlKey || e.metaKey)) {
       setOpen(true);
     }
   };
@@ -155,8 +155,8 @@ export default function SearchModal() {
                 {results.map((r) => (
                   <ListItem disablePadding key={r.objectID} sx={{ mb: 1 }}>
                     <ListItemButton sx={{ p: 0 }} component={Link} to={r.slug}>
-                      <ListItemText primary={r.title} />
-                    </ListItemButton>
+                        <ListItemText primary={r.title} />
+                      </ListItemButton>
                   </ListItem>
                 ))}
               </List>
