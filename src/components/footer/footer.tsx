@@ -25,12 +25,43 @@ import github from '../../images/footer/github-icon.svg';
 
 function Footer() {
   return (
-        <>
+        <Box sx={{
+          backgroundColor: 'rgba(18, 18, 18, 1)',
+          color: 'rgba(150, 150, 165, 1)',
+        }}
+        >
             <Typography
               variant='body1'
               sx={{
                 textAlign: 'center',
-                pt: 12,
+                color: 'inherit',
+                pt: 2,
+              }}
+            >
+                <a
+                  href='https://www.linuxfoundation.org/terms'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                    Terms of Service
+                </a>
+                <span style={{ margin: '0 12px' }}>|</span>
+                <a
+                  href='https://www.linuxfoundation.org/privacy'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                    Privacy Policy
+                </a>
+
+            </Typography>
+
+            <Typography
+              variant='body1'
+              sx={{
+                textAlign: 'center',
+                color: 'inherit',
+                pt: 6,
               }}
             >
                 {' '}
@@ -46,7 +77,6 @@ function Footer() {
                 </a>
                 {' '}
                 sandbox project.
-
             </Typography>
             <Box sx={{
               maxWidth: 360,
@@ -55,6 +85,7 @@ function Footer() {
               my: 4,
             }}
             >
+
                 <a href='https://cncf.io/' target='_blank' rel='noopener noreferrer'>
                     <img
                       style={{
@@ -65,54 +96,35 @@ function Footer() {
                       alt='CNCF logo'
                     />
                 </a>
-            </Box>
 
-            <Box sx={{
-              mx: 4,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: 2,
-              flexDirection: {
-                xs: 'column-reverse',
-                xl: 'row',
-              },
-            }}
-            >
-                <div>
-                    <a href='https://www.linuxfoundation.org/terms'>Terms of Service</a>
-                    <span style={{ margin: '0 8px' }}>
-          |
-                    </span>
-                    <a href='https://www.linuxfoundation.org/privacy'>Privacy Policy</a>
-                </div>
-
-                <div>
-                    Pixie was originally created and contributed by
-                    {' '}
-                    <a
-                      href='https://newrelic.com/'
-                      target='_blank'
-                      className=' pixie-green'
-                      rel='noopener noreferrer'
-                    >
-New Relic, Inc.
-                    </a>
-                </div>
-                <a
-                  href='https://github.com/pixie-io/blog.px.dev'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='flex-row-center pixie-green'
-                >
-                    <img src={github} alt='github' style={{ marginRight: 4 }} />
-                    Edit on GitHub
-                </a>
             </Box>
             <Typography
               variant='body1'
               sx={{
                 textAlign: 'center',
+                color: 'inherit',
+                pt: 2,
+              }}
+            >
+
+                Pixie was originally created and contributed by
+                {' '}
+                <a
+                  href='https://newrelic.com/'
+                  target='_blank'
+                  className=' pixie-green'
+                  rel='noopener noreferrer'
+                >
+                    New Relic, Inc.
+                </a>
+            </Typography>
+
+            <Typography
+              variant='body1'
+              sx={{
+                textAlign: 'center',
+                fontSize: 10,
+                color: 'inherit',
                 py: 4,
               }}
             >
@@ -132,7 +144,7 @@ New Relic, Inc.
                     Inc.
                 </a>
             </Typography>
-        </>
+        </Box>
   );
 }
 

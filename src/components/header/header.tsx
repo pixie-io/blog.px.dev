@@ -137,11 +137,11 @@ function Header() {
 
                     </Collapse>
                     <Toolbar>
-                        <Container>
                             <Stack
                               direction='row'
                               justifyContent='space-between'
                               alignItems='center'
+                              width='100%'
                             >
                                 <Link to='/'>
                                     <Box sx={{
@@ -195,7 +195,6 @@ function Header() {
                                     </Button>
                                 </div>
                             </Stack>
-                        </Container>
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>

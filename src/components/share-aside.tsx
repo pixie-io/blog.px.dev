@@ -67,8 +67,10 @@ function ShareAside() {
     <Box sx={{
       position: {
         xs: 'relative',
-        sm: 'fixed',
+        sm: 'sticky',
       },
+      top: 100,
+      mt: -50,
     }}
     >
       <Typography variant='h5' sx={{ mt: 8 }}>Connect with us</Typography>
