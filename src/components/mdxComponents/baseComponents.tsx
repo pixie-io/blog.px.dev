@@ -73,7 +73,7 @@ export default {
   // @ts-ignore
   wrapper: ({ children }) => {
     // @ts-ignore
-    const updatedChildren = children.map ? children.map((child) => {
+    const updatedChildren = children?.map ? children.map((child) => {
       if (child.props.className === 'footnotes') {
         return <Footnotes key={1} {...child.props} />;
       }
