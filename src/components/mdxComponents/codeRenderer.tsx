@@ -52,6 +52,9 @@ const CodeRenderer = withStyles((theme) => ({
         display: 'inline-flex!important' as any,
       },
     },
+    borderWidth: 0.3,
+    borderStyle: 'solid',
+    borderColor: 'rgba(var(--color-primary-code-border))',
 
   },
   pre: {
