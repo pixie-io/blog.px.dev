@@ -31,8 +31,9 @@ const useStyles = makeStyles(() => ({
       display: 'list-item',
       fontStyle: 'italic',
       fontSize: '14px',
-      lineHeight: '1.4em',
-      opacity: 0.6,
+      lineHeight: '21px',
+      marginBottom: '8px',
+      opacity: 0.8,
       '& a': {
         lineHeight: 'inherit',
       },

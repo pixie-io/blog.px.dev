@@ -61,6 +61,12 @@ function ShareAside() {
       name: 'YouTube',
       width: 22,
     },
+    {
+      href: '/rss.xml',
+      icon: youtube,
+      name: 'RSS Feed',
+      width: 22,
+    },
   ];
 
   return (
@@ -98,20 +104,12 @@ function ShareAside() {
                   <img width={18} src={item.icon} alt='slack' />
                   {' '}
                 </ListItemIcon>
-                <ListItemText primary={item.name} />
+                <ListItemText primary={item.name} sx={{ whiteSpace: 'nowrap' }} />
               </ListItemButton>
             </ListItem>
           ))}
         </Grid>
       </List>
-      <Button
-        variant='contained'
-        component='a'
-        href='/rss.xml'
-        target='_bank'
-      >
-        RSS feed
-      </Button>
     </Box>
   );
 }

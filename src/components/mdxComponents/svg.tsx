@@ -20,6 +20,8 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { ColorThemeContext } from '../color-theme.provider';
+// eslint-disable-next-line import/no-cycle
+import parseMd from './parseMd';
 
 function SvgRenderer({ src, title }) {
   return (
@@ -65,7 +67,7 @@ function SvgRenderer({ src, title }) {
 
           <figure className='gatsby-resp-image-figure'>
             <img src={getImageSrc(theme)} className='blog-image' />
-            <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1'>{title}</figcaption>
+            <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1'>{parseMd(title)}</figcaption>
           </figure>
 
         );

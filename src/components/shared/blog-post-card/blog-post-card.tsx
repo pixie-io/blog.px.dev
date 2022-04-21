@@ -20,7 +20,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 import { Box } from '@mui/system';
-import { Typography } from '@mui/material';
+import { Chip, Typography } from '@mui/material';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import slugify from 'slugify';
 import { urlFromSlug } from '../../utils';
@@ -55,14 +55,17 @@ function BlogPostCard({ post }) {
           <Typography variant='body1' sx={{ my: 2 }}>{excerpt}</Typography>
           <BlogAuthorsHeader authors={authors} timeToRead={timeToRead} date={date} />
           {(categories || []).map((c:string) => (
-            <Box
+
+            <Chip
+              variant='outlined'
               component={Link}
               to={`/${slugify(c)
                 .toLowerCase()}`}
-              sx={{ mr: 1, fontSize: 14 }}
-            >
-              {c}
-            </Box>
+              sx={{
+                mr: 1, fontSize: 12, mt: 1,
+              }}
+              label={c}
+            />
           ))}
         </Box>
       </Link>

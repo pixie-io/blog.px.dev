@@ -39,8 +39,8 @@ body.dark {
   --color-background: 18, 18, 18, 1;
   --color-background-paper: 32, 35, 36, 1;
 
-  --color-primary: 150, 150, 165, 1;
-  --color-primary-contrast: 255, 77, 104, 1;
+  --color-primary: 214, 214, 214, 1;
+  --color-primary-contrast: 255, 87, 34, .95;
 
   --color-secondary: 151, 151, 166, 1;
 
@@ -118,7 +118,7 @@ figure {
 
 figcaption {
   text-align: center;
-  opacity: .6;
+  opacity: .8;
 }
 
 .blog-post-card {

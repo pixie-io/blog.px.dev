@@ -126,8 +126,8 @@ const themeOptions: ThemeOptions = {
           fontWeight: 700,
           fontSize: '36px',
           lineHeight: '42px',
-          padding: '0 0 20px 0',
-          margin: 0,
+          margin: '20px 0 20px 0',
+          // margin: 0,
           [breakpoints.down('sm')]: {
             fontSize: '28px',
             lineHeight: '32px',
@@ -139,8 +139,7 @@ const themeOptions: ThemeOptions = {
           fontWeight: 700,
           fontSize: '30px',
           lineHeight: '41px',
-          padding: '0 0 20px 0',
-          margin: 0,
+          margin: '20px 0 20px 0',
           [breakpoints.down('sm')]: {
             fontSize: '22px',
             lineHeight: '32px',
@@ -154,6 +153,9 @@ const themeOptions: ThemeOptions = {
           lineHeight: '30px',
           fontStyle: 'normal',
           marginBottom: 8,
+        },
+        paragraph: {
+          margin: '8px 0 8px 0',
         },
       },
     },

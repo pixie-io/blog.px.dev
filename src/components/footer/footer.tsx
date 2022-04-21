@@ -36,6 +36,7 @@ function Footer() {
                 textAlign: 'center',
                 color: 'inherit',
                 pt: 2,
+                fontSize: '14px',
               }}
             >
                 <a
@@ -61,7 +62,8 @@ function Footer() {
               sx={{
                 textAlign: 'center',
                 color: 'inherit',
-                pt: 6,
+                pt: 2,
+                fontSize: '14px',
               }}
             >
                 {' '}
@@ -82,7 +84,7 @@ function Footer() {
               maxWidth: 360,
               margin: '0 auto',
               display: 'block',
-              my: 4,
+              my: 2,
             }}
             >
 
@@ -103,7 +105,8 @@ function Footer() {
               sx={{
                 textAlign: 'center',
                 color: 'inherit',
-                pt: 2,
+                pt: 1,
+                fontSize: '14px',
               }}
             >
 

@@ -54,8 +54,8 @@ function BlogAuthorsHeader({
         >
           {authors.map((a: { name: any }) => (a ? a.name : ''))
             .join(', ')}
+          <br />
         </Box>
-        {' • '}
         {date}
         {' • '}
         {timeToRead}
