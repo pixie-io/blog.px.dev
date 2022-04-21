@@ -33,6 +33,7 @@ import slack from '../images/header/slack-icon.svg';
 import github from '../images/header/github-icon.svg';
 import twitter from '../images/header/twitter-icon.svg';
 import youtube from '../images/header/youtube-icon.svg';
+import rss from '../images/header/rss-icon.svg';
 
 function ShareAside() {
   const listItems = [
@@ -63,7 +64,7 @@ function ShareAside() {
     },
     {
       href: '/rss.xml',
-      icon: youtube,
+      icon: rss,
       name: 'RSS Feed',
       width: 22,
     },
@@ -75,12 +76,18 @@ function ShareAside() {
         xs: 'relative',
         sm: 'sticky',
       },
-      top: 100,
-      mt: -50,
+      top: {
+        xs: 0,
+        sm: 100,
+      },
+      mt: {
+        xs: 0,
+        sm: 20,
+      },
     }}
     >
-      <Typography variant='h5' sx={{ mt: 8 }}>Connect with us</Typography>
-      <List component='div' sx={{ width: 'min-content' }}>
+      <Typography variant='h5' sx={{ whiteSpace: 'nowrap' }}>Connect with us</Typography>
+      <List component='div' sx={{ width: { sm: 'min-content', xs: 'auto' } }}>
         <Grid container>
           {listItems.map((item) => (
             <ListItem
