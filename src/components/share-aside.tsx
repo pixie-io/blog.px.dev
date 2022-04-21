@@ -37,17 +37,18 @@ import youtube from '../images/header/youtube-icon.svg';
 function ShareAside() {
   const listItems = [
     {
-      href: 'https://slackin.px.dev',
-      icon: slack,
-      name: 'Slack',
-      width: 18,
-    },
-    {
       href: 'https://github.com/pixie-io/pixie',
       icon: github,
       name: 'GitHub',
       width: 20,
     },
+    {
+      href: 'https://slackin.px.dev',
+      icon: slack,
+      name: 'Slack',
+      width: 18,
+    },
+
     {
       href: 'https://twitter.com/pixie_run',
       icon: twitter,
@@ -71,7 +72,7 @@ function ShareAside() {
     }}
     >
       <Typography variant='h5' sx={{ mt: 8 }}>Connect with us</Typography>
-      <List component='div'>
+      <List component='div' sx={{ width: 'min-content' }}>
         <Grid container>
           {listItems.map((item) => (
             <ListItem
@@ -104,10 +105,10 @@ function ShareAside() {
       <Button
         variant='contained'
         component='a'
-        href='https://px.dev/community/'
+        href='/rss.xml'
         target='_bank'
       >
-        FOLLOW US
+        RSS feed
       </Button>
     </Box>
   );

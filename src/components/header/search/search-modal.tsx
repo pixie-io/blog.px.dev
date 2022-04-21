@@ -120,9 +120,7 @@ export default function SearchModal() {
           },
         }}
         >
-          <Box sx={shortcutStyle}>Cmd + k</Box>
-          <Box sx={{ mx: 1 }}>/</Box>
-          <Box sx={shortcutStyle}>Ctrl + k</Box>
+          <Box sx={shortcutStyle}>Cmd/Cmd + K</Box>
         </Box>
       </Button>
       <Modal

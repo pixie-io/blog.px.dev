@@ -57,20 +57,30 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
       order: c === PIXIE_TEAM_BLOGS ? 99 : c.length,
     }));
   categories = categories.sort((a: { order: number }, b: { order: number }) => (a.order >= b.order ? -1 : 1));
+  const pageSize = 9;
+  const paginate = (posts: any[], pageNumber: number) => posts.slice(0, (pageNumber + 1) * pageSize);
 
   const [category] = useState(urlCategory);
-  const [posts, setPosts] = useState(allPosts);
+  const [posts, setPosts] = useState(paginate(allPosts, 0));
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
+
   const [heroPost, setHeroPost] = useState(heroPosts[0]);
-  const filterPosts = (c: any) => {
-    const postsWithoutHero = allPosts.filter((p) => p.id !== heroPosts[0].id);
+  const filterPosts = (p:number, c: any) => {
+    const postsWithoutHero = allPosts.filter((po) => po.id !== heroPosts[0].id);
     const filteredPosts = c
       ? postsWithoutHero.filter((pos: { frontmatter: { categories: any[] } }) => pos.frontmatter.categories.some((pc) => pc === c))
       : postsWithoutHero;
-    setPosts(filteredPosts);
+    const paginatedPosts = paginate(filteredPosts, p);
+    setPosts(paginatedPosts);
+    setPage(p);
+    setHasMore(filteredPosts.length > paginatedPosts.length);
   };
-
+  const loadMore = () => {
+    filterPosts(page + 1, category);
+  };
   useEffect(() => {
-    filterPosts(category);
+    filterPosts(0, category);
   }, []);
 
   return (
@@ -205,6 +215,14 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                         <BlogPostCard key={post.id} post={post} />
                       </Grid>
                     ))}
+                  {hasMore ? (
+                    <button type='button' onClick={() => loadMore()}>
+                      View all Blog posts
+                      {' '}
+                    </button>
+                  ) : (
+                    ''
+                  )}
                 </Grid>
               </>
             ) : ''}
