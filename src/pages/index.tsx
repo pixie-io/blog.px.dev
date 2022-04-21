@@ -215,7 +215,7 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                       </Grid>
                     ))}
                   {hasMore ? (
-                    <Grid item xs={12} justifyContent='center' container>
+                    <Grid item xs={12} justifyContent='center' container sx={{ mb: 6 }}>
                       <Button
                         variant='contained'
                         onClick={() => loadMore()}
