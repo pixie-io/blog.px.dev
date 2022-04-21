@@ -110,12 +110,10 @@ const themeOptions: ThemeOptions = {
           lineHeight: '64px',
 
           [breakpoints.down('md')]: {
-            fontFamily: 'Roboto',
             fontSize: '38px',
             lineHeight: '46px',
           },
           [breakpoints.down('sm')]: {
-            fontFamily: 'Roboto',
             fontSize: '32px',
             lineHeight: '42px',
           },
