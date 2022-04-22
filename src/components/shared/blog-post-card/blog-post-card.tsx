@@ -50,25 +50,30 @@ function BlogPostCard({ post }) {
             ? <GatsbyImage image={featuredImage.childImageSharp.gatsbyImageData} alt={title} />
             : <PostPlaceholder />}
         </Box>
-        <Box mb={4}>
+      </Link>
+
+      <Box mb={4}>
+        <Link to={urlFromSlug(slug)}>
           <Typography variant='h5' sx={{ mt: 3 }}>{title}</Typography>
           <Typography variant='body1' sx={{ my: 2 }}>{excerpt}</Typography>
           <BlogAuthorsHeader authors={authors} timeToRead={timeToRead} date={date} />
-          {(categories || []).map((c:string) => (
+        </Link>
+        {(categories || []).map((c:string) => (
 
-            <Chip
-              variant='outlined'
-              component={Link}
-              to={`/${slugify(c)
-                .toLowerCase()}`}
-              sx={{
-                mr: 1, fontSize: 12, mt: 1,
-              }}
-              label={c}
-            />
-          ))}
-        </Box>
-      </Link>
+          <Chip
+            variant='outlined'
+            size='small'
+            clickable
+            component={Link}
+            to={`/${slugify(c)
+              .toLowerCase()}`}
+            sx={{
+              mr: 1, fontSize: 12, mt: 1, cursor: 'pointer',
+            }}
+            label={c}
+          />
+        ))}
+      </Box>
     </article>
   );
 }
