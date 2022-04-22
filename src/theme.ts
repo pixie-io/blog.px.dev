@@ -41,6 +41,7 @@ const themeOptions: ThemeOptions = {
   typography: {
     body1: {
       color: 'rgba(var(--color-primary))',
+      padding: '8px 0 ',
     },
 
   },
@@ -201,6 +202,22 @@ const themeOptions: ThemeOptions = {
         input: {
           padding: 4,
           color: 'rgba(var(--color-primary))',
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          padding: '0 8px',
+          margin: 0,
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          padding: '0 8px',
+          margin: 0,
         },
       },
     },
