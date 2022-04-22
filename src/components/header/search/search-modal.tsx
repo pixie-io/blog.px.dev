@@ -110,8 +110,9 @@ export default function SearchModal() {
       disablePortal
       size='small'
       options={options}
+      popupIcon={null}
       clearOnBlur
-      noOptionsText='no results'
+      noOptionsText={<Box sx={{ color: 'primary.main' }}>No results</Box>}
       fullWidth={false}
       openOnFocus={false}
       onInputChange={(event, newInputValue) => {
@@ -130,7 +131,7 @@ export default function SearchModal() {
         color: 'white',
         p: 0,
         borderRadius: 2,
-        minWidth: 120,
+        minWidth: 160,
       }}
       renderInput={(params: JSX.IntrinsicAttributes & TextFieldProps) => (
         <TextField
