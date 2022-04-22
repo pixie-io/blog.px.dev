@@ -18,20 +18,14 @@
 
 import * as React from 'react';
 import { styled } from '@mui/material';
+import { ReactElement } from 'react';
 
-const StyledLi = styled('li')(
-  () => `
-      color: inherit;
-      fontFamily: inherit;
-      fontStyle: inherit;
-      fontSize: inherit;
-      lineHeight: inherit;
-      paddingBottom: 12px;
-      paddingLeft: 12px;
-`,
-);
+const StyledLi = styled('li')({
+  marginLeft: 32,
+  lineHeight: 'inherit',
+});
 
-function ListItem({ children, id }) {
+function ListItem({ children, id }:{ children:ReactElement, id:string }) {
   return <StyledLi id={id}>{children}</StyledLi>;
 }
 export default ListItem;
