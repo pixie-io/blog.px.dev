@@ -158,8 +158,17 @@ function Header() {
                                         />
                                     </Box>
                                 </Link>
-                                <div>
-                                    <SearchModal />
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Box sx={{
+                                      display: {
+                                        xs: 'none',
+                                        sm: 'block',
+                                      },
+                                    }}
+                                    >
+                                        <SearchModal />
+                                    </Box>
+
                                     <IconButton size='small' onClick={onThemeTypeSwitch}>
                                         {colorContext.colorMode === 'light'
                                           ? <Brightness4 style={{ color: '#B2B5BB' }} />
@@ -188,14 +197,25 @@ function Header() {
                                         display: {
                                           xs: 'none',
                                           sm: 'inline-block',
+                                          whiteSpace: 'nowrap',
                                         },
                                       }}
                                     >
                                         GET STARTED
                                     </Button>
-                                </div>
+                                </Box>
                             </Stack>
                     </Toolbar>
+                    <Box sx={{
+                      display: {
+                        xs: 'block',
+                        sm: 'none',
+                      },
+                    }}
+                    >
+                        <SearchModal />
+                    </Box>
+
                 </AppBar>
             </ElevationScroll>
             <Collapse sx={{ height: open ? 92 : 64 }} />
