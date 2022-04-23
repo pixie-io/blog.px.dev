@@ -50,7 +50,7 @@ function BlogAuthorsHeader({
             // @ts-ignore
             // eslint-disable-next-line implicit-arrow-linebreak
               t?.components?.MuiTypography?.styleOverrides?.h1?.color,
-            fontSize: '14px',
+            fontSize: '16px',
           }}
         >
           {authors.map((a: { name: any }) => (a ? a.name : ''))

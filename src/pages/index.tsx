@@ -117,6 +117,7 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                 <Link to={urlFromSlug(heroPost.fields.slug)}>
                   <Typography
                     variant='h2'
+                    sx={{ mt: 0 }}
                   >
                     {heroPost.frontmatter.title}
                   </Typography>
@@ -183,6 +184,7 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                     <Link to={urlFromSlug(post.fields.slug)}>
                       <Typography
                         variant='h3'
+                        sx={{ mt: 0 }}
                       >
                         {post.frontmatter.title}
                       </Typography>
@@ -254,7 +256,7 @@ export const pageQuery = graphql`
         }
         id
         timeToRead
-        excerpt(pruneLength: 100)
+        excerpt(pruneLength: 150)
         frontmatter {
           title
           authors {
@@ -283,7 +285,7 @@ export const pageQuery = graphql`
         }
         id
         timeToRead
-        excerpt(pruneLength: 100)
+        excerpt(pruneLength: 180)
         frontmatter {
           title
           authors {
