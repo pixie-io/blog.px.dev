@@ -111,7 +111,7 @@ function ShareAside() {
                   <img width={18} src={item.icon} alt='slack' />
                   {' '}
                 </ListItemIcon>
-                <ListItemText primary={item.name} sx={{ whiteSpace: 'nowrap' }} />
+                <ListItemText primary={item.name} sx={{ whiteSpace: 'nowrap', m: 0 }} />
               </ListItemButton>
             </ListItem>
           ))}

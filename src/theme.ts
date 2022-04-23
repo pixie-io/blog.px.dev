@@ -213,14 +213,6 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
-    MuiListItemText: {
-      styleOverrides: {
-        root: {
-          padding: '0 8px',
-          margin: 0,
-        },
-      },
-    },
   },
 
 };
