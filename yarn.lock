@@ -6308,6 +6308,11 @@ gatsby-plugin-sass@^5.9.0:
     resolve-url-loader "^3.1.4"
     sass-loader "^10.1.1"
 
+gatsby-plugin-segment-js@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-segment-js/-/gatsby-plugin-segment-js-3.7.1.tgz#3432d59be0e45ee82f36a42cff060af220a0dd68"
+  integrity sha512-zAsjRrF77Kih7YRUJVp84thnODbzjDE44H6ePtdQfLVyPWiJj3IpS/WAwyRg9Cu3+FciFAT8WEjfJ2I02V0sUw==
+
 gatsby-plugin-sharp@^4.9.1:
   version "4.12.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-4.12.1.tgz#f97cb29074f4a07b469b9ddb1058a3574928d4eb"
