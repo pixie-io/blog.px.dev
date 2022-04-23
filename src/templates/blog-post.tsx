@@ -125,7 +125,17 @@ function BlogPostTemplate({
               </Tooltip>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={8}>
+          <Grid
+            item
+            xs={12}
+            sm={8}
+            sx={{
+              mt: {
+                xs: 4,
+                sm: 0,
+              },
+            }}
+          >
             <HLink id='title' variant='h1'>{post.frontmatter.title}</HLink>
             <Box sx={(theme) => ({
               display: 'flex',
