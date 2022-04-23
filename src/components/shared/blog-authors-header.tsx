@@ -39,7 +39,7 @@ function BlogAuthorsHeader({
           ? <GravatarIcon email={a.email} size={32} key={a.email} /> : ''))}
       </Stack>
       <Box sx={{
-        fontSize: '16px',
+        fontSize: '14px',
         lineHeight: '18px',
       }}
       >
@@ -50,6 +50,7 @@ function BlogAuthorsHeader({
             // @ts-ignore
             // eslint-disable-next-line implicit-arrow-linebreak
               t?.components?.MuiTypography?.styleOverrides?.h1?.color,
+            fontSize: '14px',
           }}
         >
           {authors.map((a: { name: any }) => (a ? a.name : ''))
