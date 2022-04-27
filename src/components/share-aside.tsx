@@ -80,6 +80,10 @@ function ShareAside() {
         xs: 0,
         sm: 100,
       },
+      ml: {
+        xs: 0,
+        sm: 4,
+      },
       mt: {
         xs: 0,
         sm: 20,
