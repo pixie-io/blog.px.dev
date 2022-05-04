@@ -49,7 +49,7 @@ Clustering by logical endpoint provies a better high-level view of the usage of 
 
 For example, these two calls:
 
-```
+```bash
 /v1/catalog/d3588631-ad8e-49df-bbd6-3167f7efb291/details
 /v1/catalog/d3234332-s5fe-s30s-gsh6-323434sdf634/details
 ```

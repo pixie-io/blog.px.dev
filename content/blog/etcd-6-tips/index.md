@@ -90,7 +90,7 @@ Bolt operations are copy-on-write. When a page is updated, it is copied to a com
 
 etcd uses [MultiVersion Concurrency Control](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) in order to safely handle concurrent operations. This goes hand-in-hand with the Raft protocol, as each version in MVCC corresponds to an index in the Raft log. To handle MVCC, etcd tracks changes by revisions. Each transaction made to etcd is a new revision. For example, if you were to load up a fresh instance of etcd and ran the following operations, the revision state would look like so:
 
-```
+```bash
 ---- Revision begins at 1 ----
 tx: [put foo bar] -> Revision is 2
 tx: [put foo1 bar1] -> Revision is 3
