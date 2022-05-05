@@ -71,9 +71,9 @@ function BlogPostTemplate({
         description={post.excerpt}
         url={location.href}
         creators={post.frontmatter.authors ? (post.frontmatter.authors || []).map(
-          (a:{ twitterHandle:string }) => (a?.twitterHandle),
+          (a: { twitterHandle: string }) => (a?.twitterHandle),
         )
-          .filter((n:string) => n) : []}
+          .filter((n: string) => n) : []}
         image={post.frontmatter.featured_image
           ? post.frontmatter.featured_image.childImageSharp.gatsbyImageData.images.fallback.src
           : null}
@@ -92,8 +92,36 @@ function BlogPostTemplate({
                 display: 'none',
               },
             })}
+          />
+          <Grid item xs={12} sm={8}>
+            <HLink id='title' variant='h1'>{post.frontmatter.title}</HLink>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={3}
+            sx={(theme) => ({
+              [theme.breakpoints.down('md')]: {
+                display: 'none',
+              },
+            })}
+          />
+        </Grid>
+
+      </Container>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid
+            item
+            xs={12}
+            sm={1}
+            sx={(theme) => ({
+              [theme.breakpoints.down('md')]: {
+                display: 'none',
+              },
+            })}
           >
-            <Box sx={{ mt: 20 }} />
+            <Box sx={{ mt: 8 }} />
             <Box sx={(theme) => ({
               display: 'flex',
               flexDirection: 'column',
@@ -101,7 +129,7 @@ function BlogPostTemplate({
               position: 'sticky',
               top: 100,
               my: 2,
-
+              mr: 4,
             })}
             >
               <Tooltip title='Share on reddit' placement='left'>
@@ -136,7 +164,6 @@ function BlogPostTemplate({
               },
             }}
           >
-            <HLink id='title' variant='h1'>{post.frontmatter.title}</HLink>
             <Box sx={(theme) => ({
               display: 'flex',
               justifyContent: 'space-between',

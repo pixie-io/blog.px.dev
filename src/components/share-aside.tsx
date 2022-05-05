@@ -85,7 +85,7 @@ function ShareAside() {
       },
       mt: {
         xs: 0,
-        sm: 20,
+        sm: 8,
       },
     }}
     >
