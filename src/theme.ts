@@ -196,6 +196,7 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           color: 'inherit',
+          fontFamily: 'Manrope',
         },
       },
     },

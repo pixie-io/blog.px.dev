@@ -20,10 +20,19 @@ import React from 'react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import {
-  Box, Container, Divider, Grid, Stack, Tooltip, Typography,
+  Box,
+  Container,
+  Divider,
+  Grid,
+  Stack,
+  Theme,
+  ThemeProvider,
+  Tooltip,
+  Typography,
 } from '@mui/material';
 import { graphql } from 'gatsby';
 import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
+import createBreakpoints from '@mui/system/createTheme/createBreakpoints';
 import mdxComponents from '../components/mdxComponents';
 import Header from '../components/header';
 import HLink from '../components/mdxComponents/h-link';
@@ -35,6 +44,106 @@ import reddit from '../images/icons/reddit-icon.svg';
 import twitter from '../images/icons/twitter-icon.svg';
 import linkedin from '../images/icons/linkedin-icon.svg';
 import SEO from '../components/seo';
+
+const breakpoints = createBreakpoints({});
+
+const blogPostThemeOverride = {
+  MuiList: {
+    styleOverrides: {
+      root: {
+        margin: 0,
+        padding: 0,
+        listStyle: 'disc',
+        paddingInlineStart: '40px',
+        marginTop: '28px',
+      },
+    },
+  },
+  MuiListItem: {
+    styleOverrides: {
+      root: {
+        padding: 0,
+        paddingBottom: '12px',
+        paddingLeft: '12px',
+        fontFamily: 'charter, georgia, serif',
+        fontSize: '21px',
+        lineHeight: '32px',
+        display: 'list-item',
+        [breakpoints.down('md')]: {
+          fontSize: '18px',
+          lineHeight: '28px',
+        },
+      },
+    },
+  },
+  MuiTypography: {
+    styleOverrides: {
+      h1: {
+        color: 'rgba(var(--color-headings))',
+        fontFamily: 'Manrope',
+        fontWeight: 400,
+        fontSize: '48px',
+        lineHeight: '64px',
+
+        [breakpoints.down('md')]: {
+          fontSize: '38px',
+          lineHeight: '46px',
+        },
+        [breakpoints.down('sm')]: {
+          fontSize: '32px',
+          lineHeight: '42px',
+        },
+      },
+      h2: {
+        color: 'rgba(var(--color-headings))',
+        fontFamily: 'Manrope',
+        marginBottom: '-8px',
+        marginTop: '58px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        fontSize: '30px',
+        lineHeight: '36px',
+        [breakpoints.down('md')]: {
+          marginBottom: '-6px',
+          marginTop: '26px',
+          fontStyle: 'normal',
+          fontWeight: 500,
+          fontSize: '22px',
+          lineHeight: '28px',
+        },
+      },
+      h3: {
+        color: 'rgba(var(--color-headings))',
+        fontFamily: 'Manrope',
+        marginBottom: '-6.8px',
+        marginTop: '38px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        fontSize: '22px',
+        lineHeight: '28px',
+        [breakpoints.down('md')]: {
+          marginBottom: '-6px',
+          marginTop: '25px',
+          fontStyle: 'normal',
+          fontWeight: 500,
+          fontSize: '20px',
+          lineHeight: '24px',
+        },
+      },
+      h5: {
+        color: 'rgba(var(--color-headings))',
+        fontFamily: 'Manrope',
+        marginBottom: '16px',
+        marginTop: '24px',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '14px',
+        lineHeight: '17.5px',
+        WebkitFontSmoothing: 'antialiased',
+      },
+    },
+  },
+};
 // eslint-disable-next-line react/prop-types,@typescript-eslint/ban-ts-comment
 // @ts-ignore
 function BlogPostTemplate({
@@ -220,7 +329,6 @@ function BlogPostTemplate({
                     sx={{
                       fontSize: '12px',
                       lineHeight: '14px',
-
                     }}
                     key={a.email}
                   >
@@ -231,7 +339,15 @@ function BlogPostTemplate({
             </Box>
             <Divider />
             <MDXProvider components={mdxComponents}>
-              <MDXRenderer>{post.body}</MDXRenderer>
+              <ThemeProvider
+                theme={(outerTheme: Theme) => ({
+                  ...outerTheme,
+                  components: { ...outerTheme.components, ...blogPostThemeOverride },
+                })}
+              >
+                <MDXRenderer>{post.body}</MDXRenderer>
+              </ThemeProvider>
+
             </MDXProvider>
             <Grid container spacing={2} sx={{ mt: 6 }}>
               <Grid item xs={12}>

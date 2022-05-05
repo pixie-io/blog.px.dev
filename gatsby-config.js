@@ -118,7 +118,7 @@ module.exports = {
             resolve: 'gatsby-plugin-google-fonts',
             options: {
                 fonts: [
-                    'manrope:400,700',
+                    'manrope:400,500',
                     'roboto:400,700',
                     'charter:400,400i,700',
                     'georgia:400,400i,700',

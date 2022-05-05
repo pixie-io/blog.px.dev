@@ -113,7 +113,7 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                   </Box>
                 </Link>
               </Grid>
-              <Grid item md={6} xs={12}>
+              <Grid item md={6} xs={12} sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
                 <Link to={urlFromSlug(heroPost.fields.slug)}>
                   <Typography
                     variant='h2'
@@ -180,7 +180,7 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                       </Box>
                     </Link>
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                  <Grid item md={6} xs={12} sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
                     <Link to={urlFromSlug(post.fields.slug)}>
                       <Typography
                         variant='h3'

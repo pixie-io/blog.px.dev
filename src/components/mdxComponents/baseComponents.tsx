@@ -19,16 +19,18 @@
 import React from 'react';
 import {
   Alert,
+  List,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
   Typography,
+  ListItem,
 } from '@mui/material';
+
 import { idFromSlug } from '../utils';
 import CodeRenderer from './codeRenderer';
-import ListItem from './listItem';
 import HLink from './h-link';
 import Code from './code';
 import AnchorTag from './anchor';
@@ -54,12 +56,25 @@ export default {
       variant='body1'
       sx={{
         fontFamily: 'charter, georgia, serif',
-        marginTop: '18px',
-        marginBlockStart: '18px',
+        marginBlockStart: '28px',
         marginBlockEnd: '30px',
-        fontSize: '21px',
-        lineHeight: '32px',
+        fontSize: {
+          xs: '18px',
+          md: '21px',
+
+        },
+        lineHeight: {
+          xs: '28px',
+          md: '32px',
+        },
         padding: 0,
+        mb: '-9px',
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: '28px',
+        overflowWrap: 'break-word',
+        marginBottom: '30px',
+
       }}
     />
   ),
@@ -83,7 +98,7 @@ export default {
   }: any) => <TableCell {...props} align={align || undefined} />,
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
-  ul: (props: any) => <Typography {...props} component='ul' />,
+  ul: (props: any) => <List {...props} />,
   // @ts-ignore
   wrapper: ({ children }) => {
     // @ts-ignore
@@ -97,7 +112,16 @@ export default {
     return <>{updatedChildren}</>;
   },
   ol: (props: any) => <Typography {...props} component='ol' />,
-  em: (props: any) => <Typography {...props} component='em' style={{ fontStyle: 'italic' }} />,
+  em: (props: any) => (
+    <Typography
+      {...props}
+      component='em'
+      style={{
+        fontStyle: 'italic',
+        fontFamily: 'inherit',
+      }}
+    />
+  ),
   li: (props: any) => <ListItem {...props} />,
   // img: (props: any) => {
   //   console.log(props);
