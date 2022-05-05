@@ -119,6 +119,7 @@ const themeOptions: ThemeOptions = {
           [breakpoints.down('sm')]: {
             fontSize: '32px',
             lineHeight: '42px',
+            marginTop: '40px',
           },
         },
         h2: {

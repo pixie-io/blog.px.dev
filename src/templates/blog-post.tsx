@@ -268,8 +268,8 @@ function BlogPostTemplate({
             sm={8}
             sx={{
               mt: {
-                xs: 4,
-                sm: 0,
+                xs: 0,
+                sm: 2,
               },
             }}
           >
