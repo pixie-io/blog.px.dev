@@ -18,7 +18,7 @@ We’ll start with the easy and commonly recommended ways of exploring a contain
 
 If you perform a quick search on how to inspect a container’s filesystem, a common solution you’ll find is to use the [Docker command](https://docs.docker.com/engine/reference/commandline/exec/) ([[1]](https://stackoverflow.com/questions/20813486/exploring-docker-containers-file-system), [[2]](https://www.baeldung.com/ops/docker-container-filesystem)):
 
-```
+```bash
 docker exec -it mycontainer /bin/bash
 ```
 
@@ -34,7 +34,7 @@ If you get a little more advanced, you’ll realize that container processes are
 
 So you could use the [`nsenter`](https://man7.org/linux/man-pages/man1/nsenter.1.html) command to enter the namespace of the target container, using something like this:
 
-```
+```bash
 # Get the host PID of the process in the container
 PID=$(docker container inspect mycontainer | jq '.[0].State.Pid')
 
@@ -52,12 +52,13 @@ A different approach to the problem is simply to copy the relevant files to the 
 
 To copy selected files from a running container, you can use:
 
-```
+```bash
 docker cp mycontainer:/path/to/file file
 ```
 
 It's also possible to snapshot the entire filesystem with:
-```
+
+```bash
 docker export mycontainer -o container_fs.tar
 ```
 
@@ -65,18 +66,19 @@ These commands give you the ability to inspect the files, and are a big improvem
 
 ## Method 4: Finding the filesystem on the host
 
-The copy method solves a lot of our issues, but what if you are trying to monitor a log file? Or what if you're trying to deploy an eBPF probe to a file inside the container? In these cases copying doesn't work. 
+The copy method solves a lot of our issues, but what if you are trying to monitor a log file? Or what if you're trying to deploy an eBPF probe to a file inside the container? In these cases copying doesn't work.
 
 We’d really like to access the container’s filesystem directly from the host. The container’s files should be somewhere on the host's filesystem, but where?
 
 Docker's `inspect` command has a clue for us:
-```
+
+```bash
 docker container inspect mycontainer | jq '.[0].GraphDriver'
 ```
 
 Which gives us:
 
-```
+```json
 {
   "Data": {
     "LowerDir": "/var/lib/docker/overlay2/63ec1a08b063c0226141a9071b5df7958880aae6be5dc9870a279a13ff7134ab-init/diff:/var/lib/docker/overlay2/524a0d000817a3c20c5d32b79c6153aea545ced8eed7b78ca25e0d74c97efc0d/diff",
@@ -89,10 +91,11 @@ Which gives us:
 ```
 
 Let’s break this down:
- - `LowerDir`: Includes the filesystems of all the layers inside the container except the last one
- - `UpperDir`: The filesystem of the top-most layer of the container. This is also where any run-time modifications are reflected.
- - `MergedDir`: A combined view of all the layers of the filesystem.
- - `WorkDir`: An internal working directory used to manage the filesystem.
+
+- `LowerDir`: Includes the filesystems of all the layers inside the container except the last one
+- `UpperDir`: The filesystem of the top-most layer of the container. This is also where any run-time modifications are reflected.
+- `MergedDir`: A combined view of all the layers of the filesystem.
+- `WorkDir`: An internal working directory used to manage the filesystem.
 
 ::: div image-xl
 <svg title='Structure of container filesystems based on overlayfs.' src='overlayfs.png' />
@@ -100,7 +103,7 @@ Let’s break this down:
 
 So to see the files inside our container, we simply need to look at the MergedDir path.
 
-```
+```bash
 sudo ls /var/lib/docker/overlay2/63ec1a08b063c0226141a9071b5df7958880aae6be5dc9870a279a13ff7134ab/merged
 ```
 
@@ -110,7 +113,7 @@ If you want to learn in more detail how the filesystem works, you can check out 
 
 Saving the best for last, there’s an even easier way to find the container’s filesystem from the host. Using the host PID of a process inside the container, you can simply run:
 
-```
+```bash
 sudo ls /proc/<pid>/root
 ```
 
@@ -119,9 +122,10 @@ Linux has taken care of giving you a view into the mount namespace of the proces
 At this point, you’re probably thinking: why didn’t we just lead with this approach and make it a one-line blog post...but it’s all about the journey, right?
 
 ## Bonus: /proc/&lt;pid&gt;/mountinfo
+
 For the curious, all the information about the container’s overlay filesystem discussed in Method 4 can also be discovered directly from the Linux `/proc` filesystem. If you simply look at `/proc/<pid>/mountinfo`, you’ll see something like this:
 
-```
+```bash
 2363 1470 0:90 / / rw,relatime master:91 - overlay overlay rw,lowerdir=/var/lib/docker/overlay2/l/YZVAVZS6HYQHLGEPJHZSWTJ4ZU:/var/lib/docker/overlay2/l/ZYW5O24UWWKAUH6UW7K2DGV3PB,upperdir=/var/lib/docker/overlay2/63ec1a08b063c0226141a9071b5df7958880aae6be5dc9870a279a13ff7134ab/diff,workdir=/var/lib/docker/overlay2/63ec1a08b063c0226141a9071b5df7958880aae6be5dc9870a279a13ff7134ab/work
 2364 2363 0:93 / /proc rw,nosuid,nodev,noexec,relatime - proc proc rw
 2365 2363 0:94 / /dev rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755,inode64
@@ -131,6 +135,7 @@ For the curious, all the information about the container’s overlay filesystem 
 Here you can see that the container has mounted an overlay filesystem as its root. It also reports the same type of information that `docker inspect` reports, including the `LowerDir` and `UpperDir` of the container’s filesystem. It’s not directly showing the `MergedDir`, but you can just take the `UpperDir` and change `diff` to `merged`, and you have a view into the filesystem of the container.
 
 ## How we use this at Pixie
+
 At the beginning of this blog, I mentioned how the Pixie project needs to place eBPF probes on containers. Why and how?
 
 The Stirling module inside Pixie is responsible for collecting observability data. Being k8s-native, a lot of the data that is collected comes from applications running in containers. Stirling also uses eBPF probes to gather data from the processes it monitors. For example, Stirling deploys eBPF probes on OpenSSL to trace encrypted messages (see the [SSL tracing blog](https://blog.px.dev/ebpf-openssl-tracing/) if you want more details on that).
@@ -139,12 +144,10 @@ Since each container bundles its own OpenSSL and other libraries, any eBPF probe
 
 The diagram below shows an overview of how the deployment of eBPF probes in another container works.
 
-
 ::: div image-xl
 <svg title='Stirling deploys eBPF probes on other containers by mounting the host filesystem, and then finding the target container filesystem on the host.' src='accessing-container-files.png' />
 :::
 
 ## Wrap-Up
 
-The next time you need to inspect the files inside your container, hopefully you’ll give some of these techniques a shot. Once you experience the freedom of no longer being restricted by your container’s shell, you might never go back. And all it takes is a simple access to `/proc/<pid>/root`! 
-
+The next time you need to inspect the files inside your container, hopefully you’ll give some of these techniques a shot. Once you experience the freedom of no longer being restricted by your container’s shell, you might never go back. And all it takes is a simple access to `/proc/<pid>/root`!

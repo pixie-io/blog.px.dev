@@ -26,7 +26,7 @@ Also, before diving into the code, we should mention that the Linux developers h
 
 With that said, let’s look at some BCC eBPF code. Our basic structure has three main components:
 
-```c++
+```cpp
 const int kNumMapEntries = 65536;
 
 BPF_STACK_TRACE(stack_traces, kNumMapEntries);
@@ -61,7 +61,7 @@ As we’ll see in more detail later, we’ll set up our BPF code to trigger on a
 
 Now let’s look at the full BPF code inside `sample_stack_trace`:
 
-```c++
+```cpp
 int sample_stack_trace(struct bpf_perf_event_data* ctx) {
  // Sample the user stack trace, and record in the stack_traces structure.
  int user_stack_id = stack_traces.get_stackid(&ctx->regs, BPF_F_USER_STACK);
@@ -100,7 +100,7 @@ Fortunately, all this work can be done in user-space. No more eBPF required.
 
 Setting up our BPF program to run periodically turns out to be fairly easy. Again, credit goes to the BCC and eBPF developers. The crux of this setup is the following:
 
-```c++
+```cpp
 bcc->attach_perf_event(
   PERF_TYPE_SOFTWARE,
   PERF_COUNT_SW_CPU_CLOCK,
@@ -113,7 +113,7 @@ Here we’re telling the BCC to set up a trigger based on the CPU clock by setti
 
 After deploying our BPF code, we have to collect the results from the BPF maps. We access the maps from user-space using the BCC APIs:
 
-```c++
+```cpp
 ebpf::BPFStackTable stack_traces =
      bcc->get_stack_table(kStackTracesMapName);
 
@@ -123,7 +123,7 @@ ebpf::BPFHashTable<stack_trace_key_t, uint64_t> histogram =
 
 Finally, we want to convert our addresses to symbols, and to concatenate our user and kernel stack traces. Fortunately, BCC has once again made our life easy on this one. In particular, there is a call `stack_traces.get_stack_symbol`, that will convert the list of addresses in a stack trace into a list of symbols. This function needs the PID, because it will lookup the debug symbols in the process’s object file to perform the translation.
 
-```c++
+```cpp
  std::map<std::string, int> result;
 
  for (const auto& [key, count] : histogram.get_table_offline()) {

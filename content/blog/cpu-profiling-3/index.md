@@ -62,7 +62,7 @@ From [Part 2](/cpu-profiling-2/), you may recall that our profiler has two main 
 
 To transfer and clear the data in these structures from kernel to user space, the initial profiler implementation used the following BCC APIs:
 
-```c++
+```cpp
 BPFStackTable::get_stack_symbol()       // Read & symbolize one stack trace
 BPFStackTable::clear_table_non_atomic() // Prepare for next use
 

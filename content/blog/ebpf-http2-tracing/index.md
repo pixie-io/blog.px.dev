@@ -102,7 +102,7 @@ Let’s run the uprobe HTTP/2 tracer, then start up the gRPC client and server. 
 
 Now we see the headers of the response sent from the gRPC server to client:
 
-```
+```bash
 [name=':status' value='200']
 [name='content-type' value='application/grpc']
 [name='grpc-status' value='0']
@@ -113,7 +113,7 @@ We also implemented a probe on `google.golang.org/grpc/internal/transport.(*http
 
 This allows us to see the headers of the requests received by the gRPC server from client:
 
-```
+```bash
 [name=':method' value='POST']
 [name=':scheme' value='http']
 [name=':path' value='/greet.Greeter/SayHello']
