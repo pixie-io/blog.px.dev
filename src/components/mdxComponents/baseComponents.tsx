@@ -48,7 +48,21 @@ export default {
   h4: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h4'>{children}</HLink>,
   h5: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h5'>{children}</HLink>,
   h6: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h6'>{children}</HLink>,
-  p: (props: any) => <Typography {...props} variant='body1' />,
+  p: (props: any) => (
+    <Typography
+      {...props}
+      variant='body1'
+      sx={{
+        fontFamily: 'charter, georgia, serif',
+        marginTop: '18px',
+        marginBlockStart: '18px',
+        marginBlockEnd: '30px',
+        fontSize: '21px',
+        lineHeight: '32px',
+        padding: 0,
+      }}
+    />
+  ),
   // pre: Pre,
   code: (props: any) => {
     const { children } = props;

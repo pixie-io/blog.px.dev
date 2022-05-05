@@ -22,7 +22,12 @@ import { ReactElement } from 'react';
 
 const StyledLi = styled('li')({
   marginLeft: 32,
-  lineHeight: 'inherit',
+  paddingBottom: '12px',
+  fontFamily: 'charter, georgia, serif',
+  marginTop: '18px',
+  fontSize: '21px',
+  lineHeight: '32px',
+  padding: 0,
 });
 
 function ListItem({ children, id }:{ children:ReactElement, id:string }) {

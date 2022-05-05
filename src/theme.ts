@@ -42,6 +42,8 @@ const themeOptions: ThemeOptions = {
     body1: {
       color: 'rgba(var(--color-primary))',
       padding: '8px 0 ',
+
+      fontFamily: 'Manrope,sans-serif',
     },
 
   },

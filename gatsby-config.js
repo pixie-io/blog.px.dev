@@ -120,6 +120,8 @@ module.exports = {
                 fonts: [
                     'manrope:400,700',
                     'roboto:400,700',
+                    'charter:400,400i,700',
+                    'georgia:400,400i,700',
                 ],
                 display: 'block',
             },

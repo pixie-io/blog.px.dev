@@ -20,7 +20,6 @@
 import React from 'react';
 import {
   Box,
-  Button,
   Grid,
   List,
   ListItem,
@@ -91,13 +90,25 @@ function ShareAside() {
     }}
     >
       <Typography variant='h5' sx={{ whiteSpace: 'nowrap' }}>Connect with us</Typography>
-      <List component='div' sx={{ width: { sm: 'min-content', xs: 'auto' } }}>
+      <List
+        component='div'
+        sx={{
+          width: {
+            sm: 'min-content',
+            xs: 'auto',
+          },
+        }}
+      >
         <Grid container>
           {listItems.map((item) => (
             <ListItem
               key={item.href}
               component='div'
               sx={{
+                ml: {
+                  xs: 0,
+                  sm: '12px',
+                },
                 width: {
                   xs: '50%',
                   sm: '100%',
@@ -112,10 +123,19 @@ function ShareAside() {
                 }}
                 >
                   {' '}
-                  <img width={18} src={item.icon} alt='slack' />
+                  <img width={18} src={item.icon} alt={`${item.name} icon`} />
                   {' '}
                 </ListItemIcon>
-                <ListItemText primary={item.name} sx={{ whiteSpace: 'nowrap', m: 0 }} />
+                <ListItemText
+                  primary={item.name}
+                  disableTypography
+                  sx={{
+                    whiteSpace: 'nowrap',
+                    fontSize: '18px',
+                    lineHeight: '25px',
+                    m: '8px 0',
+                  }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
