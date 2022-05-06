@@ -68,7 +68,7 @@ Attaching uprobes to shared library is no different than setting uprobes on appl
 
 [BCC](https://github.com/iovisor/bcc) makes it easy to attach a uprobe to a function in your application code. For example, if you had a function called `foo()` in a program called `demo`, you’d use BCC to attach a uprobe in the following way:
 
-```
+```cpp
 attach_uprobe(
 	"/home/user/demo",
 	"foo",
@@ -109,7 +109,7 @@ Phew! The symbols do exist. This is promising.
 
 The final `attach_uprobe` invocation is really easy. For the object on which to set the uprobe, you can directly provide the shared library. And for the symbol, use the dynamic symbol of interest.
 
-```
+```cpp
 attach_uprobe(
     "/usr/lib/x86_64-linux-gnu/libssl.so.1.1",
     "SSL_write",

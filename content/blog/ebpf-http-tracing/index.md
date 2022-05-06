@@ -27,19 +27,19 @@ The first step is to understand what Linux kernel APIs are used to send and rece
 
 We can use the Linux [perf](https://perf.wiki.kernel.org/index.php/Main_Page) command to understand what system calls are invoked:
 
-```
+```bash
 sudo perf trace -p <PID>
 ```
 
 Using `curl`, we’ll make a simple HTTP request in another terminal window:
 
-```
+```bash
 curl http://localhost:9090/e\?iters\=10
 ```
 
 Back in the original terminal window, where the `perf` command is running, you should see a spew of data:
 
-```
+```bash
 [0] % sudo perf trace -p 1011089
         ? (         ): app/1011089  ... [continued]: epoll_pwait())                                      = 1
     ...

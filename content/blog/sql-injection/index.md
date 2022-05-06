@@ -7,42 +7,47 @@ categories: ['Guest Blogs', 'Security']
 authors: ['Elaine Laguerta', 'Hannah Stepanek', 'Robert Prast']
 emails: ['elaguerta@newrelic.com', 'hstepanek@newrelic.com', 'rprast@newrelic.com']
 ---
-*FYI - The team will demo this SQL injection detection workflow at KubeCon! The demo will be live at KubeCon 2021 [Friday, October 15, 11 am PDT](https://kccncna2021.sched.com/event/lV4c). The source code for the demo is [available at the Pixie demo repo](https://github.com/pixie-io/pixie-demos/tree/main/sql-injection-demo).*   
+*FYI - The team will demo this SQL injection detection workflow at KubeCon! The demo will be live at KubeCon 2021 [Friday, October 15, 11 am PDT](https://kccncna2021.sched.com/event/lV4c). The source code for the demo is [available at the Pixie demo repo](https://github.com/pixie-io/pixie-demos/tree/main/sql-injection-demo).*
 
-*This is a guest post by employees of New Relic.*  
+*This is a guest post by employees of New Relic.*
 
 ---
 
-Think about the possible security vulnerabilities in code that you ship. What keeps you up at night? You’d be wise to answer “SQL injection” -- after all, since 2003 it’s been on the OWASP’s (Open Web Application Security Project) [top 10 list of CVEs](https://owasp.org/Top10/) (Common Vulnerabilities and Exposures).  
+Think about the possible security vulnerabilities in code that you ship. What keeps you up at night? You’d be wise to answer “SQL injection” -- after all, since 2003 it’s been on the OWASP’s (Open Web Application Security Project) [top 10 list of CVEs](https://owasp.org/Top10/) (Common Vulnerabilities and Exposures).
 
 Imagine you have an endpoint that takes an id query parameter:
+
 ```
 http://example.com.com/api/host?id=1
 ```
-The id parameter, it turns out, is not correctly sanitized and it is injectable. A hacker could come along and do something like: 
+
+The id parameter, it turns out, is not correctly sanitized and it is injectable. A hacker could come along and do something like:
+
 ```
-http://example.com.com/api/host?id=1 UNION SELECT current_user, NULL FROM user 
+http://example.com.com/api/host?id=1 UNION SELECT current_user, NULL FROM user
 ```
-Which, at the database level would run the following query: 
+
+Which, at the database level would run the following query:
+
 ```sql
 SELECT name, ip FROM host WHERE id=1 UNION SELECT current_user, NULL FROM user
 ```
-Instead of returning the host data that belongs to that id, the endpoint would now return the database username. As you can imagine this could be really bad as the hacker has just exposed a huge vulnerability within this endpoint. Any user using this vulnerability could get any data they wanted out of the database. 
 
-We won’t link to any news stories about devastating hacks; that’s not why we’re here. As developers and security engineers, we believe our job isn’t to scare, but to empower. Pixie is a powerful observability platform, and as security people we saw some unique opportunities to apply Pixie to security use cases. We’re here to show you how you can use Pixie to proactively detect and report SQL injection attempts, while your application is live.   
+Instead of returning the host data that belongs to that id, the endpoint would now return the database username. As you can imagine this could be really bad as the hacker has just exposed a huge vulnerability within this endpoint. Any user using this vulnerability could get any data they wanted out of the database.
 
+We won’t link to any news stories about devastating hacks; that’s not why we’re here. As developers and security engineers, we believe our job isn’t to scare, but to empower. Pixie is a powerful observability platform, and as security people we saw some unique opportunities to apply Pixie to security use cases. We’re here to show you how you can use Pixie to proactively detect and report SQL injection attempts, while your application is live.
 
 Compared to traditional WAFs (web application firewalls), and various tools that position themselves as middlemen in your tech stack, Pixie runs within your cluster and hooks into your nodes underlying kernel. Specifically, while traditional firewalls are constrained to viewing only the surface of network traffic, Pixie uses [eBPF](https://docs.px.dev/about-pixie/pixie-ebpf/) (extended Berkeley Packet Filter) tracing to offer visibility to the operating system itself. This positions Pixie perfectly to traverse most layers in the OSI (Open Systems Interconnection) model to collect data rather than being pigeonholed into one. In practice, this means we can look at raw HTTP and database requests in the application layer while also peeling back any encryption happening in the presentation layer. To put things bluntly, context is king and Pixie allows us to understand the flow of data at every contextual layer.
 
-Why detect injection attempts? Why not just block them actively? Because blocking works -- until it doesn’t. No firewall is 100% effective for long; eventually someone determined will find a way through. And when they do, we won’t know about it until the consequences of the attack.  
+Why detect injection attempts? Why not just block them actively? Because blocking works -- until it doesn’t. No firewall is 100% effective for long; eventually someone determined will find a way through. And when they do, we won’t know about it until the consequences of the attack.
 
 Compared to blocking, detection can offer more information for the defenders and less information for attackers. For example, say an attacker begins by probing a system with some more obvious injection attempts. These are probably the malicious queries that would be most likely to be known to the firewall and actively blocked. That means that we defenders won’t know about these initial blocked attempts, while the attacker gets a chance to learn the firewall. Now there is an information asymmetry in favor of the attacker. While us defenders continue to have a blind spot because of our blocker, the attacker can try ever more insidious queries until they get past the firewall.
 
 Detection allows us to observe attacks on our code while our systems are live. What we can observe, we can understand. Understanding is how we will turn the bogeyman of SQL injection into something more like a weed: it’s an inevitable part of growing our code base, and it can be really bad. But if we can observe it, we can nip it in the bud.
- 
+
 To that end, we made a simple [PxL script](https://docs.px.dev/reference/pxl/) that uses Pixie to flag suspicious database queries that appear to be SQL injection attempts.
 
-This script is a proof of concept of a grander vision. We don’t want to rely on firewalls to be our system’s main defense agent, because firewalls aren’t responsive and context aware to your actual application. We want a tool that flags what we think are injections, but is smart enough to minimize false positives, without blocking.  That way we humans have full visibility into attempted attacks, and we have the final say on which events constitute serious attempts. 
+This script is a proof of concept of a grander vision. We don’t want to rely on firewalls to be our system’s main defense agent, because firewalls aren’t responsive and context aware to your actual application. We want a tool that flags what we think are injections, but is smart enough to minimize false positives, without blocking.  That way we humans have full visibility into attempted attacks, and we have the final say on which events constitute serious attempts.
 
 At New Relic, we’re really excited to make a security product using Pixie that will realize this vision, a tool that will cover a significant portion of the  OWASP Top 10 vulnerabilities.
 
@@ -50,19 +55,19 @@ In the short term, we’ll be contributing SQL injection detection to the open s
 
 In the mid term, we want to replace our regular expression rule set approach with machine learning detection. The Pixie team has already laid the groundwork for a machine learning approach; we’ll be able to leverage PxL’s [existing support of Tensorflow models](https://blog.tensorflow.org/2021/06/leveraging-machine-learning-pixie.html). In the long term, we are designing an observability-based security product that will run on open-source building blocks.
 
-Because that long term vision will be some time from now, we’ll leave you with the recipe for our SQL injection proof of concept. You can dig into the source code and test it on a vulernable app with this [demo repo](https://github.com/pixie-io/pixie-demos/tree/main/sql-injection-demo).  
+Because that long term vision will be some time from now, we’ll leave you with the recipe for our SQL injection proof of concept. You can dig into the source code and test it on a vulernable app with this [demo repo](https://github.com/pixie-io/pixie-demos/tree/main/sql-injection-demo).
 
-So spin up your development environment and get ready to turn monsters into dandelions.   
-
+So spin up your development environment and get ready to turn monsters into dandelions.
 
 ---
 
 ## A PxL script for identifying potential SQL injections
 
-The PxL script identifies SQL injections by matching the query against a simple set of regular expressions. Each of these regexes is associated with a particular SQL injection rule. For example, if a query contains a comment (--) then it is flagged as a SQL injection attack and in violation of the comment dash rule, represented as `RULE_BROKEN` in the data table. 
+The PxL script identifies SQL injections by matching the query against a simple set of regular expressions. Each of these regexes is associated with a particular SQL injection rule. For example, if a query contains a comment (--) then it is flagged as a SQL injection attack and in violation of the comment dash rule, represented as `RULE_BROKEN` in the data table.
 ![SQL Injection Table](sql_injection_table.png)
 
-Regular expressions are fairly easy to evade in the real world however, attackers usually start with attempts like these to see if vulnerabilities are present. This rule set captures many attacker’s first attempts.  If you want to know if someone is probing your system for vulnerabilities before trying something more sophisticated, this might be handy -- which is why we’re planning on building these rules into the Pixie SQL parser.  
+Regular expressions are fairly easy to evade in the real world however, attackers usually start with attempts like these to see if vulnerabilities are present. This rule set captures many attacker’s first attempts.  If you want to know if someone is probing your system for vulnerabilities before trying something more sophisticated, this might be handy -- which is why we’re planning on building these rules into the Pixie SQL parser.
+
 ```python
 # Rule set to capture some obvious attempts.
 SCRIPT_TAG_RULE = "(<|%3C)\s*[sS][cC][rR][iI][pP][tT]"
@@ -74,7 +79,9 @@ UNION_RULE = "UNION"
 CHAR_CASTING_RULE = "[cC][hH][rR](\(|%28)"
 SYSTEM_CATALOG_ACCESS_RULE = "[fF][rR][oO][mM]\s+[pP][gG]_"
 ```
+
 Here's the full PxL script:
+
 ```python
 # Copyright 2018- The Pixie Authors.
 #
@@ -214,6 +221,7 @@ def add_source_dest_links(df, start_time: str):
 ```
 
 And here is a companion `vis.json` that will give you a nicely formatted table:
+
 ```json
 {
   "variables": [

@@ -26,7 +26,7 @@ Pixie can help us make these parts easier. Pixie can distribute eBPF programs ac
 
 Let's develop our first `bpftrace` PxL script. For this example, we will use a famous one-liner, which we will call `sleepy_snoop`. Let's first look at the actual code itself.
 
-```
+```cpp
 kprobe:do_nanosleep { printf("PID %d sleeping\n", pid); }
 ```
 
@@ -38,7 +38,7 @@ Pixie requires some [minor adjustments](https://docs.px.dev/tutorials/custom-dat
 
 The converted eBPF program should look like this:
 
-```
+```cpp
 kprobe:do_nanosleep { printf(\"time_:%llu pid:%d comm:%s\", nsecs, pid, comm); }
 ```
 
@@ -141,7 +141,7 @@ Let’s do one more example by looking for OOM killed processes. In short, OOM m
 
 Let's first look at the [original code](https://github.com/iovisor/bpftrace/blob/master/tools/oomkill.bt):
 
-```
+```cpp
 #include <linux/oom.h>
 
 BEGIN
@@ -169,7 +169,7 @@ As mentioned before, we have to make some minor adjustments to get this working 
 
 End result of the eBPF program should look like this:
 
-```
+```cpp
 kprobe:oom_kill_process
 {
     $oc = (struct oom_control *)arg0;
