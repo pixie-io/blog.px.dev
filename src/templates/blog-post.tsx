@@ -53,9 +53,7 @@ const blogPostThemeOverride = {
       root: {
         margin: 0,
         padding: 0,
-        listStyle: 'disc',
         paddingInlineStart: '40px',
-        marginTop: '28px',
       },
     },
   },

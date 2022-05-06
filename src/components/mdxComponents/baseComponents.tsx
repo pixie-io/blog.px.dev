@@ -18,15 +18,14 @@
 
 import React from 'react';
 import {
-  Alert,
   List,
+  ListItem,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
   Typography,
-  ListItem,
 } from '@mui/material';
 
 import { idFromSlug } from '../utils';
@@ -98,7 +97,7 @@ export default {
   }: any) => <TableCell {...props} align={align || undefined} />,
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
-  ul: (props: any) => <List {...props} />,
+  ul: (props: any) => <List {...props} sx={{ listStyle: 'disc' }} />,
   // @ts-ignore
   wrapper: ({ children }) => {
     // @ts-ignore
@@ -111,7 +110,7 @@ export default {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     return <>{updatedChildren}</>;
   },
-  ol: (props: any) => <Typography {...props} component='ol' />,
+  ol: (props: any) => <List {...props} component='ol' sx={{ listStyle: 'auto' }} />,
   em: (props: any) => (
     <Typography
       {...props}
