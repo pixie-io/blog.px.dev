@@ -53,6 +53,7 @@ const blogPostThemeOverride = {
       root: {
         margin: 0,
         padding: 0,
+        marginTop: '16px',
         paddingInlineStart: '40px',
       },
     },
