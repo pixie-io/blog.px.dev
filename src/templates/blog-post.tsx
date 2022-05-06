@@ -30,9 +30,11 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { graphql } from 'gatsby';
+import { graphql, Link as GatsbyLink } from 'gatsby';
 import { LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
 import createBreakpoints from '@mui/system/createTheme/createBreakpoints';
+import MuiLink from '@mui/material/Link';
+import slugify from 'slugify';
 import mdxComponents from '../components/mdxComponents';
 import Header from '../components/header';
 import HLink from '../components/mdxComponents/h-link';
@@ -143,6 +145,7 @@ const blogPostThemeOverride = {
     },
   },
 };
+
 // eslint-disable-next-line react/prop-types,@typescript-eslint/ban-ts-comment
 // @ts-ignore
 function BlogPostTemplate({
@@ -172,6 +175,9 @@ function BlogPostTemplate({
     title: post.frontmatter.title,
   };
   const allAuthors = authors.filter((a: any) => a);
+
+  const categoryLink = (category: string) => (category ? `/${slugify(category)
+    .toLowerCase()}` : '');
   return (
     <>
       <SEO
@@ -202,6 +208,27 @@ function BlogPostTemplate({
             })}
           />
           <Grid item xs={12} sm={8}>
+            <Box sx={{ my: 2 }}>
+              <MuiLink component={GatsbyLink} to='/' sx={{ textDecoration: 'none' }}>
+                Blog
+              </MuiLink>
+              {' '}
+              /
+              {' '}
+              {categories.length
+                ? (
+                  <MuiLink
+                    component={GatsbyLink}
+                    to={categoryLink(categories[0])}
+                    sx={{
+                      textDecoration: 'none',
+                      color: 'rgba(150, 150, 165, 1)',
+                    }}
+                  >
+                    {categories[0]}
+                  </MuiLink>
+                ) : ''}
+            </Box>
             <HLink id='title' variant='h1'>{post.frontmatter.title}</HLink>
           </Grid>
           <Grid
@@ -299,7 +326,7 @@ function BlogPostTemplate({
                     ) : ''))}
                 </Stack>
                 <Box sx={{
-                  fontSize: '12px',
+                  fontSize: '14px',
                   lineHeight: '14px',
                 }}
                 >
