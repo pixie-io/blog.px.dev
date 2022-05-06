@@ -196,7 +196,7 @@ function BlogPostTemplate({
       />
       <Header />
       <Container>
-        <Grid container spacing={2}>
+        <Grid container>
           <Grid
             item
             xs={12}
@@ -245,7 +245,7 @@ function BlogPostTemplate({
 
       </Container>
       <Container>
-        <Grid container spacing={2}>
+        <Grid container>
           <Grid
             item
             xs={12}
@@ -256,7 +256,13 @@ function BlogPostTemplate({
               },
             })}
           >
-            <Box sx={{ mt: 8 }} />
+            <Box sx={{
+              mt: {
+                xs: 0,
+                sm: 15,
+              },
+            }}
+            />
             <Box sx={(theme) => ({
               display: 'flex',
               flexDirection: 'column',
@@ -389,7 +395,17 @@ function BlogPostTemplate({
               ))}
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={3}>
+          <Grid
+            item
+            xs={12}
+            sm={3}
+            sx={{
+              mt: {
+                xs: 0,
+                sm: 6.5,
+              },
+            }}
+          >
             <ShareAside />
           </Grid>
         </Grid>

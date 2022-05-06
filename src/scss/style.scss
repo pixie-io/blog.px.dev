@@ -41,7 +41,7 @@ body.dark {
   --color-background-paper: 32, 35, 36, 1;
 
   --color-primary: 214, 214, 214, 1;
-  --color-primary-contrast: 255, 87, 34, .95;
+  --color-primary-contrast: 255, 255, 255, 1;
 
   --color-secondary: 151, 151, 166, 1;
 
@@ -205,7 +205,9 @@ video {
 .bold {
   font-weight: bold;
 }
-
+.chip-background {
+  background-color: rgba(var(--color-primary-code-border))
+}
 .pixie-green {
   color: rgba(var(--color-pixie-green))
 }

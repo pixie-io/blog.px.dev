@@ -92,7 +92,7 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
       />
       <Header />
       <Container>
-        <Grid container spacing={3}>
+        <Grid container>
           <Grid item xs={12} sm={9}>
             <Grid container spacing={3} my={4}>
               <Grid item md={6} xs={12}>
@@ -136,18 +136,39 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
               </Grid>
             </Grid>
             <Grid item xs={12}>
+              <Typography variant='h5'>
+                Latest posts
+              </Typography>
+              <Divider sx={{ mb: 4 }} />
+            </Grid>
+            <Grid item xs={12}>
+              <GatsbyLink to='/'>
+                <Chip
+                  sx={(theme) => ({
+                    mr: 2,
+                    mb: 2,
+                    color: theme.palette.primary.main,
+                  })}
+                  className={category === undefined ? 'chip-background' : ''}
+                  label={`All (${allPosts.length})`}
+                  variant='outlined'
+                  clickable
+                />
+              </GatsbyLink>
+
               {categories.map((cat: { label: any; count: any }) => (
                 <GatsbyLink to={`/${slugify(cat.label)
                   .toLowerCase()}`}
                 >
                   <Chip
-                    sx={{
+                    sx={(theme) => ({
                       mr: 2,
                       mb: 2,
-                    }}
-                    variant='outlined'
-                    className={category === cat.label ? 'active' : ''}
+                      color: theme.palette.primary.main,
+                    })}
+                    className={category === cat.label ? 'chip-background' : ''}
                     label={`${cat.label} (${cat.count})`}
+                    variant='outlined'
                     clickable
                   />
                 </GatsbyLink>
@@ -155,10 +176,6 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
 
             </Grid>
 
-            <Grid item xs={12}>
-              <Typography variant='h5'>Latest posts</Typography>
-              <Divider />
-            </Grid>
             {posts.slice(0, 2)
               .map((post: any) => (
                 <Grid container spacing={3} mb={4} mt={2} key={post.id}>
@@ -204,33 +221,27 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                 </Grid>
               ))}
             {posts.slice(2, posts.length).length ? (
-              <>
-                <Grid item xs={12} mb={2}>
-                  <Typography variant='h5'>Latest posts</Typography>
-                  <Divider />
-                </Grid>
-                <Grid container spacing={4}>
-                  {posts.slice(2, posts.length)
-                    .map((post: any) => (
-                      <Grid item xs={12} sm={6} md={4}>
-                        <BlogPostCard key={post.id} post={post} />
-                      </Grid>
-                    ))}
-                  {hasMore ? (
-                    <Grid item xs={12} justifyContent='center' container sx={{ mb: 6 }}>
-                      <Button
-                        variant='contained'
-                        onClick={() => loadMore()}
-                      >
-                        View more
-                        {' '}
-                      </Button>
+              <Grid container spacing={4} sx={{ mt: 4 }}>
+                {posts.slice(2, posts.length)
+                  .map((post: any) => (
+                    <Grid item xs={12} sm={6} md={4}>
+                      <BlogPostCard key={post.id} post={post} />
                     </Grid>
-                  ) : (
-                    ''
-                  )}
-                </Grid>
-              </>
+                  ))}
+                {hasMore ? (
+                  <Grid item xs={12} justifyContent='center' container sx={{ mb: 6 }}>
+                    <Button
+                      variant='contained'
+                      onClick={() => loadMore()}
+                    >
+                      View more
+                      {' '}
+                    </Button>
+                  </Grid>
+                ) : (
+                  ''
+                )}
+              </Grid>
             ) : ''}
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -285,7 +296,7 @@ export const pageQuery = graphql`
         }
         id
         timeToRead
-        excerpt(pruneLength: 180)
+        excerpt(pruneLength: 130)
         frontmatter {
           title
           authors {

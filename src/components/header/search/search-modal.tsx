@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useRef } from 'react';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -6,7 +7,6 @@ import { Search } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import { SxProps } from '@mui/system';
 import { styled } from '@mui/styles';
-import { useEffect, useRef } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import { navigate } from 'gatsby';
 
@@ -17,6 +17,7 @@ export interface ResultType {
   date: string;
   categories: string[];
 }
+
 const shortcutStyle: SxProps = {
   backgroundColor: '#303132',
   color: '#B2B5BB',
@@ -42,9 +43,9 @@ const StyledAutocomplete = styled(Autocomplete)({
   '& .MuiAutocomplete-inputRoot': {
     padding: 0,
     color: 'white',
-    '& :focus': {
-      width: '30vw',
-    },
+
+    width: '30vw',
+
     '& .MuiOutlinedInput-notchedOutline': {
       border: 0,
     },
@@ -62,6 +63,8 @@ export default function SearchModal() {
 
   const keydownHandler = (e: KeyboardEvent) => {
     if (e.code === 'KeyK' && (e.ctrlKey || e.metaKey)) {
+      e.stopPropagation();
+      e.preventDefault();
       inputRef.current?.focus();
     }
   };

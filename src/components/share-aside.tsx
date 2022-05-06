@@ -75,6 +75,7 @@ function ShareAside() {
         xs: 'relative',
         sm: 'sticky',
       },
+      width: '200px',
       top: {
         xs: 0,
         sm: 100,
