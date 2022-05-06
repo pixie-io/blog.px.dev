@@ -17,37 +17,68 @@
  */
 
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import { Alert } from '@material-ui/lab';
-import { idFromSlug } from 'components/utils';
-import Code from './code';
-import Pre from './pre';
-import AnchorTag from './anchor';
+import {
+  Alert,
+  List,
+  ListItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
+
+import { idFromSlug } from '../utils';
 import CodeRenderer from './codeRenderer';
-import ListItem from './listItem';
 import HLink from './h-link';
+import Code from './code';
+import AnchorTag from './anchor';
 import Footnotes from './footnotes';
 
+// @ts-ignore
 export default {
   // There is a bug in material plugin that overwrites the H1 with the default typography,
   // so this cannot be set here. The default mui h1 has been updated to match
   // the design and overwritten on homepage (only 1 implementation).
   // The problem seems to occur only on the H1 (to be investigated).
-  h1: ({ children }) => (
+  h1: ({ children }: any) => (
     <HLink id={idFromSlug(children)} variant='h1' />
   ),
-  h2: ({ children }) => <HLink id={idFromSlug(children)} variant='h2'>{children}</HLink>,
-  h3: ({ children }) => <HLink id={idFromSlug(children)} variant='h3'>{children}</HLink>,
-  h4: ({ children }) => <HLink id={idFromSlug(children)} variant='h4'>{children}</HLink>,
-  h5: ({ children }) => <HLink id={idFromSlug(children)} variant='h5'>{children}</HLink>,
-  h6: ({ children }) => <HLink id={idFromSlug(children)} variant='h6'>{children}</HLink>,
-  p: (props: any) => <Typography {...props} variant='body1' />,
-  pre: Pre,
+  h2: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h2'>{children}</HLink>,
+  h3: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h3'>{children}</HLink>,
+  h4: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h4'>{children}</HLink>,
+  h5: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h5'>{children}</HLink>,
+  h6: ({ children }: any) => <HLink id={idFromSlug(children)} variant='h6'>{children}</HLink>,
+  p: (props: any) => (
+    <Typography
+      {...props}
+      variant='body1'
+      sx={{
+        fontFamily: 'charter, georgia, serif',
+        marginBlockStart: '28px',
+        marginBlockEnd: '30px',
+        fontSize: {
+          xs: '18px',
+          md: '21px',
+
+        },
+        lineHeight: {
+          xs: '28px',
+          md: '32px',
+        },
+        padding: 0,
+        mb: '-9px',
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: '28px',
+        overflowWrap: 'break-word',
+        marginBottom: '30px',
+
+      }}
+    />
+  ),
+  // pre: Pre,
   code: (props: any) => {
     const { children } = props;
     return (
@@ -61,23 +92,48 @@ export default {
   a: (props: any) => <AnchorTag {...props} />,
   table: (props: any) => <Table {...props} />,
   tr: (props: any) => <TableRow {...props} />,
-  th: ({ align, ...props }) => <TableCell {...props} align={align || undefined} />,
+  th: ({
+    align,
+    ...props
+  }: any) => <TableCell {...props} align={align || undefined} />,
   tbody: (props: any) => <TableBody {...props} />,
   thead: (props: any) => <TableHead {...props} />,
-  ul: (props: any) => <Typography {...props} component='ul' className='blog-ul' />,
+  ul: (props: any) => <List {...props} sx={{ listStyle: 'disc' }} />,
+  // @ts-ignore
   wrapper: ({ children }) => {
-    // eslint-disable-next-line no-prototype-builtins
+    // @ts-ignore
     const updatedChildren = children?.map ? children.map((child) => {
       if (child.props.className === 'footnotes') {
         return <Footnotes key={1} {...child.props} />;
       }
       return child;
     }) : children;
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     return <>{updatedChildren}</>;
   },
-  ol: (props: any) => <Typography {...props} component='ol' />,
-  em: (props: any) => <Typography {...props} component='em' style={{ fontStyle: 'italic' }} />,
+  ol: (props: any) => <List {...props} component='ol' sx={{ listStyle: 'auto' }} />,
+  em: (props: any) => (
+    <Typography
+      {...props}
+      component='em'
+      style={{
+        fontStyle: 'italic',
+        fontFamily: 'inherit',
+        fontSize: 'inherit',
+      }}
+    />
+  ),
   li: (props: any) => <ListItem {...props} />,
-  img: (props: any) => <div className='blog-image-wrapper'><img {...props} className='blog-image' /></div>,
-  alert: (props: any) => <Alert {...props} />,
+  // img: (props: any) => {
+  //   console.log(props);
+  //   return (
+  //     <div className='blog-image-wrapper'>
+  //       <img
+  //         {...props}
+  //         className='blog-image'
+  //       />
+  //     </div>
+  //   );
+  // },
+  alert: (props: any) => <Alert {...props} variant='outlined' />,
 };

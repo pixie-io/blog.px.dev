@@ -15,211 +15,52 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-@use "sass:math";
-//Import CSS
-@import "./partials/variables";
-@import "../font/fontello.css";
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap');
-
 body {
-  font-family: Manrope, sans-serif;
-  padding: 0;
-  margin: 0;
-  background-color: white;
-  &:global(.theme-dark){
-    background-color: $color-dark;
-  }
+  --theme-type: light;
+  --color-background: 255, 255, 255, 1;
+  --color-background-paper: 227, 229, 230, 1;
 
-  &.menu-open {
-    @media (max-width: 768px) {
-      overflow: hidden;
-    }
-  }
+  --color-primary: 18, 18, 18, 1;
+  --color-primary-contrast: 255, 77, 104, 1;
 
-  &.black {
-    background-color: $color-dark;;
-  }
+  --color-secondary: 150, 150, 165, 1;
 
-  &.show-menu {
-    header {
-      top: 0;
-    }
-  }
+  --color-headings: 0, 0, 0, 1;
+
+  --color-pixie-green: 18, 214, 214, 1;
+  --color-primary-pre-border: 248, 249, 250, 1;
+  --color-primary-code-border: 202, 204, 207, 1;
+}
+html{
+  font-size: 18px;
+}
+body.dark {
+  --theme-type: dark;
+
+  --color-background: 18, 18, 18, 1;
+  --color-background-paper: 32, 35, 36, 1;
+
+  --color-primary: 214, 214, 214, 1;
+  --color-primary-contrast: 255, 255, 255, 1;
+
+  --color-secondary: 151, 151, 166, 1;
+
+  --color-headings: 255, 255, 255, 1;
+
+  --color-pixie-green: 18, 214, 214, 1;
+
+  --color-primary-pre-border: 72, 72, 72, 1;
+  --color-primary-code-border: 72, 72, 72, 1;
+
 }
 
-.small-scroll {
-  overflow: auto;
+
+.blog-image {
+  max-width: 100%;
+  margin: 8px auto;
+  display: block;
 }
 
-.small-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.small-scroll::-webkit-scrollbar-button {
-
-}
-
-a {
-  text-decoration: none;
-  color: #17AAAA;
-}
-
-i {
-  &:before {
-    margin: 0;
-  }
-}
-
-.hide-desktop {
-  @media (min-width: 1000px) {
-    display: none !important;
-  }
-}
-
-.hide-not-desktop {
-  @media (max-width: 1000px) {
-    display: none !important;
-  }
-}
-
-.hide-mobile {
-  @media (max-width: 768px) {
-    display: none !important;
-  }
-}
-
-.hide-tablet {
-  @media (min-width: 768px) and (max-width: 1000px) {
-    display: none !important;
-  }
-}
-
-.clearfix {
-  &:after {
-    display: block;
-    content: "";
-    clear: both;
-  }
-}
-
-//BUTTONS
-.button, button {
-  padding: 22px 46px;
-  background: $color-blue;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 15px;
-  text-align: center;
-  letter-spacing: 0.4em;
-  outline: none;
-  box-shadow: none;
-  border: none;
-  text-transform: uppercase;
-  color: $color-dark;
-  cursor: pointer;
-  -webkit-filter: brightness(100%);
-  transition: filter .3s ease;
-  border-radius: 3px;
-  @media (max-width: 1000px) {
-    letter-spacing: 0;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  &.active {
-    background: $color-blue !important;
-  }
-
-  &.small {
-    padding: 12px 22px;
-  }
-
-  &:hover {
-    -webkit-filter: brightness(80%);
-  }
-}
-
-//GRID SYSTEM
-
-.container {
-  margin: 0 auto;
-}
-
-@media (min-width: 1000px) {
-  .container {
-    max-width: 700px;
-    width: 80%;
-    padding: 0 35px;
-  }
-  .row {
-    width: 100%;
-  }
-}
-
-@for $i from 1 through 12 {
-  .col-#{$i} {
-    width: percentage(math.div($i, 12));
-    box-sizing: border-box;
-    float: left;
-    padding-left: 15px;
-    padding-right: 15px;
-    position: relative;
-
-    &::after {
-      content: "\200B";
-      height: 1px;
-      float: left;
-    }
-
-    @media (min-width: 1200px) {
-      //padding-left: 20px;
-      //padding-right: 20px;
-    }
-    @media (max-width: 1000px) {
-      display: block;
-      float: none;
-      width: 100%;
-      &:empty {
-        display: none;
-      }
-    }
-  }
-}
-
-.row {
-  &:before,
-  &:after {
-    display: table;
-    content: " ";
-    clear: both;
-  }
-}
-
-.hero-col {
-  overflow: hidden;
-  padding: 0;
-
-  .hero-image {
-
-
-    .gatsby-image-wrapper {
-      @media (max-width: 1000px) {
-        height: 30vh;
-        margin-left: 0;
-      }
-    }
-
-    &.left-heavy {
-      .gatsby-image-wrapper {
-        @media (max-width: 1000px) {
-          height: 30vh;
-          margin-left: 0;
-        }
-      }
-    }
-  }
-}
 
 .hidden {
   display: none;
@@ -260,7 +101,7 @@ i {
 .image-l {
   max-width: 75%;
   margin: 32px auto;
-  @media (max-width: $breakpoint) {
+  @media (max-width: 1000px) {
     padding: 0;
     max-width: 100%;
   }
@@ -270,46 +111,51 @@ i {
 .image-xl {
   max-width: 100%;
   margin: 32px auto;
-  @media (max-width: $breakpoint) {
+  @media (max-width: 1000px) {
     padding: 0;
     max-width: 100%;
   }
 }
 
+
 figure {
-  margin: 24px 0;
+  margin: 16px 0;
 }
 
 .blog-image {
+  margin-top: 24px;
+  margin-bottom: 24px;
   max-width: 100%;
-  margin: 8px auto;
-  display: block;
+}
+
+figcaption {
+  text-align: center;
+  opacity: .8;
 }
 
 figcaption.blog-image-caption {
-  margin-top: 0;
-  text-align: center;
-  opacity: .6;
-}
+   margin-top: 0;
+   text-align: center;
+   opacity: .6;
+ }
 
 .blog-post-card {
-  .gatsby-image-wrapper {
-    height: 120px;
+  .blog-post-card-image {
+    .gatsby-image-wrapper {
+      height: 200px;
+      border-radius: 10px;
 
-    img {
-      object-fit: contain !important;
+      img {
+        object-fit: cover !important;
+      }
     }
   }
-}
 
-.blog-ul .blog-ul {
-  margin-block-start: 8px;
-  margin-block-end: 0;
 }
 
 iframe {
   padding: 24px 0;
-  @media (max-width: $breakpoint) {
+  @media (max-width: 1000px) {
     width: 100%;
   }
 }
@@ -334,4 +180,39 @@ sup[id]::before {
 
 li {
   scroll-margin-top: 110px !important;
+}
+
+
+a {
+  color: rgba(var(--color-secondary));
+  text-decoration: none;
+
+}
+
+.block{
+  display: block;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+
+video {
+  width: 100%;
+}
+
+.bold {
+  font-weight: bold;
+}
+.chip-background {
+  background-color: rgba(var(--color-primary-code-border))
+}
+.pixie-green {
+  color: rgba(var(--color-pixie-green))
+}
+.flex-row-center{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

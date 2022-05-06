@@ -5,16 +5,16 @@ const slugify = require('slugify');
 const categoryLink = require('./src/components/category-link');
 
 exports.onCreateNode = ({
-  node, actions, getNode, getNodesByType,
-}) => {
+                          node, actions, getNode, getNodesByType,
+                        }) => {
   const { createNodeField, createParentChildLink } = actions;
 
   if (node.internal.type === 'Directory') {
     const parentDirectory = path.normalize(`${node.dir}/`);
     const parent = getNodesByType('Directory')
-      .find(
-        (n) => path.normalize(`${n.absolutePath}/`) === parentDirectory,
-      );
+        .find(
+            (n) => path.normalize(`${n.absolutePath}/`) === parentDirectory,
+        );
     if (parent) {
       // eslint-disable-next-line no-param-reassign
       node.parent = parent.id;
@@ -27,20 +27,20 @@ exports.onCreateNode = ({
 
   if (node.internal.type === 'Mdx') {
     const fileNode = (node.parent && node.parent !== 'undefined')
-      ? getNode(node.parent)
-      : node;
+        ? getNode(node.parent)
+        : node;
 
     const slug = createFilePath({
       node,
       getNode,
     });
     const fullSlug = fileNode.sourceInstanceName !== 'posts'
-      ? path.posix.join(fileNode.sourceInstanceName, slug)
-      : slug;
+        ? path.posix.join(fileNode.sourceInstanceName, slug)
+        : slug;
     const parent = getNodesByType('Directory')
-      .find(
-        (n) => n.name === fileNode.relativeDirectory,
-      );
+        .find(
+            (n) => n.name === fileNode.relativeDirectory,
+        );
     if (parent) {
       createParentChildLink({
         child: node,
@@ -80,8 +80,8 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const blogPrefix = 'blog/';
-  const blogPost = path.resolve('./src/templates/blog-post.js');
-  const homePage = path.resolve('./src/pages/index.js');
+  const blogPost = path.resolve('./src/templates/blog-post.tsx');
+  const homePage = path.resolve('./src/pages/index.tsx');
 
   const posts = result.data.blog.edges;
   posts.forEach((post) => {
@@ -126,7 +126,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       date: Date @dateformat(formatString: "YYYY-MM-DD")
       categories: [String]
-      authors: [AuthorYaml] @link
+      authors: [AuthorYaml] @link(by: "name")
       featured_image: File @fileByRelativePath,
       redirect_from: [String]
     }
@@ -138,9 +138,9 @@ exports.createSchemaCustomization = ({ actions }) => {
 };
 
 exports.sourceNodes = async ({
-  actions: { createNode },
-  createContentDigest,
-}) => {
+                               actions: { createNode },
+                               createContentDigest,
+                             }) => {
   const slackReq = await fetch('https://slackin.px.dev/data');
   const slack = await slackReq.json();
 

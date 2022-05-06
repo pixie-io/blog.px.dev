@@ -15,26 +15,13 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable import/prefer-default-export */
 import React from 'react';
-import { Theme } from '@mui/material';
-import { withStyles } from '@mui/styles';
+import { CacheProvider } from '@emotion/react';
+import getEmotionCache from './getEmotionCache';
 
-const Code = withStyles((theme: Theme) => ({
-  code: {
-    fontFamily: '"Roboto Mono", Monospace',
-    color: theme.palette.primary.contrastText,
-    borderWidth: '0.5px',
-    borderStyle: 'solid',
-    borderRadius: '4px',
-    padding: '2.72px 5.44px',
-    margin: 0,
-    fontSize: '85%',
-    backgroundColor: theme.palette.background.paper,
-    borderColor: 'rgba(var(--color-primary-pre-border))',
-  },
+const cache = getEmotionCache();
 
-}))(({ children, classes }) => (<code className={classes.code}>{children}</code>));
-
-export default Code;
+export const wrapRootElement = ({ element }) => {
+  return <CacheProvider value={cache}>{element}</CacheProvider>;
+};

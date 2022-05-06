@@ -17,10 +17,13 @@
  */
 
 import * as React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
+import { Typography } from '@mui/material';
 
 const useStyles = makeStyles(() => ({
   footnotes: {
+    paddingLeft: '40px',
+    marginBottom: '20px',
     '& hr': {
       display: 'none',
     },
@@ -28,15 +31,21 @@ const useStyles = makeStyles(() => ({
       display: 'list-item',
       fontStyle: 'italic',
       fontSize: '14px',
-      lineHeight: '1.4em',
-      opacity: 0.6,
+      lineHeight: '21px',
+      marginBottom: '8px',
+      opacity: 0.8,
       '& a': {
         lineHeight: 'inherit',
       },
     },
   },
 }));
-const Footnotes = ({ children, id }) => (
-  <div className={useStyles().footnotes} id={id}>{children}</div>
-);
+function Footnotes({ children, id }) {
+  return (
+    <>
+      <Typography variant='h3'>Footnotes</Typography>
+      <div className={useStyles().footnotes} id={id}>{children}</div>
+    </>
+  );
+}
 export default Footnotes;

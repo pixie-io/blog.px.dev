@@ -1,19 +1,18 @@
-import MainThemeProvider from './src/components/mainThemeProvider.tsx';
-import './src/scss/style.scss';
 import { processClientEntry, runZoom } from './src/components/image-zoom-modal.plugin';
+import * as ReactDOM from 'react-dom';
 
-const React = require('react');
 
-// eslint-disable-next-line import/prefer-default-export
-export const wrapRootElement = ({ element }) => (
-  <MainThemeProvider>
-    {element}
-  </MainThemeProvider>
-);
+
+export const  replaceHydrateFunction = () => {
+    return (element, container, callback) => {
+        ReactDOM.render(element, container, callback);
+    };
+};
+
 
 export const onClientEntry = () => {
-  processClientEntry();
+    processClientEntry();
 };
 export const onRouteUpdate = () => {
-  runZoom();
+    runZoom();
 };

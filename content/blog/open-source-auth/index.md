@@ -24,7 +24,7 @@ Adding Auth0 to Pixie was very simple. Integrating Auth0's API took less than a 
 In our original authentication scheme (*figure below*), Pixie's UI redirects to Auth0 and receives an access token back. The UI forwards the token to the Pixie Cloud backend and the backend validates the token by making a call to the external Auth0 server.
 
 ::: div image-l
-![Auth0 architecture diagram](./auth0_impl.svg)
+<svg title='Auth0 architecture diagram' src='auth0_impl.svg' />
 :::
 
 Auth0 does all the heavy lifting and provides an easy way to setup different login providers - we went with Google-based Signup and Login flows. During signup, users could give us access to their name and profile picture. We incorporated this into our small profile dropdown, rounding out the user experience.
@@ -116,7 +116,7 @@ We document our design here for reference in case future readers also want an ac
 ### Example login flow
 
 ::: div image-xl
-![Auth0 architecture diagram](./kratos_login_flow.svg)
+<svg title='Auth0 architecture diagram' src='kratos_login_flow.svg' />
 :::
 
 The Hydra/Kratos integration is complex, so it's easiest to demonstrate with an example. Let's break down a successful login flow. *The steps match the diagram above.*
@@ -150,13 +150,13 @@ However, we still appreciate the benefits that Auth0 provides:
 Given the benefits, we will still support Auth0 in Pixie. Pixie users will have the choice of configuring their deployment with Auth0 or relying on Kratos and Hydra. We reduced the auth solution to a simple interface, as shown in the following diagram.
 
 ::: div image-l
-![Pixie's Auth interface](./auth_interface.svg)
+<svg title="Pixie's Auth interface" src='auth_interface.svg' />
 :::
 
 We then implemented the interface with the Kratos/Hydra logic from above.
 
 ::: div image-l
-![Pixie's Auth interface implemented for kratos](./auth_interface_kratos_impl.svg)
+<svg title="Pixie's Auth interface implemented for kratos" src='auth_interface_kratos_impl.svg' />
 :::
 
 ## Conclusion

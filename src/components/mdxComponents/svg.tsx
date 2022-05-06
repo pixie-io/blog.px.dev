@@ -17,14 +17,16 @@
  */
 
 import * as React from 'react';
+import { useContext } from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { ThemeModeContext } from '../mainThemeProvider';
+import { ColorThemeContext } from '../color-theme.provider';
 // eslint-disable-next-line import/no-cycle
 import parseMd from './parseMd';
 
-const SvgRenderer = ({ src, title }) => (
-  <StaticQuery
-    query={graphql`
+function SvgRenderer({ src, title }) {
+  return (
+    <StaticQuery
+      query={graphql`
       query {
         images: allFile {
           edges {
@@ -37,40 +39,41 @@ const SvgRenderer = ({ src, title }) => (
         }
       }
     `}
-    render={(data) => {
-      const lastDot = src.lastIndexOf('.');
+      render={(data) => {
+        const lastDot = src.lastIndexOf('.');
+        const colorContext = useContext(ColorThemeContext);
+        const theme = colorContext.colorMode;
 
-      const fileName = src.substring(0, lastDot);
-      const ext = src.substring(lastDot + 1);
+        const fileName = src.substring(0, lastDot);
+        const ext = src.substring(lastDot + 1);
 
-      const image = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${src}`));
-      const lightImage = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${fileName}-light.${ext}`));
-      const darkImage = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${fileName}-dark.${ext}`));
+        const image = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${src}`));
+        const lightImage = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${fileName}-light.${ext}`));
+        const darkImage = data.images.edges.find((n) => n.node.relativePath.endsWith(`/${fileName}-dark.${ext}`));
 
-      const getImageSrc = (theme) => {
-        if (theme === 'light' && lightImage) {
-          return lightImage.node.publicURL;
+        const getImageSrc = (th: string) => {
+          if (th === 'light' && lightImage) {
+            return lightImage.node.publicURL;
+          }
+          if (th === 'dark' && darkImage) {
+            return darkImage.node.publicURL;
+          }
+          return image.node.publicURL;
+        };
+        if (!image) {
+          return null;
         }
-        if (theme === 'dark' && darkImage) {
-          return darkImage.node.publicURL;
-        }
-        return image.node.publicURL;
-      };
-      if (!image) {
-        return null;
-      }
-      return (
-        <ThemeModeContext.Consumer>
-          {({ theme }) => (
-            <figure className='gatsby-resp-image-figure'>
-              <img src={getImageSrc(theme)} className='blog-image' />
-              <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1 blog-image-caption'>{parseMd(title)}</figcaption>
-            </figure>
-          )}
-        </ThemeModeContext.Consumer>
-      );
-    }}
-  />
-);
+        return (
+
+          <figure className='gatsby-resp-image-figure'>
+            <img src={getImageSrc(theme)} className='blog-image' />
+            <figcaption className='gatsby-resp-image-figcaption MuiTypography-body1'>{parseMd(title)}</figcaption>
+          </figure>
+
+        );
+      }}
+    />
+  );
+}
 
 export default SvgRenderer;

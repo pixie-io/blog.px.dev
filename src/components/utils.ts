@@ -19,7 +19,6 @@
 import slugify from 'slugify';
 
 // Adds the prefix if needed eg: /docs/about-pixie/how-pixie-works/
-export const normalizePath = (path) => path.replace(/\/?$/, '/');
-export const urlFromSlug = (slug) => (slug === '/' ? slug : normalizePath(slug));
-export const idFromSlug = (slug) => slugify((slug || '').toString())
-  .toLowerCase();
+export const normalizePath = (path: string) => path.replace(/\/?$/, '/');
+export const urlFromSlug = (slug: string) => (slug === '/' ? slug : normalizePath(slug));
+export const idFromSlug = (slug: string) => slugify((slug || '').toString()).toLowerCase();

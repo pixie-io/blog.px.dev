@@ -15,29 +15,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+import createCache from '@emotion/cache';
 
-import * as React from 'react';
-import { Link } from 'gatsby';
-import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  link: {
-    color: theme.palette.success.main,
-    fontFamily: 'inherit',
-    fontStyle: 'inherit',
-    fontSize: 'inherit',
-    textDecoration: 'none',
-    '&:hover': {
-      color: theme.palette.success.main,
-      textDecoration: 'underline',
-    },
-  },
-}));
-// @ts-ignore
-function AnchorTag({ href: to, ...props }) {
-  const classes = useStyles();
-  return <Link to={to} className={classes.link} {...props} />;
+// prepend: true moves MUI styles to the top of the <head> so they're loaded first.
+// It allows developers to easily override MUI styles with other styling solutions, like CSS modules.
+export default function getEmotionCache() {
+  return createCache({ key: 'css', prepend: true });
 }
-
-export default AnchorTag;

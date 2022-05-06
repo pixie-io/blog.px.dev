@@ -16,28 +16,21 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import * as React from 'react';
-import { Link } from 'gatsby';
-import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import styled from '@emotion/styled';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  link: {
-    color: theme.palette.success.main,
-    fontFamily: 'inherit',
-    fontStyle: 'inherit',
-    fontSize: 'inherit',
-    textDecoration: 'none',
-    '&:hover': {
-      color: theme.palette.success.main,
-      textDecoration: 'underline',
-    },
+const Pre = styled(
+  {
+    is: 'pre',
+    fontSize: 1,
+    m: 0,
   },
-}));
-// @ts-ignore
-function AnchorTag({ href: to, ...props }) {
-  const classes = useStyles();
-  return <Link to={to} className={classes.link} {...props} />;
-}
+  {
+    overflow: 'auto',
+  },
+  'fontFamily',
+  'space',
+  'color',
+);
+Pre.displayName = 'Pre';
 
-export default AnchorTag;
+export default Pre;

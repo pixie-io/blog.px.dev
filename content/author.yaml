@@ -1,89 +1,89 @@
-- id: Zain Asgar
+- name: Zain Asgar
   bio: GVP/GM @ New Relic, Co-Founder/CEO of Pixie Labs
   twitter: '@zainasgar'
   email: 'zasgar@pixielabs.ai'
 
-- id: Ishan Mukherjee
+- name: Ishan Mukherjee
   bio: GVP @ New Relic, Co-Founder/CPO of Pixie Labs
   twitter: '@ishanmkh'
   email: 'ishan@pixielabs.ai'
 
-- id: John Arundel
+- name: John Arundel
   bio: Principal consultant at Bitfield Consulting, is a well-known writer and expert on DevOps, infrastructure, Kubernetes, Puppet, and the Go programming language.
   twitter: '@bitfield'
   email: 'john@bitfieldconsulting.com'
 
-- id: Adam Hawkins
+- name: Adam Hawkins
   bio: SRE at Skillshare
   twitter: '@adman65'
   email: 'adam@hawkins.io'
 
-- id: Michelle Nguyen
+- name: Michelle Nguyen
   bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
   twitter: '@michelle_aimi'
   email: 'michelle@pixielabs.ai'
 
-- id: Natalie Serrino
+- name: Natalie Serrino
   bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
   twitter: '@nserrino'
   email: 'nserrino@pixielabs.ai'
 
-- id: Phillip Kuznetsov
+- name: Phillip Kuznetsov
   bio: Lead SWE @ New Relic, Founding Engineer @ Pixie Labs
   twitter: '@philkuz'
   email: 'philkuz@pixielabs.ai'
 
-- id: Omid Azizi
+- name: Omid Azizi
   bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
   twitter: '@oazizi'
   email: 'oazizi@pixielabs.ai'
 
-- id: Pete Stevenson
+- name: Pete Stevenson
   bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
   email: 'jps@pixielabs.ai'
 
-- id: Vihang Mehta
+- name: Vihang Mehta
   bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
   twitter: '@vihangmehta'
   email: 'vihang@pixielabs.ai'
 
-- id: Nick Lanam
+- name: Nick Lanam
   bio: Lead SWE @ New Relic, Founding Engineer @ Pixie Labs
   email: 'nlanam@pixielabs.ai'
 
-- id: James Bartlett
+- name: James Bartlett
   bio: Lead SWE @ New Relic, Founding Engineer @ Pixie Labs
   email: 'jamesbartlett@pixielabs.ai'
 
-- id: Elaine Laguerta
+- name: Elaine Laguerta
   bio: Security Engineer @ New Relic
   email: 'elaguerta@newrelic.com'
 
-- id: Hannah Stepanek
+- name: Hannah Stepanek
   bio: Senior Security Engineer @ New Relic
   twitter: '@hannahstepanek'
   email: 'hstepanek@newrelic.com'
 
-- id: Robert Prast
+- name: Robert Prast
   bio: Security Engineer @ New Relic
   email: 'rprast@newrelic.com'
 
-- id: Arnold van Wijnbergen
+- name: Arnold van Wijnbergen
   bio: Lead Observability Expert (SME), Principal Architect @ Fullstaq
   twitter: '@DevMonOps'
   email: 'arnold.van.wijnbergen@gmail.com'
 
-- id: Hannah Troisi
+- name: Hannah Troisi
   bio: Senior Dev Relations Engineer @ New Relic, Founding Engineer @ Pixie Labs
   twitter: '@HannahTroisi'
   email: 'htroisi@pixielabs.ai'
 
-- id: Yaxiong Zhao
+- name: Yaxiong Zhao
   bio: Principal Engineer @ New Relic, Founding Engineer @ Pixie Labs
   twitter: '@ZhaoYaxiong'
   email: 'yzhao@pixielabs.ai'
 
-- id: Guy Arbitman
+- name: Guy Arbitman
   bio: Developer Relations @ Seekret
   twitter: '@arbitmanguy'
   email: 'guya@seekret.com'

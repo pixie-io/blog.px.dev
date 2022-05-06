@@ -16,28 +16,35 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import * as React from 'react';
-import { Link } from 'gatsby';
-import { Theme } from '@mui/material';
+import React, { useMemo } from 'react';
+import { toUrl } from 'gatsby-source-gravatar';
 import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  link: {
-    color: theme.palette.success.main,
-    fontFamily: 'inherit',
-    fontStyle: 'inherit',
-    fontSize: 'inherit',
-    textDecoration: 'none',
-    '&:hover': {
-      color: theme.palette.success.main,
-      textDecoration: 'underline',
-    },
+const useStyles = makeStyles(() => ({
+  icon: {
+    width: '45px',
+    height: '45px',
+    overflow: 'hidden',
+    borderRadius: '50%',
   },
 }));
-// @ts-ignore
-function AnchorTag({ href: to, ...props }) {
+
+function GravatarIcon({
+  email,
+  size,
+}: { email: string, size: any }) {
+  const url = useMemo(() => toUrl(email || ''), []);
   const classes = useStyles();
-  return <Link to={to} className={classes.link} {...props} />;
+  return (
+    <img
+      className={classes.icon}
+      style={{
+        width: size,
+        height: size,
+      }}
+      src={url}
+    />
+  );
 }
 
-export default AnchorTag;
+export default GravatarIcon;

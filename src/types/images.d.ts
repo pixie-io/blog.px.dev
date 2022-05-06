@@ -15,29 +15,6 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
-import * as React from 'react';
-import { Link } from 'gatsby';
-import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  link: {
-    color: theme.palette.success.main,
-    fontFamily: 'inherit',
-    fontStyle: 'inherit',
-    fontSize: 'inherit',
-    textDecoration: 'none',
-    '&:hover': {
-      color: theme.palette.success.main,
-      textDecoration: 'underline',
-    },
-  },
-}));
-// @ts-ignore
-function AnchorTag({ href: to, ...props }) {
-  const classes = useStyles();
-  return <Link to={to} className={classes.link} {...props} />;
-}
-
-export default AnchorTag;
+declare module '*.jpg';
+declare module '*.svg';
+declare module '*.png';
