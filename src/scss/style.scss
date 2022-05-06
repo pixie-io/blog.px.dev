@@ -56,9 +56,9 @@ body.dark {
 
 
 .blog-image {
-  margin-top: 24px;
-  margin-bottom: 24px;
   max-width: 100%;
+  margin: 8px auto;
+  display: block;
 }
 
 
@@ -75,18 +75,27 @@ body.dark {
 
 
 .image-xs {
-  max-width: 15%;
+  max-width: 70%;
   margin: 32px auto;
+  .blog-image {
+    max-width: 15% !important;
+  }
 }
 
 .image-s {
-  max-width: 30%;
+  max-width: 70%;
   margin: 32px auto;
+  .blog-image {
+    max-width: 30%;
+  }
 }
 
 .image-m {
-  max-width: 50%;
+  max-width: 70%;
   margin: 32px auto;
+  .blog-image {
+    max-width: 50%;
+  }
 }
 
 .image-l {
@@ -108,6 +117,7 @@ body.dark {
   }
 }
 
+
 figure {
   margin: 16px 0;
 }
@@ -122,6 +132,12 @@ figcaption {
   text-align: center;
   opacity: .8;
 }
+
+figcaption.blog-image-caption {
+   margin-top: 0;
+   text-align: center;
+   opacity: .6;
+ }
 
 .blog-post-card {
   .blog-post-card-image {
