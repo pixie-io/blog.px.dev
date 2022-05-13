@@ -311,7 +311,7 @@ function BlogPostTemplate({
               flexDirection: 'row',
               my: 2,
               [theme.breakpoints.down('md')]: {
-                flexDirection: 'column-reverse',
+                flexDirection: 'column',
               },
             })}
             >
@@ -361,6 +361,10 @@ function BlogPostTemplate({
                     sx={{
                       fontSize: '12px',
                       lineHeight: '14px',
+                      mt: {
+                        xs: 2,
+                        sm: 0,
+                      },
                     }}
                     key={a.email}
                   >
