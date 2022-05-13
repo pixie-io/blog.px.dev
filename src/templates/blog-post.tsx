@@ -333,7 +333,7 @@ function BlogPostTemplate({
                 </Stack>
                 <Box sx={{
                   fontSize: '14px',
-                  lineHeight: '14px',
+                  lineHeight: '18px',
                 }}
                 >
                   <Box
@@ -355,7 +355,7 @@ function BlogPostTemplate({
                   minutes read
                 </Box>
               </Box>
-              <Stack direction='column' mb={1} mr={1}>
+              <Stack direction='column' mr={1} justifyContent='center'>
                 {(allAuthors || []).map((a: { bio: any; email: string }) => (
                   <Box
                     sx={{
