@@ -26,4 +26,19 @@ Sizing a Kubernetes deployment can be tricky. How many pods should it have? How 
 - [**Reproducing Production Issues in your CI Pipeline Using eBPF**](https://sched.co/ytpE) (Thursday, May 19, 2022 14:30 CEST) <br/><br/>
 Observing production workloads with enough detail to find real problems is difficult, but it's getting easier with the community adoption of eBPF. As the technology becomes better understood, tools like Falco, Cilium and Pixie are increasingly appearing in production clusters. But have you ever considered using eBPF data to help with unit tests, Continuous Integration and load testing? This talk will explain the basic technology behind eBPF while presenting some examples of how to use data collected via eBPF for a variety of software quality use cases. We'll use the Pixie CNCF sandbox project to pull data and replicate production issues on the developer desktop for debugging. You'll also get some ideas on using those calls in your Continuous Integration pipeline to sanity check builds before they are deployed. Included in that discussion will be handling some common issues like timestamp skew and authentication. All examples are open source and available after the talk.
 
-We hope to see you next week, in person or virtually!
+Here are some of the events we'll be attending. We hope to see you at them, along with the many other exciting talks at Kubecon!
+
+**Wednesday, May 18**
+
+- 11:00 CEST: [Fluent Bit: Logs, OpenMetrics, and OpenTelemetry all-in-one](https://sched.co/ytl1) - Eduardo Silva & Anurag Gupta (Calyptia)
+- 11:00 CEST: [Intro to Kubernetes, GitOps, and Observability Hands-On Tutorial](https://sched.co/ytkj) - Joaquin Rodriguez (Microsoft), Tiffany Wang (Weaveworks)
+
+**Thursday, May 19**
+
+- 11:55 CEST: [OpenTelemetry: The Vision, Reality, and How to Get Started](https://sched.co/ytob) - Dotan Horovits (Logz.io)
+- 14:30 CEST: [Prometheus Intro and Deep Dive](https://sched.co/ytpW) - Julius Volz (PromLabs), Björn Rabenstein (Grafana Labs), Julien Pivotto (Inuits), Matthias Rampke (SoundCloud)
+
+**Friday, May 20**
+
+- 14:55 CEST: [Build a Cloud Native Logging Pipeline on the Edge with Fluentbit Operator](https://sched.co/ytt3) - Feynman Zhou (QingCloud)
+- 16:00 CEST: [A Guided Tour of Cilium Service Mesh](https://sched.co/yttj) - Liz Rice (Isovalent)
