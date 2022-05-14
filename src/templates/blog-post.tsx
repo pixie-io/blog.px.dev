@@ -355,16 +355,22 @@ function BlogPostTemplate({
                   minutes read
                 </Box>
               </Box>
-              <Stack direction='column' mr={1} justifyContent='center'>
+              <Stack
+                direction='column'
+                justifyContent='center'
+                sx={{
+                  mt: {
+                    xs: 2,
+                    sm: 0,
+                  },
+                }}
+              >
                 {(allAuthors || []).map((a: { bio: any; email: string }) => (
                   <Box
                     sx={{
                       fontSize: '12px',
                       lineHeight: '14px',
-                      mt: {
-                        xs: 2,
-                        sm: 0,
-                      },
+
                     }}
                     key={a.email}
                   >
