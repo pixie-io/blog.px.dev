@@ -311,7 +311,7 @@ function BlogPostTemplate({
               flexDirection: 'row',
               my: 2,
               [theme.breakpoints.down('md')]: {
-                flexDirection: 'column-reverse',
+                flexDirection: 'column',
               },
             })}
             >
@@ -333,7 +333,7 @@ function BlogPostTemplate({
                 </Stack>
                 <Box sx={{
                   fontSize: '14px',
-                  lineHeight: '14px',
+                  lineHeight: '18px',
                 }}
                 >
                   <Box
@@ -355,12 +355,22 @@ function BlogPostTemplate({
                   minutes read
                 </Box>
               </Box>
-              <Stack direction='column' mb={1} mr={1}>
+              <Stack
+                direction='column'
+                justifyContent='center'
+                sx={{
+                  mt: {
+                    xs: 2,
+                    sm: 0,
+                  },
+                }}
+              >
                 {(allAuthors || []).map((a: { bio: any; email: string }) => (
                   <Box
                     sx={{
                       fontSize: '12px',
                       lineHeight: '14px',
+
                     }}
                     key={a.email}
                   >
