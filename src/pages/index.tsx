@@ -18,8 +18,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import {
-  Button,
-  Chip, Container, Divider, Grid, Typography,
+  Button, Chip, Container, Divider, Grid, Typography,
 } from '@mui/material';
 import slugify from 'slugify';
 import { graphql, Link, Link as GatsbyLink } from 'gatsby';
@@ -67,7 +66,7 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
   const [hasMore, setHasMore] = useState(allPosts.length > pageSize);
 
   const [heroPost, setHeroPost] = useState(heroPosts[0]);
-  const filterPosts = (p:number, c: any) => {
+  const filterPosts = (p: number, c: any) => {
     const postsWithoutHero = allPosts.filter((po) => po.id !== heroPosts[0].id);
     const filteredPosts = c
       ? postsWithoutHero.filter((pos: { frontmatter: { categories: any[] } }) => pos.frontmatter.categories.some((pc) => pc === c))
@@ -113,7 +112,16 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                   </Box>
                 </Link>
               </Grid>
-              <Grid item md={6} xs={12} sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+              <Grid
+                item
+                md={6}
+                xs={12}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  flexDirection: 'column',
+                }}
+              >
                 <Link to={urlFromSlug(heroPost.fields.slug)}>
                   <Typography
                     variant='h2'
@@ -121,18 +129,20 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                   >
                     {heroPost.frontmatter.title}
                   </Typography>
+
+                  <Typography
+                    variant='body1'
+                    sx={{ my: 1 }}
+                  >
+                    {heroPost.excerpt}
+                  </Typography>
+                  <BlogAuthorsHeader
+                    authors={heroPost.frontmatter.authors}
+                    timeToRead={heroPost.timeToRead}
+                    date={heroPost.frontmatter.date}
+                  />
                 </Link>
-                <Typography
-                  variant='body1'
-                  sx={{ my: 1 }}
-                >
-                  {heroPost.excerpt}
-                </Typography>
-                <BlogAuthorsHeader
-                  authors={heroPost.frontmatter.authors}
-                  timeToRead={heroPost.timeToRead}
-                  date={heroPost.frontmatter.date}
-                />
+
               </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -197,7 +207,16 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                       </Box>
                     </Link>
                   </Grid>
-                  <Grid item md={6} xs={12} sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+                  <Grid
+                    item
+                    md={6}
+                    xs={12}
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      flexDirection: 'column',
+                    }}
+                  >
                     <Link to={urlFromSlug(post.fields.slug)}>
                       <Typography
                         variant='h3'
@@ -205,18 +224,19 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                       >
                         {post.frontmatter.title}
                       </Typography>
+
+                      <Typography
+                        variant='body1'
+                        sx={{ my: 1 }}
+                      >
+                        {post.excerpt}
+                      </Typography>
+                      <BlogAuthorsHeader
+                        authors={post.frontmatter.authors}
+                        timeToRead={post.timeToRead}
+                        date={post.frontmatter.date}
+                      />
                     </Link>
-                    <Typography
-                      variant='body1'
-                      sx={{ my: 1 }}
-                    >
-                      {post.excerpt}
-                    </Typography>
-                    <BlogAuthorsHeader
-                      authors={post.frontmatter.authors}
-                      timeToRead={post.timeToRead}
-                      date={post.frontmatter.date}
-                    />
                   </Grid>
                 </Grid>
               ))}
@@ -229,7 +249,13 @@ function IndexPage(props: { data: any; pageContext: { category: any }; location?
                     </Grid>
                   ))}
                 {hasMore ? (
-                  <Grid item xs={12} justifyContent='center' container sx={{ mb: 6 }}>
+                  <Grid
+                    item
+                    xs={12}
+                    justifyContent='center'
+                    container
+                    sx={{ mb: 6 }}
+                  >
                     <Button
                       variant='contained'
                       onClick={() => loadMore()}
