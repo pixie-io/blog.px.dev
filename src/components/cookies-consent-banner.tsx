@@ -39,9 +39,6 @@ const CookiesConsentBanner = () => {
           color: 'white',
           opacity: 0.9,
           textAlign: 'center',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           p: 2,
           fontSize: 14,
         }}
@@ -57,7 +54,26 @@ const CookiesConsentBanner = () => {
           use of cookies
         </a>
         .
-        <Button sx={{ ml: 4 }} type='button' onClick={() => close()} size='small' variant='contained'>
+        <Button
+          sx={{
+            display: {
+              xs: 'block',
+              sm: 'inline-block',
+            },
+            mx: {
+              xs: 'auto',
+              sm: 2,
+            },
+            mt: {
+              xs: 2,
+              sm: 0,
+            },
+          }}
+          type='button'
+          onClick={() => close()}
+          size='small'
+          variant='contained'
+        >
           Close
         </Button>
       </Box>
