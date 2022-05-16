@@ -58,7 +58,7 @@ const HeaderLink = styled('a')(
         display: inline;
         opacity: 0;
         margin-left: 10px;
-        position: relative;
+        position: absolute;
         img: {
             vertical-align: middle;
         },
