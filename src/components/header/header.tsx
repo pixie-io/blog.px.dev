@@ -93,7 +93,7 @@ const DesktopAlertBar = () => (
         </MuiLink>
         {' '}
         (May 16-20, 2022).
-        {' '}   
+        {' '}
         <MuiLink
           href='https://blog.px.dev/kubecon-eu-2022/'
           target='_blank'
