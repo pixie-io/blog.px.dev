@@ -9,6 +9,7 @@ import { SxProps } from '@mui/system';
 import { styled } from '@mui/styles';
 import algoliasearch from 'algoliasearch/lite';
 import { navigate } from 'gatsby';
+import createBreakpoints from '@mui/system/createTheme/createBreakpoints';
 
 export interface ResultType {
   objectID: string;
@@ -17,6 +18,7 @@ export interface ResultType {
   date: string;
   categories: string[];
 }
+const breakpoints = createBreakpoints({});
 
 const shortcutStyle: SxProps = {
   backgroundColor: '#303132',
@@ -45,6 +47,10 @@ const StyledAutocomplete = styled(Autocomplete)({
     color: 'white',
 
     width: '30vw',
+
+    [breakpoints.down('sm')]: {
+      width: 'auto',
+    },
 
     '& .MuiOutlinedInput-notchedOutline': {
       border: 0,
@@ -116,7 +122,7 @@ export default function SearchModal() {
       popupIcon={null}
       clearOnBlur
       noOptionsText={<Box sx={{ color: 'primary.main' }}>No results</Box>}
-      fullWidth={false}
+      fullWidth
       openOnFocus={false}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
