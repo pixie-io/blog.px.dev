@@ -78,9 +78,10 @@ const DesktopAlertBar = () => (
       },
     }}
     >
-        Pixie is now a CNCF Sandbox project!
+        Pixie is at
+        {' '}
         <MuiLink
-          href='https://www.cncf.io/projects/pixie/'
+          href='https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/'
           target='_blank'
           sx={{
             color: 'success.main',
@@ -88,7 +89,21 @@ const DesktopAlertBar = () => (
             mx: 1,
           }}
         >
-Learn more
+        KubeCon EU
+        </MuiLink>
+        {' '}
+        (May 16-20, 2022).
+        {' '}
+        <MuiLink
+          href='https://blog.px.dev/kubecon-eu-2022/'
+          target='_blank'
+          sx={{
+            color: 'success.main',
+            textDecoration: 'none',
+            mx: 1,
+          }}
+        >
+        Learn more
         </MuiLink>
         🚀
     </Box>
