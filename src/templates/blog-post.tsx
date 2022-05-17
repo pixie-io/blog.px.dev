@@ -208,7 +208,17 @@ function BlogPostTemplate({
             })}
           />
           <Grid item xs={12} sm={8}>
-            <Box sx={{ my: 2 }}>
+            <Box sx={{
+              my: {
+                xs: 0,
+                sm: 2,
+              },
+              mt: {
+                xs: 5,
+                sm: 2,
+              },
+            }}
+            >
               <MuiLink component={GatsbyLink} to='/' sx={{ textDecoration: 'none' }}>
                 Blog
               </MuiLink>
