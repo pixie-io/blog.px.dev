@@ -49,7 +49,7 @@ function ElevationScroll(props: { children: any }) {
 
 const MobileAlertBar = () => (
     <MuiLink
-      href='https://www.cncf.io/projects/pixie/'
+      href='https://blog.px.dev/kubecon-eu-2022/'
       target='_blank'
       sx={{
         color: 'success.main',
@@ -64,7 +64,7 @@ const MobileAlertBar = () => (
         },
       }}
     >
-        Pixie is now a CNCF Sandbox project!
+        Pixie is at KubeCon EU!
     </MuiLink>
 );
 const DesktopAlertBar = () => (
