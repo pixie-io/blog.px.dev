@@ -315,6 +315,7 @@ def main():
 
     path = args.f
     autofix = args.a
+    failed = False
     if os.path.isfile(path):
         diff = generate_diff_if_needed(path)
         if diff is not None:
@@ -322,8 +323,11 @@ def main():
                 diff.fix(path)
             else:
                 print(diff.phabricator())
+                failed = True
     else:
         logging.fatal('-f argument is required and needs to be a file')
+    if failed:
+        exit(1)
 
 
 if __name__ == '__main__':
