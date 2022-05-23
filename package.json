@@ -28,8 +28,8 @@
     "snyk-protect": "snyk-protect"
   },
   "resolutions": {
-    "lodash": "^4.17.21",
-    "potrace": "./tools/no-potrace"
+    "@gatsbyjs/potrace": "./tools/no-potrace",
+    "lodash": "^4.17.21"
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",
