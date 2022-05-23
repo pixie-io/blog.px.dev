@@ -29,13 +29,11 @@
   },
   "resolutions": {
     "browserslist": "^4.16.5",
-    "event-source-polyfill": "1.0.25",
     "immer": "^9.0.6",
     "lodash": "^4.17.21",
     "potrace": "./tools/no-potrace",
     "prompts": "^2.4.2",
-    "webpack": "^5.61.0",
-    "webpack-assets-manifest": "5.0.1"
+    "webpack": "^5.61.0"
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",
@@ -54,7 +52,7 @@
     "algoliasearch": "^4.13.0",
     "dotenv": "^14.3.2",
     "escape-string-regexp": "^5.0.0",
-    "gatsby": "4.7.0",
+    "gatsby": "^4.14.1",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-algolia": "^0.26.0",
     "gatsby-plugin-feed": "^4.12.1",
@@ -70,7 +68,7 @@
     "gatsby-plugin-sitemap": "^5.12.1",
     "gatsby-plugin-segment-js": "^3.7.1",
     "gatsby-remark-copy-linked-files": "^5.12.1",
-    "gatsby-remark-images": "6.12.1",
+    "gatsby-remark-images": "^6.14.0",
     "gatsby-remark-relative-images": "^2.0.2",
     "gatsby-remark-unwrap-images": "^1.0.2",
     "gatsby-source-filesystem": "^4.9.1",
@@ -82,7 +80,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^5.2.1",
-    "react-share": "4.4.0",
+    "react-share": "^4.4.0",
     "remark-containers": "^1.2.0",
     "sass": "^1.49.9",
     "slugify": "^1.3.6",
