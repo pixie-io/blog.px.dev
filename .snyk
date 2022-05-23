@@ -7,6 +7,11 @@ ignore:
         reason: 'Replaced with a noop'
         expires: 2022-09-21T04:36:35.857Z
         created: 2021-09-21T04:36:35.859Z
+  'snyk:lic:npm:gatsbyjs:potrace:GPL-3.0':
+    - '*':
+        reason: 'Replaced with a noop'
+        expires: 2023-05-22T00:00:00.000Z
+        created: 2022-05-22T00:00:00.000Z
   'snyk:lic:npm:pngquant-bin:GPL-3.0':
     - '*':
         reason: 'Only used during build time'
