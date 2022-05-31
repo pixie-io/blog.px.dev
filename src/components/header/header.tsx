@@ -78,19 +78,7 @@ const DesktopAlertBar = () => (
       },
     }}
     >
-        Export
-        <MuiLink
-          href='https://docs.px.dev/about-pixie/data-sources/'
-          target='_blank'
-          sx={{
-            color: 'success.main',
-            textDecoration: 'none',
-            mx: 1,
-          }}
-        >
-        Pixie data
-        </MuiLink>
-        in the OpenTelemetry format.
+        Export Pixie data in the OpenTelemetry format.
         <MuiLink
           href='http://blog.px.dev/plugin-system/'
           target='_blank'
