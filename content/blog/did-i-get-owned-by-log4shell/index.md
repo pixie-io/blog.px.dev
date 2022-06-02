@@ -3,13 +3,13 @@ path: '/did-i-get-owned-by-log4shell'
 title: 'Did I get owned by Log4Shell?'
 date: 2021-12-10T06:00:00.000+00:00
 featured_image: sos-emergency-exit.png
-categories: ['Pixie Team Blogs']
+categories: ['Pixie Team Blogs', 'eBPF', 'Security']
 authors: ['Omid Azizi', 'James Bartlett', 'Vihang Mehta']
 emails: ['oazizi@pixielabs.ai', 'jamesbartlett@pixielabs.ai', 'vihang@pixielabs.ai']
 ---
 
 <alert severity="error">
-Are your <a href="https://www.lunasec.io/docs/blog/log4j-zero-day/#who-is-impacted">services impacted</a> by this exploit? 
+Are your <a href="https://www.lunasec.io/docs/blog/log4j-zero-day/#who-is-impacted">services impacted</a> by this exploit?
 If so, start with the <a href="https://www.lunasec.io/docs/blog/log4j-zero-day/#permanent-mitigation">mitigation</a> first.
 </alert>
 
