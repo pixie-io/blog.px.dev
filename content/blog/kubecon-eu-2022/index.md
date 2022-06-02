@@ -8,6 +8,11 @@ authors: ['Zain Asgar', 'Michelle Nguyen']
 emails: ['zasgar@pixielabs.ai', 'michelle@pixielabs.ai']
 ---
 
+
+<alert severity="info">
+Recordings of the KubeCon + CloudNativeCon talks are now live! Check out this <a href="https://youtube.com/playlist?list=PLwam28KvZfrSTr5at3blIdY5YKzS2T6W-">YouTube playlist</a> to watch the Pixie contributor talks.
+</alert>
+
 Pixie contributors will be attending this year’s KubeCon + CloudNativeCon Europe 2022 in person in Valencia, Spain and virtually!
 
 Come chat about open source observability for Kubernetes with Pixie’s core contributors at our booth in the Project Pavilion.
