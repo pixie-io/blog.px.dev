@@ -33,6 +33,7 @@ const LineNumber = withStyles((theme) => ({
     paddingRight: '20px',
     color: theme.palette.primary.main,
     fontFamily: '"Roboto Mono", Monospace',
+    userSelect: 'none',
   },
 }
 ))(({ lineNumber, classes }: any) => (<span className={classes.lineBlock}>{lineNumber}</span>));
