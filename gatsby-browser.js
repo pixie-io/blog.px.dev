@@ -8,7 +8,13 @@ export const  replaceHydrateFunction = () => {
         ReactDOM.render(element, container, callback);
     };
 };
-
+export const onInitialClientRender = () => {
+    const gatsbyFocusWrapper = document.getElementById('gatsby-focus-wrapper');
+    if (gatsbyFocusWrapper) {
+        gatsbyFocusWrapper.removeAttribute('style');
+        gatsbyFocusWrapper.removeAttribute('tabIndex');
+    }
+};
 
 export const onClientEntry = () => {
     processClientEntry();
