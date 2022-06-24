@@ -99,6 +99,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
+    "netlify-plugin-checklinks": "^4.1.1",
     "prettier": "^1.17.1",
     "typescript": "^4.6.2"
   },

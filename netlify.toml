@@ -2,3 +2,8 @@
   publish ="public/"
   environment = { GATSBY_CONCURRENT_DOWNLOAD = "10" }
   command = "yarn install && yarn lint && gatsby build"
+
+[[plugins]]
+  package = "netlify-plugin-checklinks"
+  [plugins.inputs]
+    skipPatterns = ["sw.js"]
