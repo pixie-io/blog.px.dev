@@ -46,7 +46,7 @@ const CookiesConsentBanner = () => {
         This site uses cookies to provide you with a better user experience.
         By using Pixie, you consent to our&nbsp;
         <a
-          href='https://pixielabs.ai/privacy/#Cookies'
+          href='https://linuxfoundation.org/cookies/'
           target='_blank'
           className='pixie-green bold'
           rel='noopener noreferrer'
