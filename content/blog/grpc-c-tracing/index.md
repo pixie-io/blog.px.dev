@@ -10,7 +10,7 @@ emails: ['ori@groundcover.com', 'aviv@groundcover.com']
 
 gRPC is quickly becoming the preferred tool for enabling quick, lightweight connections between microservices, but it also presents new problems for observability. This is mainly because gRPC connections apply stateful compression, which makes monitoring them with sniffing tools an extremely challenging task. At least, this was traditionally the case. But thanks to eBPF, gRPC monitoring has become much easier.
 
-We at [groundcover](http://www.groundcover.com) were thrilled to have the opportunity to collaborate with the Pixie project to build a gRPC monitoring solution that uses eBPF to trace gRPC sessions that use the [gRPC-C library](https://github.com/grpc/grpc). In this blog post we will discuss what makes gRPC monitoring difficult, the challenges of constructing a user based eBPF solution, and how we integrated gRPC-C tracing within the existing Pixie framework.
+We at [groundcover](http://www.groundcover.com) were thrilled to have the opportunity to collaborate with the Pixie project to build a gRPC monitoring solution that uses eBPF to trace gRPC sessions that use the [gRPC-C library](https://github.com/grpc/grpc). In this blog post we will discuss what makes gRPC monitoring difficult, the challenges of constructing a user based eBPF solution, and how we integrated[^1] gRPC-C tracing within the existing Pixie framework.
 
 ## The hassle of gRPC monitoring
 
@@ -64,7 +64,7 @@ To help ensure that everything integrates nicely with the existing framework, we
 
 ## The nitty and gritty
 
-In this part we will elaborate on how we approached each of the tasks described above.[^1]
+In this part we will elaborate on how we approached each of the tasks described above.[^2]
 
 ### Incoming and outgoing data
 
@@ -80,7 +80,7 @@ grpc_error* grpc_chttp2_data_parser_parse(void* /*parser*/,
 
 The key parameters to note are `grpc_chttp2_stream` and `grpc_slice`, which contain the associated stream and the freshly received data buffer (=slice), respectively. The stream object will matter to us when we get to retrieving headers a bit later, but for now, the slice object contains the raw data we are interested in.
 
-**Tracing outgoing data** proved to be a bit harder. Most of the functions in the ingress flow are inlined, so finding a good probing spot turned out to be challenging[^2].
+**Tracing outgoing data** proved to be a bit harder. Most of the functions in the ingress flow are inlined, so finding a good probing spot turned out to be challenging.[^3]
 
 ::: div image-xl
 <svg title="Central functions of the egress flow. All of the Flush_x functions are inlined in the compiled binary." src='tracing-outgoing-data.png' />
@@ -196,5 +196,8 @@ Today, with the help of eBPF functions, we can get the data we need to achieve g
 
 ## Footnotes
 
-[^1] All source code snippets were taken from gRPC-C version 1.33
-[^2] eBPF requires the functions to exist as actual functions, which is the opposite of inlining. For example, think about what happens when trying to add a probe at the end of an inlined function. Since the function was inlined, the return instructions are completely gone, and there’s no simple way to find the correct point to hook.
+[^1] Code changes: https://github.com/pixie-io/pixie/pull/415, https://github.com/pixie-io/pixie/pull/432, https://github.com/pixie-io/pixie/pull/520, and https://github.com/pixie-io/pixie/pull/547.
+
+[^2] All source code snippets were taken from gRPC-C version 1.33.
+
+[^3] eBPF requires the functions to exist as actual functions, which is the opposite of inlining. For example, think about what happens when trying to add a probe at the end of an inlined function. Since the function was inlined, the return instructions are completely gone, and there’s no simple way to find the correct point to hook.
