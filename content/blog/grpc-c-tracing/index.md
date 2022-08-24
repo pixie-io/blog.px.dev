@@ -8,7 +8,7 @@ authors: ['Ori Shussman', 'Aviv Zohari']
 emails: ['ori@groundcover.com', 'aviv@groundcover.com']
 ---
 
-gRPC is quickly becoming the preferred tool for enabling quick, lightweight connections between microservices, but it also presents new problems for observability. This is mainly because gRPC connections apply stateful compression, which makes monitoring them with sniffing tools an extremely challenging task. At least, this was traditionally the case. But thanks to eBPF, gRPC monitoring has become much easier.
+gRPC is quickly becoming the preferred tool for enabling quick, lightweight connections between microservices, but it also presents new problems for observability. This is mainly because gRPC connections apply stateful compression, which makes monitoring them with sniffing tools an extremely challenging task. At least, this was traditionally the case. But thanks to [eBPF](http://ebpf.io), gRPC monitoring has become much easier.
 
 We at [groundcover](http://www.groundcover.com) were thrilled to have the opportunity to collaborate with the Pixie project to build a gRPC monitoring solution that uses eBPF to trace gRPC sessions that use the [gRPC-C library](https://github.com/grpc/grpc). In this blog post we will discuss what makes gRPC monitoring difficult, the challenges of constructing a user based eBPF solution, and how we integrated gRPC-C tracing within the existing Pixie framework.[^1] [^2]
 
@@ -29,7 +29,7 @@ We at [groundcover](http://www.groundcover.com) were thrilled to have the opport
 
 Another reason to love gRPC is that it's (typically) implemented over HTTP/2, so you get long-lived, reliable streams. Plus, the protocol headers are compressed using HPACK, which saves a ton of space by avoiding transmission of repetitive header information. Yet, despite all this, gRPC implements its own API layer, so developers don't actually have to worry about the HTTP/2 implementation. They enjoy the benefits of HTTP/2 without the headache.
 
-All of that magic being said, efficiency comes with a price. HTTP/2’s HPACK header compression makes the problem of tracing connections through sniffers much more difficult. Unless you know the entire session context from when the connection was established, it is difficult to decode the header information from sniffed traffic (See [this post](/ebpf-http2-tracing/) for more info and an example).
+All of that magic being said, efficiency comes with a price. HTTP/2’s HPACK header compression makes the problem of tracing connections through sniffers much more difficult. Unless you know the entire session context from when the connection was established, it is difficult to decode the header information from sniffed traffic (see [this post](/ebpf-http2-tracing/) for more info and an example).
 
 On its own, gRPC doesn’t provide tools to overcome this problem. Nor does it provide a way to collect incoming or outgoing data, or report stream control events, like the closing of a stream.
 
@@ -37,7 +37,7 @@ On its own, gRPC doesn’t provide tools to overcome this problem. Nor does it p
 
 What we need is a super power - one that will enable us to grab what we need from the gRPC library itself, rather than trying to get it from the raw session.
 
-This is exactly what eBPF enables. Introduced in 2014, [eBPF](http://ebpf.io) enables observability of system functions in the Linux kernel, alongside powerful usermode monitoring capabilities - making it possible to extract runtime information from applications. Although eBPF is still maturing, it is rapidly becoming the go-to observability standard for Kubernetes and a variety of other distributed, microservices-based environments where traditional approaches to monitoring are too complicated, too resource-intensive or both.
+This is exactly what eBPF enables. Introduced in 2014, [eBPF](https://www.groundcover.com/blog/what-is-ebpf) enables observability of system functions in the Linux kernel, alongside powerful usermode monitoring capabilities - making it possible to extract runtime information from applications. Although eBPF is still maturing, it is rapidly becoming the go-to observability standard for Kubernetes and a variety of other distributed, microservices-based environments where traditional approaches to monitoring are too complicated, too resource-intensive or both.
 
 Recognizing the power of eBPF as a gRPC monitoring solution, Pixie implemented an [eBPF-based approach for monitoring gRPC sessions](/ebpf-http2-tracing/) involving golang applications. Inspired by the benefits of that work to the community, we at groundcover decided to expand the eBPF arsenal to support gRPC monitoring in even more frameworks and programming languages, by monitoring the gRPC-C library.
 
@@ -89,7 +89,7 @@ grpc_error* grpc_chttp2_data_parser_parse(void* /*parser*/,
 
 The key parameters to note are `grpc_chttp2_stream` and `grpc_slice`, which contain the associated stream and the freshly received data buffer (=slice), respectively. The stream object will matter to us when we get to retrieving headers a bit later, but for now, the slice object contains the raw data we are interested in.
 
-**Tracing outgoing data** proved to be a bit harder. Most of the functions in the ingress flow are inlined, so finding a good probing spot turned out to be challenging.[^4]
+**Tracing outgoing data** proved to be a bit harder. Most of the functions in the egress flow are inlined, so finding a good probing spot turned out to be challenging.[^4]
 
 ::: div image-xl
 <svg title="Central functions of the egress flow. All of the Flush_x functions are inlined in the compiled binary." src='tracing-outgoing-data.png' />
@@ -131,7 +131,7 @@ Tracing incoming and outgoing data is great, but it’s not enough to deliver fu
 
 Looking at the functions we already found for data extraction, it seems we are in luck. Part of the logic in these functions deals with header encoding and decoding - for example, the FlushMetadata functions described above. We should be able to find plain text headers inside the same probe.
 
-In practice, however, we noticed that for some cases, some of the headers were missing. Further examination of the codebase led us to note two other relevant functions, which we thought could help us find the missing pieces:
+In practice, however, we noticed that for some cases, some of the headers were missing. Further examination of the codebase led us to two other relevant functions, which we thought could help us find the missing pieces:
 
 ```cpp
 void grpc_chttp2_maybe_complete_recv_initial_metadata(grpc_chttp2_transport* t,
@@ -205,7 +205,7 @@ grpc_chttp2_incoming_metadata_buffer_publish(
 
 And the offsets for `v.1.33.2`:
 
-```
+```cpp
 grpc_chttp2_incoming_metadata_buffer_publish(
     (grpc_chttp2_incoming_metadata_buffer *)(param_2 + 0x418),
                    *(grpc_metadata_batch **)(param_2 + 0x168));
