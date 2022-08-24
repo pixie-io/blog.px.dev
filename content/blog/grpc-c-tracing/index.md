@@ -1,7 +1,7 @@
 ---
 path: '/grpc-c-tracing'
 title: 'Pushing the envelope: monitoring gRPC-C with eBPF'
-date: 2022-8-24T06:00:00.000+00:00
+date: 2022-8-25T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Guest Blogs', 'eBPF']
 authors: ['Ori Shussman', 'Aviv Zohari']
@@ -10,7 +10,18 @@ emails: ['ori@groundcover.com', 'aviv@groundcover.com']
 
 gRPC is quickly becoming the preferred tool for enabling quick, lightweight connections between microservices, but it also presents new problems for observability. This is mainly because gRPC connections apply stateful compression, which makes monitoring them with sniffing tools an extremely challenging task. At least, this was traditionally the case. But thanks to eBPF, gRPC monitoring has become much easier.
 
-We at [groundcover](http://www.groundcover.com) were thrilled to have the opportunity to collaborate with the Pixie project to build a gRPC monitoring solution that uses eBPF to trace gRPC sessions that use the [gRPC-C library](https://github.com/grpc/grpc). In this blog post we will discuss what makes gRPC monitoring difficult, the challenges of constructing a user based eBPF solution, and how we integrated[^1] gRPC-C tracing within the existing Pixie framework[^2].
+We at [groundcover](http://www.groundcover.com) were thrilled to have the opportunity to collaborate with the Pixie project to build a gRPC monitoring solution that uses eBPF to trace gRPC sessions that use the [gRPC-C library](https://github.com/grpc/grpc). In this blog post we will discuss what makes gRPC monitoring difficult, the challenges of constructing a user based eBPF solution, and how we integrated gRPC-C tracing within the existing Pixie framework.[^1] [^2]
+
+::: div image-xl
+<figure>
+  <video controls muted playsinline width="670">
+    <source src="./grpc-c-demo.mp4" type="video/mp4" />
+  </video>
+  <figcaption>
+    A quick demo of eBPF gRPC-C tracing. Bottom right: Pixie data collector logs showing uprobe attachment and traced gRPC-C data. Top right: sample gRPC-C server. Left: gRPC-C client periodically making requests to the server.
+  </figcaption>
+</figure>
+:::
 
 ## The hassle of gRPC monitoring
 
@@ -47,7 +58,7 @@ Among the different implementations of gRPC, [gRPC-C](https://github.com/grpc/gr
 Our mission was to achieve complete gRPC observability - meaning the ability to observe both unary and streaming RPCs - for environments which use the gRPC-C library. We did so by tracing all of the following:
 
 1. [Incoming and outgoing data](#incoming-and-outgoing-data)
-2. [Plaintext headers (both initial and trailing)](#headers-initial-and-trailing)
+2. [Plaintext headers (both initial and trailing)](#headers-(initial-and-trailing))
 3. [Stream control events (specifically, closing of streams)](#stream-control-events)
 
 ## Planning the solution
@@ -55,20 +66,18 @@ Our mission was to achieve complete gRPC observability - meaning the ability to 
 Before getting into the bits and bytes, it’s important to first describe the structure of the solution. Following the general uprobe tracing schema described in the diagram above, we implemented the following 3 parts:
 
 1. The eBPF programs that are attached to the gRPC-C usermode functions. Note that even though the functions belong to userland, the code runs in a kernel context
-
 2. The logic to parse the events that are sent from the eBPF programs to the usermode agent
-
 3. The logic to find instances of the gRPC-C library, identify their versions and attach to them correctly
 
 To help ensure that everything integrates nicely with the existing framework, we made sure our gRPC-C parsers produce results in a format that the existing Pixie Go-gRPC parsers expect. The result is a seamless gRPC observability experience, no matter which framework it came from.
 
 ## The nitty and gritty
 
-In this part we will elaborate on how we approached each of the tasks described above.[^4]
+In this part we will elaborate on how we approached each of the tasks described above.[^3]
 
 ### Incoming and outgoing data
 
-**Tracing incoming data** turned out to be a relatively straightforward task. We simply probed the grpc_chttp2_header_parser_parse function. This is one of the core functions in the ingress flow, and it has the following signature:
+**Tracing incoming data** turned out to be a relatively straightforward task. We simply probed the `grpc_chttp2_header_parser_parse` function. This is one of the core functions in the ingress flow, and it has the following signature:
 
 ```cpp
 grpc_error* grpc_chttp2_data_parser_parse(void* /*parser*/,
@@ -80,7 +89,7 @@ grpc_error* grpc_chttp2_data_parser_parse(void* /*parser*/,
 
 The key parameters to note are `grpc_chttp2_stream` and `grpc_slice`, which contain the associated stream and the freshly received data buffer (=slice), respectively. The stream object will matter to us when we get to retrieving headers a bit later, but for now, the slice object contains the raw data we are interested in.
 
-**Tracing outgoing data** proved to be a bit harder. Most of the functions in the ingress flow are inlined, so finding a good probing spot turned out to be challenging.[^3]
+**Tracing outgoing data** proved to be a bit harder. Most of the functions in the ingress flow are inlined, so finding a good probing spot turned out to be challenging.[^4]
 
 ::: div image-xl
 <svg title="Central functions of the egress flow. All of the Flush_x functions are inlined in the compiled binary." src='tracing-outgoing-data.png' />
@@ -159,10 +168,14 @@ We know which functions we want to probe, but knowing is only half the battle. W
 
 Fear not! The functions _are_ there - we just need to find them. And fortunately, this is not our first reverse engineering rodeo - so we know that Ghidra and other RE methods can be used to locate the functions. Let’s look at the following example:
 
+Strings are easy to find inside binaries. Source code:
+
 ```cpp
 gpr_log(GPR_INFO, "%p[%d][%s]: pop from %s", t, s->id,
             t->is_client ? "cli" : "svr", stream_list_id_string(id));
 ```
+
+Decompiled binary:
 
 ```cpp
 uVar3 = gpr_log("src/core/ext/transport/chttp2/transport/stream_lists.cc",0x47,1,
@@ -188,9 +201,11 @@ Accessing the same `grpc_chttp2_stream` struct members means different offsets i
 grpc_chttp2_incoming_metadata_buffer_publish(
     (grpc_chttp2_incoming_metadata_buffer *)(param_2 + 0x420),
                    *(grpc_metadata_batch **)(param_2 + 0x170));
+```
 
 And the offsets for `v.1.33.2`:
 
+```
 grpc_chttp2_incoming_metadata_buffer_publish(
     (grpc_chttp2_incoming_metadata_buffer *)(param_2 + 0x418),
                    *(grpc_metadata_batch **)(param_2 + 0x168));
@@ -218,7 +233,7 @@ Today, with the help of eBPF functions, we can get the data we need to achieve g
 
 ## Footnotes
 
-[^1] Code changes: https://github.com/pixie-io/pixie/pull/415, https://github.com/pixie-io/pixie/pull/432, https://github.com/pixie-io/pixie/pull/520, and https://github.com/pixie-io/pixie/pull/547.
+[^1] Code changes required to implement gRPC-C tracing in Pixie: [pixie-io/pixie/pull/415](https://github.com/pixie-io/pixie/pull/415), [pixie-io/pixie/pull/432](https://github.com/pixie-io/pixie/pull/432), [pixie-io/pixie/pull/520](https://github.com/pixie-io/pixie/pull/520), and [pixie-io/pixie/pull/547](https://github.com/pixie-io/pixie/pull/547).
 
 [^2] The list of currently supported gRPC-C versions can be found [here](https://github.com/pixie-io/pixie/issues/546#issuecomment-1203699526).
 
