@@ -10,7 +10,9 @@ emails: ['ori@groundcover.com', 'aviv@groundcover.com']
 
 gRPC is quickly becoming the preferred tool for enabling quick, lightweight connections between microservices, but it also presents new problems for observability. This is mainly because gRPC connections apply stateful compression, which makes monitoring them with sniffing tools an extremely challenging task. At least, this was traditionally the case. But thanks to [eBPF](http://ebpf.io), gRPC monitoring has become much easier.
 
-We at [groundcover](http://www.groundcover.com) were thrilled to have the opportunity to collaborate with the Pixie project to build a gRPC monitoring solution that uses eBPF to trace gRPC sessions that use the [gRPC-C library](https://github.com/grpc/grpc). In this blog post we will discuss what makes gRPC monitoring difficult, the challenges of constructing a user based eBPF solution, and how we integrated gRPC-C tracing within the existing Pixie framework.[^1] [^2]
+We at [groundcover](http://www.groundcover.com) were thrilled to have the opportunity to collaborate with the Pixie project to build a gRPC monitoring solution that uses eBPF to trace gRPC sessions that use the [gRPC-C library](https://github.com/grpc/grpc) (which augments Pixie's existing eBPF-based gRPC monitoring for Golang applications).
+
+In this blog post we will discuss what makes gRPC monitoring difficult, the challenges of constructing a user based eBPF solution, and how we integrated gRPC-C tracing within the existing Pixie framework.[^1] [^2]
 
 ::: div image-xl
 <figure>
