@@ -6,8 +6,6 @@ featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'Kubernetes']
 authors: ['Natalie Serrino']
 emails: ['nserrino@pixielabs.ai']
-redirect_from:
-    - /k8s-on-prem/k8s-on-prem/
 ---
 In this post, we will discuss the following:
 
