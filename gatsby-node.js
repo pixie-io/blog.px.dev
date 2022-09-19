@@ -85,9 +85,53 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const posts = result.data.blog.edges;
   posts.forEach((post) => {
-    const urlPath = (post.node.fields.slug).replace('//', '/');
+    const urlPath = post.node.fields.slug.replace('//', '/');
+    const repeatedUrlPath = (
+      post.node.fields.slug + post.node.fields.slug
+    ).replace('//', '/');
+
+    if (urlPath === '/ebpf-function-tracing/') {
+      createRedirect({
+        fromPath: (blogPrefix + '/ebpf-function-tracing/post/').replace('//', '/'),
+        toPath: urlPath,
+        redirectInBrowser: true,
+        isPermanent: true,
+      });
+      createRedirect({
+        fromPath: '/ebpf-function-tracing/post/'.replace('//', '/'),
+        toPath: urlPath,
+        redirectInBrowser: true,
+        isPermanent: true,
+      });
+    } else if (urlPath === '/open-source-auth/') {
+      createRedirect({
+        fromPath: (blogPrefix + '/open-source-auth/ossauth/').replace('//', '/'),
+        toPath: urlPath,
+        redirectInBrowser: true,
+        isPermanent: true,
+      });
+      createRedirect({
+        fromPath: '/open-source-auth/ossauth/'.replace('//', '/'),
+        toPath: urlPath,
+        redirectInBrowser: true,
+        isPermanent: true,
+      });
+    }
+
     createRedirect({
       fromPath: (blogPrefix + post.node.fields.slug).replace('//', '/'),
+      toPath: urlPath,
+      redirectInBrowser: true,
+      isPermanent: true,
+    });
+    createRedirect({
+      fromPath: (blogPrefix + repeatedUrlPath).replace('//', '/'),
+      toPath: urlPath,
+      redirectInBrowser: true,
+      isPermanent: true,
+    });
+    createRedirect({
+      fromPath: (post.node.fields.slug + post.node.fields.slug).replace('//', '/'),
       toPath: urlPath,
       redirectInBrowser: true,
       isPermanent: true,

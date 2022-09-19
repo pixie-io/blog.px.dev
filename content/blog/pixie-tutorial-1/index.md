@@ -6,8 +6,6 @@ categories: []
 authors: ['John Arundel']
 emails: ['john@bitfieldconsulting.com']
 featured_image: hero-image.png
-redirect_from:
-    - /pixie-tutorial-1/pixie-tutorial-1/
 ---
 
 This is a guest tutorial by John Arundel, of [Bitfield Consulting](https://bitfieldconsulting.com). Hang on tight as he takes you from zero to Pixie in a few thrill-packed minutes!
