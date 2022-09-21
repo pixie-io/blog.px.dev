@@ -8,7 +8,7 @@ authors: ['Pete Stevenson']
 emails: ['jps@pixielabs.ai']
 ---
 
-The Java ecosystem offers many options for profiling Java applications, but what if you want to **_debug on prod without redeploying? _**
+The Java ecosystem offers many options for profiling Java applications, but what if you want to ***debug on prod without redeploying?***
 
 At Pixie, we’re building an open source platform that makes Kubernetes observability ridiculously easy for developers. Our guiding principles is that you shouldn’t have to instrument, recompile or redeploy your applications in order to observe and debug them.
 
@@ -33,7 +33,7 @@ Symbolizers for compiled languages that are not JITed (e.g. C++, Golang) work by
 To make Java profiling “work,” we needed a new symbolizer. Fortunately, we were able to lean on other open source contributions and the Java ecosystem to easily meet this need. In brief, we use the [Java Virtual Machine Tool Interface](https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html) -- the “JVMTI” -- to interact with the JVM running the target Java application. Based on the open source Java “[perf map agent](https://github.com/jvm-profiling-tools/perf-map-agent)”, [we wrote our own JVMTI agent](https://github.com/pixie-io/pixie/blob/main/src/stirling/source_connectors/perf_profiler/java/agent/agent.cc) that listens to the JVMTI callbacks for `CompiledMethodLoad` and `DynamicCodeGenerated` [^2]. Thus, our JVMTI agent writes each Java symbol and its corresponding address range into a symbol file, and by reading this file, the Pixie data collection process (the Pixie Edge Module or “pem”) symbolizes Java stack-traces.
 
 ::: div image-xl
-<svg title="Pixie's Java Symbolization process." src='jvmti-agent.png' />
+<svg title="Using a JVMTI agent to extract symbols from JIT’d code in the Java Virtual Machine." src='jvmti-agent.png' />
 :::
 
 ## JVMTI attach issues in a Kubernetes context
@@ -92,10 +92,8 @@ To learn more about how we built Pixie’s continuous eBPF-based profiler, read 
 
 Have questions? Need help? Find us on [Slack](https://slackin.px.dev/) or [Twitter](https://twitter.com/pixie_run).
 
-### Footnotes
+[^1]: This is in contrast to interpreted languages where the addresses in a stack-trace represent code in the language interpreter (e.g. in the Python or Ruby binary), not in the application source code.
 
-[^1] This is in contrast to interpreted languages where the addresses in a stack-trace represent code in the language interpreter (e.g. in the Python or Ruby binary), not in the application source code.
+[^2]: Our JVMTI agent also responds to the `CompiledMethodUnload` callback. When a method is unloaded, we invalidate the mapping from virtual address range to symbol.
 
-[^2] Our JVMTI agent also responds to the `CompiledMethodUnload` callback. When a method is unloaded, we invalidate the mapping from virtual address range to symbol.
-
-[^3] Actually, we copy both our `libc` & `musl` agent libraries, and we chown them to the UID & GID of the target process.
+[^3]: Actually, we copy both our `libc` & `musl` agent libraries, and we chown them to the UID & GID of the target process.
