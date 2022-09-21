@@ -1,6 +1,6 @@
 ---
 path: '/cpu-profiling-java'
-title: 'Profiling K8s Java apps in prod: Java symbolization challenges'
+title: 'How we automated Java profiling: in production, without re-deploy'
 date: 2022-9-22T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs', 'eBPF']
