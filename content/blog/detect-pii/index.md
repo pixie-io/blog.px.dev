@@ -27,7 +27,7 @@ Recent breakthroughs in natural language processing (NLP) have made PII detectio
 
 - **[A new public PII dataset for structured data](#download-it-here!)**
 - **[Privy, a synthetic PII data generator](#how-was-this-data-generated)**
-- [**Benchmarks for off-the-shelf PII classifiers**](#benchmarking-pii-classifiers)
+- [**Benchmarks for off-the-shelf PII classifiers**](#benchmarking-existing-pii-classifiers)
 - **[Custom PII classifiers for protocol trace data (SQL, JSON etc)](#custom-pii-classifier)**
 - **[An interactive demo of a PII anonymizer](https://detect.streamlitapp.com/)**
 
@@ -39,23 +39,23 @@ Recent breakthroughs in natural language processing (NLP) have made PII detectio
 
 The costs of privacy violations have never been higher. Be it the EU's General Data Protection Regulation or California's California Consumer Privacy Act (CCPA), governments have enacted a flurry of new laws seeking to protect people's privacy by regulating the use of [Personally Identifiable Information (PII)](https://gdpr.eu/eu-gdpr-personal-data/). The GDPR alone charges up to [€20 million or 4% of annual global turnover](https://www.aparavi.com/resources-blog/data-compliance-fines-how-much-cost-you) (whichever is greater) for privacy violations. Despite such steep fines, compliance with these laws in the software industry has been spotty at best; privacy breaches abound and [companies are paying millions](https://www.tessian.com/blog/biggest-gdpr-fines-2020/) as a result.
 
-# Use NLP to detect personally identifiable information (PII)
+## Use NLP to detect personally identifiable information (PII)
 
 With recent advances in deep learning for text classification, developers have gained a promising new tool to detect sensitive data flows in their applications. [Transformer-based architectures](https://research.google/pubs/pub46201/) achieve remarkable accuracy for [Named Entity Recognition (NER) tasks](https://paperswithcode.com/sota/named-entity-recognition-ner-on-ontonotes-v5) in which models are trained to find geo-political entities, locations, and more in text samples.
 
-## Why not use a rules based approach?
+### Why not use a rules based approach?
 
 Rule based approaches (including regex) can be helpful for detecting pattern-based PII data such as social security numbers or bank accounts, but they struggle to identify PII that don’t follow clear patterns such as addresses or names, and can be overly sensitive to formatting. For a generalizable PII solution, it is often better to employ machine learning.
 
-## How do we know it's working?
+### How do we know it's working?
 
 A machine learning system is only [as accurate as the data it's trained on](https://www.computer.org/csdl/magazine/ex/2009/02/mex2009020008/13rRUy0HYO). To have a good sense of how well a model performs, we need a dataset representative of the real life conditions it will be used in. In our case, we are looking for PII data a developer might encounter while debugging an application, including network data, logs, and protocol traces. Unfortunately, this data is not readily available - because PII is sensitive, public PII datasets are scarce. One option is to train on data leaks, though this data tends to be unlabelled, and is morally questionable to use. The labelled datasets that do exist (including 4-class [Conll](https://paperswithcode.com/dataset/conll-2003), and 18-class [OntoNotes](https://catalog.ldc.upenn.edu/LDC2013T19)) consist of news articles and telephone conversations instead of the debugging information we need.
 
-# Introducing a new PII dataset
+## Introducing a new PII dataset
 
 Due to the lack of public PII datasets for debugging information, I have generated a synthetic dataset that approximates real world data. **To my knowledge, this is the largest, public PII dataset currently available for structured data.** This new, labelled PII dataset consists of protocol traces (`JSON, SQL (PostgreSQL, MySQL), HTML, and XML`) generated from [OpenAPI specifications](https://swagger.io/specification/) and includes [60+ PII types](https://github.com/pixie-io/pixie/blob/main/src/datagen/pii/privy/privy/providers/english_us.py).
 
-## Download it here!
+### Download it here!
 
 The dataset is [publicly available on huggingface](https://huggingface.co/datasets/beki/privy). It contains token-wise labeled samples that can be used to train and evaluate sequence labelling models that detect the exact position of PII entities in text, as I will do [later in this article](#custom-pii-classifier).
 
@@ -73,7 +73,7 @@ Each sample was generated from a unique template extracted from a public API.
 
 A [BILUO](<https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)>) tagged version of this dataset is also provided on huggingface for better compatibility with existing NER pipelines.
 
-## How was this data generated?
+### How was this data generated?
 
 This synthetic dataset was generated using [Privy](https://github.com/pixie-io/pixie/tree/main/src/datagen/pii/privy), a tool which parses [OpenAPI specifications](https://swagger.io/specification/) and generates synthetic request payloads, searching for keywords in API schema definitions to select appropriate data providers. Generated API payloads are converted to various protocol trace formats like `JSON` and `SQL` to approximate the data developers might encounter while debugging applications.
 
@@ -81,7 +81,7 @@ This synthetic dataset was generated using [Privy](https://github.com/pixie-io/p
 
 ![How Privy works](privy_flowchart.svg)
 
-## How realistic is this data?
+### How realistic is this data?
 
 Great care was taken to provide highly realistic PII data providers. For instance, to generate organizations Privy draws from a list of 30,000 names I manually compiled from stock exchange listings and government directories. Other personal information like names and addresses can be obtained from the [Fake Name Generator](https://www.fakenamegenerator.com/) and loaded into Privy. Additionally, Privy implements custom generators for rule based PII data like passports, driver’s licenses, mac addresses, and more.
 
@@ -95,7 +95,7 @@ Now that we have a [synthetic PII dataset](https://huggingface.co/datasets/beki/
 
 [Flair](https://github.com/flairNLP/flair) is an NLP library built on PyTorch, featuring some new embedding techniques (Flair embeddings) and models that achieve state-of-the-art performance on common NER datasets.
 
-## Label Conversions
+### Label Conversions
 
 Since the models surveyed use different labels for their entities, I had to translate PII annotations before passing the protocol trace dataset to them. See the diagram below for how I converted labels from one model architecture to the next.
 
@@ -169,7 +169,7 @@ What about false negatives? From the word cloud below, we see that Flair struggl
 
 ![False negative tokens for PERSON entity in Flair English Large](flair-ner-english-large-PERSON-fns-wordcloud.png)
 
-# Custom PII Classifier
+## Custom PII Classifier
 
 Can we do better than existing classifiers? Let’s train new models and benchmark them on the entities that existing NER models struggle most with in our dataset - `PERSON`, `LOCATION`, `ORGANIZATION`, `DATETIME` and `NRP`. I have chosen the following sequence labelling models to train:
 
