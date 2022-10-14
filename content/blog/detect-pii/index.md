@@ -8,7 +8,7 @@ authors: ['Benjamin Kilimnik']
 emails: ['benjaminkilimnik@gmail.com']
 ---
 
-### We built a [PII detector and anonymizer](https://detect.streamlitapp.com/) for debugging data. Give it a try and [tell us if you want it added to Pixie](). It uses a [custom NLP model](https://huggingface.co/beki/en_spacy_pii_distilbert) trained on a [new PII dataset](https://huggingface.co/datasets/beki/privy) for protocol traces.
+### Introducing a [PII detector for protocol trace data.](https://detect.streamlitapp.com/) Give it a try and [tell us what you think.](https://github.com/pixie-io/pixie/issues/623) It uses a [custom NLP model](https://huggingface.co/beki/en_spacy_pii_distilbert) trained on a [new PII dataset](https://huggingface.co/datasets/beki/privy) for protocol traces.
 
 ![](sample_pii_json.png)
 
@@ -25,7 +25,7 @@ How often in your career have you muttered these words? With so much personal da
 
 Recent breakthroughs in natural language processing (NLP) have made PII detection and redaction in unseen datasets feasible. In this blog post, I present:
 
-- **[A new public PII dataset for structured data](#download-it-here)**
+- **[A new public PII dataset for structured data](#download-it-here!)**
 - **[Privy, a synthetic PII data generator](#how-was-this-data-generated)**
 - [**Benchmarks for off-the-shelf PII classifiers**](#benchmarking-pii-classifiers)
 - **[Custom PII classifiers for protocol trace data (SQL, JSON etc)](#custom-pii-classifier)**
@@ -33,7 +33,7 @@ Recent breakthroughs in natural language processing (NLP) have made PII detectio
 
 ## How do I redact PII with Pixie?
 
-[Pixie](https://px.dev/) is an open source observability tool for Kubernetes applications that uses eBPF to automatically trace application requests, removing the need for manual instrumentation. Pixie supports a `PIIRestricted` data access mode that redacts a limited number of PII types (IPs, emails, MAC addresses, IMEI, credit cards, IBANs, and SSNs) using rule-based logic. **If you'd like to see [a more advanced NLP-based PII detector](https://detect.streamlitapp.com) added to Pixie, please upvote [this feature request]()!**
+[Pixie](https://px.dev/) is an open source observability tool for Kubernetes applications that uses eBPF to automatically trace application requests, removing the need for manual instrumentation. Pixie supports a `PIIRestricted` data access mode that redacts a limited number of PII types (IPs, emails, MAC addresses, IMEI, credit cards, IBANs, and SSNs) using rule-based logic. **If you'd like to see [a more advanced NLP-based PII detector](https://detect.streamlitapp.com) added to Pixie, please [upvote this feature request](https://github.com/pixie-io/pixie/issues/623)!**
 
 ## Why care about sensitive data?
 
@@ -85,9 +85,9 @@ This synthetic dataset was generated using [Privy](https://github.com/pixie-io/p
 
 Great care was taken to provide highly realistic PII data providers. For instance, to generate organizations Privy draws from a list of 30,000 names I manually compiled from stock exchange listings and government directories. Other personal information like names and addresses can be obtained from the [Fake Name Generator](https://www.fakenamegenerator.com/) and loaded into Privy. Additionally, Privy implements custom generators for rule based PII data like passports, driver’s licenses, mac addresses, and more.
 
-## Benchmarking existing PII models
+## Benchmarking existing PII classifiers
 
-Now that we have a [synthetic PII dataset](https://huggingface.co/datasets/beki/privy), let’s run PII detection models on it! I have selected two popular off-the-shelf models to benchmark — Presidio (with a Spacy NER backend) and Flair. For fairness, I have filtered the dataset down to the PII types that each chosen model supports, removing unsupported entities. Here is a quick overview of the models and frameworks:
+Now that we have a [synthetic PII dataset](https://huggingface.co/datasets/beki/privy), let’s run PII detection models on it! I have selected two popular off-the-shelf models to benchmark — [Presidio](https://microsoft.github.io/presidio/) (with a [Spacy NER backend](https://huggingface.co/spacy/en_core_web_lg)) and [Flair](https://huggingface.co/flair/ner-english-large). For fairness, I have filtered the dataset down to the PII types that each chosen model supports, removing unsupported entities. Here is a quick overview of the frameworks used:
 
 [SpaCy](https://github.com/explosion/spaCy) is a popular NLP library with support for Named Entity Recognition.
 
@@ -97,7 +97,7 @@ Now that we have a [synthetic PII dataset](https://huggingface.co/datasets/beki/
 
 ## Label Conversions
 
-Since the models surveyed use different labels for their entities, I had to translate PII annotations before passing the new dataset to them. Moreover, not all entities in Privy’s dataset are supported by existing models, so I filtered those samples out of the dataset before benchmarking. See the diagram below for how I converted labels from one model architecture to the next.
+Since the models surveyed use different labels for their entities, I had to translate PII annotations before passing the protocol trace dataset to them. See the diagram below for how I converted labels from one model architecture to the next.
 
 <details closed>
 <summary>PII label conversions</summary>
@@ -210,7 +210,7 @@ Accuracy is all well and good, but how fast are these models? I have used Spacy�
 
 The nice thing about machine learning is that when we improve the quality of our training data, we tend to improve the accuracy of our ML system regardless of what model architecture we use. As a result, improving the synthetic data generator is the best way to improve PII classifiers for protocol trace data. To achieve this, we could:
 
-- Support additional protocol trace formats, like protobuf. Pixie currently supports a [number of protocol trace formats](https://docs.px.dev/about-pixie/data-sources/), but not all of them are generated by Privy.
+- Support additional protocol trace formats, like protobuf. Pixie currently supports a [number of protocol trace formats](https://docs.px.dev/about-pixie/data-sources/), but not all of them are generated by [Privy](https://github.com/pixie-io/pixie/tree/main/src/datagen/pii/privy/).
 - Improve the realism of PII and non-PII data providers.
 - Implement country specific data generators to support more languages and regions.
 
