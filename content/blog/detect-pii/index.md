@@ -141,17 +141,17 @@ No need to understand the full equation here - intuitively, the beta parameter a
 
 Let’s take a look at the F2 score for presidio’s PII detection system on our dataset. It is important to note that Presidio uses Spacy’s `en_core_web_lg` NER model under the hood by default to detect `PERSON`, `NRP` (nationalities, religious and political groups), `LOCATION`, and `DATE_TIME`. The remaining PII types are found with rule-based logic.
 
-![](f2_scores_presidio_spacy.png)
+![](benchmarks/f2_scores_presidio_spacy.png)
 
 Overall, considering that Presidio was designed for and trained on free text (news articles, phone conversations etc.) it performs remarkably well on our protocol trace dataset. That said, it performs poorly for three entity types: `LOCATION`, `NRP` and `PERSON`. Why does presidio struggle here? Let's take a look at some of the most frequently misclassified tokens.
 
-![](presidio_most_common_fn.png)
+![](benchmarks/presidio_most_common_fn.png)
 
 Looking at common false positives, we can see that presidio hones in on tokens like `type` `str` and `/td`, which are common in html and xml, likely because the model hasn’t seen this kind of protocol trace data before.
 
 What about false negatives? Judging from the word cloud below, we can see that presidio struggles to identify common location-related keywords, probably because they are embedded in protocol trace data instead of the free text presidio is used to seeing.
 
-![False negative tokens for LOCATION entity in Presidio Analyzer (Spacy)](presidio-spacy-LOCATION-fns-wordcloud.png)
+![False negative tokens for LOCATION entity in Presidio Analyzer (Spacy)](benchmarks/presidio-spacy-LOCATION-fns-wordcloud.png)
 
 ### Flair
 
@@ -159,15 +159,15 @@ How is Flair different from Presidio Analyzer? For our purposes, the primary dif
 
 We can see that Flair performs significantly better than presidio for `PERSON` and `LOC` while also reporting decent results for `ORG`.
 
-![](f2_scores_flair-ner-english-large.png)
+![](benchmarks/f2_scores_flair-ner-english-large.png)
 
 Looking at the most common false positive tokens shows us that Flair, like Spacy, gets confused by html keywords like `/td` and `th`.
 
-![](flair_most_common_fn.png)
+![](benchmarks/flair_most_common_fn.png)
 
 What about false negatives? From the word cloud below, we see that Flair struggles with a variety of names, likely because they are contained within protocol traces and not the free text this model was trained on.
 
-![False negative tokens for PERSON entity in Flair English Large](flair-ner-english-large-PERSON-fns-wordcloud.png)
+![False negative tokens for PERSON entity in Flair English Large](benchmarks/flair-ner-english-large-PERSON-fns-wordcloud.png)
 
 ## Custom PII Classifier
 
@@ -180,7 +180,7 @@ Can we do better than existing classifiers? Let’s train new models and benchma
 
 To improve data coverage, I have added three additional labelled datasets to my training data: [CONLL](https://www.clips.uantwerpen.be/conll2003/ner/) (news articles), [WikiGold](https://github.com/juand-r/entity-recognition-datasets/tree/master/data/wikigold/) (wikipedia text), and [OntoNotes](https://catalog.ldc.upenn.edu/LDC2013T19) (various genres of free text). Finally, to reduce training time, I have used only 20% of Privy’s synthetic dataset, which amounts to 120k unique samples. See the graph below for F2 scores on a test set pooled from all data sources.
 
-![](f2_scores.png)
+![](benchmarks/f2_scores.png)
 
 ## Redact and Anonymize (Demo)
 
