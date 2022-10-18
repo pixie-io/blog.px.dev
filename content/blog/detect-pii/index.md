@@ -8,20 +8,17 @@ authors: ['Benjamin Kilimnik']
 emails: ['benjaminkilimnik@gmail.com']
 ---
 
-### Introducing a [PII detector for protocol trace data.](https://detect.streamlitapp.com/) Give it a try and [tell us what you think.](https://github.com/pixie-io/pixie/issues/623) It uses a [custom NLP model](https://huggingface.co/beki/en_spacy_pii_distilbert) trained on a [new PII dataset](https://huggingface.co/datasets/beki/privy) for protocol traces.
+<alert severity="info">
+This post introduces a<a href="https://detect.streamlitapp.com/" target="blank_"> PII detector for structured data</a>. Give it a try and <a href="https://github.com/pixie-io/pixie/issues/623" target="blank_">tell us what you think</a>. It uses a custom NLP model trained on a new PII dataset for protocol traces.
+</alert>
 
 ![](sample_pii_json.png)
 
-It's 10 pm and you're on-call. A few minutes ago, you received a slack message about performance issues affecting users of your application. You sigh, pour yourself some instant coffee, and start pulling up the logs of your [Kubernetes cluster](notion://www.notion.so/Kubernetes.io). By chance, you peek at the latest HTTP request coming through - it's a purchase for foot cream. Not only that, but it has the customer's name, email, and IP address written all over it.
+It's 10 pm and you're on-call. A few minutes ago, you received a slack message about performance issues affecting users of your application. You sigh, pour yourself some instant coffee, and start pulling up the logs of your Kubernetes cluster. By chance, you peek at the latest HTTP request coming through - it's a purchase for foot cream. Not only that, but it has the customer's name, email, and IP address written all over it.
 
 **"Ah," you think to yourself. "I probably shouldn't be seeing this."**
 
-How often in your career have you muttered these words? With so much personal data flowing through applications, it can be all too easy to chance upon sensitive information while debugging issues. Some observability tools, like [Pixie](https://px.dev/), enable users to [redact data sources they know to be sensitive](https://docs.px.dev/reference/admin/deploy-options/#setting-the-data-access-mode). Unfortunately, this solution drops entire categories of data, removing information that may be useful for debugging. To prevent privacy leaks while retaining useful information, developers need a system that finds and redacts only the sensitive parts of each data sample.
-
-<a href="https://detect.streamlitapp.com/" target="_blank">
-<img src="pii_anonymizer_demo.png">
-</img>
-</a>
+How often in your career have you muttered these words? With so much personal data flowing through applications, it can be all too easy to chance upon sensitive information while debugging issues. Some observability tools, like Pixie, enable users to [redact data sources they know to be sensitive](https://docs.px.dev/reference/admin/deploy-options/#setting-the-data-access-mode). Unfortunately, this solution drops entire categories of data, removing information that may be useful for debugging. To prevent privacy leaks while retaining useful information, developers need a system that finds and redacts only the sensitive parts of each data sample.
 
 Recent breakthroughs in natural language processing (NLP) have made PII detection and redaction in unseen datasets feasible. In this blog post, I present:
 
@@ -33,7 +30,7 @@ Recent breakthroughs in natural language processing (NLP) have made PII detectio
 
 ## How do I redact PII with Pixie?
 
-[Pixie](https://px.dev/) is an open source observability tool for Kubernetes applications that uses eBPF to automatically trace application requests, removing the need for manual instrumentation. Pixie supports a `PIIRestricted` data access mode that redacts a limited number of PII types (IPs, emails, MAC addresses, IMEI, credit cards, IBANs, and SSNs) using rule-based logic. **If you'd like to see [a more advanced NLP-based PII detector](https://detect.streamlitapp.com) added to Pixie, please [upvote this feature request](https://github.com/pixie-io/pixie/issues/623)!**
+Pixie is an open source observability tool for Kubernetes applications that uses eBPF to automatically trace application requests, removing the need for manual instrumentation. Pixie supports a `PIIRestricted` data access mode that redacts a limited number of PII types (IPs, emails, MAC addresses, IMEI, credit cards, IBANs, and SSNs) using rule-based logic. **If you'd like to see a more advanced NLP-based PII detector added to Pixie, please [upvote this feature request](https://github.com/pixie-io/pixie/issues/623)!**
 
 ## Why care about sensitive data?
 
@@ -49,7 +46,7 @@ Rule based approaches (including regex) can be helpful for detecting pattern-bas
 
 ### How do we know it's working?
 
-A machine learning system is only [as accurate as the data it's trained on](https://www.computer.org/csdl/magazine/ex/2009/02/mex2009020008/13rRUy0HYO). To have a good sense of how well a model performs, we need a dataset representative of the real life conditions it will be used in. In our case, we are looking for PII data a developer might encounter while debugging an application, including network data, logs, and protocol traces. Unfortunately, this data is not readily available - because PII is sensitive, public PII datasets are scarce. One option is to train on data leaks, though this data tends to be unlabelled, and is morally questionable to use. The labelled datasets that do exist (including 4-class [Conll](https://paperswithcode.com/dataset/conll-2003), and 18-class [OntoNotes](https://catalog.ldc.upenn.edu/LDC2013T19)) consist of news articles and telephone conversations instead of the debugging information we need.
+A machine learning system is only [as accurate as the data it's trained on](https://research.google/pubs/pub35179/). To have a good sense of how well a model performs, we need a dataset representative of the real life conditions it will be used in. In our case, we are looking for PII data a developer might encounter while debugging an application, including network data, logs, and protocol traces. Unfortunately, this data is not readily available - because PII is sensitive, public PII datasets are scarce. One option is to train on data leaks, though this data tends to be unlabelled, and is morally questionable to use. The labelled datasets that do exist (including 4-class [Conll](https://paperswithcode.com/dataset/conll-2003), and 18-class [OntoNotes](https://catalog.ldc.upenn.edu/LDC2013T19)) consist of news articles and telephone conversations instead of the debugging information we need.
 
 ## Introducing a new PII dataset
 
