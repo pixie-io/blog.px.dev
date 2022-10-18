@@ -28,13 +28,18 @@ Here are some of the events we'll be attending. We hope to see you at them, alon
 **Wednesday, October 26**
 
 - 11:55 AM EDT: [Resize Your Pods In-Place With Deterministic eBPF Triggers](https://sched.co/182HU) - Pablo Chico de Guzman (Okteto), Vinay Kulkarni (Futurewei Technologies)
-
 - 2:30 PM EDT: [Kubernet-Bees: How Bees Solve Problems Of Distributed Systems](https://sched.co/182DK) - Simon Emms & Christian Weichel (Gitpod)
-
 - 4:30 PM EDT: [Fluent Bit V2.0: Unifying Open Standards For Logs, Metrics & Traces](https://sched.co/182NO) - Eduardo Silva & Anurag Gupta (Calyptia)
 
 **Thursday, October 27**
 
 - 11:55 AM EDT: [Edge-Native Application Principles: Taking Your App Beyond the Cloud](https://sched.co/182Nv) - Kate Goldenring (Fermyon), Amar Kapadia (Aarna Networks)
-
 - 2:30 PM EDT: [Edge-Native: The New Paradigm For Operating And Developing Edge Apps](https://sched.co/182Gx) - Frank Brockners (Cisco)
+
+**Friday, October 28**
+
+- 11:00 AM EDT: [How Adobe Planned For Scale With Argo CD, Cluster API, And VCluster](https://sched.co/182Dx) - Joseph Sandoval (Adobe) & Dan Garfield (Codefresh)
+- 11:00 AM EDT: [SIG-Multicluster Intro And Deep Dive](https://sched.co/182P2) - Jeremy Olmsted-Thompson & Laura Lorenz (Google), Paul Morie (Apple)
+- 11:00 AM EDT: [cert-manager - Past, Present and Future](https://sched.co/1Bvui) - Jake Sanders, cert-manager Maintainer & Ashley Davis (Jetstack)
+- 2:00 PM EDT: [Dynamically Testing Individual Microservice Releases In Production](https://sched.co/182Ep) - Matt Turner (Tetrate)
+- 4:00 PM EDT: [SIG Autoscaling Updates And Feature Highlights](https://sched.co/182Pl) - Marcin Wielgus & Jayant Jain (Google), Diego Bonfigli (Sysdig)
