@@ -1,7 +1,7 @@
 ---
 path: '/detect-pii'
 title: "I shouldn't be seeing this: anonymize sensitive data while debugging using NLP"
-date: 2022-10-10T06:00:00.000+00:00
+date: 2022-10-18T06:00:00.000+00:00
 featured_image: hero.png
 categories: ['Pixie Team Blogs', 'PII', 'Security']
 authors: ['Benjamin Kilimnik']
