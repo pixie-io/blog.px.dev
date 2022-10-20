@@ -154,7 +154,7 @@ Let’s take a look at the F2 score for presidio’s PII detection system on our
 </figure>
 :::
 
-Overall, considering that Presidio was designed for and trained on free text (news articles, phone conversations etc.) it performs remarkably well on our protocol trace dataset. That said, Presidio, specifically its underlying Spacy NER model, performs poorly for three entity types: `LOCATION`, `NRP` and `PERSON`. Why does Presidio struggle here? Let's take a look at some of the most frequently misclassified tokens.
+Overall, considering that Presidio was designed for and trained on free text (news articles, phone conversations etc.) it performs remarkably well on our protocol trace dataset. That said, Presidio, specifically its underlying Spacy NER model, performs poorly for three entity types: `LOCATION`, `NRP` and `PERSON`. Why does Spacy struggle here? Let's take a look at some of the most frequently misclassified tokens.
 
 ::: div image-xl
 
@@ -163,9 +163,9 @@ Overall, considering that Presidio was designed for and trained on free text (ne
 </figure>
 :::
 
-Looking at common false positives, we can see that Presidio hones in on tokens like `type` `str` and `/td`, which are common in html and xml, likely because the model hasn’t seen this kind of protocol trace data before.
+Looking at common false positives, we can see that Spacy hones in on tokens like `type` `str` and `/td`, which are common in html and xml, likely because the model hasn’t seen this kind of protocol trace data before.
 
-What about false negatives? Judging from the word cloud below, we can see that Presidio's Spacy NER model struggles to identify common location-related keywords, probably because they are embedded in protocol trace data instead of the free text Presidio is used to seeing.
+What about false negatives? Judging from the word cloud below, we can see that Spacy struggles to identify common location-related keywords, probably because they are embedded in protocol trace data instead of the free text this model was trained on.
 
 ::: div image-xl
 
@@ -178,7 +178,7 @@ What about false negatives? Judging from the word cloud below, we can see that P
 
 How is Flair different from Presidio Analyzer? For our purposes, the primary difference is that it supports one more PII entity out-of-the-box: `ORG` (organizations). I have benchmarked `flair-ner-english-large`, a NER model that uses [transformer embeddings](https://huggingface.co/xlm-roberta-large) and has entity labels similar to Privy.
 
-We can see that Flair performs significantly better than Presidio for `PERSON` and `LOC` while also reporting decent results for `ORG`.
+We can see that Flair performs significantly better than the Spacy NER model for `PERSON` and `LOC` while also reporting decent results for `ORG`.
 
 ![F2 scores for Flair evaluated on protocol trace data](benchmarks/f2_scores_flair-ner-english-large.png)
 
