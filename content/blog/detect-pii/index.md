@@ -1,16 +1,12 @@
 ---
 path: '/detect-pii'
 title: "I shouldn't be seeing this: anonymize sensitive data while debugging using NLP"
-date: 2022-10-18T06:00:00.000+00:00
+date: 2022-10-24T06:00:00.000+00:00
 featured_image: hero.png
 categories: ['Pixie Team Blogs', 'PII', 'Security']
 authors: ['Benjamin Kilimnik']
 emails: ['benjaminkilimnik@gmail.com']
 ---
-
-<alert severity="info">
-This post introduces a<a href="https://detect.streamlitapp.com/" target="blank_"> PII detector for structured data</a>. Give it a try and <a href="https://github.com/pixie-io/pixie/issues/623" target="blank_">tell us what you think</a>. It uses a custom NLP model trained on a new PII dataset for protocol traces.
-</alert>
 
 ::: div image-xl
 
@@ -35,7 +31,7 @@ Recent breakthroughs in natural language processing (NLP) have made PII detectio
 
 ## How do I redact PII with Pixie?
 
-Pixie is an open source observability tool for Kubernetes applications that uses eBPF to automatically trace application requests, removing the need for manual instrumentation. Pixie supports a `PIIRestricted` data access mode that redacts a limited number of PII types (IPs, emails, MAC addresses, IMEI, credit cards, IBANs, and SSNs) using rule-based logic. **If you'd like to see a more advanced NLP-based PII detector added to Pixie, please [upvote this feature request](https://github.com/pixie-io/pixie/issues/623)!**
+Pixie is an open source observability tool for Kubernetes applications that uses eBPF to automatically trace application requests, removing the need for manual instrumentation. Pixie supports a `PIIRestricted` data access mode that redacts a limited number of PII types (IPs, emails, MAC addresses, IMEI, credit cards, IBANs, and SSNs) using rule-based logic. Adding an NLP-based classifier would enable Pixie to detect additional PII like names and addresses. The Pixie project is gauging community interest in this [feature request](https://github.com/pixie-io/pixie/issues/623) - feel free to check it out and add comments.
 
 ## Why care about sensitive data?
 
