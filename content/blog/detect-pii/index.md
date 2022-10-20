@@ -12,7 +12,12 @@ emails: ['benjaminkilimnik@gmail.com']
 This post introduces a<a href="https://detect.streamlitapp.com/" target="blank_"> PII detector for structured data</a>. Give it a try and <a href="https://github.com/pixie-io/pixie/issues/623" target="blank_">tell us what you think</a>. It uses a custom NLP model trained on a new PII dataset for protocol traces.
 </alert>
 
-![](sample_pii_json.png)
+::: div image-xl
+
+<figure>
+  <img src="sample_pii_json.png" alt="PII detection in protocol trace data" />
+</figure>
+:::
 
 It's 10 pm and you're on-call. A few minutes ago, you received a slack message about performance issues affecting users of your application. You sigh, pour yourself some instant coffee, and start pulling up the logs of your Kubernetes cluster. By chance, you peek at the latest HTTP request coming through - it's a purchase for foot cream. Not only that, but it has the customer's name, email, and IP address written all over it.
 
@@ -76,11 +81,13 @@ This synthetic dataset was generated using [Privy](https://github.com/pixie-io/p
 
 [Try it out for yourself](https://github.com/pixie-io/pixie/tree/main/src/datagen/pii/privy#quickstart) using a custom OpenAPI spec. By default, Privy draws from roughly 4000 descriptors stored in the [OpenAPI directory](https://github.com/APIs-guru/openapi-directory) to generate data, producing templates that can be used to generate a configurable number of unique data samples. Privy is language and region extensible, though it is currently configured to generate PII data in [English](https://github.com/pixie-io/pixie/blob/main/src/datagen/pii/privy/privy/providers/english_us.py) and [German](https://github.com/pixie-io/pixie/blob/main/src/datagen/pii/privy/privy/providers/german_de.py).
 
-![How Privy works](privy_flowchart.svg)
+::: div image-xl
+<svg title='Overview of Privy, a synthetic PII data generator for protocol trace data' src='privy_flowchart.svg' />
+:::
 
 ### How realistic is this data?
 
-Great care was taken to provide highly realistic PII data providers. For instance, to generate organizations Privy draws from a list of 30,000 names I manually compiled from stock exchange listings and government directories. Other personal information like names and addresses can be obtained from the [Fake Name Generator](https://www.fakenamegenerator.com/) and loaded into Privy. Additionally, Privy implements custom generators for rule based PII data like passports, driver’s licenses, mac addresses, and more.
+Great care was taken to provide highly realistic PII data providers. For instance, to generate organizations Privy draws from a list of 21,000 names I manually compiled from stock exchange listings and government directories. Other personal information like names and addresses can be obtained from the [Fake Name Generator](https://www.fakenamegenerator.com/) and loaded into Privy. Additionally, Privy implements custom generators for rule based PII data like passports, driver’s licenses, mac addresses, and more.
 
 ## Benchmarking existing PII classifiers
 
@@ -99,7 +106,9 @@ Since the models surveyed use different labels for their entities, I had to tran
 <details closed>
 <summary>PII label conversions</summary>
 
-![](privy_pii_label_conversions.svg)
+::: div image-xl
+<svg title='PII label conversions from Privy to other frameworks' src='privy_pii_label_conversions.svg' />
+:::
 
 </details>
 
@@ -138,33 +147,58 @@ No need to understand the full equation here - intuitively, the beta parameter a
 
 Let’s take a look at the F2 score for presidio’s PII detection system on our dataset. It is important to note that Presidio uses Spacy’s `en_core_web_lg` NER model under the hood by default to detect `PERSON`, `NRP` (nationalities, religious and political groups), `LOCATION`, and `DATE_TIME`. The remaining PII types are found with rule-based logic.
 
-![](benchmarks/f2_scores_presidio_spacy.png)
+::: div image-xl
 
-Overall, considering that Presidio was designed for and trained on free text (news articles, phone conversations etc.) it performs remarkably well on our protocol trace dataset. That said, it performs poorly for three entity types: `LOCATION`, `NRP` and `PERSON`. Why does presidio struggle here? Let's take a look at some of the most frequently misclassified tokens.
+<figure>
+  <img src="benchmarks/f2_scores_presidio_spacy.png" alt="F2 scores for Presidio with Spacy NER on PII dataset for protocol traces" />
+</figure>
+:::
 
-![](benchmarks/presidio_most_common_fn.png)
+Overall, considering that Presidio was designed for and trained on free text (news articles, phone conversations etc.) it performs remarkably well on our protocol trace dataset. That said, Presidio, specifically its underlying Spacy NER model, performs poorly for three entity types: `LOCATION`, `NRP` and `PERSON`. Why does Presidio struggle here? Let's take a look at some of the most frequently misclassified tokens.
 
-Looking at common false positives, we can see that presidio hones in on tokens like `type` `str` and `/td`, which are common in html and xml, likely because the model hasn’t seen this kind of protocol trace data before.
+::: div image-xl
 
-What about false negatives? Judging from the word cloud below, we can see that presidio struggles to identify common location-related keywords, probably because they are embedded in protocol trace data instead of the free text presidio is used to seeing.
+<figure>
+  <img src="benchmarks/presidio_most_common_fn.png" alt="Most common False Positive tokens for Presidio with Spacy NER evaluated on protocol trace data" />
+</figure>
+:::
 
-![False negative tokens for LOCATION entity in Presidio Analyzer (Spacy)](benchmarks/presidio-spacy-LOCATION-fns-wordcloud.png)
+Looking at common false positives, we can see that Presidio hones in on tokens like `type` `str` and `/td`, which are common in html and xml, likely because the model hasn’t seen this kind of protocol trace data before.
+
+What about false negatives? Judging from the word cloud below, we can see that Presidio's Spacy NER model struggles to identify common location-related keywords, probably because they are embedded in protocol trace data instead of the free text Presidio is used to seeing.
+
+::: div image-xl
+
+<figure style="width:80%; display: block; margin-left: auto; margin-right: auto;">
+  <img src="benchmarks/presidio-spacy-LOCATION-fns-wordcloud.png" alt="False negative tokens for LOCATION entity in Presidio with Spacy NER evaluated on protocol trace data" />
+</figure>
+:::
 
 ### Flair
 
 How is Flair different from Presidio Analyzer? For our purposes, the primary difference is that it supports one more PII entity out-of-the-box: `ORG` (organizations). I have benchmarked `flair-ner-english-large`, a NER model that uses [transformer embeddings](https://huggingface.co/xlm-roberta-large) and has entity labels similar to Privy.
 
-We can see that Flair performs significantly better than presidio for `PERSON` and `LOC` while also reporting decent results for `ORG`.
+We can see that Flair performs significantly better than Presidio for `PERSON` and `LOC` while also reporting decent results for `ORG`.
 
-![](benchmarks/f2_scores_flair-ner-english-large.png)
+![F2 scores for Flair evaluated on protocol trace data](benchmarks/f2_scores_flair-ner-english-large.png)
 
 Looking at the most common false positive tokens shows us that Flair, like Spacy, gets confused by html keywords like `/td` and `th`.
 
-![](benchmarks/flair_most_common_fn.png)
+::: div image-xl
+
+<figure>
+  <img src="benchmarks/flair_most_common_fn.png" alt="False negative tokens for LOCATION entity in Flair evaluated on protocol trace data" />
+</figure>
+:::
 
 What about false negatives? From the word cloud below, we see that Flair struggles with a variety of names, likely because they are contained within protocol traces and not the free text this model was trained on.
 
-![False negative tokens for PERSON entity in Flair English Large](benchmarks/flair-ner-english-large-PERSON-fns-wordcloud.png)
+::: div image-xl
+
+<figure style="width:80%; display: block; margin-left: auto; margin-right: auto;">
+  <img src="benchmarks/flair-ner-english-large-PERSON-fns-wordcloud.png" alt="False negative tokens for PERSON entity in Flair evaluated on protocol trace data" />
+</figure>
+:::
 
 ## Custom PII Classifier
 
@@ -177,7 +211,12 @@ Can we do better than existing classifiers? Let’s train new models and benchma
 
 To improve data coverage, I have added three additional labelled datasets to my training data: [CONLL](https://www.clips.uantwerpen.be/conll2003/ner/) (news articles), [WikiGold](https://github.com/juand-r/entity-recognition-datasets/tree/master/data/wikigold/) (wikipedia text), and [OntoNotes](https://catalog.ldc.upenn.edu/LDC2013T19) (various genres of free text). Finally, to reduce training time, I have used only 20% of Privy’s synthetic dataset, which amounts to 120k unique samples. See the graph below for F2 scores on a test set pooled from all data sources.
 
-![](benchmarks/f2_scores.png)
+::: div image-xl
+
+<figure>
+  <img src="benchmarks/f2_scores.png" alt="F2 scores for custom PII detection models trained on protocol trace data" />
+</figure>
+:::
 
 ## Redact and Anonymize (Demo)
 
@@ -185,10 +224,14 @@ Okay, so we’ve improved the PII identification element, but how do we actually
 
 Let’s see it in action.
 
+::: div image-xl
+
+<figure>
 <a href="https://detect.streamlitapp.com/" target="_blank">
-<img src="demo.png">
-</img>
+  <img src="demo.png" alt="PII detector for structured data demo" />
 </a>
+</figure>
+:::
 
 Test it for yourself - this [PII anonymizer is hosted on streamlit](https://detect.streamlitapp.com/)!
 
