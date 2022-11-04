@@ -1,7 +1,7 @@
 ---
 path: '/detect-pii'
 title: "I shouldn't be seeing this: anonymize sensitive data while debugging using NLP"
-date: 2022-10-24T06:00:00.000+00:00
+date: 2022-11-04T06:00:00.000+00:00
 featured_image: hero.png
 categories: ['Pixie Team Blogs', 'PII', 'Security']
 authors: ['Benjamin Kilimnik']
@@ -11,7 +11,7 @@ emails: ['benjaminkilimnik@gmail.com']
 ::: div image-xl
 
 <figure>
-  <img src="sample_pii_json.png" alt="PII detection in protocol trace data" />
+  <img src="sample_pii_json.png" alt="Detect PII in protocol trace data" />
 </figure>
 :::
 
@@ -23,11 +23,13 @@ How often in your career have you muttered these words? With so much personal da
 
 Recent breakthroughs in natural language processing (NLP) have made PII detection and redaction in unseen datasets feasible. In this blog post, I present:
 
-- **[A new public PII dataset for structured data](#download-it-here!)**
-- **[Privy, a synthetic PII data generator](#how-was-this-data-generated)**
-- [**Benchmarks for off-the-shelf PII classifiers**](#benchmarking-existing-pii-classifiers)
-- **[Custom PII classifiers for protocol trace data (SQL, JSON etc)](#custom-pii-classifier)**
-- **[An interactive demo of a PII anonymizer](https://detect.streamlitapp.com/)**
+<ul>
+  <li><a href="https://huggingface.co/spaces/beki/pii-anonymizer" target="_blank"><b>An interactive demo of a PII anonymizer</b></a></li>
+  <li><a href="#introducing-a-new-pii-dataset"><b> A new public PII dataset for structured data</b></a></li>
+  <li><a href="#how-was-this-data-generated"><b>Privy, a synthetic PII data generator</b></a></li>
+  <li><a href="#benchmarking-existing-pii-classifiers"><b>Benchmarks for off-the-shelf PII classifiers</b></a></li>
+  <li><a href="#custom-pii-classifier"><b>Custom PII classifiers for protocol trace data (SQL, JSON etc)</b></a></li>
+</ul>
 
 ## How do I redact PII with Pixie?
 
@@ -53,7 +55,7 @@ A machine learning system is only [as accurate as the data it's trained on](http
 
 Due to the lack of public PII datasets for debugging information, I have generated a synthetic dataset that approximates real world data. **To my knowledge, this is the largest, public PII dataset currently available for structured data.** This new, labelled PII dataset consists of protocol traces (`JSON, SQL (PostgreSQL, MySQL), HTML, and XML`) generated from [OpenAPI specifications](https://swagger.io/specification/) and includes [60+ PII types](https://github.com/pixie-io/pixie/blob/main/src/datagen/pii/privy/privy/providers/english_us.py).
 
-### Download it here!
+### Download it here
 
 The dataset is [publicly available on huggingface](https://huggingface.co/datasets/beki/privy). It contains token-wise labeled samples that can be used to train and evaluate sequence labelling models that detect the exact position of PII entities in text, as I will do [later in this article](#custom-pii-classifier).
 
@@ -214,22 +216,18 @@ To improve data coverage, I have added three additional labelled datasets to my 
 </figure>
 :::
 
-## Redact and Anonymize (Demo)
+## Redact and Anonymize Demo
 
 Okay, so we’ve improved the PII identification element, but how do we actually redact PII from text? One way is to integrate our custom models with Presidio’s Anonymizer engine. This allows us to use Presidio’s rule-based classifiers for PII it excels at finding (phone numbers, emails etc.) while using our custom model to find the entities Presidio struggles with (`LOCATION` `PERSON`, `NRP`, `ORGANIZATION`).
 
-Let’s see it in action.
+Let’s see it in action — this [PII anonymizer is hosted on huggingface](https://huggingface.co/spaces/beki/pii-anonymizer) and [on streamlit](https://detect.streamlitapp.com/)!
 
 ::: div image-xl
 
 <figure>
-<a href="https://detect.streamlitapp.com/" target="_blank">
   <img src="demo.png" alt="PII detector for structured data demo" />
-</a>
 </figure>
 :::
-
-Test it for yourself - this [PII anonymizer is hosted on streamlit](https://detect.streamlitapp.com/)!
 
 ## Inference Speed
 
