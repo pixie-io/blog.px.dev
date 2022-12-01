@@ -183,6 +183,6 @@ So how do you get the BTF for your host machine? If your kernel was compiled wit
 
 For example, for Pixie, we support kernels as old as 4.14, which won’t have BTF built-in; to make sure we have the widest possible support across kernel versions, we have found ourselves in a spot where we have had to stick with BCC. What else can one do?
 
-Fortunately, there are cool new projects on the horizon. Check out [Part 2]() to see how to use CO-RE with a BTF repository called [BTFHub](https://github.com/aquasecurity/btfhub) to enable deployments across a wide range of machines.
+Fortunately, there are cool new projects on the horizon. Check out Part 2 (coming soon!) to see how to use CO-RE with a BTF repository called [BTFHub](https://github.com/aquasecurity/btfhub) to enable deployments across a wide range of machines.
 
 Questions? Comments? Find us on [Slack](https://slackin.px.dev/) or [Twitter](https://twitter.com/pixie_run).
