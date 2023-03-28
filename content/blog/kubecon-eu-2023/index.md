@@ -27,6 +27,10 @@ Here are some of the events we'll be attending. We hope to see you at them, alon
 
 **Wednesday, April 19**
 
+- 11:00 CEST: [It Is More Than Just Correlation - A Debug Journey](https://sched.co/1HyaD) - Simon Pasuqier & Vanessa Martini (Red Hat)
+- 14:30 CEST: [Understand Systems with OpenTelemetry: A Hybrid Telemetry Data Backend](https://sched.co/1Hyb2) - Ran Xu, Huawei & Xiaochun Yang (Northeastern University)
+- 17:25 CEST: [Defining A Common Observability Query Language and Other Observability TAG Updates](https://sched.co/1Ipz2) - Alolita Sharma & Matt Young (Apple)
+- 17:25 CEST: [Life Without Sidecars - Is eBPF's Promise Too Good to Be True?](https://sched.co/1HyZd) - Zahari Dichev (Buoyant)
 - 17:25 CEST: [Making Sense of Your Vital Signals: The Future of Pod and Containers Monitoring](https://sched.co/1HydJ) - David Porter (Google), Peter Hunt (Red Hat)
 - 17:25 CEST: [OTel Me About Metrics: A Metrics 101 Crash Course](https://sched.co/1Hya1) - Reese Lee (New Relic)
 
