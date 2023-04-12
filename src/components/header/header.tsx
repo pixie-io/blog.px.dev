@@ -78,7 +78,7 @@ const DesktopAlertBar = () => (
       },
     }}
     >
-        Join us at KubeCon EU, April 18-21!
+        Join us at KubeCon + CloudNativeCon EU, April 18-21!
         <MuiLink
           href='https://blog.px.dev/kubecon-eu-2023/'
           target='_blank'
