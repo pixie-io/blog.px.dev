@@ -49,7 +49,7 @@ function ElevationScroll(props: { children: any }) {
 
 const MobileAlertBar = () => (
     <MuiLink
-      href='https://blog.px.dev/kubecon-eu-2023/'
+      href='http://blog.px.dev/plugin-system/'
       target='_blank'
       sx={{
         color: 'success.main',
@@ -64,7 +64,7 @@ const MobileAlertBar = () => (
         },
       }}
     >
-        Join us at KubeCon EU!
+        Pixie has an OpenTelemetry plugin!
     </MuiLink>
 );
 const DesktopAlertBar = () => (
@@ -78,9 +78,9 @@ const DesktopAlertBar = () => (
       },
     }}
     >
-        Join us at KubeCon + CloudNativeCon EU, April 18-21!
+        Export Pixie data in the OpenTelemetry format.
         <MuiLink
-          href='https://blog.px.dev/kubecon-eu-2023/'
+          href='http://blog.px.dev/plugin-system/'
           target='_blank'
           sx={{
             color: 'success.main',
