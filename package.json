@@ -48,7 +48,7 @@
     "algoliasearch": "^4.13.0",
     "dotenv": "^14.3.2",
     "escape-string-regexp": "^5.0.0",
-    "gatsby": "^4.14.1",
+    "gatsby": "^4.25.7",
     "gatsby-plugin-algolia": "^0.26.0",
     "gatsby-plugin-feed": "^4.12.1",
     "gatsby-plugin-google-fonts": "^1.0.1",

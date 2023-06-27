@@ -95,12 +95,12 @@ const DesktopAlertBar = () => (
 );
 
 function Header() {
-  const colorContext = useContext(ColorThemeContext);
+  const { colorMode, setColorMode } = useContext(ColorThemeContext);
   const [open, setOpen] = React.useState(true);
 
   const onThemeTypeSwitch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    colorContext.setColorMode(colorContext.colorMode === 'light' ? 'dark' : 'light');
+    setColorMode(colorMode === 'light' ? 'dark' : 'light');
   };
 
   return (
@@ -170,7 +170,7 @@ function Header() {
                                     </Box>
 
                                     <IconButton size='small' onClick={onThemeTypeSwitch}>
-                                        {colorContext.colorMode === 'light'
+                                        {colorMode === 'light'
                                           ? <Brightness4 style={{ color: '#B2B5BB' }} />
                                           : <Brightness7 style={{ color: '#B2B5BB' }} />}
                                     </IconButton>
