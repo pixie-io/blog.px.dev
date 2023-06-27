@@ -89,13 +89,17 @@ exports.createPages = async ({ graphql, actions }) => {
     const repeatedUrlPath = (urlPath + urlPath).replaceAll('//', '/');
 
     const redirects = {
-      '/ebpf/function-tracing/': [
+      '/ebpf-function-tracing/': [
         blogPrefix + '/ebpf-function-tracing/post/',
         '/ebpf-function-tracing/post/',
       ],
       '/open-source-auth/': [
         blogPrefix + '/open-source-auth/ossauth/',
         '/open-source-auth/ossauth/',
+      ],
+      '/public-beta-launch/': [
+        blogPrefix + '/beta-launch/beta-launch/',
+        '/beta-launch/beta-launch/',
       ],
       [urlPath]: [
         blogPrefix + post.node.fields.slug,
