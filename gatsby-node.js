@@ -85,13 +85,40 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const posts = result.data.blog.edges;
   posts.forEach((post) => {
-    const urlPath = (post.node.fields.slug).replace('//', '/');
-    createRedirect({
-      fromPath: (blogPrefix + post.node.fields.slug).replace('//', '/'),
-      toPath: urlPath,
-      redirectInBrowser: true,
-      isPermanent: true,
-    });
+    const urlPath = post.node.fields.slug.replaceAll('//', '/');
+    const repeatedUrlPath = (urlPath + urlPath).replaceAll('//', '/');
+
+    const redirects = {
+      '/ebpf-function-tracing/': [
+        blogPrefix + '/ebpf-function-tracing/post/',
+        '/ebpf-function-tracing/post/',
+      ],
+      '/open-source-auth/': [
+        blogPrefix + '/open-source-auth/ossauth/',
+        '/open-source-auth/ossauth/',
+      ],
+      '/public-beta-launch/': [
+        blogPrefix + '/beta-launch/beta-launch/',
+        '/beta-launch/beta-launch/',
+      ],
+      [urlPath]: [
+        blogPrefix + post.node.fields.slug,
+        blogPrefix + repeatedUrlPath,
+        repeatedUrlPath,
+      ],
+    };
+
+    for (const toPath of Object.keys(redirects)) {
+      for (const fromPath of redirects[toPath]) {
+        createRedirect({
+          fromPath: fromPath.replaceAll('//', '/'),
+          toPath,
+          redirectInBrowser: true,
+          isPermanent: true,
+        });
+      }
+    }
+
     actions.createPage({
       path: urlPath,
       component: blogPost,
