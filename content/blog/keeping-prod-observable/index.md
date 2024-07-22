@@ -2,7 +2,7 @@
 path: '/keeping-prod-observable'
 title: 'Keeping Production Observable with rising costs'
 date: 2021-10-20T06:00:00.000+00:00
-featured_image: autoscaling-hero.png
+featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
 authors: ['Dom Delnano']
 emails: ['ddelnano@px.dev']
