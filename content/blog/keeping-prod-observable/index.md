@@ -1,7 +1,7 @@
 ---
 path: '/keeping-prod-observable'
 title: 'Keeping Production Observable with rising costs'
-date: 2024-07-22T06:00:00.000+00:00
+date: 2024-07-23T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['Pixie Team Blogs']
 authors: ['Dom Delnano']
@@ -22,7 +22,11 @@ Let's dive into how we architected Pixie to address this observability cost cris
 
 ## Pixie's edge architecture
 
--- Add Pixie arch image
+::: div image-xl
+<figure>
+  <img src="assets/pixie-architecture.png" alt="Pixie's architecture when executing PxL scripts. The query broker sends the script to each PEM and the node level results are aggregated and sent back to the client." />
+</figure>
+:::
 
 At the center of this architecture is Pixie's per node data collector known as the Pixie Edge Module (PEM). This component is an in-memory data store that is fully programmable through our data processing language [PxL](https://docs.px.dev/reference/pxl/) and is responsible for the data collection and processing for that node. When Pixie serves a query request, the compiler within the Query Broker service transforms the python-esque script into a directed acyclic graph of operations to execute known as the query plan. This planning process determines where the operations should run and even schedules execution on the data collector nodes when possible. Pushing these operations to the PEM avoids unnecessary data transfer and parallelizes the data processing before the Kelvin service, Pixie’s aggregator, combines the final results.
 
@@ -63,7 +67,7 @@ For this example, we will inspect the [px/http_data_filtered](https://github.com
 After deploying a workload to my two node Kubernetes cluster and enabling query analysis (details in the Appendix), the following GraphViz of the query execution was generated.
 
 ::: div image-xl
-<svg title='Query Plan Graph' src='http_filtered_query_plan.svg' />
+<svg title='Query Plan Graph' src='assets/http_filtered_query_plan.svg' />
 :::
 
 Since this cluster contains two nodes, the aggregator service (kelvin) receives two grpc source operators – one for each PEM. Because the px-sock-shop/carts Service consists of a single pod, the query should return data from only one of the two nodes.
@@ -97,7 +101,7 @@ To recreate the GraphViz seen above, I deployed the [px-sock-shop demo](https://
 </figure>
 :::
 
-Once those lines and the arguments are modified, run the script and open up the Data Drawer (use the ctrl/cmd+d keyboard shortcut). The __query_plan__ tab will contain the GraphViz of the query execution. Generating a SVG of the GraphViz yields the following graph below:
+Once those lines and the arguments are modified, run the script and open up the Data Drawer (use the ctrl/cmd+d keyboard shortcut). The `__query_plan__` tab will contain the GraphViz of the query execution. Generating a SVG of the GraphViz yields the following graph below:
 
 ::: div image-xl
 
