@@ -8,9 +8,9 @@ authors: ['Dom Delnano']
 emails: ['ddelnano@px.dev']
 ---
 
-Instrumentation free, eBPF based tools such as [DeepFlow](https://deepflow.io) and [Pixie](https://px.dev) aim to provide broad observability coverage out of the box. By leveraging eBPF[^bpf-blog], these tools inspect all network traffic by hooking into Linux's network stack (syscalls). The prevalence of TLS and encrypted traffic obscures this global view and necessitates probing applications higher in the software stack (at the TLS library layer) to regain access to the plaintext data. This moves the eBPF instrumentation from stable kernel syscalls to unstable user space interfaces (TLS libraries, application binaries, etc). In this post, we will walk through the TLS tracing tactics used by open source projects, how they've evolved to address these unstable user space library interfaces and where the future is headed.
+Instrumentation free, eBPF based tools such as [DeepFlow](https://deepflow.io) and [Pixie](https://px.dev) aim to provide broad observability coverage out of the box. By leveraging eBPF[^1], these tools inspect all network traffic by hooking into Linux's network stack (syscalls). The prevalence of TLS and encrypted traffic obscures this global view and necessitates probing applications higher in the software stack (at the TLS library layer) to regain access to the plaintext data. This moves the eBPF instrumentation from stable kernel syscalls to unstable user space interfaces (TLS libraries, application binaries, etc). In this post, we will walk through the TLS tracing tactics used by open source projects, how they've evolved to address these unstable user space library interfaces and where the future is headed.
 
-[^bpf-blog]: For an intro to eBPF and an end to end example of working with TLS see this [blog post](https://blog.px.dev/ebpf-openssl-tracing/).
+[^1]: For an intro to eBPF and an end to end example of working with TLS see this [blog post](https://blog.px.dev/ebpf-openssl-tracing/).
 
 ## Tracing TLS: An overview
 
@@ -70,7 +70,7 @@ While BPF tools ([DeepFlow](https://deepflow.io), [ecapture](https://github.com/
 
 ## The Present
 
-In order to support BoringSSL and other statically linked use cases, Pixie's team believed a new method for accessing the socket fd needed to be developed. Applications using TLS can be classified in one of two ways – BIO native and custom BIO[^bio-definition]. The former refers to when the TLS library performs IO for the application, while the latter uses the TLS library only for encryption and performs the IO itself, usually in an async manner.
+In order to support BoringSSL and other statically linked use cases, Pixie's team believed a new method for accessing the socket fd needed to be developed. Applications using TLS can be classified in one of two ways – BIO native and custom BIO[^2]. The former refers to when the TLS library performs IO for the application, while the latter uses the TLS library only for encryption and performs the IO itself, usually in an async manner.
 
 ::: div image-xl
 <figure>
@@ -78,12 +78,12 @@ In order to support BoringSSL and other statically linked use cases, Pixie's tea
 </figure>
 :::
 
-The distinction between these types of applications was important because assumptions could be made about how the functions exist on the call stack when TLS library functions are invoked. The belief (which was later verified[^verification]) was that a uprobe could access the underlying syscall socket fd for BIO native applications since `send`/`recv` would be on the call stack when `SSL_write` and `SSL_read` were called.
+The distinction between these types of applications was important because assumptions could be made about how the functions exist on the call stack when TLS library functions are invoked. The belief (which was later verified[^3]) was that a uprobe could access the underlying syscall socket fd for BIO native applications since `send`/`recv` would be on the call stack when `SSL_write` and `SSL_read` were called.
 
 This detection is orchestrated by populating a BPF map on `SSL_write`/`SSL_read` entry and the underlying syscall probe will check to see if this map is populated for the given pid and tgid, storing the socket fd if present. This is then consumed on the `SSL_write`/`SSL_read` return probes. See the following animation for a visualization of how the BPF program performs this access.
 
-[^bio-definition]: "BIO" is synonymous with [OpenSSL's BIO definition](https://docs.openssl.org/1.1.1/man7/bio/).
-[^verification]: See [appendix](#integrity-checker) for more details on the verification.
+[^2]: "BIO" is synonymous with [OpenSSL's BIO definition](https://docs.openssl.org/1.1.1/man7/bio/).
+[^3]: See [appendix](#integrity-checker) for more details on the verification.
 
 ![Animation showing the call stack and eBPF events that happen during BIO native tracing](assets/redesigned-tls-tracing.gif)
 
