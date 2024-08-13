@@ -35,7 +35,7 @@ The `send()` and `recv()` syscalls are very high up on the network stack, before
 
 ## The problem with TLS/SSL
 
-The BPF kprobe approach outlined above works well for all plain-text traffic, but will not work for encrypted connections. By the time the data flows through the Linux `send()` and `recv()` syscalls for TSL/SSL traffic, it is encrypted and we can’t make any sense of it.
+The BPF kprobe approach outlined above works well for all plain-text traffic, but will not work for encrypted connections. By the time the data flows through the Linux `send()` and `recv()` syscalls for TLS/SSL traffic, it is encrypted and we can’t make any sense of it.
 
 The approach taken by Wireshark and other low-level packet captures is to ask for the key so that the data can be decrypted. TLS handshakes are fairly complex and consist of a number of different keys and secrets, but at a high-level, there are two modes for this:
 
