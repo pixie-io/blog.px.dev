@@ -87,7 +87,7 @@ This detection is orchestrated by populating a BPF map on `SSL_write`/`SSL_read`
 
 ::: div image-xl
 <figure>
-  <img src="assets/redesigned-tls-tracing.gif" alt="Animation showing the call stack and eBPF events that happen during BIO native tracing" />
+  <img style="width: 80%" src="assets/redesigned-tls-tracing.gif" alt="Animation showing the call stack and eBPF events that happen during BIO native tracing" />
 </figure>
 :::
 
