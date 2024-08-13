@@ -85,7 +85,12 @@ This detection is orchestrated by populating a BPF map on `SSL_write`/`SSL_read`
 [^2]: "BIO" is synonymous with [OpenSSL's BIO definition](https://docs.openssl.org/1.1.1/man7/bio/).
 [^3]: See [appendix](#integrity-checker) for more details on the verification.
 
-![Animation showing the call stack and eBPF events that happen during BIO native tracing](assets/redesigned-tls-tracing.gif)
+::: div image-xl
+<figure>
+  <img src="assets/redesigned-tls-tracing.gif" alt="Animation showing the call stack and eBPF events that happen during BIO native tracing" />
+</figure>
+:::
+
 
 While this approach doesn't support custom BIO applications, the BIO native ones had significant overlap with the previous memory offset based tracing. In practice, custom BIO applications don't populate the `SSL` struct's socket fd since it's not needed – remember that the IO is decoupled from the encryption! See the diagram below that compares the coverage between the well known, initial implementation and Pixie's redesigned one.
 
