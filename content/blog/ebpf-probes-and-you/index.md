@@ -3,7 +3,7 @@ path: '/epbf-probes-and-you-navigating-linux'
 title: 'eBPF probes and you: Navigating the kernel source for tracing'
 date: 2024-09-9T06:00:00.000+00:00
 featured_image: hero-image.png
-categories: ['Pixie Team Blogs']
+categories: ['eBPF']
 authors: ['Dom Delnano']
 emails: ['ddelnano@px.dev']
 ---
