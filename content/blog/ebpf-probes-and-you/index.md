@@ -1,6 +1,6 @@
 ---
 path: '/epbf-probes-and-you-navigating-linux'
-title: 'eBPF probes and you: Navigating the kernel source for tracing'
+title: 'eBPF Probes and You: Navigating the kernel source for tracing'
 date: 2024-09-9T06:00:00.000+00:00
 featured_image: hero-image.png
 categories: ['eBPF']
@@ -12,7 +12,7 @@ eBPF's ability to reprogram the kernel for networking, observability and securit
 
 Many eBPF resources available today explore how to write eBPF programs for well known hooks (syscalls, XDP, etc) and leave future application up to the reader. While learning to write a program is half the battle, you can't start writing a program without first knowing where to attach and the data structures available to the attachment point. Therefore choosing the correct probe is crucial for solving novel challenges and can even help avoid complexity and unstable APIs.
 
-In this post, we will explore strategies to inspect the Linux source to write eBPF programs. These tactics will provide the necessary skills for fearlessly navigating Linux and were recently employed to supplement [Pixie's](https://px.dev) protocol traces with a socket's local address ([pixie#1989](https://github.com/pixie-io/pixie/pull/1989).
+In this post, we will explore strategies to inspect the Linux source to write eBPF programs. These tactics will provide the necessary skills for fearlessly navigating Linux and were recently employed to supplement [Pixie's](https://px.dev) protocol traces with a socket's local address ([pixie#1989](https://github.com/pixie-io/pixie/pull/1989)).
 
 ## Introduction to ftrace: the Linux function tracer
 
@@ -33,12 +33,12 @@ The socket syscall APIs provide easy access to the remote details of a connectio
 ::: div image-xl
 <figure>
   <pre>
-    ssize_t sendto(int sockfd, const void buf[.len], size_t len, int flags,
-                          const <b>struct sockaddr *dest_addr</b>, socklen_t addrlen);
+    ssize_t sendto(int sockfd, const void buf[.len], size_t len, int flags,<br/>
+                          const <b>struct sockaddr *dest_addr</b>, socklen_t addrlen);</br/><br/>
     
-    int connect(int sockfd, const <b>struct sockaddr *addr</b>, socklen_t addrlen);
+    int connect(int sockfd, const <b>struct sockaddr *addr</b>, socklen_t addrlen);<br/><br/>
     
-    ssize_t sendmsg(int sockfd, const struct msghdr *<b>msg</b>, int flags);
+    ssize_t sendmsg(int sockfd, const struct msghdr *<b>msg</b>, int flags);<br/>
     \# <b>msg->msg_name</b> contains the struct sockaddr
   </pre>
   <figcaption>Various linux socket syscall functions with the parameter highlighted that stores the remote side of the connection.</figcaption>
@@ -55,21 +55,21 @@ sudo trace-cmd record -F -p function_graph curl http://google.com
 Since the kernel performs many complex operations on our behalf, the resulting trace needs to be filtered to the socket handling. To do this, we need to first filter the traces to the syscalls. They can be identified by searching for any functions with a __x64_sys_ prefix as seen below:
 
 ```bash
-curl-965264 [003] 856720.850841: funcgraph_entry:                   |    __x64_sys_sendto() {
-            curl-965264 [003] 856720.850841: funcgraph_entry:                   |  x64_sys_call() {            
-    curl-965264 [003] 856720.850841: funcgraph_entry:                   |      __sys_sendto() {
-            curl-965264 [003] 856720.850842: funcgraph_entry:                   |        sockfd_lookup_light() {
-            curl-965264 [003] 856720.850842: funcgraph_entry:        0.301 us   |          __fdget();
-            curl-965264 [003] 856720.850843: funcgraph_exit:         0.794 us   |        }
-            curl-965264 [003] 856720.850843: funcgraph_entry:                   |        security_socket_sendmsg() {
-            curl-965264 [003] 856720.850843: funcgraph_entry:                   |          apparmor_socket_sendmsg() {
-            curl-965264 [003] 856720.850843: funcgraph_entry:                   |            aa_inet_msg_perm() {
-            curl-965264 [003] 856720.850844: funcgraph_entry:                   |              __cond_resched() {
-            curl-965264 [003] 856720.850844: funcgraph_entry:        0.267 us   |                rcu_all_qs();
-            curl-965264 [003] 856720.850844: funcgraph_exit:         0.736 us   |              }
-            curl-965264 [003] 856720.850845: funcgraph_exit:         1.276 us   |            }
-            curl-965264 [003] 856720.850845: funcgraph_exit:         1.793 us   |          }
-            curl-965264 [003] 856720.850845: funcgraph_exit:         2.326 us   |        }
+curl-965264 [003] 856720.850841: funcgraph_entry:                   |  __x64_sys_sendto() {
+curl-965264 [003] 856720.850841: funcgraph_entry:                   |    x64_sys_call() {
+curl-965264 [003] 856720.850841: funcgraph_entry:                   |      __sys_sendto() {
+curl-965264 [003] 856720.850842: funcgraph_entry:                   |        sockfd_lookup_light() {
+curl-965264 [003] 856720.850842: funcgraph_entry:        0.301 us   |          __fdget();
+curl-965264 [003] 856720.850843: funcgraph_exit:         0.794 us   |        }
+curl-965264 [003] 856720.850843: funcgraph_entry:                   |        security_socket_sendmsg() {
+curl-965264 [003] 856720.850843: funcgraph_entry:                   |          apparmor_socket_sendmsg() {
+curl-965264 [003] 856720.850843: funcgraph_entry:                   |            aa_inet_msg_perm() {
+curl-965264 [003] 856720.850844: funcgraph_entry:                   |              __cond_resched() {
+curl-965264 [003] 856720.850844: funcgraph_entry:        0.267 us   |                rcu_all_qs();
+curl-965264 [003] 856720.850844: funcgraph_exit:         0.736 us   |              }
+curl-965264 [003] 856720.850845: funcgraph_exit:         1.276 us   |            }
+curl-965264 [003] 856720.850845: funcgraph_exit:         1.793 us   |          }
+curl-965264 [003] 856720.850845: funcgraph_exit:         2.326 us   |        }
 ```
 
 From here, we started to investigate the child functions of the socket send syscalls (`sendto`, `sendmsg`, `sendmmsg`). Since these syscalls comprise a complete transmission to the socket, additional state management can be avoided if a child function is probed. For example, it might be possible to capture the local address from the [socket](https://man7.org/linux/man-pages/man2/socket.2.html) syscall, however, this could be complex to implement correctly. Web servers are known to have pre-forking threading models that issue the `socket` and `sendto`/`sendmsg`/`sendmmsg` syscalls from different threads. While this architecture isn't well known for clients, capturing the data from within a single syscall limits any potential unknowns.
