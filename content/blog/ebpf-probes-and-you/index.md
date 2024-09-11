@@ -34,7 +34,7 @@ The socket syscall APIs provide easy access to the remote details of a connectio
 <figure>
   <pre>
     ssize_t sendto(int sockfd, const void buf[.len], size_t len, int flags,<br/>
-                          const <b>struct sockaddr *dest_addr</b>, socklen_t addrlen);</br/><br/>
+                          const <b>struct sockaddr *dest_addr</b>, socklen_t addrlen);<br/><br/>
     
     int connect(int sockfd, const <b>struct sockaddr *addr</b>, socklen_t addrlen);<br/><br/>
     
