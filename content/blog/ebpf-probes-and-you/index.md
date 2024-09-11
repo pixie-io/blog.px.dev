@@ -34,12 +34,12 @@ The socket syscall APIs provide easy access to the remote details of a connectio
 <figure>
   <pre>
     ssize_t sendto(int sockfd, const void buf[.len], size_t len, int flags,<br/>
-                          const <b>struct sockaddr *dest_addr</b>, socklen_t addrlen);<br/><br/>
+&nbsp;             const <b>struct sockaddr *dest_addr</b>, socklen_t addrlen);<br/><br/>
     
     int connect(int sockfd, const <b>struct sockaddr *addr</b>, socklen_t addrlen);<br/><br/>
     
     ssize_t sendmsg(int sockfd, const struct msghdr *<b>msg</b>, int flags);<br/>
-    \# <b>msg->msg_name</b> contains the struct sockaddr
+    # <b>msg->msg_name</b> contains the struct sockaddr
   </pre>
   <figcaption>Various linux socket syscall functions with the parameter highlighted that stores the remote side of the connection.</figcaption>
 
