@@ -1,5 +1,5 @@
 ---
-path: '/tls-tracing-past-present-future'
+path: '/ebpf-tls-tracing-past-present-future'
 title: 'eBPF TLS tracing: The Past, Present and Future'
 date: 2024-08-12T06:00:00.000+00:00
 featured_image: hero-image.png
