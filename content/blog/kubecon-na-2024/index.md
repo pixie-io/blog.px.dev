@@ -15,7 +15,7 @@ Stop by our booth in the Project Pavilion to catch up, talk Pixie and snag a Pix
 Pixie contributors will also be speaking at the following events:
 
 - [**Powering Automatic Authorization in Envoy Through Live Traffic Inspection**](https://sched.co/1i7pm) (Friday November 15, 2024 11:00 MST)<br/><br/>
-Join us as we dive into how Pixie can power automatic authorization (AuthZ) in Envoy, showcasing a case study for how this can boostrap authorization in your service mesh.
+Join us as we dive into how Pixie can power automatic authorization (AuthZ) in Envoy, showcasing a case study for how this can bootstrap authorization in your service mesh.
 
 Here are some of the events we'll be attending. We hope to see you there, along with the many other exciting talks at Kubecon!
 
