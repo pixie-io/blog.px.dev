@@ -86,7 +86,7 @@ If a component misses an update—for instance, due to downtime—it can inform 
 
 To support this recovery mechanism, the metadata service durably stores updates from the API server with the Pixie-materialized resourceVersion. When persistent volumes are available, the metadata service uses a [Pebble database](https://github.com/cockroachdb/pebble) backed by a PVC. This ensures that the service can restart without data loss and fulfill missed update requests. In clusters without persistent volume support, the service falls back to an etcd cluster, which offers persistence at the cost of reduced performance.
 
-[![Pixie Metadata Service](pixie-metadata-service.png)](pixie-metadata-service.png)
+![Pixie Metadata Service](pixie-metadata-service.png)
 
 ## Extension beyond in-cluster use
 
